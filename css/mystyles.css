@@ -1,0 +1,86 @@
+.exam-box::before {
+    content: "\f06a"; /* Font Awesome Icon für Ausrufezeichen */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #AA3A39;
+    /* ... */
+  }
+
+.exam-box {
+    display: block;
+    border: 5px solid #AA3A39;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #dcb9b8;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    color: #000;
+    position: relative;
+    font-size: large;
+    font-weight: bold;
+    width:90%;
+}
+
+.info-box::before {
+    content: "\f05a"; /* Font Awesome Icon für Info */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #3d9f9f;
+    /* ... */
+  }
+
+.info-box {
+    display: block;
+    border: 5px solid #3d9f9f;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #c0fafa;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    color: #000;
+    position: relative;
+    font-size: large;
+    width: 90%;
+}
+
+.interactive-box::before {
+    content: "\f0e7"; /* Font Awesome Icon für Kugelschreiber */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #dcca05;
+    /* ... */
+  }
+
+.interactive-box {
+    display: block;
+    border: 5px solid #dcca05;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #fef69c;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    color: #000;
+    position: relative;
+    font-size: large;
+    width: 90%;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start; /* Elemente oben ausrichten */
+  }
+  .container img {
+    width: 50%; /* Breite des Bildes auf 50% setzen */
+    margin-left: 20px; /* Abstand zwischen Box und Bild */
+  }
+
+  @media print {
+    .slide-background {
+        background-color: white !important;
+        -webkit-print-color-adjust: exact; 
+    }
+}
+
+
+ 
+ 
