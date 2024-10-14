@@ -58,5 +58,36 @@
 }
 
 
+.box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 2px;
+}
+
+.blue {
+    background-color: rgb(0, 166, 255);
+}
+
+.red {
+    background-color: rgb(214, 90, 68);
+}
+
+.green {
+    background-color: rgb(0, 184, 52);
+}
+
+.yellow {
+    background-color: rgb(255, 221, 0);
+}
+
+.purple {
+    background-color: rgb(200, 37, 245);
+}
+
+.gray {
+    background-color: rgb(128, 128, 128);
+}
+
  
  

@@ -96,13 +96,14 @@
 							<td style="border-width: 0px; border-color: transparent;">Oct</td>
 							<td style="border-width: 0px; border-color: transparent;">Data Characterization 1</td>
 							<td style="border-width: 0px; border-color: transparent; font-size: medium;">Mean, Median,
-								Mode, Variance, Standard Deviation, Moments, Quantiles, Range</td>
+								Mode, Variance, Standard Deviation, Quantiles, Range</td>
 						</tr>
 						<tr style="background-color: #FF983b;">
 							<td style="border-width: 0px; border-color: transparent;">22</td>
 							<td style="border-width: 0px; border-color: transparent;">Oct</td>
 							<td style="border-width: 0px; border-color: transparent;">Data Characterization 2</td>
 							<td style="border-width: 0px; border-color: transparent; font-size: medium;">Distributions,
+								Moments,
 								Histograms, Boxplots, Normalizations</td>
 
 							</td>
@@ -884,18 +885,99 @@
 				</section>
 
 				<section>
-					<h4>Variance & Standard Deviation</h4>
+					<h4>Range of the Data</h4>
 					<p style="font-size: x-large;">
-						Next to the measures of <span style="color: #00C4D4;"><code>central tendency</code></span>, we need measures of dispersion to describe the <span style="color: #00C4D4;"><code>spread</code></span> of a data set.
+						Next to the measures of <span style="color: #00C4D4;"><code>central tendency</code></span>, we
+						need measures of dispersion to describe the <span
+							style="color: #00C4D4;"><code>spread</code></span> of a data set. A very simple approach for
+						this is the <span style="color: #00C4D4;"><code>range</code></span>.
 					</p>
 					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-						Let's have a look at the <span style="color: #00C4D4;"><code>variance</code></span> and the <span style="color: #00C4D4;"><code>standard deviation</code></span>.
+						The <span style="color: #00C4D4;"><code>range</code></span> is defined as:
+						\[
+						\text{range} = \text{max}(data) - \text{min}(data)
+						\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Example:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_max = max(data)</code></pre>
+						<pre><code>>> data_max = 0.8</code></pre>
+						<pre><code>data_min = min(data)</code></pre>
+						<pre><code>>> data_min = 0.4</code></pre>
+						<pre><code>data_range = data_max - data_min</code></pre>
+						<pre><code>>> data_range = 0.4</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>Range of the Data</h4>
+					<p style="font-size: x-large;">
+						The range is a very simple measure of the spread of the data set. However, it is very sensitive
+						to outliers.
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<p style="font-size: x-large;">
+							Here is an example for such an outlier:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4, 3.1]</code></pre>
+						<pre><code>data_max = max(data)</code></pre>
+						<pre><code>>> data_max = 3.1</code></pre>
+						<pre><code>data_min = min(data)</code></pre>
+						<pre><code>>> data_min = 0.4</code></pre>
+						<pre><code>data_range = data_max - data_min</code></pre>
+						<pre><code>>> data_range = 2.7</code></pre>
+						</p>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						The large range would suggest a large spread of the data set, which is not true in this case.
+					</p>
+				</section>
+
+				<section>
+					<h4>Range of the Data</h4>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						One typical approach for using the range is for Normalizations, e.g., Min-Max Normalization:
+						\[
+						\text{normalized} = \frac{data - \text{min}(data)}{\text{max}(data) - \text{min}(data)}
+						\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Example:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_normalized = (data - min(data)) / (max(data) - min(data))</code></pre>
+						<pre><code>>> data_normalized = [0.25, 0.5, 0.75, 1.0, 0.0]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="3">
+						<p style="font-size: x-large;">
+							Example with outlier:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 3.1]</code></pre>
+						<pre><code>data_normalized = (data - min(data)) / (max(data) - min(data))</code></pre>
+						<pre><code>>> data_normalized = [0.00, 0.04, 0.08, 0.12, 1.0]</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>Variance & Standard Deviation</h4>
+					<p style="font-size: x-large;">
+						A more advanced approach to describe the spread of a data set is the <span
+							style="color: #00C4D4;"><code>variance</code></span> and the <span
+							style="color: #00C4D4;"><code>standard deviation</code></span>.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Let's have a look at the <span style="color: #00C4D4;"><code>variance</code></span> and the
+						<span style="color: #00C4D4;"><code>standard deviation</code></span>.
 					</p>
 					<div class="fragment fade-in" data-fragment-index="1">
 						<div class="exam-box">
 							<div class="exam-box-content">
 								<span style="color:#AA3A39;">>></span>
-								The variance \(\sigma^2\) describes the average squared deviation <br>from the expected (i.e. true) value \(\mu\).<br>
+								The variance \(\sigma^2\) describes the average squared deviation <br>from the expected
+								(i.e. true) value \(\mu\).<br>
 								<span style="color:#AA3A39;">>></span>
 								The standard deviation \(\sigma\) is the square root of the variance \(\sigma^2\).
 							</div>
@@ -907,7 +989,11 @@
 						\end{equation}\]
 					</p>
 					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
-						However, in pratice we mostly estimate the <span style="color: #00C4D4;"><code>variance</code></span> using the <span style="color: #00C4D4;"><code>sample variance</code> \(s^2\)</span> due to the unknown <span style="color: #00C4D4;"><code>true value</code> \(\mu\)</span> but using the arithmetic <span style="color: #00C4D4;"><code>mean</code> \(\bar{x}\)</span> instead.
+						However, in pratice we mostly estimate the <span
+							style="color: #00C4D4;"><code>variance</code></span> using the <span
+							style="color: #00C4D4;"><code>sample variance</code> \(s^2\)</span> due to the unknown <span
+							style="color: #00C4D4;"><code>true value</code> \(\mu\)</span> but using the arithmetic
+						<span style="color: #00C4D4;"><code>mean</code> \(\bar{x}\)</span> instead.
 						\[\begin{equation}
 						\text{sample variance} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2 = s^2
 						\end{equation}\]
@@ -918,18 +1004,24 @@
 					<h4>Variance & Standard Deviation</h4>
 					<p style="font-size: x-large;">
 						\[s^2=\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2\]
-						Why do we divide by <span style="color: #00C4D4;">\(n-1\)</span> instead of <span style="color: #00C4D4;">\(n\)</span>?
+						Why do we divide by <span style="color: #00C4D4;">\(n-1\)</span> instead of <span
+							style="color: #00C4D4;">\(n\)</span>?
 					</p>
 					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-						<span style="color: #c93535;">>></span> To answer this question, we need to understand <br>the concept of <span style="color: #00C4D4;"><code>degrees of freedom (df)</code></span>.<br>
-						<span style="color: #c93535;">>></span> <span style="color: #00C4D4;"><code>df</code></span> is the number of independent values in your data set. <br>Means that there is no influence between the values.<br>
-						<span style="color: #c93535;">>></span> However, when we do some calculations, <br>we lose <span style="color: #00C4D4;"><code>df</code></span> due to adding dependencies like <span style="color: #00C4D4;"><code>y=f(x)</code></span>.
+						<span style="color: #c93535;">>></span> To answer this question, we need to understand <br>the
+						concept of <span style="color: #00C4D4;"><code>degrees of freedom (df)</code></span>.<br>
+						<span style="color: #c93535;">>></span> <span style="color: #00C4D4;"><code>df</code></span> is
+						the number of independent values in your data set. <br>Means that there is no influence between
+						the values.<br>
+						<span style="color: #c93535;">>></span> However, when we do some calculations, <br>we lose <span
+							style="color: #00C4D4;"><code>df</code></span> due to adding dependencies like <span
+							style="color: #00C4D4;"><code>y=f(x)</code></span>.
 					</p>
 					<div class="fragment fade-in" data-fragment-index="2">
 						<p style="font-size: x-large;">
 							Let's have a look at an example:<br>
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>data_mean = mean(data)</code></pre>
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_mean = mean(data)</code></pre>
 						</p>
 					</div>
 				</section>
@@ -939,156 +1031,360 @@
 					<div>
 						<p style="font-size: x-large;">
 							Let's have a look at an example:<br>
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>data_mean = mean(data)</code></pre>
-							<pre><code>>> data_mean = 0.6</code></pre>
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_mean = mean(data)</code></pre>
+						<pre><code>>> data_mean = 0.6</code></pre>
 						</p>
 					</div>
 					<p style="font-size: x-large;">
-						We could see that the <span style="color: #00C4D4;"><code>mean</code></span> depends on the data. This adds some dependency to the data set. As we now have an equation that must be fulfilled by the data.
+						We could see that the <span style="color: #00C4D4;"><code>mean</code></span> depends on the
+						data. This adds some dependency to the data set. As we now have an equation that must be
+						fulfilled by the data.
 					</p>
 					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
 						\[data\_mean = \frac{1}{5} \left(data_1 + data_2 + data_3 + data_4 + data_5\right)\]
 						\[data_1 = data\_mean \cdot 5 - data_2 - data_3 - data_4 - data_5\]
-						We can calculate the value of \(data_1\) by using the equation above, which indicates that at least one value is dependent on the other values. Therefore, we reduce the degree of freedom by one (<span style="color: #00C4D4;">\(df = n-1 = 4\)</span>).
+						We can calculate the value of \(data_1\) by using the equation above, which indicates that at
+						least one value is dependent on the other values. Therefore, we reduce the degree of freedom by
+						one (<span style="color: #00C4D4;">\(df = n-1 = 4\)</span>).
 					</p>
 				</section>
 
 				<section data-auto-animate>
 					<h4>Variance & Standard Deviation</h4>
-						<p style="font-size: x-large;">
-							\[s=\sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}\]
-						</p>
-						<div class="fragment fade-in" data-fragment-index="1">
-							<div class="exam-box">
-								<div class="exam-box-content">
-									<span style="color:#AA3A39;">>></span> In most real systems, we use the sample standard deviation \(s\) to estimate the data's spread. As this function uses an estimation of the true value, we need to consider this in the degree of freedom and divide by \(n-1\).
-								</div>
+					<p style="font-size: x-large;">
+						\[s=\sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<div class="exam-box">
+							<div class="exam-box-content">
+								<span style="color:#AA3A39;">>></span> In most real systems, we use the sample standard
+								deviation \(s\) to estimate the data's spread. As this function uses an estimation of
+								the true value, we need to consider this in the degree of freedom and divide by \(n-1\).
 							</div>
 						</div>
-						<div class="fragment fade-in" data-fragment-index="2">
-							<p style="font-size: x-large;">
-								Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span style="color: #00C4D4;"><code>standard deviation</code></span>:
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>data_mean = mean(data)</code></pre>
-							<pre><code>data_variance = sum((data - data_mean)^2) / (n-1)</code></pre>
-							<pre><code>>> data_variance = 0.025</code></pre>
-							<pre><code>data_std = sqrt(data_variance)</code></pre>
-							<pre><code>>> data_std = 0.158</code></pre>
-						</p>
-						</div>
-				</section>
-
-				<section data-auto-animate>
-					<h4>Variance & Standard Deviation</h4>
-						<div>
-							<p style="font-size: x-large;">
-								Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span style="color: #00C4D4;"><code>standard deviation</code></span>:
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>>> data_variance = 0.025</code></pre>
-							<pre><code>>> data_std = 0.158</code></pre>
-						</p>
-						</div>
-						<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-							Interpretation: The average concentration is 0.6 mg/L <br>with an average spread of 0.158 mg/L. 
-						</p>
-						<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
-							<span style="color: #00C4D4;">>></span> Note: This is not the uncertainty of the average concentration!
-						</p>
-						<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
-							<span style="color: #00C4D4;">>></span> The spread describes the precision of the data set <br>and is proportional to the uncertainty of the mean.
-						</p>
-						<p class="fragment fade-in" data-fragment-index="4" style="font-size: x-large;">
-							<span style="color: #00C4D4;">>></span> The spread can give you feedback on your measurement system/method <br>and the quality of your data. 
-						</p>
-				</section>
-
-				<section data-auto-animate>
-					<h4>The Standard Error of the Mean</h4>
-					<p style="font-size: x-large;">
-						Next to the <span style="color: #00C4D4;"><code>standard deviation</code></span> that describes the spread of the data, we need the <span style="color: #00C4D4;"><code>standard error of the mean (se)</code></span> to describe the uncertainty of the <span style="color: #00C4D4;"><code>mean</code></span>.
-					</p>
-					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-						The <span style="color: #00C4D4;"><code>se</code></span> is defined as:
-						\[\begin{equation}
-						se = \frac{s}{\sqrt{n}}
-						\end{equation}\]
-					</p>
+					</div>
 					<div class="fragment fade-in" data-fragment-index="2">
 						<p style="font-size: x-large;">
-							Example:
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>data_mean = 0.6</code></pre>
-							<pre><code>data_std = 0.158</code></pre>
-							<pre><code>data_se = data_std / sqrt(5)</code></pre>
-							<pre><code>>> data_se = 0.071</code></pre>
+							Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span
+								style="color: #00C4D4;"><code>standard deviation</code></span>:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_mean = mean(data)</code></pre>
+						<pre><code>data_variance = sum((data - data_mean)^2) / (n-1)</code></pre>
+						<pre><code>>> data_variance = 0.025</code></pre>
+						<pre><code>data_std = sqrt(data_variance)</code></pre>
+						<pre><code>>> data_std = 0.158</code></pre>
 						</p>
 					</div>
 				</section>
 
 				<section data-auto-animate>
-					<h4>The Standard Error of the Mean</h4>
+					<h4>Variance & Standard Deviation</h4>
 					<div>
 						<p style="font-size: x-large;">
-							Example:
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>data_mean = 0.6</code></pre>
-							<pre><code>data_std = 0.158</code></pre>
-							<pre><code>data_se = data_std / sqrt(5)</code></pre>
-							<pre><code>>> data_se = 0.071</code></pre>
+							Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span
+								style="color: #00C4D4;"><code>standard deviation</code></span>:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>>> data_variance = 0.025</code></pre>
+						<pre><code>>> data_std = 0.158</code></pre>
 						</p>
 					</div>
 					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-						Interpretation: The average concentration is 0.6 mg/L <br>with an uncertainty of 0.071 mg/L.
+						Interpretation: The average concentration is 0.6 mg/L <br>with an average spread of 0.158 mg/L.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> Note: This is not the uncertainty of the average
+						concentration!
+					</p>
+					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> The spread describes the precision of the data set
+						<br>and is proportional to the uncertainty of the mean.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="4" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> The spread can give you feedback on your measurement
+						system/method <br>and the quality of your data.
 					</p>
 				</section>
 
 				<section>
-					<h4>Range of the Data</h4>
+					<h4>The Interquartile Range</h4>
 					<p style="font-size: x-large;">
-						Next to the measures of <span style="color: #00C4D4;"><code>central tendency</code></span> and <span style="color: #00C4D4;"><code>dispersion</code></span>, we need measures of <span style="color: #00C4D4;"><code>range</code></span> to describe the <span style="color: #00C4D4;"><code>full spread</code></span> of a data set.
+						Another measure of the spread of the data set is the <span
+							style="color: #00C4D4;"><code>interquartile range (IQR)</code></span>. The <span
+							style="color: #00C4D4;"><code>IQR</code></span> covers the middle 50% of the data set, i.e.,
+						from the 25th to the 75th percentile.
 					</p>
 					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-						The <span style="color: #00C4D4;"><code>range</code></span> is defined as:
-						\[
-						\text{range} = \text{max}(data) - \text{min}(data)
-						\]
+						Some helpful terms for the <span style="color: #00C4D4;"><code>IQR</code></span>:
 					</p>
-					<div class="fragment fade-in" data-fragment-index="2">
-						<p style="font-size: x-large;">
-							Example:
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>data_max = max(data)</code></pre>
-							<pre><code>>> data_max = 0.8</code></pre>
-							<pre><code>data_min = min(data)</code></pre>
-							<pre><code>>> data_min = 0.4</code></pre>
-							<pre><code>data_range = data_max - data_min</code></pre>
-							<pre><code>>> data_range = 0.4</code></pre>
-						</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> Percentile / Quantile: The value below which a given
+						percentage of
+						observations fall. <br>E.g., the 13th percentile or 0.13 quantile is the value below which 13%
+						of the data fall.<br>
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						sorted data:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2" style="display: flex; flex-wrap: wrap;">
+						<!-- 25 Blue Boxes and 75 red boxes-->
+						<script>
+							for (let i = 0; i < 13; i++) {
+								document.write('<div class="box blue"></div>');
+							}
+							for (let i = 0; i < 87; i++) {
+								document.write('<div class="box red"></div>');
+							}
+						</script>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> Quartile: The 25th, 50th, and 75th percentiles are
+						called the first, second, and third quartiles, respectively.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+						sorted data:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="3" style="display: flex; flex-wrap: wrap;">
+						<!-- 25 Blue Boxes and 75 red boxes-->
+						<script>
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box blue"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box yellow"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box green"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box purple"></div>');
+							}
+						</script>
 					</div>
 				</section>
 
 				<section>
-					<h4>Range of the Data</h4>
+					<h4>The Interquartile Range</h4>
 					<p style="font-size: x-large;">
-						The range is a very simple measure of the spread of the data set. However, it is very sensitive to outliers.
+						Another measure of the spread of the data set is the <span
+							style="color: #00C4D4;"><code>interquartile range (IQR)</code></span>. The <span
+							style="color: #00C4D4;"><code>IQR</code></span> covers the middle 50% of the data set, i.e.,
+						from the 25th to the 75th percentile.
 					</p>
+					<p style="font-size: x-large;">
+						sorted data:
+					</p>
+					<div style="display: flex; flex-wrap: wrap;">
+						<!-- 25 Blue Boxes and 75 red boxes-->
+						<script>
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box gray"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box yellow"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box green"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box gray"></div>');
+							}
+						</script>
+					</div>
 					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-						One typical approach for using the range is for Normalizations, e.g., Min-Max Normalization:
-						\[
-						\text{normalized} = \frac{data - \text{min}(data)}{\text{max}(data) - \text{min}(data)}
-						\]
+						How to calculate the <span style="color: #00C4D4;"><code>IQR</code></span>?
 					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						\[
+						q = (n+1) \cdot p
+						\]
+						Where \(q\) is the quantile position, \(n\) is the number of data points, and \(p\) is the
+						quantile.
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<p style="font-size: x-large;">
+						Let's calculate the <span style="color: #00C4D4;"><code>IQR</code></span> for the given dataset:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<pre><code>data = [0.573, 0.712, 0.594, 0.631, 0.682,...
+				0.800, 0.471, 0.499, 0.538, 0.697,...
+				0.612, 0.556, 0.644, 0.524, 0.528,...
+				0.728, 0.656, 0.507, 0.512, 0.552,...
+				0.668, 0.750, 0.774]</code></pre>
+					</div>
 					<div class="fragment fade-in" data-fragment-index="2">
 						<p style="font-size: x-large;">
-							Example:
-							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
-							<pre><code>data_normalized = (data - min(data)) / (max(data) - min(data))</code></pre>
-							<pre><code>>> data_normalized = [0.25, 0.5, 0.75, 1.0, 0.0]</code></pre>
+							First, we need to sort the data:
 						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.803, 0.774, 0.800]</code></pre>
 					</div>
 				</section>
 
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<pre><code>q25 = (24 + 1) * 0.25</code></pre>
+						<pre><code>q75 = (24 + 1) * 0.75</code></pre>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span>
+						Now we know that the 25th percentile is between the 6th and 7th value and the 75th percentile is
+						between the 18th and 19th value. To calculate the <span
+							style="color: #00C4D4;"><code>IQR</code></span>, we need to interpolate the values:
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						\[ x_p = x_{\lfloor q\rfloor} + (x_{\lceil q\rceil} - x_{\lfloor q\rfloor}) \cdot (q - \lfloor
+						q\rfloor)\]
+						Where <span style="color: #00C4D4;">\(x_p\)</span> is the quantile value, <span
+							style="color: #00C4D4;">\(x_{\lfloor q\rfloor}\)</span> is the lower value, <span
+							style="color: #00C4D4;">\(x_{\lceil q\rceil}\)</span> is the upper value, and <span
+							style="color: #00C4D4;">\(q\)</span> is the quantile. <span
+							style="color: #00C4D4;">\(\lfloor \rfloor\)</span> is the floor function (rounds down) and
+						<span style="color: #00C4D4;">\(\lceil \rceil\)</span> is the ceiling function (rounds up).
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span>
+						Now we know that the 25th percentile is between the 6th and 7th value and the 75th percentile is
+						between the 18th and 19th value. To calculate the <span
+							style="color: #00C4D4;"><code>IQR</code></span>, we need to interpolate the values:
+					</p>
+					<p style="font-size: x-large;">
+						\[ x_p = x_{\lfloor q\rfloor} + (x_{\lceil q\rceil} - x_{\lfloor q\rfloor}) \cdot (q - \lfloor
+						q\rfloor)\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<pre><code>q25 = 0.528 + (0.538 - 0.528) * (6.25 - 6)</code></pre>
+						<pre><code>q75 = 0.697 + (0.712 - 0.697) * (18.75 - 18)</code></pre>
+						<pre><code>>> q25 = 0.503, q75 = 0.708</code></pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span>
+						To calculate the <span style="color: #00C4D4;"><code>IQR</code></span>, we need to interpolate
+						the values:
+					</p>
+					<div>
+						<pre><code>>> q25 = 0.503, q75 = 0.708</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Finally, we can calculate the <span style="color: #00C4D4;"><code>IQR</code></span>:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<pre><code>IQR = q75 - q25</code></pre>
+						<pre><code>>> IQR = 0.205</code></pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<div>
+						<pre><code>>> IQR = 0.205</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Interpretation: The middle 50% of the data set is between 0.503 and 0.708 mg/L with a spread of
+						0.205 mg/L.
+				</section>
+
+				<section>
+					<h4>Seminar Material</h4>
+					<div class="interactive-box">
+						<div class="interactive-box-content">
+							Case 1: <br>
+							You want to compare to two analytical methods for the determination chloride concentration in surface water. You have the following data:
+							<pre style="font-size: x-large;"><code>data_1 = [43.13, 45.12, 44.98, 40.23, 42.11,...
+					41.98, 43.12, 44.01, 42.98, 43.12]</code></pre>
+							<pre style="font-size: x-large;"><code>data_2 = [39.12, 45.12, 44.98, 43.23, 44.78,...
+					43.56, 44.61, 45.01, 46.02, 49.73]</code></pre>
+							Which method is more precise?
+						</div>
+					</div>
+				</section>
 			</section>
 		</div>
 		<footer class="footer" style="font-size: medium; color: #666666;">
