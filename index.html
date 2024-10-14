@@ -895,7 +895,7 @@
 						<div class="exam-box">
 							<div class="exam-box-content">
 								<span style="color:#AA3A39;">>></span>
-								The variance \(\sigma^2\) describes the average squared deviation from the expected (i.e. true) value \(\mu\).<br>
+								The variance \(\sigma^2\) describes the average squared deviation <br>from the expected (i.e. true) value \(\mu\).<br>
 								<span style="color:#AA3A39;">>></span>
 								The standard deviation \(\sigma\) is the square root of the variance \(\sigma^2\).
 							</div>
@@ -907,23 +907,186 @@
 						\end{equation}\]
 					</p>
 					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
-						However, in pratice we mostly estimate the variance using the sample variance (\(s^2\)) due to the unknown true value \(\mu\).
+						However, in pratice we mostly estimate the <span style="color: #00C4D4;"><code>variance</code></span> using the <span style="color: #00C4D4;"><code>sample variance</code> \(s^2\)</span> due to the unknown <span style="color: #00C4D4;"><code>true value</code> \(\mu\)</span> but using the arithmetic <span style="color: #00C4D4;"><code>mean</code> \(\bar{x}\)</span> instead.
 						\[\begin{equation}
 						\text{sample variance} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2 = s^2
 						\end{equation}\]
 					</p>
 				</section>
 
-				<section>
+				<section data-auto-animate>
 					<h4>Variance & Standard Deviation</h4>
 					<p style="font-size: x-large;">
 						\[s^2=\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2\]
-						Why do we divide by \(n-1\) instead of \(n\)?
+						Why do we divide by <span style="color: #00C4D4;">\(n-1\)</span> instead of <span style="color: #00C4D4;">\(n\)</span>?
 					</p>
 					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
-						To answer this question, we need to understand the concept of <span style="color: #00C4D4;"><code>degrees of freedom (df)</code></span>.<br>
-						<span style="color: #00C4D4;"><code>df</code></span> is the number of independent values in your data set. Means that there is no influence between the values.
+						<span style="color: #c93535;">>></span> To answer this question, we need to understand <br>the concept of <span style="color: #00C4D4;"><code>degrees of freedom (df)</code></span>.<br>
+						<span style="color: #c93535;">>></span> <span style="color: #00C4D4;"><code>df</code></span> is the number of independent values in your data set. <br>Means that there is no influence between the values.<br>
+						<span style="color: #c93535;">>></span> However, when we do some calculations, <br>we lose <span style="color: #00C4D4;"><code>df</code></span> due to adding dependencies like <span style="color: #00C4D4;"><code>y=f(x)</code></span>.
 					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Let's have a look at an example:<br>
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>data_mean = mean(data)</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Variance & Standard Deviation</h4>
+					<div>
+						<p style="font-size: x-large;">
+							Let's have a look at an example:<br>
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>data_mean = mean(data)</code></pre>
+							<pre><code>>> data_mean = 0.6</code></pre>
+						</p>
+					</div>
+					<p style="font-size: x-large;">
+						We could see that the <span style="color: #00C4D4;"><code>mean</code></span> depends on the data. This adds some dependency to the data set. As we now have an equation that must be fulfilled by the data.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						\[data\_mean = \frac{1}{5} \left(data_1 + data_2 + data_3 + data_4 + data_5\right)\]
+						\[data_1 = data\_mean \cdot 5 - data_2 - data_3 - data_4 - data_5\]
+						We can calculate the value of \(data_1\) by using the equation above, which indicates that at least one value is dependent on the other values. Therefore, we reduce the degree of freedom by one (<span style="color: #00C4D4;">\(df = n-1 = 4\)</span>).
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Variance & Standard Deviation</h4>
+						<p style="font-size: x-large;">
+							\[s=\sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}\]
+						</p>
+						<div class="fragment fade-in" data-fragment-index="1">
+							<div class="exam-box">
+								<div class="exam-box-content">
+									<span style="color:#AA3A39;">>></span> In most real systems, we use the sample standard deviation \(s\) to estimate the data's spread. As this function uses an estimation of the true value, we need to consider this in the degree of freedom and divide by \(n-1\).
+								</div>
+							</div>
+						</div>
+						<div class="fragment fade-in" data-fragment-index="2">
+							<p style="font-size: x-large;">
+								Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span style="color: #00C4D4;"><code>standard deviation</code></span>:
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>data_mean = mean(data)</code></pre>
+							<pre><code>data_variance = sum((data - data_mean)^2) / (n-1)</code></pre>
+							<pre><code>>> data_variance = 0.025</code></pre>
+							<pre><code>data_std = sqrt(data_variance)</code></pre>
+							<pre><code>>> data_std = 0.158</code></pre>
+						</p>
+						</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Variance & Standard Deviation</h4>
+						<div>
+							<p style="font-size: x-large;">
+								Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span style="color: #00C4D4;"><code>standard deviation</code></span>:
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>>> data_variance = 0.025</code></pre>
+							<pre><code>>> data_std = 0.158</code></pre>
+						</p>
+						</div>
+						<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+							Interpretation: The average concentration is 0.6 mg/L <br>with an average spread of 0.158 mg/L. 
+						</p>
+						<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+							<span style="color: #00C4D4;">>></span> Note: This is not the uncertainty of the average concentration!
+						</p>
+						<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+							<span style="color: #00C4D4;">>></span> The spread describes the precision of the data set <br>and is proportional to the uncertainty of the mean.
+						</p>
+						<p class="fragment fade-in" data-fragment-index="4" style="font-size: x-large;">
+							<span style="color: #00C4D4;">>></span> The spread can give you feedback on your measurement system/method <br>and the quality of your data. 
+						</p>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Standard Error of the Mean</h4>
+					<p style="font-size: x-large;">
+						Next to the <span style="color: #00C4D4;"><code>standard deviation</code></span> that describes the spread of the data, we need the <span style="color: #00C4D4;"><code>standard error of the mean (se)</code></span> to describe the uncertainty of the <span style="color: #00C4D4;"><code>mean</code></span>.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						The <span style="color: #00C4D4;"><code>se</code></span> is defined as:
+						\[\begin{equation}
+						se = \frac{s}{\sqrt{n}}
+						\end{equation}\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Example:
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>data_mean = 0.6</code></pre>
+							<pre><code>data_std = 0.158</code></pre>
+							<pre><code>data_se = data_std / sqrt(5)</code></pre>
+							<pre><code>>> data_se = 0.071</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Standard Error of the Mean</h4>
+					<div>
+						<p style="font-size: x-large;">
+							Example:
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>data_mean = 0.6</code></pre>
+							<pre><code>data_std = 0.158</code></pre>
+							<pre><code>data_se = data_std / sqrt(5)</code></pre>
+							<pre><code>>> data_se = 0.071</code></pre>
+						</p>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Interpretation: The average concentration is 0.6 mg/L <br>with an uncertainty of 0.071 mg/L.
+					</p>
+				</section>
+
+				<section>
+					<h4>Range of the Data</h4>
+					<p style="font-size: x-large;">
+						Next to the measures of <span style="color: #00C4D4;"><code>central tendency</code></span> and <span style="color: #00C4D4;"><code>dispersion</code></span>, we need measures of <span style="color: #00C4D4;"><code>range</code></span> to describe the <span style="color: #00C4D4;"><code>full spread</code></span> of a data set.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						The <span style="color: #00C4D4;"><code>range</code></span> is defined as:
+						\[
+						\text{range} = \text{max}(data) - \text{min}(data)
+						\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Example:
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>data_max = max(data)</code></pre>
+							<pre><code>>> data_max = 0.8</code></pre>
+							<pre><code>data_min = min(data)</code></pre>
+							<pre><code>>> data_min = 0.4</code></pre>
+							<pre><code>data_range = data_max - data_min</code></pre>
+							<pre><code>>> data_range = 0.4</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>Range of the Data</h4>
+					<p style="font-size: x-large;">
+						The range is a very simple measure of the spread of the data set. However, it is very sensitive to outliers.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						One typical approach for using the range is for Normalizations, e.g., Min-Max Normalization:
+						\[
+						\text{normalized} = \frac{data - \text{min}(data)}{\text{max}(data) - \text{min}(data)}
+						\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Example:
+							<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+							<pre><code>data_normalized = (data - min(data)) / (max(data) - min(data))</code></pre>
+							<pre><code>>> data_normalized = [0.25, 0.5, 0.75, 1.0, 0.0]</code></pre>
+						</p>
+					</div>
 				</section>
 
 			</section>
