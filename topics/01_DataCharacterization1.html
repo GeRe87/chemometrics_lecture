@@ -1097,6 +1097,7 @@
 	<script src="../plugin/markdown/markdown.js"></script>
 	<script src="../plugin/highlight/highlight.js"></script>
 	<script src="../plugin/math/math.js"></script>
+	<script src="../plugin/menu/menu.js"></script>
 	<!-- Chart plugin -->
 	<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1105,6 +1106,13 @@
 		// - https://revealjs.com/initialization/
 		// - https://revealjs.com/config/
 		Reveal.initialize({
+			menu: {
+        custom: [{
+          title: 'Topics',
+          icon: '<i class="fas fa-home"></i>',
+          src: 'menu.html'
+        }]
+      },
 			hash: true,
 			chart: {
 				defaults: {
