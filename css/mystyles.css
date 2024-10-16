@@ -1,3 +1,16 @@
+.footer-global {
+    position: fixed;
+    bottom: 10px;
+    left: 60px;
+    font-size: 14px;
+    color: #666;
+}
+
+.icon-link {
+    position: relative;  /* oder absolute/fixed, je nach Layout */
+    z-index: 100000;        /* Ein hoher Wert, um das Icon nach vorne zu bringen */
+}
+
 .exam-box {
     display: block;
     border: 5px solid #AA3A39;

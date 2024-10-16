@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Chemometrics and Statistics</title>
+
+  <link rel="stylesheet" href="../dist/reset.css">
+  <link rel="stylesheet" href="../dist/reveal.css">
+  <link rel="stylesheet" href="../dist/theme/league.css">
+  <link rel="stylesheet" href="../css/mystyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+  <style>
+    .green-text {
+      color: rgb(133, 198, 42);
+    }
+
+    .teal-text {
+      color: rgb(0, 150, 136);
+    }
+
+    .small-text {
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+        </h4>
+        <pre><code>00. Introduction</code></pre>
+        <p>by <a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
+      </section>
+
+      <section>
+        <h4>about me</h4>
+        <p><a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Dr. Gerrit Renner</a></p>
+        <table>
+          <td style="text-align: center; vertical-align: top;">
+            <img src="../resources/renner_foto.JPG" alt="Gerrit Renner" style="width: 600px;">
+          </td>
+          <td style="vertical-align: top;">
+            <ul class="small-text">
+              <li> <span class="green-text">since 2020:</span> Analytical Data Science @ <a
+                  href="https://www.uni-due.de/iac" target="_blank">IAC</a>, University of
+                Duisburg-Essen </li>
+              <li> <span class="green-text">2015-2020:</span> PhD in Chemistry, University of
+                Duisburg-Essen & Niederrhein University of Applied Sciences</li>
+              <li> <span class="green-text">2012-2015:</span> M.Sc. in Applied Chemistry Instrumental
+                Analytics and Lab Management, Niederrhein University of Applied Sciences</li>
+              <li> <span class="green-text">2008-2012:</span> B.Sc. in Chemistry & Biotechnology,
+                Niederrhein University of Applied Sciences</li>
+            </ul>
+          </td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h4>time schedule</h4>
+        <b class="green-text">Lecture & Seminar</b><br>
+        Tuesday, 10.15-12.45 @ S06 S00 B41<br><br>
+        <b class="green-text">Tutorial</b><br>
+        Wednesday, 12.15-13.45 @ S05 T00 B71<br><span style="color: rgb(106, 235, 238); font-size: large;">(This will
+          start later; October
+          30th)</span><br><br>
+      </section>
+
+      <section>
+        <h4>time schedule (continued)</h4>
+        <table style="border-collapse: separate; border-spacing: 5px; font-size: large;">
+          <tr>
+            <th style="border-width: 0px; border-color: transparent;">Day</th>
+            <th style="border-width: 0px; border-color: transparent;">Month</th>
+            <th style="border-width: 0px; border-color: transparent;">Topic</th>
+          </tr>
+          <!-- Intro -->
+          <tr style="background-color: #efc51b;">
+            <td style="border-width: 0px; border-color: transparent;">8</td>
+            <td style="border-width: 0px; border-color: transparent;">Oct</td>
+            <td style="border-width: 0px; border-color: transparent;">Intro</td>
+          </tr>
+          <!-- Data Characterization -->
+          <tr style="background-color: #FF983b;">
+            <td style="border-width: 0px; border-color: transparent;">15</td>
+            <td style="border-width: 0px; border-color: transparent;">Oct</td>
+            <td style="border-width: 0px; border-color: transparent;">Data Characterization 1</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Mean, Median,
+              Mode, Variance, Standard Deviation, Quantiles, Range</td>
+          </tr>
+          <tr style="background-color: #FF983b;">
+            <td style="border-width: 0px; border-color: transparent;">22</td>
+            <td style="border-width: 0px; border-color: transparent;">Oct</td>
+            <td style="border-width: 0px; border-color: transparent;">Data Characterization 2</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Distributions,
+              Moments,
+              Histograms, Boxplots, Normalizations</td>
+
+            </td>
+          </tr>
+          <!-- Similarity Analysis -->
+          <tr style="background-color: #AA3A39;">
+            <td style="border-width: 0px; border-color: transparent;">29</td>
+            <td style="border-width: 0px; border-color: transparent;">Oct</td>
+            <td style="border-width: 0px; border-color: transparent;">Similarity Analysis 1</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">t-Tests, f-Test
+            </td>
+          </tr>
+          <tr style="background-color: #AA3A39;">
+            <td style="border-width: 0px; border-color: transparent;">5</td>
+            <td style="border-width: 0px; border-color: transparent;">Nov</td>
+            <td style="border-width: 0px; border-color: transparent;">Similarity Analysis 2</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">ANOVA</td>
+          </tr>
+          <tr style="background-color: #AA3A39;">
+            <td style="border-width: 0px; border-color: transparent;">12</td>
+            <td style="border-width: 0px; border-color: transparent;">Nov</td>
+            <td style="border-width: 0px; border-color: transparent;">Similarity Analysis 3</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">PCA</td>
+          </tr>
+          <!-- Data Modeling -->
+          <tr style="background-color: #fe4e4e;">
+            <td style="border-width: 0px; border-color: transparent;">19</td>
+            <td style="border-width: 0px; border-color: transparent;">Nov</td>
+            <td style="border-width: 0px; border-color: transparent;">Data Modeling 1</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Linear
+              Regression</td>
+          </tr>
+          <tr style="background-color: #fe4e4e;">
+            <td style="border-width: 0px; border-color: transparent;">26</td>
+            <td style="border-width: 0px; border-color: transparent;">Nov</td>
+            <td style="border-width: 0px; border-color: transparent;">Data Modeling 2</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Non-Linear
+              Regression</td>
+          </tr>
+          <tr style="background-color: #fe4e4e;">
+            <td style="border-width: 0px; border-color: transparent;">3</td>
+            <td style="border-width: 0px; border-color: transparent;">Dec</td>
+            <td style="border-width: 0px; border-color: transparent;">Data Modeling 3</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Machine
+              Learning, Random Forest</td>
+          </tr>
+          <!-- Signal Processing -->
+          <tr style="background-color: #ee5397;">
+            <td style="border-width: 0px; border-color: transparent;">10</td>
+            <td style="border-width: 0px; border-color: transparent;">Dec</td>
+            <td style="border-width: 0px; border-color: transparent;">Signal Processing</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Smoothing,
+              Derivatives, Fourier Transformation, Wavelets</td>
+          </tr>
+          <!-- Errors and Uncertainties -->
+          <tr style="background-color: #634490;">
+            <td style="border-width: 0px; border-color: transparent;">17</td>
+            <td style="border-width: 0px; border-color: transparent;">Dec</td>
+            <td style="border-width: 0px; border-color: transparent;">Errors and Uncertainties</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Error
+              Propagation, Confidence Intervals</td>
+          </tr>
+          <!-- Experimental Design -->
+          <tr style="background-color: #3466A5;">
+            <td style="border-width: 0px; border-color: transparent;">7</td>
+            <td style="border-width: 0px; border-color: transparent;">Jan</td>
+            <td style="border-width: 0px; border-color: transparent;">Experimental Design 1</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Downhill
+              Simplex</td>
+          </tr>
+          <tr style="background-color: #3466A5;">
+            <td style="border-width: 0px; border-color: transparent;">14</td>
+            <td style="border-width: 0px; border-color: transparent;">Jan</td>
+            <td style="border-width: 0px; border-color: transparent;">Experimental Design 2</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Full Factorial
+              Design</td>
+          </tr>
+          <tr style="background-color: #3466A5;">
+            <td style="border-width: 0px; border-color: transparent;">21</td>
+            <td style="border-width: 0px; border-color: transparent;">Jan</td>
+            <td style="border-width: 0px; border-color: transparent;">Experimental Design 3</td>
+            <td style="border-width: 0px; border-color: transparent; font-size: medium;">Fractional
+              Factorial Design</td>
+          </tr>
+          <!-- Wrap-Up -->
+          <tr style="background-color: #00C4D4;">
+            <td style="border-width: 0px; border-color: transparent;">28</td>
+            <td style="border-width: 0px; border-color: transparent;">Jan</td>
+            <td style="border-width: 0px; border-color: transparent;">Wrap-Up</td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h4>Moodle & Materials</h4>
+        <p>Course materials will be provided via Moodle. Please register for the course <a
+            href="https://moodle.uni-due.de/course/view.php?id=47908">here</a>.</p>
+        <p>The script will be updated weekly and will be available via Moodle or <a
+            href="https://gere87.github.io/chemometrics_lecture/">github</a>.</p>
+      </section>
+
+      <section>
+        <h4>How to use this script?</h4>
+        <p>This script is designed as html presentation. You can navigate through the slides using the arrow
+          keys or the navigation buttons in the lower right corner.</p>
+        <p style="font-size: large; text-align: left;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span> Press
+          <code>F1</code> to open the help
+          menu and see all available shortcuts.
+        </p>
+        <p style="font-size: large; text-align: left;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span> Press
+          <code>F</code> to enter full screen
+          mode.
+        </p>
+        <p style="font-size: large; text-align: left;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span> Up/down
+          arrow keys navigate through
+          slides, left/right arrow keys navigate through topics.</p>
+      </section>
+
+      <section>
+        <h4>Boxes & other Elements</h4>
+        <p>Boxes can be used to highlight important information. They can be colored differently to indicate
+          different types of information.</p>
+
+        <table style="width: 100%;">
+          <tr>
+            <td style="width: 50%;">
+              <div class="exam-box">
+                <div class="exam-box-content">
+                  This content is highly relevant for the exam. Please make sure to understand it.
+                </div>
+              </div>
+              <div class="info-box">
+                <div class="info-box-content">
+                  This content is important for the understanding of the topic.
+                </div>
+              </div>
+
+              <div class="interactive-box">
+                <div class="interactive-box-content">
+                  This content is interactive and requires your participation.
+                </div>
+              </div>
+            </td>
+            <td style="font-size: large;">
+              <p>Equations will be displayed like:</p>
+              \[\begin{equation}
+              \sigma = \sqrt{\frac{1}{N-1} \sum_{i=1}^{N} (x_i - \bar{x})^2}
+              \end{equation}\]
+              <p style="font-weight: bold;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span>
+                Don't worry, in the exam you will not be required to write down equations! They will
+                be provided.</p>
+              <p>Code will be displayed like:</p>
+              <pre><code style="font-size: large;">print("Hello World!")</code></pre>
+              <p style="font-weight: bold;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span>
+                Don't worry, reading/writing code is not part of the exam and is not required for
+                the course!</p>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+      <section>
+        <h4>Share your experience</h4>
+        <div class="container">
+          <div class="interactive-box" style="width: 45%;">
+            <div class="interactive-box-content">
+              Please introduce yourself to the class. What is your background? What are your
+              experiences with statistics and chemometrics?
+              <p>Do you know: </p>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg/512px-Microsoft_Office_Excel_%282019%E2%80%93present%29.svg.png"
+                alt="Excel" style="height: 50px; width: auto;">
+              <img alt="R"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/512px-R_logo.svg.png"
+                style="height: 50px; width: auto;">
+              <img alt="Python"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/2048px-Python-logo-notext.svg.png"
+                style="height: 50px; width: auto;">
+              <img alt="Matlab"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Matlab_Logo.png/512px-Matlab_Logo.png"
+                style="height: 50px; width: auto;"><br>
+              <img alt="Julia"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Julia_Programming_Language_Logo.svg/512px-Julia_Programming_Language_Logo.svg.png"
+                style="height: 50px; width: auto;">
+              <img alt="C++"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/512px-ISO_C%2B%2B_Logo.svg.png"
+                style="height: 50px; width: auto;">
+              <img alt="Java"
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/234px-Java_programming_language_logo.svg.png?20210624193855"
+                style="height: 50px; width: auto;">
+            </div>
+          </div>
+          <figure style="width: 50%;">
+            <img src="../resources/ukn_users.png" alt="Users" style="width: 100%;">
+            <figcaption style="font-size: small; text-align: center;">
+              Source: <a href="http://www.freepik.com">www.freepik.com</a>
+            </figcaption>
+          </figure>
+
+        </div>
+      </section>
+
+      <section>
+        <h4>Printable Script</h4>
+        <p style="font-size: large;">The script can also be exported as *.pdf or printed by following these
+          steps:</p>
+        <p style="font-size: large; text-align: left;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span> Open the
+          <a href="https://gere87.github.io/chemometrics_lecture/" target="_blank">script</a> in your
+          browser
+        </p>
+        <p style="font-size: large; text-align: left;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span> Add
+          <code>?print-pdf</code> to the URL
+          (e.g. <code>https://gere87.github.io/chemometrics_lecture/?print-pdf</code>, or click <a
+            href="https://gere87.github.io/chemometrics_lecture/?print-pdf" target="_blank">here</a>)
+        </p>
+        <p style="font-size: large; text-align: left;"><span style="color: rgb(106, 235, 238);">&gt;&gt;</span> Press
+          <code>Ctrl+P</code> to open the
+          print dialog and select your printer or save as *.pdf ("Micrsoft Print to PDF" is recommended)
+        </p>
+        <p style="font-size: large; text-align: left;"><span style="color: rgb(250, 154, 19);">&gt;&gt;</span> Optional:
+          I recommend to de-select the
+          option "Header and Footer" in the print dialog</p>
+      </section>
+
+      <section>
+        <h4>Questions?</h4>
+        <p>Do you have any questions regarding the course, the content, the exam, or anything else? Please
+          feel free to ask!</p>
+      </section>
+    </div>
+    <div class="footer-global">
+      Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+      Last updated: October 16, 2024
+    </div>
+  </div>
+
+  <script src="../dist/reveal.js"></script>
+  <script src="../plugin/notes/notes.js"></script>
+  <script src="../plugin/markdown/markdown.js"></script>
+  <script src="../plugin/highlight/highlight.js"></script>
+  <script src="../plugin/math/math.js"></script>
+  <script src="../plugin/menu/menu.js"></script>
+
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      menu: {
+        custom: [{
+          title: 'Home',
+          icon: '<i class="fas fa-home"></i>',
+          src: '../index.html'
+        }]
+      },
+      hash: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu]
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Chemometrics and Statistics</title>
+
+	<link rel="stylesheet" href="../dist/reset.css">
+	<link rel="stylesheet" href="../dist/reveal.css">
+	<link rel="stylesheet" href="../dist/theme/league.css">
+	<link rel="stylesheet" href="../css/mystyles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+	<link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+	<style>
+		.green-text {
+			color: rgb(133, 198, 42);
+		}
+
+		.teal-text {
+			color: rgb(0, 150, 136);
+		}
+
+		.small-text {
+			font-size: 0.8em;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+				<section>
+					<h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+					</h4>
+					<pre><code>01. Data Characterization 1</code></pre>
+					<p>by <a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
+				</section>
+
+				<section data-auto-animate data-auto-animate-unmatched="false">
+					<h4>Introduction to Data Characterization</h4>
+					<p data-id="text1">You are asked to anaylze diclofenac in a river.</p>
+					<object type="image/svg+xml" data="../resources/river_svg1.svg" style="width: auto; height: 60%;">
+						Your browser does not support SVG
+					</object>
+				</section>
+
+				<section data-auto-animate data-auto-animate-unmatched="false">
+					<h4>Introduction to Data Characterization</h4>
+					<p data-id="text1">Therefore, you collect five samples from a sampling location.</p>
+					<object type="image/svg+xml" data="../resources/river_svg2.svg" style="width: auto; height: 60%;">
+						Your browser does not support SVG
+					</object>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Introduction to Data Characterization</h4>
+					<p style="font-weight: bold;">You obtained the following concentration data:</p>
+					<table data-id="table1" style="border-collapse: separate; border-spacing: 5px; font-size: large;">
+						<tr>
+							<th style="border-width: 0px; border-color: transparent;">sample id</th>
+							<th style="border-width: 0px; border-color: transparent;">concentration [mg/L]</th>
+						</tr>
+						<!-- Intro -->
+						<tr style="background-color: #FF983b;">
+							<td style="border-width: 0px; border-color: transparent;">#1</td>
+							<td style="border-width: 0px; border-color: transparent;">0.5</td>
+						</tr>
+						<tr style="background-color: #AA3A39;">
+							<td style="border-width: 0px; border-color: transparent;">#2</td>
+							<td style="border-width: 0px; border-color: transparent;">0.7</td>
+						</tr>
+						<tr style="background-color: #fe4e4e;">
+							<td style="border-width: 0px; border-color: transparent;">#3</td>
+							<td style="border-width: 0px; border-color: transparent;">0.6</td>
+						</tr>
+						<tr style="background-color: #ee5397;">
+							<td style="border-width: 0px; border-color: transparent;">#4</td>
+							<td style="border-width: 0px; border-color: transparent;">0.8</td>
+						</tr>
+						<tr style="background-color: #634490;">
+							<td style="border-width: 0px; border-color: transparent;">#5</td>
+							<td style="border-width: 0px; border-color: transparent;">0.4</td>
+						</tr>
+					</table>
+					<div>
+						<div style="display: inline-block;">
+							<p style="font-weight: bold; font-size: x-large;">
+								<span style="color: rgb(106, 235, 238);">&gt;&gt;</span>
+								What's the
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-weight: bold; font-size: x-large;">
+								river's
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-weight: bold; font-size: x-large;">
+								<span style="color: #00C4D4;"><code>true</code></span> diclofenac concentration?
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Introduction to Data Characterization</h4>
+					<p style="font-weight: bold;">You obtained the following concentration data:</p>
+					<div style="vertical-align: top;">
+						<div style="display: inline-block; vertical-align: top;">
+							<table data-id="table1"
+								style="border-collapse: separate; border-spacing: 5px; font-size: large;">
+								<tr>
+									<th style="border-width: 0px; border-color: transparent;">sample id</th>
+									<th style="border-width: 0px; border-color: transparent;">concentration [mg/L]</th>
+								</tr>
+								<!-- Intro -->
+								<tr style="background-color: #FF983b;">
+									<td style="border-width: 0px; border-color: transparent;">#1</td>
+									<td style="border-width: 0px; border-color: transparent;">0.5</td>
+								</tr>
+								<tr style="background-color: #AA3A39;">
+									<td style="border-width: 0px; border-color: transparent;">#2</td>
+									<td style="border-width: 0px; border-color: transparent;">0.7</td>
+								</tr>
+								<tr style="background-color: #fe4e4e;">
+									<td style="border-width: 0px; border-color: transparent;">#3</td>
+									<td style="border-width: 0px; border-color: transparent;">0.6</td>
+								</tr>
+								<tr style="background-color: #ee5397;">
+									<td style="border-width: 0px; border-color: transparent;">#4</td>
+									<td style="border-width: 0px; border-color: transparent;">0.8</td>
+								</tr>
+								<tr style="background-color: #634490;">
+									<td style="border-width: 0px; border-color: transparent;">#5</td>
+									<td style="border-width: 0px; border-color: transparent;">0.4</td>
+								</tr>
+							</table>
+						</div>
+						<div class="info-box" style="width: 35%; display: inline-block; vertical-align: top;">
+							<div class="info-box-content">
+								Compounds in rivers are often not homogeneously distributed. Therefore, the
+								concentration
+								of diclofenac can vary significantly depending on the sampling location.
+							</div>
+						</div>
+					</div>
+					<div>
+						<div style="display: inline-block;">
+							<p style="font-weight: bold; font-size: x-large;">
+								<span style="color: rgb(106, 235, 238);">&gt;&gt;</span>
+								What's the
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-weight: bold; font-size: x-large; color: #fe4e4e;">
+								<ins>sample's</ins>
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-weight: bold; font-size: x-large;">
+								<span style="color: #00C4D4;"><code>true</code></span> diclofenac concentration?
+							</p>
+						</div>
+					</div>
+					<div class="fragment fade-in">
+						<div class="exam-box" style="width: 100%;">
+							<div class="exam-box-content">
+								The <span style="color: #AA3A39;"><code>true</code></span> value cannot be determined
+								exatcly from the finite number of samples. <br>However, we can estimate the true
+								concentration using the arithmetic mean.
+							</div>
+						</div>
+						<p style="font-size: x-large;">
+							\[\begin{equation}
+							\text{mean} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}
+							\end{equation}\]</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Arithmetic Mean</h4>
+					<span style="font-size: x-large;">Let's have a quick look at the equation:</span>
+					<p style="font-size: x-large;">
+						\[\begin{equation}
+						\text{mean} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}
+						\end{equation}\]
+					</p>
+					<p style="font-size: x-large;">
+						Where
+						<span style="color: #fe4e4e;">\(n\)</span> is the number of samples and
+						<span style="color: #fe4e4e;">\(x_i\)</span> is the concentration of the
+						<span style="color: #fe4e4e;">\(i\)</span>-th sample.
+					</p>
+					<pre class="fragment fade-in"
+						data-fragment-index="1"><code>mean = (0.5 + 0.7 + 0.6 + 0.8 + 0.4) / 5 </code></pre>
+					<pre class="fragment fade-in" data-fragment-index="1"><code>>> mean = 0.6</code></pre>
+					<p class="fragment fade-in" data-fragment-index="2">
+						But why is this only an estimation of the <span style="color: #00C4D4;"><code>true</code></span>
+						value?
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Arithmetic Mean</h4>
+					<p style="font-size: x-large;">
+						Let's do a theoretical experiment:<br>
+					</p>
+					<div>
+						<div class="fragment fade-in" data-fragment-index="1" style="display: inline-block;">
+							<p style="font-size: x-large;">
+								We repeat the sampling (
+							</p>
+						</div>
+						<div class="fragment fade-in" data-fragment-index="1" style="display: inline-block;">
+							<p style="font-size: x-large;">
+								<span style="color: #00C4D4;"><code>n=5</code></span>
+							</p>
+						</div>
+						<div class="fragment fade-in" data-fragment-index="1" style="display: inline-block;">
+							<p style="font-size: x-large;">
+								) and the analysis <span style="color: #00C4D4;"><code>200</code></span> times.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Arithmetic Mean</h4>
+					<p style="font-size: x-large;">
+						Let's do a theoretical experiment:<br>
+					</p>
+					<div>
+						<div style="display: inline-block;">
+							<p style="font-size: x-large;">
+								We repeat the sampling (
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-size: x-large;">
+								<span style="color: #00C4D4;"><code>n=5</code></span>
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-size: x-large;">
+								) and the analysis <span style="color: #00C4D4;"><code>200</code></span> times.
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p class="fragment fade-in" style="font-size: x-large;color: #fe4e4e;">
+								Let's increase <span style="color: #00C4D4;"><code>n</code></span>.
+							</p>
+						</div>
+					</div>
+					<div style="width: 100%; height: 400px;">
+						<canvas id="chart_meanValue1"></canvas>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Arithmetic Mean</h4>
+					<p style="font-size: x-large;">
+						Let's do a theoretical experiment:<br>
+					</p>
+					<div>
+						<div style="display: inline-block;">
+							<p style="font-size: x-large;">
+								We repeat the sampling (
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-size: x-large;">
+								<span style="color: #00C4D4;"><code>n=50</code></span>
+							</p>
+						</div>
+						<div style="display: inline-block;">
+							<p style="font-size: x-large;">
+								) and the analysis <span style="color: #00C4D4;"><code>200</code></span> times.
+							</p>
+						</div>
+					</div>
+					<div style="width: 100%; height: 400px;">
+						<canvas id="chart_meanValue2"></canvas>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Arithmetic Mean</h4>
+					<div class="exam-box" style="width: 100%;">
+						<div class="exam-box-content">
+							<span style="color:#AA3A39;">>></span>
+							The arithmetic mean is an estimation of the true value.<br>
+							<span style="color:#AA3A39;">>></span>
+							The more samples you take, the more robust the estimation becomes. <br>
+							<span style="color:#AA3A39;">>></span>
+							I.e., the true value would be obtained, if you could take an infinite number of samples
+							(<span style="color:#AA3A39;">\(n \rightarrow \infty\)</span>).
+							<p>
+								\[\text{mean} = \frac{1}{N} \sum_{i=1}^{N} x_i = \bar{x} = \mu\]
+								where <span style="color:#AA3A39;">\(N\)</span> means all samples of a population, which
+								is often infinite. In practice, we use a finite number of samples <span
+									style="color:#AA3A39;">\(n\)</span> assuming: \[\mu \approx \bar{x}\]
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>The Median</h4>
+					<p style="font-size: x-large;">
+						Next to the arithmetic <span style="color: #00C4D4;"><code>mean</code></span>, the <span
+							style="color: #00C4D4;"><code>median</code></span> is another measure of central tendency.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Let's check look at an example to understand the difference between the <span
+							style="color: #00C4D4;"><code>mean</code></span> and the <span
+							style="color: #00C4D4;"><code>medianmean</code></span>.
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1" style="width: 100%; height: 400px;">
+						<button id="chart_meanValue3_addOutlier">Add Outlier</button>
+						<button id="chart_meanValue3_reduceData">Reduce Data</button>
+						<button id="chart_meanValue3_resetChart">Reset</button>
+						<canvas id="chart_meanValue3"></canvas>
+					</div>
+
+				</section>
+
+				<section>
+					<h4>The Median</h4>
+					<p style="font-size: x-large;">
+						How to calculate the <span style="color: #00C4D4;"><code>median</code></span>? How is the <span
+							style="color: #00C4D4;"><code>median</code></span> defined?
+					</p>
+					<div class="exam-box">
+						<div class="exam-box-content">
+							<span style="color:#AA3A39;">>></span>
+							The median is the value that separates the higher half from the lower half of a data set.
+							I.e. it is the middle value of a data set - when it is sorted in ascending or descending
+							order.
+						</div>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>median</code></span> for the
+							following data set:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							First, we need to sort the data set:
+						<pre><code>data_sorted = sort(data)</code></pre>
+						<pre><code>>> data_sorted = [0.4, 0.5, 0.6, 0.7, 0.8]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="3">
+						<p style="font-size: x-large;">
+							Then, we can calculate the <span style="color: #00C4D4;"><code>median</code></span> by
+							extracting the middle value:
+						<pre><code>median = 0.6</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>The Median</h4>
+					<p style="font-size: x-large;">
+						What if the data set has an even number of values?
+					</p>
+					<div class="exam-box">
+						<div class="exam-box-content">
+							<span style="color:#AA3A39;">>></span>
+							When the data set has an even number of values, the median is the average of the two middle
+							values.
+						</div>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>median</code></span> for the
+							following data set:
+						<pre><code>data = [0.5, 0.7, 0.9, 0.4]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							First, we need to sort the data set:
+						<pre><code>data_sorted = sort(data)</code></pre>
+						<pre><code>>> data_sorted = [0.4, 0.5, 0.7, 0.9]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="3">
+						<p style="font-size: x-large;">
+							Then, we can calculate the <span style="color: #00C4D4;"><code>median</code></span> by
+							averaging the two middle values:
+						<pre><code>median = (0.5 + 0.7) / 2</code></pre>
+						<pre><code>>> median = 0.6</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>The Mode</h4>
+					<p style="font-size: x-large;">
+						Next to the <span style="color: #00C4D4;"><code>mean</code></span> and the <span
+							style="color: #00C4D4;"><code>median</code></span>, the <span
+							style="color: #00C4D4;"><code>mode</code></span> is another measure of central tendency.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Let's check look at an example to understand the difference between them.
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1" style="width: 100%; height: 400px;">
+						<button id="chart_meanValue4_addLevels">Add Levels</button>
+						<button id="chart_meanValue4_resetChart">Reset</button>
+						<canvas id="chart_meanValue4"></canvas>
+					</div>
+				</section>
+
+				<section>
+					<h4>The Mode</h4>
+					<p style="font-size: x-large;">
+						How to calculate the <span style="color: #00C4D4;"><code>mode</code></span>? How is the <span
+							style="color: #00C4D4;"><code>mode</code></span> defined?
+					</p>
+					<div class="exam-box">
+						<div class="exam-box-content">
+							<span style="color:#AA3A39;">>></span>
+							The mode is the value that appears most frequently in a data set.
+						</div>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>mode</code></span> for the following
+							data set:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4, 0.6]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							We can calculate the <span style="color: #00C4D4;"><code>mode</code></span> by counting the
+							frequency of each value:
+						<pre><code>>> 0.4: 1
+>> 0.5: 1
+>> 0.6: 2 <-- mode
+>> 0.7: 1
+>> 0.8: 1</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Mode</h4>
+					<p style="font-size: x-large;">
+						What if we have continous data?
+					<pre><code>data = [0.5265, 0.6324, 0.7263, 0.8324, 0.4265, 0.6682]</code></pre>
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<div class="exam-box" data-id="box1">
+							<div class="exam-box-content">
+								<span style="color:#AA3A39;">>></span>
+								When we have continous data, we can define intervals and calculate the mode for each
+								interval. Or we may use the Pearson's mode skewness approach.
+							</div>
+						</div>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>mode</code></span> for the given
+							dataset using the interval approach:
+						<pre><code>intervals = [0.4, 0.5, 0.6, 0.7, 0.8]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="3">
+						<p style="font-size: x-large;">
+							We can calculate the <span style="color: #00C4D4;"><code>mode</code></span> by counting the
+							frequency of each interval:
+						<pre><code>>> 0.4-0.5: 1
+>> 0.5-0.6: 1
+>> 0.6-0.7: 2 <-- mode
+>> 0.7-0.8: 1</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Mode</h4>
+					<p style="font-size: x-large;">
+						What if we have continous data?
+					<pre><code>data = [0.5265, 0.6324, 0.7263, 0.8324, 0.4265, 0.6682]</code></pre>
+					</p>
+					<div>
+						<div class="exam-box" data-id="box1">
+							<div class="exam-box-content">
+								<span style="color:#AA3A39;">>></span>
+								When we have continous data, we can define intervals and calculate the mode for each
+								interval. Or we may use the Pearson's mode skewness approach.
+							</div>
+						</div>
+					</div>
+					<div>
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>mode</code></span> for the given
+							dataset using the interval approach:
+						<pre><code>intervals = [0.4, 0.5, 0.6, 0.7, 0.8]</code></pre>
+						</p>
+					</div>
+					<div>
+						<p style="font-size: x-large;">
+							We can also use rounding for intervaling the data to calculate the <span
+								style="color: #00C4D4;"><code>mode</code></span>
+						<pre><code>data_rounded = round(data, 1)</code></pre>
+						<pre><code>>> data_rounded = [0.5, 0.6, 0.7, 0.8, 0.4, 0.7]</code></pre>
+						<pre><code>>> 0.4: 1
+>> 0.5: 1
+>> 0.6: 1
+>> 0.7: 2 <-- mode
+>> 0.8: 1</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Mode</h4>
+					<p style="font-size: x-large;">
+						What if we have continous data?
+					<pre><code>data = [0.5265, 0.6324, 0.7263, 0.8324, 0.4265, 0.6682]</code></pre>
+					</p>
+					<div>
+						<div class="exam-box" data-id="box1">
+							<div class="exam-box-content">
+								<span style="color:#AA3A39;">>></span>
+								When we have continous data, we can define intervals and calculate the mode for each
+								interval. Or we may use the Pearson's mode skewness approach.
+							</div>
+						</div>
+					</div>
+					<div>
+						<p style="font-size: x-large;">
+							As an alternative, we can use the Pearson's mode skewness approach:
+						<pre><code>median(data)</code></pre>
+						<pre><code>>> 0.6503</code></pre>
+						<pre><code>mean(data)</code></pre>
+						<pre><code>>> 0.6354</code></pre>
+						<pre><code>mode = 3 * median - 2 * mean</code></pre>
+						<pre><code>>> mode = 0.6801</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>The Mode</h4>
+					<p style="font-size: x-large;">
+						What if we have multiple modes?
+					<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4, 0.6, 0.7]</code></pre>
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<div class="exam-box">
+							<div class="exam-box-content">
+								<span style="color:#AA3A39;">>></span>
+								When a data set has multiple modes, it is called multimodal. I.e. the mode is a set of
+								values.
+							</div>
+						</div>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>mode</code></span> for the given
+							dataset:
+						<pre><code>>> 0.4: 1
+>> 0.5: 1
+>> 0.6: 2 <-- mode
+>> 0.7: 2 <-- mode
+>> 0.8: 1</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="3">
+						<p style="font-size: x-large;">
+							If all values appear with the same frequency, the data set is called uniform (i.e., no
+							mode), except if we assume sufficient intervaling.
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>Range of the Data</h4>
+					<p style="font-size: x-large;">
+						Next to the measures of <span style="color: #00C4D4;"><code>central tendency</code></span>, we
+						need measures of dispersion to describe the <span
+							style="color: #00C4D4;"><code>spread</code></span> of a data set. A very simple approach for
+						this is the <span style="color: #00C4D4;"><code>range</code></span>.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						The <span style="color: #00C4D4;"><code>range</code></span> is defined as:
+						\[
+						\text{range} = \text{max}(data) - \text{min}(data)
+						\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Example:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_max = max(data)</code></pre>
+						<pre><code>>> data_max = 0.8</code></pre>
+						<pre><code>data_min = min(data)</code></pre>
+						<pre><code>>> data_min = 0.4</code></pre>
+						<pre><code>data_range = data_max - data_min</code></pre>
+						<pre><code>>> data_range = 0.4</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>Range of the Data</h4>
+					<p style="font-size: x-large;">
+						The range is a very simple measure of the spread of the data set. However, it is very sensitive
+						to outliers.
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<p style="font-size: x-large;">
+							Here is an example for such an outlier:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4, 3.1]</code></pre>
+						<pre><code>data_max = max(data)</code></pre>
+						<pre><code>>> data_max = 3.1</code></pre>
+						<pre><code>data_min = min(data)</code></pre>
+						<pre><code>>> data_min = 0.4</code></pre>
+						<pre><code>data_range = data_max - data_min</code></pre>
+						<pre><code>>> data_range = 2.7</code></pre>
+						</p>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						The large range would suggest a large spread of the data set, which is not true in this case.
+					</p>
+				</section>
+
+				<section>
+					<h4>Range of the Data</h4>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						One typical approach for using the range is for Normalizations, e.g., Min-Max Normalization:
+						\[
+						\text{normalized} = \frac{data - \text{min}(data)}{\text{max}(data) - \text{min}(data)}
+						\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Example:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_normalized = (data - min(data)) / (max(data) - min(data))</code></pre>
+						<pre><code>>> data_normalized = [0.25, 0.5, 0.75, 1.0, 0.0]</code></pre>
+						</p>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="3">
+						<p style="font-size: x-large;">
+							Example with outlier:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 3.1]</code></pre>
+						<pre><code>data_normalized = (data - min(data)) / (max(data) - min(data))</code></pre>
+						<pre><code>>> data_normalized = [0.00, 0.04, 0.08, 0.12, 1.0]</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>Variance & Standard Deviation</h4>
+					<p style="font-size: x-large;">
+						A more advanced approach to describe the spread of a data set is the <span
+							style="color: #00C4D4;"><code>variance</code></span> and the <span
+							style="color: #00C4D4;"><code>standard deviation</code></span>.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Let's have a look at the <span style="color: #00C4D4;"><code>variance</code></span> and the
+						<span style="color: #00C4D4;"><code>standard deviation</code></span>.
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<div class="exam-box">
+							<div class="exam-box-content">
+								<span style="color:#AA3A39;">>></span>
+								The variance \(\sigma^2\) describes the average squared deviation <br>from the expected
+								(i.e. true) value \(\mu\).<br>
+								<span style="color:#AA3A39;">>></span>
+								The standard deviation \(\sigma\) is the square root of the variance \(\sigma^2\).
+							</div>
+						</div>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						\[\begin{equation}
+						\text{variance} = \frac{1}{N} \sum_{i=1}^{N} (x_i - \mu)^2 = \sigma^2
+						\end{equation}\]
+					</p>
+					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+						However, in pratice we mostly estimate the <span
+							style="color: #00C4D4;"><code>variance</code></span> using the <span
+							style="color: #00C4D4;"><code>sample variance</code> \(s^2\)</span> due to the unknown <span
+							style="color: #00C4D4;"><code>true value</code> \(\mu\)</span> but using the arithmetic
+						<span style="color: #00C4D4;"><code>mean</code> \(\bar{x}\)</span> instead.
+						\[\begin{equation}
+						\text{sample variance} = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2 = s^2
+						\end{equation}\]
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Variance & Standard Deviation</h4>
+					<p style="font-size: x-large;">
+						\[s^2=\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2\]
+						Why do we divide by <span style="color: #00C4D4;">\(n-1\)</span> instead of <span
+							style="color: #00C4D4;">\(n\)</span>?
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						<span style="color: #c93535;">>></span> To answer this question, we need to understand <br>the
+						concept of <span style="color: #00C4D4;"><code>degrees of freedom (df)</code></span>.<br>
+						<span style="color: #c93535;">>></span> <span style="color: #00C4D4;"><code>df</code></span> is
+						the number of independent values in your data set. <br>Means that there is no influence between
+						the values.<br>
+						<span style="color: #c93535;">>></span> However, when we do some calculations, <br>we lose <span
+							style="color: #00C4D4;"><code>df</code></span> due to adding dependencies like <span
+							style="color: #00C4D4;"><code>y=f(x)</code></span>.
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Let's have a look at an example:<br>
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_mean = mean(data)</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Variance & Standard Deviation</h4>
+					<div>
+						<p style="font-size: x-large;">
+							Let's have a look at an example:<br>
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_mean = mean(data)</code></pre>
+						<pre><code>>> data_mean = 0.6</code></pre>
+						</p>
+					</div>
+					<p style="font-size: x-large;">
+						We could see that the <span style="color: #00C4D4;"><code>mean</code></span> depends on the
+						data. This adds some dependency to the data set. As we now have an equation that must be
+						fulfilled by the data.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						\[data\_mean = \frac{1}{5} \left(data_1 + data_2 + data_3 + data_4 + data_5\right)\]
+						\[data_1 = data\_mean \cdot 5 - data_2 - data_3 - data_4 - data_5\]
+						We can calculate the value of \(data_1\) by using the equation above, which indicates that at
+						least one value is dependent on the other values. Therefore, we reduce the degree of freedom by
+						one (<span style="color: #00C4D4;">\(df = n-1 = 4\)</span>).
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Variance & Standard Deviation</h4>
+					<p style="font-size: x-large;">
+						\[s=\sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<div class="exam-box">
+							<div class="exam-box-content">
+								<span style="color:#AA3A39;">>></span> In most real systems, we use the sample standard
+								deviation \(s\) to estimate the data's spread. As this function uses an estimation of
+								the true value, we need to consider this in the degree of freedom and divide by \(n-1\).
+							</div>
+						</div>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span
+								style="color: #00C4D4;"><code>standard deviation</code></span>:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>data_mean = mean(data)</code></pre>
+						<pre><code>data_variance = sum((data - data_mean)^2) / (n-1)</code></pre>
+						<pre><code>>> data_variance = 0.025</code></pre>
+						<pre><code>data_std = sqrt(data_variance)</code></pre>
+						<pre><code>>> data_std = 0.158</code></pre>
+						</p>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>Variance & Standard Deviation</h4>
+					<div>
+						<p style="font-size: x-large;">
+							Let's calculate the <span style="color: #00C4D4;"><code>variance</code></span> and the <span
+								style="color: #00C4D4;"><code>standard deviation</code></span>:
+						<pre><code>data = [0.5, 0.6, 0.7, 0.8, 0.4]</code></pre>
+						<pre><code>>> data_variance = 0.025</code></pre>
+						<pre><code>>> data_std = 0.158</code></pre>
+						</p>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Interpretation: The average concentration is 0.6 mg/L <br>with an average spread of 0.158 mg/L.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> Note: This is not the uncertainty of the average
+						concentration!
+					</p>
+					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> The spread describes the precision of the data set
+						<br>and is proportional to the uncertainty of the mean.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="4" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> The spread can give you feedback on your measurement
+						system/method <br>and the quality of your data.
+					</p>
+				</section>
+
+				<section>
+					<h4>The Interquartile Range</h4>
+					<p style="font-size: x-large;">
+						Another measure of the spread of the data set is the <span
+							style="color: #00C4D4;"><code>interquartile range (IQR)</code></span>. The <span
+							style="color: #00C4D4;"><code>IQR</code></span> covers the middle 50% of the data set, i.e.,
+						from the 25th to the 75th percentile.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Some helpful terms for the <span style="color: #00C4D4;"><code>IQR</code></span>:
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> Percentile / Quantile: The value below which a given
+						percentage of
+						observations fall. <br>E.g., the 13th percentile or 0.13 quantile is the value below which 13%
+						of the data fall.<br>
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						sorted data:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2" style="display: flex; flex-wrap: wrap;">
+						<!-- 25 Blue Boxes and 75 red boxes-->
+						<script>
+							for (let i = 0; i < 13; i++) {
+								document.write('<div class="box blue"></div>');
+							}
+							for (let i = 0; i < 87; i++) {
+								document.write('<div class="box red"></div>');
+							}
+						</script>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span> Quartile: The 25th, 50th, and 75th percentiles are
+						called the first, second, and third quartiles, respectively.
+					</p>
+					<p class="fragment fade-in" data-fragment-index="3" style="font-size: x-large;">
+						sorted data:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="3" style="display: flex; flex-wrap: wrap;">
+						<!-- 25 Blue Boxes and 75 red boxes-->
+						<script>
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box blue"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box yellow"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box green"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box purple"></div>');
+							}
+						</script>
+					</div>
+				</section>
+
+				<section>
+					<h4>The Interquartile Range</h4>
+					<p style="font-size: x-large;">
+						Another measure of the spread of the data set is the <span
+							style="color: #00C4D4;"><code>interquartile range (IQR)</code></span>. The <span
+							style="color: #00C4D4;"><code>IQR</code></span> covers the middle 50% of the data set, i.e.,
+						from the 25th to the 75th percentile.
+					</p>
+					<p style="font-size: x-large;">
+						sorted data:
+					</p>
+					<div style="display: flex; flex-wrap: wrap;">
+						<!-- 25 Blue Boxes and 75 red boxes-->
+						<script>
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box gray"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box yellow"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box green"></div>');
+							}
+							for (let i = 0; i < 25; i++) {
+								document.write('<div class="box gray"></div>');
+							}
+						</script>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						How to calculate the <span style="color: #00C4D4;"><code>IQR</code></span>?
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						\[
+						q = (n+1) \cdot p
+						\]
+						Where \(q\) is the quantile position, \(n\) is the number of data points, and \(p\) is the
+						quantile.
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<p style="font-size: x-large;">
+						Let's calculate the <span style="color: #00C4D4;"><code>IQR</code></span> for the given dataset:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<pre><code>data = [0.573, 0.712, 0.594, 0.631, 0.682,...
+				0.800, 0.471, 0.499, 0.538, 0.697,...
+				0.612, 0.556, 0.644, 0.524, 0.528,...
+				0.728, 0.656, 0.507, 0.512, 0.552,...
+				0.668, 0.803, 0.750, 0.774]</code></pre>
+					</div>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<pre><code>q25 = (24 + 1) * 0.25</code></pre>
+						<pre><code>q75 = (24 + 1) * 0.75</code></pre>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span>
+						Now we know that the 25th percentile is between the 6th and 7th value and the 75th percentile is
+						between the 18th and 19th value. To calculate the <span
+							style="color: #00C4D4;"><code>IQR</code></span>, we need to interpolate the values:
+					</p>
+					<p class="fragment fade-in" data-fragment-index="2" style="font-size: x-large;">
+						\[ x_p = x_{\lfloor q\rfloor} + (x_{\lceil q\rceil} - x_{\lfloor q\rfloor}) \cdot (q - \lfloor
+						q\rfloor)\]
+						Where <span style="color: #00C4D4;">\(x_p\)</span> is the quantile value, <span
+							style="color: #00C4D4;">\(x_{\lfloor q\rfloor}\)</span> is the lower value, <span
+							style="color: #00C4D4;">\(x_{\lceil q\rceil}\)</span> is the upper value, and <span
+							style="color: #00C4D4;">\(q\)</span> is the quantile. <span
+							style="color: #00C4D4;">\(\lfloor \rfloor\)</span> is the floor function (rounds down) and
+						<span style="color: #00C4D4;">\(\lceil \rceil\)</span> is the ceiling function (rounds up).
+					</p>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span>
+						Now we know that the 25th percentile is between the 6th and 7th value and the 75th percentile is
+						between the 18th and 19th value. To calculate the <span
+							style="color: #00C4D4;"><code>IQR</code></span>, we need to interpolate the values:
+					</p>
+					<p style="font-size: x-large;">
+						\[ x_p = x_{\lfloor q\rfloor} + (x_{\lceil q\rceil} - x_{\lfloor q\rfloor}) \cdot (q - \lfloor
+						q\rfloor)\]
+					</p>
+					<div class="fragment fade-in" data-fragment-index="1">
+						<pre><code>q25 = 0.528 + (0.538 - 0.528) * (6.25 - 6)</code></pre>
+						<pre><code>q75 = 0.697 + (0.712 - 0.697) * (18.75 - 18)</code></pre>
+						<pre><code>>> q25 = 0.503, q75 = 0.708</code></pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<p style="font-size: x-large;">
+							First, we need to sort the data:
+						</p>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						Next, we calculate the <span style="color: #00C4D4;"><code>quantile positions q</code></span>:
+					</p>
+					<div>
+						<pre><code>>> q25 = 6.25, q75 = 18.75</code></pre>
+					</div>
+					<p style="font-size: x-large;">
+						<span style="color: #00C4D4;">>></span>
+						To calculate the <span style="color: #00C4D4;"><code>IQR</code></span>, we need to interpolate
+						the values:
+					</p>
+					<div>
+						<pre><code>>> q25 = 0.503, q75 = 0.708</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Finally, we can calculate the <span style="color: #00C4D4;"><code>IQR</code></span>:
+					</p>
+					<div class="fragment fade-in" data-fragment-index="2">
+						<pre><code>IQR = q75 - q25</code></pre>
+						<pre><code>>> IQR = 0.205</code></pre>
+					</div>
+				</section>
+
+				<section data-auto-animate>
+					<h4>The Interquartile Range</h4>
+					<div>
+						<pre><code>data = [0.471, 0.499, 0.507, 0.512, 0.524,...
+				0.528, 0.538, 0.552, 0.556, 0.573,...
+				0.594, 0.612, 0.631, 0.644, 0.656,...
+				0.668, 0.682, 0.697, 0.712, 0.728,...
+				0.750, 0.774, 0.800, 0.803]</code></pre>
+					</div>
+					<div>
+						<pre><code>>> IQR = 0.205</code></pre>
+					</div>
+					<p class="fragment fade-in" data-fragment-index="1" style="font-size: x-large;">
+						Interpretation: The middle 50% of the data set is between 0.503 and 0.708 mg/L with a spread of
+						0.205 mg/L.
+				</section>
+
+				<section>
+					<h4>Seminar Material</h4>
+					<div class="interactive-box">
+						<div class="interactive-box-content">
+							Case 1: <br>
+							You want to compare to two analytical methods for the determination chloride concentration in surface water. You have the following data:
+							<pre style="font-size: x-large;"><code>data_1 = [43.13, 45.12, 44.98, 40.23, 42.11,...
+					41.98, 43.12, 44.01, 42.98, 43.12]</code></pre>
+							<pre style="font-size: x-large;"><code>data_2 = [39.12, 45.12, 44.98, 43.23, 44.78,...
+					43.56, 44.61, 45.01, 46.02, 49.73]</code></pre>
+							Which method is more precise?
+						</div>
+					</div>
+				</section>
+		</div>
+		<footer class="footer" style="font-size: medium; color: #666666;">
+			Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+			Last updated: October 9, 2024
+		</footer>
+	</div>
+
+	<script src="../dist/reveal.js"></script>
+	<script src="../plugin/notes/notes.js"></script>
+	<script src="../plugin/markdown/markdown.js"></script>
+	<script src="../plugin/highlight/highlight.js"></script>
+	<script src="../plugin/math/math.js"></script>
+	<!-- Chart plugin -->
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			chart: {
+				defaults: {
+					color: 'lightgray', // color of labels
+					scale: {
+						beginAtZero: true,
+						ticks: { stepSize: 1 },
+						grid: { color: "lightgray" }, // color of grid lines
+					},
+				},
+				line: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"], "borderDash": [[5, 10], [0, 0]] },
+				bar: { backgroundColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
+				pie: { backgroundColor: [["rgba(0,0,0,.8)", "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"]] },
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealChart]
+		});
+	</script>
+	<!-- Chart scripts -->
+	<script src="../resources/chart_meanValue1.js"></script>
+	<script src="../resources/chart_meanValue2.js"></script>
+	<script src="../resources/chart_meanValue3.js"></script>
+	<script src="../resources/chart_meanValue4.js"></script>
+
+</body>
+
+</html>
