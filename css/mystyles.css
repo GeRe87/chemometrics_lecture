@@ -11,6 +11,18 @@
     z-index: 100000;        /* Ein hoher Wert, um das Icon nach vorne zu bringen */
 }
 
+/* Grundformatierung, damit die Leerzeichen erhalten bleiben */
+.hoverable {
+    display: inline-block;
+    white-space: pre; /* Verhindert das Zusammenfassen von Leerzeichen */
+}
+
+/* Beim Hover über den Link */
+.topic-link:hover .hoverable::after {
+    color: aqua;
+    content: " <<";     /* Fügt das ">>" hinzu */
+}
+
 .exam-box {
     display: block;
     border: 5px solid #AA3A39;
