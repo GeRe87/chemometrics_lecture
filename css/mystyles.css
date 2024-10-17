@@ -7,20 +7,24 @@
 }
 
 .icon-link {
-    position: relative;  /* oder absolute/fixed, je nach Layout */
-    z-index: 100000;        /* Ein hoher Wert, um das Icon nach vorne zu bringen */
+    position: relative;
+    /* oder absolute/fixed, je nach Layout */
+    z-index: 100000;
+    /* Ein hoher Wert, um das Icon nach vorne zu bringen */
 }
 
 /* Grundformatierung, damit die Leerzeichen erhalten bleiben */
 .hoverable {
     display: inline-block;
-    white-space: pre; /* Verhindert das Zusammenfassen von Leerzeichen */
+    white-space: pre;
+    /* Verhindert das Zusammenfassen von Leerzeichen */
 }
 
 /* Beim Hover über den Link */
 .topic-link:hover .hoverable::after {
     color: aqua;
-    content: " <<";     /* Fügt das ">>" hinzu */
+    content: " <<";
+    /* Fügt das ">>" hinzu */
 }
 
 .exam-box {
@@ -30,12 +34,12 @@
     margin: 10px;
     border-radius: 5px;
     background-color: #dcb9b8;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
     color: #000;
     position: relative;
     font-size: large;
     font-weight: bold;
-    width:90%;
+    width: 90%;
 }
 
 .info-box {
@@ -45,7 +49,7 @@
     margin: 10px;
     border-radius: 5px;
     background-color: #c0fafa;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
     color: #000;
     position: relative;
     font-size: large;
@@ -59,7 +63,7 @@
     margin: 10px;
     border-radius: 5px;
     background-color: #fef69c;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
     color: #000;
     position: relative;
     font-size: large;
@@ -68,17 +72,21 @@
 
 .container {
     display: flex;
-    align-items: flex-start; /* Elemente oben ausrichten */
-  }
-  .container img {
-    width: 50%; /* Breite des Bildes auf 50% setzen */
-    margin-left: 20px; /* Abstand zwischen Box und Bild */
-  }
+    align-items: flex-start;
+    /* Elemente oben ausrichten */
+}
 
-  @media print {
+.container img {
+    width: 50%;
+    /* Breite des Bildes auf 50% setzen */
+    margin-left: 20px;
+    /* Abstand zwischen Box und Bild */
+}
+
+@media print {
     .slide-background {
         background-color: white !important;
-        -webkit-print-color-adjust: exact; 
+        -webkit-print-color-adjust: exact;
     }
 }
 
@@ -114,5 +122,89 @@
     background-color: rgb(128, 128, 128);
 }
 
- 
- 
+.styled-point {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    /* Platz für das Icon */
+}
+
+.styled-point::before {
+    content: "\f0c8";
+    /* Unicode für das Font Awesome square */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 900;
+    /* für solid icons */
+    color: burlywood;
+    position: absolute;
+    font-size: medium;
+    left: -20px;
+    /* Icon links vom Text platzieren */
+    top: 0.75ex
+}
+
+.styled-point code {
+    color: #00C4D4;
+}
+
+.styled-point2 {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    /* Platz für das Icon */
+}
+
+.styled-point2::before {
+    content: "\f101";
+    /* Unicode für das Font Awesome angles-right */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 900;
+    /* für solid icons */
+    color: rgb(219, 93, 43);
+    position: absolute;
+    font-size: medium;
+    left: -20px;
+    /* Icon links vom Text platzieren */
+    top: 0.75ex
+}
+
+.styled-point2 code {
+    color: #00C4D4;
+}
+
+.image-box {
+    display: block;
+    border: 5px solid #d4d4d4;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #ededed;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    color: #000;
+    position: relative;
+    font-size: large;
+    width: 90%;
+}
+
+.styled-noPoint {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    /* Platz für das Icon */
+}
+
+.styled-noPoint code {
+    color: #00C4D4;
+}
+
+.styled-point2 .katex .mord,
+.styled-point2 .katex .mop {
+    color: #00C4D4; /* Deine gewünschte Farbe für LaTeX-Elemente */
+}
+
+.styled-point .katex .mord,
+.styled-point .katex .mop {
+    color: #00C4D4; /* Deine gewünschte Farbe für LaTeX-Elemente */
+}

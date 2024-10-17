@@ -31,5 +31,8 @@
     "gulp": "^4.0.2",
     "rollup": "^2.21.0",
     "rollup-plugin-terser": "^6.1.0"
+  },
+  "dependencies": {
+    "reveal.js-menu": "file:"
   }
 }
