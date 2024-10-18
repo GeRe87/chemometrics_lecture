@@ -85,10 +85,15 @@
 					<div style="display: inline-block; width: 5%;"></div>
 					<div style="display: inline-block; width: 50%; text-align: left; vertical-align: middle;">
 						<div class="image-box" style="height: 400px">
-							<div style="width: 95%; height: 95%">
-								<button id="chart_uniformDistribution1_addBars">Count Results</button>
-								<button id="chart_uniformDistribution1_resetChart">Reset</button>
+							<div class="tabs">
+								<div class="tab active" data-tab="scatter1">Scatter Plot</div>
+								<div class="tab" data-tab="histogram1">Histogram</div>
+							</div>
+							<div class="tab-content active" id="scatter1" style="height: 370px;">
 								<canvas id="chart_uniformDistribution1"></canvas>
+							</div>
+							<div class="tab-content" id="histogram1" style="height: 370px;">
+								<canvas id="chart_uniformDistribution1_histogram"></canvas>
 							</div>
 						</div>
 					</div>
@@ -123,10 +128,15 @@
 					<div style="display: inline-block; width: 50%; text-align: left; vertical-align: middle;"
 						class="fragment fade-in">
 						<div class="image-box" style="height: 400px">
-							<div style="width: 95%; height: 95%">
-								<button id="chart_uniformDistribution2_addBars">Count Results</button>
-								<button id="chart_uniformDistribution2_resetChart">Reset</button>
+							<div class="tabs">
+								<div class="tab active" data-tab="scatter2">Scatter Plot</div>
+								<div class="tab" data-tab="histogram2">Histogram</div>
+							</div>
+							<div class="tab-content active" id="scatter2" style="height: 370px;">
 								<canvas id="chart_uniformDistribution2"></canvas>
+							</div>
+							<div class="tab-content" id="histogram2" style="height: 370px;">
+								<canvas id="chart_uniformDistribution2_histogram"></canvas>
 							</div>
 						</div>
 					</div>
@@ -189,6 +199,14 @@
 							The CDF (cumulative distribution function) describes the <code>probability</code> that a random variable
 							will be found at a value less than or equal to a given value.
 						</p>
+						<p class="styled-point2">
+							The CDF is the integral of the PDF. I.e.,
+							<span style="font-size: medium;">
+								\[
+								\int_{x1}^{x2}PDF = CDF(x2) - CDF(x1)
+								\]
+							</span>
+						</p>
 					</div>
 				</div>
 			</section>
@@ -248,6 +266,9 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 							The t-distribution is commonly used in <code>hypothesis testing</code> and in the construction of
 							<code>confidence intervals</code>.
 						</p>
+						<p class="styled-point2">
+							Mean values from normally distributed populations are t-distributed.
+						</p>
 					</div>
 					<div style="display: inline-block; width: 5%;"></div>
 					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
@@ -295,14 +316,79 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 						</p>
 					</div>
 				</div>
+				<p style="font-size: large;">Fortunately, we don't have to calculate these functions by hand :)</p>
 			</section>
+
+			<section>
+				<h4>Chi-Square Distribution: Definition</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: middle;">
+						<p class="styled-point">
+							The <code>Chi-Square (χ²) distribution</code> describes the distribution of the sum of squared standard normal variables.
+						</p>
+						<p class="styled-point">
+							It is widely used in hypothesis testing, especially in testing the variance of a normally distributed population.
+						</p>
+						<p class="styled-point2">
+							The Chi-Square distribution has one parameter, <code>degrees of freedom (df)</code>, which corresponds to the number of independent random variables being squared and summed.
+						</p>
+						<p class="styled-point2">
+							Sample variances from normally distributed populations are Chi-Square distributed.
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
+						<div class="image-box" style="height: 400px;">
+							<div style="width: 95%; height: 95%;">
+								<label for="dfSliderChi">Degrees of Freedom (df): </label>
+								<input type="range" id="dfSliderChi" min="1" max="30" value="3" step="1">
+								<span id="dfValueChi">3</span>
+								<canvas id="chart_chiSquare"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<section>
+				<h4>Chi-Square Distribution: PDF & CDF</h4>
+				<div>
+						<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+								<p class="styled-point">
+										The <code>probability density function (PDF)</code> of the Chi-Square distribution is:
+								</p>
+								<p class="styled-noPoint">
+										\[
+										f(x, k) = \frac{x^{(k/2 - 1)} e^{-x/2}}{2^{k/2} \Gamma(k/2)}
+										\]
+								</p>
+								<p class="styled-point2">
+										Where \(k\) is the degrees of freedom and \(\Gamma\) is the Gamma function.
+								</p>
+						</div>
+						<div style="display: inline-block; width: 5%;"></div>
+						<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+								<p class="styled-point">
+										The <code>cumulative distribution function (CDF)</code> of the Chi-Square distribution is:
+								</p>
+								<p class="styled-noPoint">
+										\[
+										F(x, k) = \frac{\gamma(k/2, x/2)}{\Gamma(k/2)}
+										\]
+								</p>
+								<p class="styled-point2">
+										Where \(\gamma\) is the lower incomplete Gamma function and \(k\) is the degrees of freedom.
+								</p>
+						</div>
+				</div>
+		</section>			
 
 			<section>
 				<h4>F-Distribution: Interactive Example</h4>
 				<div>
 					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
 						<p class="styled-point">
-							The <code>F-distribution</code> arises when comparing two variances and depends on two parameters:
+							The <code>F-distribution</code> arises when comparing two variances by their ratio and depends on two parameters:
 							<code>degrees of freedom</code> \(d_1\) and \(d_2\).
 						</p>
 						<p class="styled-point">
@@ -320,12 +406,12 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 							</div>
 							<div>
 								<label for="df1Slider">Degrees of Freedom \(d_1\): </label>
-								<input type="range" id="df1Slider" min="1" max="30" value="5" step="1">
+								<input type="range" id="df1Slider" min="1" max="60" value="5" step="1">
 								<span id="df1Value">5</span>
 							</div>
 							<div>
 								<label for="df2Slider">Degrees of Freedom \(d_2\): </label>
-								<input type="range" id="df2Slider" min="1" max="30" value="10" step="1">
+								<input type="range" id="df2Slider" min="1" max="60" value="10" step="1">
 								<span id="df2Value">10</span>
 							</div>
 						</div>
@@ -374,7 +460,7 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 				<div>
 					<div style="display: inline-block; width: 52%; text-align: left; vertical-align: top;">
 						<p class="styled-noPoint">
-							<pre><code>x = [47.59, 50.96, 49.92, 51.93, 49.10, 
+						<pre><code>x = [47.59, 50.96, 49.92, 51.93, 49.10, 
      51.17, 49.68, 48.56, 51.79, 48.61, 
      52.00, 47.58, 46.41, 48.78, 49.45, 
      50.31, 49.58, 52.12, 53.82, 47.04, 
@@ -386,79 +472,80 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
      49.47, 48.73, 49.01, 46.67]</code></pre>
 						</p>
 					</div>
-				<div style="display: inline-block; width: 3%;"></div>
-				<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
-						<p class="styled-point">We have recorded some data. After processing, we obtained the results shown on the left.</p>
+					<div style="display: inline-block; width: 3%;"></div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">We have recorded some data. After processing, we obtained the results shown on the
+							left.</p>
 						<p class="styled-point2">What are the characteristics of this data?</p>
 						<p class="styled-point2">How many data points were recorded?</p>
 						<p class="styled-point2">What is the range of the data?</p>
 						<p class="styled-point2">How does the distribution look like?</p>
 						<p class="styled-point2">Are there any outliers?</p>
-				</div>
-			</div>	
-		</section>
-
-		<section>
-			<h4>Whisker Boxplot</h4>
-			<div>
-				<div style="display: inline-block; width: 40%; text-align: left; vertical-align: middle;">
-					<p class="styled-point">
-						A very powerful tool for data characterization is the Whisker Boxplot.
-					</p>
-					<p class="styled-point">
-						The data series is shown as a box with two range indicators.
-					</p>
-					<p class="styled-point">
-						We obtain information about:
-					</p>
-					<p class="styled-point2">
-						Median
-					</p>
-					<p class="styled-point2">
-						Symmetry
-					</p>
-					<p class="styled-point2">
-						Range
-					</p>
-					<p class="styled-point2">
-						Outlier Candidates
-					</p>
-			</div>
-			<div style="display: inline-block; width: 5%;"></div>
-			<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
-					<div class="image-box">
-							<img src="../resources/boxplot1.png" style="width: 100%;">
 					</div>
-			</div>
-	</section>
-	
-	<section>
-    <h4>How to Construct a Whisker Boxplot?</h4>
-    <div>
-        <div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
-            <p class="styled-point">
-                The first step will be sorting your data.
-            </p>
-            <p class="styled-point">
-              We divide the sorted data into four groups with mostly equal number of members.
-            </p>
-            <p class="styled-point">
-              Between these four groups, there are three edges (called quartiles: Q1, Q2, Q3).
-            </p>
-            <p class="styled-point2">
-                <strong>Q1</strong> Splits the data into 25% lowest and 75% highest values.
-            </p>
-            <p class="styled-point2">
-                <strong>Q2</strong> Splits the data into 50% lowest and 50% highest values.
-            </p>
-            <p class="styled-point2">
-                <strong>Q3</strong> Splits the data into 75% lowest and 25% highest values.
-            </p>
-        </div>
-        <div style="display: inline-block; width: 2%;"></div>
-        <div style="display: inline-block; width: 53%; text-align: left; vertical-align: top;">
-            <p class="styled-noPoint">
-							<pre><code>x = [45.15, 46.41, 46.67, 46.71, 46.88, 
+				</div>
+			</section>
+
+			<section>
+				<h4>Whisker Boxplot</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: middle;">
+						<p class="styled-point">
+							A very powerful tool for data characterization is the Whisker Boxplot.
+						</p>
+						<p class="styled-point">
+							The data series is shown as a box with two range indicators.
+						</p>
+						<p class="styled-point">
+							We obtain information about:
+						</p>
+						<p class="styled-point2">
+							Median
+						</p>
+						<p class="styled-point2">
+							Symmetry
+						</p>
+						<p class="styled-point2">
+							Range
+						</p>
+						<p class="styled-point2">
+							Outlier Candidates
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
+						<div class="image-box">
+							<img src="../resources/boxplot1.png" style="width: 100%;">
+						</div>
+					</div>
+			</section>
+
+			<section>
+				<h4>How to Construct a Whisker Boxplot?</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The first step will be sorting your data.
+						</p>
+						<p class="styled-point">
+							We divide the sorted data into four groups with mostly equal number of members.
+						</p>
+						<p class="styled-point">
+							Between these four groups, there are three edges (called quartiles: Q1, Q2, Q3).
+						</p>
+						<p class="styled-point2">
+							<strong>Q1</strong> Splits the data into 25% lowest and 75% highest values.
+						</p>
+						<p class="styled-point2">
+							<strong>Q2</strong> Splits the data into 50% lowest and 50% highest values.
+						</p>
+						<p class="styled-point2">
+							<strong>Q3</strong> Splits the data into 75% lowest and 25% highest values.
+						</p>
+					</div>
+					<div style="display: inline-block; width: 2%;"></div>
+					<div style="display: inline-block; width: 53%; text-align: left; vertical-align: top;">
+						<p class="styled-noPoint">
+						<pre><code>x = [45.15, 46.41, 46.67, 46.71, 46.88, 
 		 47.04, 47.53, 47.58, 47.59, 48.25, 
 		 48.35, 48.56, 48.61, 48.73, 48.78, 
 		 48.85, 48.99, 49.01, 49.02, 49.09, 
@@ -468,142 +555,143 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 		 51.22, 51.79, 51.93, 51.95, 52.00, 
 		 52.12, 52.41, 52.60, 52.76, 53.82, 
 		 54.60, 54.80, 55.77, 58.10]</code></pre>
-            </p>
+						</p>
 						<p class="styled-point2">
 							We already know, how to calculate the quartiles from former lecture.
 						</p>
-        </div>
-    </div>
-</section>
+					</div>
+				</div>
+			</section>
 
-<section>
-	<h4>
-		Construct the Box of the Boxplot
-	</h4>
-	<div>
-		<div style="display: inline-block; width: 50%; text-align: left; vertical-align: top;">
-			<div class="image-box">
-				<img src="../resources/boxplot2.png" style="width: 100%;">
-			</div>
-			</div>
-			<div style="display: inline-block; width: 5%;"></div>
-			<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
-				<p class="styled-point">
-					Having calculated Q1, Q2, and Q3, the box is defined, ranging from Q1 to Q3.
-				</p>
+			<section>
+				<h4>
+					Construct the Box of the Boxplot
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 50%; text-align: left; vertical-align: top;">
+						<div class="image-box">
+							<img src="../resources/boxplot2.png" style="width: 100%;">
+						</div>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							Having calculated Q1, Q2, and Q3, the box is defined, ranging from Q1 to Q3.
+						</p>
+						<p class="styled-point2">
+							This length is called <code>interquartile range (IQR)</code>.
+						</p>
+						<p class="styled-point2">
+							50 % of the data points are located inside the box.
+						</p>
+						<p class="styled-point">
+							The median (Q2) is shown as a line inside the box.
+						</p>
+						<p class="styled-point2">
+							The more the the median is shifted to the top or bottom, the more asymmetric the data is.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Construct the Fence of the Boxplot
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							To complete the boxplot, we need some information about the range of the data series compared to the IQR.
+						</p>
+						<p class="styled-point2">
+							For this purpose, we add the fence to the boxplot describing the total range or a multiple (e.g. 1.5) of
+							the IQR.
+						</p>
+						<p class="styled-noPoint">
+							<span style="font-size: 0.8em;">
+								\[
+								\text{upper\_fence} =\\ \min \left( \max(x), Q3 + 1.5 \times IQR \right)
+								\]
+								\[
+								\text{lower\_fence} =\\ \max \left( \min(x), Q1 - 1.5 \times IQR \right)
+								\]
+							</span>
+						</p>
+						<p class="styled-point">
+							Data outside the fence is plotted as individual points like
+							<i class="fas fa-circle"></i>
+						</p>
+						<p class="styled-point2">
+							These points are considered as <code>outliers</code>.
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
+						<div class="image-box">
+							<img src="../resources/boxplot3.png" style="width: 100%;">
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Strengths and Limitations of the Boxplot
+				</h4>
+				<img src="../resources/boxplot4.png" style="width: 100%; border-radius: 15px;">
 				<p class="styled-point2">
-					This length is called <code>interquartile range (IQR)</code>.
+					*note: the black horizontal dashes show individual data points and aren't part of a boxplot.
 				</p>
-				<p class="styled-point2">
-					50 % of the data points are located inside the box.
-				</p>
-				<p class="styled-point">
-					The median (Q2) is shown as a line inside the box.
-				</p>
-				<p class="styled-point2">
-					The more the the median is shifted to the top or bottom, the more asymmetric the data is.
-				</p>
-			</div>
-		</div>
-</section>
+			</section>
 
-<section>
-	<h4>
-		Construct the Fence of the Boxplot
-	</h4>
-	<div>
-		<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
-			<p class="styled-point">
-				To complete the boxplot, we need some information about the range of the data series compared to the IQR.
-			</p>
-			<p class="styled-point2">
-				For this purpose, we add the fence to the boxplot describing the total range or a multiple (e.g. 1.5) of the IQR.
-			</p>
-			<p class="styled-noPoint">
-				<span style="font-size: 0.8em;">
-					\[
-					\text{upper\_fence} =\\ \min \left( \max(x), Q3 + 1.5 \times IQR \right)
-					\]
-					\[
-					\text{lower\_fence} =\\ \max \left( \min(x), Q1 - 1.5 \times IQR \right)
-					\]
-					</span>
-			</p>
-			<p class="styled-point">
-				Data outside the fence is plotted as individual points like 
-				<i class="fas fa-circle"></i>
-			</p>
-			<p class="styled-point2">
-				These points are considered as <code>outliers</code>.
-			</p>
-		</div>
-		<div style="display: inline-block; width: 5%;"></div>
-		<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
-			<div class="image-box">
-				<img src="../resources/boxplot3.png" style="width: 100%;">
-			</div>
-		</div>
-	</div>
-</section>
+			<section>
+				<h4>
+					Histograms
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							Next to <code>Boxplots</code>, <code>Histograms</code> are nice tools for Data Characterization.
+						</p>
+						<p class="styled-point">
+							The data series is divided into several bins shown as bars.
+						</p>
+						<p class="styled-point2">
+							Every bin covers a defined value range (mostly equidistant).
+						</p>
+						<p class="styled-point">
+							We obtain information about:
+						</p>
+						<p class="styled-point2">
+							Mode
+						</p>
+						<p class="styled-point2">
+							Distribution
+						</p>
+						<p class="styled-point2">
+							Symmetry
+						</p>
+						<p class="styled-point2">
+							Range
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
+						<div class="image-box">
+							<img src="../resources/hist1.png" style="width: 100%;">
+						</div>
+					</div>
+				</div>
+			</section>
 
-<section>
-	<h4>
-		Strengths and Limitations of the Boxplot
-	</h4>
-	<img src="../resources/boxplot4.png" style="width: 100%; border-radius: 15px;">
-	<p class="styled-point2">
-		*note: the black horizontal dashes show individual data points and aren't part of a boxplot.
-	</p>
-</section>
-
-<section>
-	<h4>
-		Histograms
-	</h4>
-	<div>
-		<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
-			<p class="styled-point">
-				Next to <code>Boxplots</code>, <code>Histograms</code> are nice tools for Data Characterization.
-			</p>
-			<p class="styled-point">
-				The data series is divided into several bins shown as bars.
-			</p>
-			<p class="styled-point2">
-				Every bin covers a defined value range (mostly equidistant).
-			</p>
-			<p class="styled-point">
-				We obtain information about:
-			</p>
-			<p class="styled-point2">
-				Mode
-			</p>
-			<p class="styled-point2">
-				Distribution
-			</p>
-			<p class="styled-point2">
-				Symmetry
-			</p>
-			<p class="styled-point2">
-				Range
-			</p>
-		</div>
-		<div style="display: inline-block; width: 5%;"></div>
-		<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
-			<div class="image-box">
-				<img src="../resources/hist1.png" style="width: 100%;">
-			</div>
-		</div>
-	</div>
-</section>
-
-<section>
-	<h4>
-		Construct a Histogram
-	</h4>
-	<div>
-		<div style="display: inline-block; width: 53%; text-align: left; vertical-align: top;">
-			<p class="styled-noPoint">
-				<pre><code>x = [45.15, 46.41, 46.67, 46.71, 46.88, 
+			<section>
+				<h4>
+					Construct a Histogram
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 53%; text-align: left; vertical-align: top;">
+						<p class="styled-noPoint">
+						<pre><code>x = [45.15, 46.41, 46.67, 46.71, 46.88, 
 47.04, 47.53, 47.58, 47.59, 48.25, 
 48.35, 48.56, 48.61, 48.73, 48.78, 
 48.85, 48.99, 49.01, 49.02, 49.09, 
@@ -613,85 +701,85 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 51.22, 51.79, 51.93, 51.95, 52.00, 
 52.12, 52.41, 52.60, 52.76, 53.82, 
 54.60, 54.80, 55.77, 58.10]</code></pre>
-			</p>
-		</div>
-		<div style="display: inline-block; width: 2%;"></div>
-		<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
-			<p class="styled-point">
-				The first step will be defining the bins.
-			</p>
-			<p class="styled-point2">
-				To do so, we need the number of bins \(k\) or the bin width \(h\) first.
-			</p>
-			<p class="styled-point">
-				Here, we have serveral options; most common:
-			</p>
-			<p class="styled-point2">
-				Sturges' Rule: \(k = 1 + \log_2(n)\)
-			</p>
-			<p class="styled-point2">
-				Scott's Rule: \(h = \frac{3.5 \times \text{std}(x)}{n^{1/3}}\)
-			</p>
-			<p class="styled-point2">
-				Freedman-Diaconis' Rule: \(h = 2 \times \text{IQR}(x) \times n^{-1/3}\) 
-			</p>
-			<p class="styled-point2">
-				Square-root Rule: \(k = \sqrt{n}\)
-			</p>
-			<p class="styled-point2">
-				Manual: \(k = 5\)
-			</p>
-			<p class="styled-point2">
-				... and many more.
-			</p>
-	</div>
-</section>
+						</p>
+					</div>
+					<div style="display: inline-block; width: 2%;"></div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The first step will be defining the bins.
+						</p>
+						<p class="styled-point2">
+							To do so, we need the number of bins \(k\) or the bin width \(h\) first.
+						</p>
+						<p class="styled-point">
+							Here, we have serveral options; most common:
+						</p>
+						<p class="styled-point2">
+							Sturges' Rule: \(k = 1 + \log_2(n)\)
+						</p>
+						<p class="styled-point2">
+							Scott's Rule: \(h = \frac{3.5 \times \text{std}(x)}{n^{1/3}}\)
+						</p>
+						<p class="styled-point2">
+							Freedman-Diaconis' Rule: \(h = 2 \times \text{IQR}(x) \times n^{-1/3}\)
+						</p>
+						<p class="styled-point2">
+							Square-root Rule: \(k = \sqrt{n}\)
+						</p>
+						<p class="styled-point2">
+							Manual: \(k = 5\)
+						</p>
+						<p class="styled-point2">
+							... and many more.
+						</p>
+					</div>
+			</section>
 
-<section>
-	<h4>
-		Defining Bins and Their Edges
-	</h4>
-	<div>
-		<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
-			<p class="styled-point">
-				Depending on the rule, we obtain:
-			</p>
-			<p class="styled-point2">
-				Sturges' Rule: \(k = 1 + \log_2(49) = 7\)
-			</p>
-			<p class="styled-point2">
-				Square-root Rule: \(k = \sqrt{49} = 7\)
-			</p>
-			<p class="styled-point2">
-				Scott's Rule: \(h = \frac{3.5 \times 2.57}{49^{1/3}} = 2.46\)
-			</p>
-			<p class="styled-point2">
-				Freedman-Diaconis' Rule: \(h = 2 \times 3.2 \times 49^{-1/3} = 1.75\)
-			</p>
-			<p class="styled-point">
-				We can transform \(k\) into \(h\) and vice versa.
-				\[
-				h = \frac{\max(x) - \min(x)}{k}
-				\]
-			</p>
-			<p class="styled-noPoint">
-				<pre><code>Rule:     k:  h:    (range: 12.95)
+			<section>
+				<h4>
+					Defining Bins and Their Edges
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							Depending on the rule, we obtain:
+						</p>
+						<p class="styled-point2">
+							Sturges' Rule: \(k = 1 + \log_2(49) = 7\)
+						</p>
+						<p class="styled-point2">
+							Square-root Rule: \(k = \sqrt{49} = 7\)
+						</p>
+						<p class="styled-point2">
+							Scott's Rule: \(h = \frac{3.5 \times 2.57}{49^{1/3}} = 2.46\)
+						</p>
+						<p class="styled-point2">
+							Freedman-Diaconis' Rule: \(h = 2 \times 3.2 \times 49^{-1/3} = 1.75\)
+						</p>
+						<p class="styled-point">
+							We can transform \(k\) into \(h\) and vice versa.
+							\[
+							h = \frac{\max(x) - \min(x)}{k}
+							\]
+						</p>
+						<p class="styled-noPoint">
+						<pre><code>Rule:     k:  h:    (range: 12.95)
 Sturges'  7   1.85
 Square    7   1.85
 Scott's   6   2.46
 Freedman  8   1.75</code></pre>
-				</code></pre>
-			</div>
-			<div style="display: inline-block; width: 5%;"></div>
-			<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
-				<p class="styled-point">
-					Using \(\min(x)\), \(k\), and \(h\), we can define the edges of the bins.
-				</p>
-				<p class="styled-noPoint">
-					\[
-					\text{edge}(i) = \min(x) + i \times h
-					\]
-					<pre><code>Sturges  Square  Scotts  Freedman
+						</code></pre>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							Using \(\min(x)\), \(k\), and \(h\), we can define the edges of the bins.
+						</p>
+						<p class="styled-noPoint">
+							\[
+							\text{edge}(i) = \min(x) + i \times h
+							\]
+						<pre><code>Sturges  Square  Scotts  Freedman
 = 45.1  	45.1    45.1    45.1
 = 47.0 	  47.0    47.5    46.8
 = 48.9  	48.9    49.9		48.5
@@ -701,71 +789,75 @@ Freedman  8   1.75</code></pre>
 = 56.5  	56.5    59.5		55.3
 = 58.4  	58.4            57.0
 =                         58.7</code></pre>
-					</code></pre>
-				</p>
-				<p class="styled-point">
-					The bin centers are located between the edges.
-				</p>
-			</div>
-	</div>
-</section>
-
-<section>
-	<h4>
-		Assigning Data to Bins
-	</h4>
-	<div>
-		<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
-			<p class="styled-point">
-				After calculating the bin edges and centers, we can now count the data between two adjacent bins.
-			</p>
-			<p class="styled-point2">
-				The number of data points within two edges represents the frequency and the height of the bar in the histogram.
-			</p>
-			<img src="../resources/hist2.png" style="width: 100%; border-radius: 15px;">
-			</div>
-			<div style="display: inline-block; width: 5%;"></div>
-			<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
-				<div class="image-box">
-					<img src="../resources/hist3.png" style="width: 100%;">
+						</code></pre>
+						</p>
+						<p class="styled-point">
+							The bin centers are located between the edges.
+						</p>
+					</div>
 				</div>
-			</div>
-	</div>
-</section>
+			</section>
 
-<section>
-	<h4>
-		Strengths and Limitations of Histograms
-	</h4>
-	<img src="../resources/hist4a.png" style="width: 19%; border-radius: 15px;">
-	<img src="../resources/hist4b.png" style="width: 19%; border-radius: 15px;">
-	<img src="../resources/hist4c.png" style="width: 19%; border-radius: 15px;">
-	<img src="../resources/hist4d.png" style="width: 19%; border-radius: 15px;">
-	<img src="../resources/hist4e.png" style="width: 19%; border-radius: 15px;">
-</section>
-
-<section>
-	<h4>
-		Binning Rules Matter
-	</h4>
-	<div>
-		<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
-			<div class="exam-box">
-				<div class="exam-box-content">
-					Histograms can significantly differ using other binning rules. There is no golden standard for choosing the right one as it always depends on your data. Therefore, the best practice will be trying different binnings.
+			<section>
+				<h4>
+					Assigning Data to Bins
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
+						<p class="styled-point">
+							After calculating the bin edges and centers, we can now count the data between two adjacent bins.
+						</p>
+						<p class="styled-point2">
+							The number of data points within two edges represents the frequency and the height of the bar in the
+							histogram.
+						</p>
+						<img src="../resources/hist2.png" style="width: 100%; border-radius: 15px;">
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
+						<div class="image-box">
+							<img src="../resources/hist3.png" style="width: 100%;">
+						</div>
+					</div>
 				</div>
-			</div>
-			<p class="styled-point">
-				In the example given, we can observe two local modes in the data series. With more bins, we can resolve these modes and get a better understanding of the data.
-			</p>
-	</div>
-	<div style="display: inline-block; width: 5%;"></div>
-	<div style="display: inline-block; width: 45%; text-align: center; vertical-align: middle;">
-			<img src="../resources/hist4e.png" style="width: 45%; border-radius: 15px;">
-			<img src="../resources/hist4f.png" style="width: 45%; border-radius: 15px;">
-	</div>
-</div>
-</section>
+			</section>
+
+			<section>
+				<h4>
+					Strengths and Limitations of Histograms
+				</h4>
+				<img src="../resources/hist4a.png" style="width: 19%; border-radius: 15px;">
+				<img src="../resources/hist4b.png" style="width: 19%; border-radius: 15px;">
+				<img src="../resources/hist4c.png" style="width: 19%; border-radius: 15px;">
+				<img src="../resources/hist4d.png" style="width: 19%; border-radius: 15px;">
+				<img src="../resources/hist4e.png" style="width: 19%; border-radius: 15px;">
+			</section>
+
+			<section>
+				<h4>
+					Binning Rules Matter
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
+						<div class="exam-box">
+							<div class="exam-box-content">
+								Histograms can significantly differ using other binning rules. There is no golden standard for choosing
+								the right one as it always depends on your data. Therefore, the best practice will be trying different
+								binnings.
+							</div>
+						</div>
+						<p class="styled-point">
+							In the example given, we can observe two local modes in the data series. With more bins, we can resolve
+							these modes and get a better understanding of the data.
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: center; vertical-align: middle;">
+						<img src="../resources/hist4e.png" style="width: 45%; border-radius: 15px;">
+						<img src="../resources/hist4f.png" style="width: 45%; border-radius: 15px;">
+					</div>
+				</div>
+			</section>
 
 		</div>
 		<div class="footer-global">
@@ -815,10 +907,12 @@ Freedman  8   1.75</code></pre>
 		});
 	</script>
 	<!-- Chart scripts -->
+	<script src="../resources/chart_utils.js"></script>
 	<script src="../resources/chart_uniformDistribution1.js"></script>
 	<script src="../resources/chart_uniformDistribution2.js"></script>
 	<script src="../resources/chart_normalDist.js"></script>
 	<script src="../resources/chart_tDist.js"></script>
+	<script src="../resources/chart_chiSquareDist.js"></script>
 	<script src="../resources/chart_fDist.js"></script>
 
 </body>

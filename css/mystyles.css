@@ -201,10 +201,39 @@
 
 .styled-point2 .katex .mord,
 .styled-point2 .katex .mop {
-    color: #00C4D4; /* Deine gewünschte Farbe für LaTeX-Elemente */
+    color: #00C4D4;
+    /* Deine gewünschte Farbe für LaTeX-Elemente */
 }
 
 .styled-point .katex .mord,
 .styled-point .katex .mop {
-    color: #00C4D4; /* Deine gewünschte Farbe für LaTeX-Elemente */
+    color: #00C4D4;
+    /* Deine gewünschte Farbe für LaTeX-Elemente */
+}
+
+
+/* Stil für Tabs */
+.tab {
+    display: inline-block;
+    padding: 5px 20px;
+    cursor: pointer;
+    background-color: lightgray;
+    border: 1px solid #c5c3c3;
+    margin-right: 10px;
+    font-size: medium;
+    height: 20px;
+}
+
+.tab.active {
+    background-color: #8bccf8;
+    border: 1px solid #59b2ee;
+}
+
+/* Stil für die Inhalte der Tabs */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
 }
