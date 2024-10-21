@@ -324,13 +324,16 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 				<div>
 					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: middle;">
 						<p class="styled-point">
-							The <code>Chi-Square (χ²) distribution</code> describes the distribution of the sum of squared standard normal variables.
+							The <code>Chi-Square (χ²) distribution</code> describes the distribution of the sum of squared standard
+							normal variables.
 						</p>
 						<p class="styled-point">
-							It is widely used in hypothesis testing, especially in testing the variance of a normally distributed population.
+							It is widely used in hypothesis testing, especially in testing the variance of a normally distributed
+							population.
 						</p>
 						<p class="styled-point2">
-							The Chi-Square distribution has one parameter, <code>degrees of freedom (df)</code>, which corresponds to the number of independent random variables being squared and summed.
+							The Chi-Square distribution has one parameter, <code>degrees of freedom (df)</code>, which corresponds to
+							the number of independent random variables being squared and summed.
 						</p>
 						<p class="styled-point2">
 							Sample variances from normally distributed populations are Chi-Square distributed.
@@ -349,46 +352,47 @@ cdf_x2 = 0.5 * (1 + erf(x2/sqrt(2)))</code></pre>
 					</div>
 				</div>
 			</section>
-			
+
 			<section>
 				<h4>Chi-Square Distribution: PDF & CDF</h4>
 				<div>
-						<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
-								<p class="styled-point">
-										The <code>probability density function (PDF)</code> of the Chi-Square distribution is:
-								</p>
-								<p class="styled-noPoint">
-										\[
-										f(x, k) = \frac{x^{(k/2 - 1)} e^{-x/2}}{2^{k/2} \Gamma(k/2)}
-										\]
-								</p>
-								<p class="styled-point2">
-										Where \(k\) is the degrees of freedom and \(\Gamma\) is the Gamma function.
-								</p>
-						</div>
-						<div style="display: inline-block; width: 5%;"></div>
-						<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
-								<p class="styled-point">
-										The <code>cumulative distribution function (CDF)</code> of the Chi-Square distribution is:
-								</p>
-								<p class="styled-noPoint">
-										\[
-										F(x, k) = \frac{\gamma(k/2, x/2)}{\Gamma(k/2)}
-										\]
-								</p>
-								<p class="styled-point2">
-										Where \(\gamma\) is the lower incomplete Gamma function and \(k\) is the degrees of freedom.
-								</p>
-						</div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The <code>probability density function (PDF)</code> of the Chi-Square distribution is:
+						</p>
+						<p class="styled-noPoint">
+							\[
+							f(x, k) = \frac{x^{(k/2 - 1)} e^{-x/2}}{2^{k/2} \Gamma(k/2)}
+							\]
+						</p>
+						<p class="styled-point2">
+							Where \(k\) is the degrees of freedom and \(\Gamma\) is the Gamma function.
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The <code>cumulative distribution function (CDF)</code> of the Chi-Square distribution is:
+						</p>
+						<p class="styled-noPoint">
+							\[
+							F(x, k) = \frac{\gamma(k/2, x/2)}{\Gamma(k/2)}
+							\]
+						</p>
+						<p class="styled-point2">
+							Where \(\gamma\) is the lower incomplete Gamma function and \(k\) is the degrees of freedom.
+						</p>
+					</div>
 				</div>
-		</section>			
+			</section>
 
 			<section>
 				<h4>F-Distribution: Interactive Example</h4>
 				<div>
 					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: middle;">
 						<p class="styled-point">
-							The <code>F-distribution</code> arises when comparing two variances by their ratio and depends on two parameters:
+							The <code>F-distribution</code> arises when comparing two variances by their ratio and depends on two
+							parameters:
 							<code>degrees of freedom</code> \(d_1\) and \(d_2\).
 						</p>
 						<p class="styled-point">
@@ -859,10 +863,236 @@ Freedman  8   1.75</code></pre>
 				</div>
 			</section>
 
+			<section>
+				<h4>
+					Kernel Density Estimation & Violin Plots
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							<code>Kernel Density Estimation (KDE)</code> is a non-parametric way to estimate the probability density
+							function of a random variable. It can be visualized as a <code>Violin Plot</code>.
+						</p>
+						<p class="styled-point">
+							We obtain information about:
+						</p>
+						<p class="styled-point2">
+							Mode
+						</p>
+						<p class="styled-point2">
+							Distribution
+						</p>
+						<p class="styled-point2">
+							Symmetry
+						</p>
+						<p class="styled-point2">
+							Range
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
+						<div class="image-box">
+							<img src="../resources/violin1.png" style="width: 100%;">
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					How does KDE work?
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The main idea of KDE is considering each data point as a small distribution (e.g. Gaussian).
+						</p>
+						<p class="styled-point2">
+							The distribution function that is used is called <code>kernel</code>.
+						</p>
+						<p class="styled-point2">
+							The <code>bandwidth</code> of the kernel defines the width of the distribution. We can use rules similar to bin width for histograms.
+						<p class="styled-point">
+							These distributions are summed up to get the overall probability density function.
+						</p>
+						<p class="styled-point">
+							For a violin plot, the kernel is mirrored and rotated by 90°.
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
+						<div class="image-box" style="height: 400px">
+							<div class="tabs">
+								<div class="tab active" data-tab="kde1">Raw Data</div>
+								<div class="tab" data-tab="kde2">add Kernels</div>
+								<div class="tab" data-tab="kde3">sum Kernels</div>
+							</div>
+							<div class="tab-content active" id="kde1" style="height: 350px;">
+								<canvas id="chart_kde1"></canvas>
+							</div>
+							<div class="tab-content" id="kde2" style="height: 350px;">
+								<canvas id="chart_kde2"></canvas>
+							</div>
+							<div class="tab-content" id="kde3" style="height: 350px;">
+								<canvas id="chart_kde3"></canvas>
+							</div>
+							<label for="bwSlider">Bandwidth: </label>
+								<input type="range" id="bwSlider" min="0.05" max="1" value=".15" step=".05">
+								<span id="bwSliderValue">0.15</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Strengths and Limitations of KDE
+				</h4>
+				<img src="../resources/violin3.png" style="width: 100%; border-radius: 15px;">
+			</section>
+
+			<section>
+				<h4>
+					Violin Plots for Pairwise Comparison
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 40%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							<code>Violin Plots</code> are a great tool for pairwise comparison of data series.
+						</p>
+						<p class="styled-point2">
+							To do so, we use one side for each data series and compare the shapes.
+						</p>
+						</div>	
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
+						<div class="image-box">
+							<img src="../resources/violin4.png" style="width: 100%;">
+						</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Moments of a Distribution
+				</h4>
+				<p>
+					Describe the differences between the following distributions:
+				</p>
+				<img src="../resources/moments.png" style="width: 100%; border-radius: 15px;">
+			</section>
+
+			<section>
+				<h4>
+					The Expected Value
+				</h4>
+				<div>
+					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The <code>Expected Value</code> of a random variable \(X\) is the theoretical average value considering infinite repetitions or all possible outcomes of the population.
+						</p>
+						<p class="styled-noPoint">
+							\[
+							E(X) = \mu = \sum_{i=1}^{n} x_i \cdot p(x_i)
+							\]
+							Where \(x_i\) are the values of the random variable and \(p(x_i)\) are the probabilities of the values. 
+						</p>
+						<p class="styled-point">
+							The expected value is the <code>first moment</code> of a distribution.
+						</p>
+					</div>
+					<div style= "display: inline-block; width: 5%;"></div>
+					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<img src="../resources/expected_value1.png" style="width: 100%; border-radius: 15px;">
+						<div class="exam-box">
+							<div class="exam-box-content">
+								The empirical average is only an approximation of E(X). E(X) is not necessarily the most probable value and not necessarily a valid value in the data series.
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Higher Moments & Central Moments
+				</h4>
+				<div>
+					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The <code>Expected Value</code> of a the kth power of a random variable \(X\) is called the <code>kth moment</code>.
+						</p>
+						<p class="styled-noPoint">
+							\[
+							m_k(X) = E(X^k) = \sum_{i=1}^{n} x_i^k \cdot p(x_i)
+							\]
+							Where \(x_i\) are the values of the random variable and \(p(x_i)\) are the probabilities of the values. 
+						</p>
+						<p class="styled-point">
+							The expected value is the <code>first moment</code> of a distribution.
+						</p>
+					</div>
+					<div style= "display: inline-block; width: 5%;"></div>
+					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							Instead ordinary moments, we often use <code>central moments</code>. The kth central moment is defined as:
+						</p>
+						<p class="styled-noPoint">
+							\[
+							m_k^c = E\left(\left[X - E(X)\right]^k\right) 
+							\]
+						</p>
+						<p class="styled-point">
+							The <code>second central moment</code> is called <code>variance</code> and the <code>square root of the variance</code> is called <code>standard deviation</code>.
+						</p>
+						<p class="styled-point2">
+							The variance is a measure of the spread of the data and may also serves as a measure of the width of the distribution.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Normalized Central Moments: Skewness & Kurtosis
+				</h4>
+				<div>
+					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The normalized third central moment is called <code>skewness</code>. It is a measure of the asymmetry of the distribution.
+						</p>
+						<p class="styled-noPoint">
+							\[
+							m_3^{c,n} = E\left(\left[\frac{X - E(X)}{\sigma}\right]^3\right)
+							\]
+							Where \(\sigma\) is the standard deviation. The \(n\) in the superscript indicates the normalization.
+						</p>
+						<p class="styled-point">
+							For a symmetric distribution, the skewness is zero.
+						</p>
+					</div>
+					<div style= "display: inline-block; width: 5%;"></div>
+					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The normalized fourth central moment is called <code>kurtosis</code>. It is a measure of the roundness of the distribution.
+						</p>
+						<p class="styled-noPoint">
+							\[
+							m_4^{c,n} = E\left(\left[\frac{X - E(X)}{\sigma}\right]^4\right)
+							\]
+							Where \(\sigma\) is the standard deviation. The \(n\) in the superscript indicates the normalization.
+						</p>
+						<p class="styled-point">
+							For a normal distribution, the kurtosis is three. For a leptokurtic distribution, the kurtosis is greater than three.
+						</p>
+					</div>
+				</div>
+			</section>
+
 		</div>
 		<div class="footer-global">
 			Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
-			Last updated: October 16, 2024
+			Last updated: October 21, 2024
 		</div>
 	</div>
 
@@ -914,6 +1144,7 @@ Freedman  8   1.75</code></pre>
 	<script src="../resources/chart_tDist.js"></script>
 	<script src="../resources/chart_chiSquareDist.js"></script>
 	<script src="../resources/chart_fDist.js"></script>
+	<script src="../resources/chart_kde.js"></script>
 
 </body>
 

@@ -128,6 +128,13 @@ function adjustYLimits(chart, min, max) {
   chart.update();
 }
 
+// function to adjust x limits of a chart
+function adjustXLimits(chart, min, max) {
+  chart.options.scales.x.min = min;
+  chart.options.scales.x.max = max;
+  chart.update();
+}
+
 // Berechnung der Normalverteilung (PDF)
 function gaussianPDF(x, mean, sigma) {
   return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * Math.pow((x - mean) / sigma, 2));

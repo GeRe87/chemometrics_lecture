@@ -199,6 +199,13 @@
     color: #00C4D4;
 }
 
+.styled-noPoint .katex .mord,
+.styled-noPoint .katex .mop {
+    color: #00C4D4;
+    /* Deine gewünschte Farbe für LaTeX-Elemente */
+}
+
+
 .styled-point2 .katex .mord,
 .styled-point2 .katex .mop {
     color: #00C4D4;
