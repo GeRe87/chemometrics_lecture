@@ -911,7 +911,8 @@ Freedman  8   1.75</code></pre>
 							The distribution function that is used is called <code>kernel</code>.
 						</p>
 						<p class="styled-point2">
-							The <code>bandwidth</code> of the kernel defines the width of the distribution. We can use rules similar to bin width for histograms.
+							The <code>bandwidth</code> of the kernel defines the width of the distribution. We can use rules similar
+							to bin width for histograms.
 						<p class="styled-point">
 							These distributions are summed up to get the overall probability density function.
 						</p>
@@ -937,8 +938,8 @@ Freedman  8   1.75</code></pre>
 								<canvas id="chart_kde3"></canvas>
 							</div>
 							<label for="bwSlider">Bandwidth: </label>
-								<input type="range" id="bwSlider" min="0.05" max="1" value=".15" step=".05">
-								<span id="bwSliderValue">0.15</span>
+							<input type="range" id="bwSlider" min="0.05" max="1" value=".15" step=".05">
+							<span id="bwSliderValue">0.15</span>
 						</div>
 					</div>
 				</div>
@@ -963,13 +964,13 @@ Freedman  8   1.75</code></pre>
 						<p class="styled-point2">
 							To do so, we use one side for each data series and compare the shapes.
 						</p>
-						</div>	
+					</div>
 					<div style="display: inline-block; width: 5%;"></div>
 					<div style="display: inline-block; width: 50%; text-align: center; vertical-align: middle;">
 						<div class="image-box">
 							<img src="../resources/violin4.png" style="width: 100%;">
 						</div>
-				</div>
+					</div>
 			</section>
 
 			<section>
@@ -987,26 +988,28 @@ Freedman  8   1.75</code></pre>
 					The Expected Value
 				</h4>
 				<div>
-					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
 						<p class="styled-point">
-							The <code>Expected Value</code> of a random variable \(X\) is the theoretical average value considering infinite repetitions or all possible outcomes of the population.
+							The <code>Expected Value</code> of a random variable \(X\) is the theoretical average value considering
+							infinite repetitions or all possible outcomes of the population.
 						</p>
 						<p class="styled-noPoint">
 							\[
 							E(X) = \mu = \sum_{i=1}^{n} x_i \cdot p(x_i)
 							\]
-							Where \(x_i\) are the values of the random variable and \(p(x_i)\) are the probabilities of the values. 
+							Where \(x_i\) are the values of the random variable and \(p(x_i)\) are the probabilities of the values.
 						</p>
 						<p class="styled-point">
 							The expected value is the <code>first moment</code> of a distribution.
 						</p>
 					</div>
-					<div style= "display: inline-block; width: 5%;"></div>
-					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
 						<img src="../resources/expected_value1.png" style="width: 100%; border-radius: 15px;">
 						<div class="exam-box">
 							<div class="exam-box-content">
-								The empirical average is only an approximation of E(X). E(X) is not necessarily the most probable value and not necessarily a valid value in the data series.
+								The empirical average is only an approximation of E(X). E(X) is not necessarily the most probable value
+								and not necessarily a valid value in the data series.
 							</div>
 						</div>
 					</div>
@@ -1018,35 +1021,38 @@ Freedman  8   1.75</code></pre>
 					Higher Moments & Central Moments
 				</h4>
 				<div>
-					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
 						<p class="styled-point">
-							The <code>Expected Value</code> of a the kth power of a random variable \(X\) is called the <code>kth moment</code>.
+							The <code>Expected Value</code> of a the kth power of a random variable \(X\) is called the
+							<code>kth moment</code>.
 						</p>
 						<p class="styled-noPoint">
 							\[
 							m_k(X) = E(X^k) = \sum_{i=1}^{n} x_i^k \cdot p(x_i)
 							\]
-							Where \(x_i\) are the values of the random variable and \(p(x_i)\) are the probabilities of the values. 
+							Where \(x_i\) are the values of the random variable and \(p(x_i)\) are the probabilities of the values.
 						</p>
 						<p class="styled-point">
 							The expected value is the <code>first moment</code> of a distribution.
 						</p>
 					</div>
-					<div style= "display: inline-block; width: 5%;"></div>
-					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
 						<p class="styled-point">
 							Instead ordinary moments, we often use <code>central moments</code>. The kth central moment is defined as:
 						</p>
 						<p class="styled-noPoint">
 							\[
-							m_k^c = E\left(\left[X - E(X)\right]^k\right) 
+							m_k^c = E\left(\left[X - E(X)\right]^k\right)
 							\]
 						</p>
 						<p class="styled-point">
-							The <code>second central moment</code> is called <code>variance</code> and the <code>square root of the variance</code> is called <code>standard deviation</code>.
+							The <code>second central moment</code> is called <code>variance</code> and the
+							<code>square root of the variance</code> is called <code>standard deviation</code>.
 						</p>
 						<p class="styled-point2">
-							The variance is a measure of the spread of the data and may also serves as a measure of the width of the distribution.
+							The variance is a measure of the spread of the data and may also serves as a measure of the width of the
+							distribution.
 						</p>
 					</div>
 				</div>
@@ -1057,9 +1063,10 @@ Freedman  8   1.75</code></pre>
 					Normalized Central Moments: Skewness & Kurtosis
 				</h4>
 				<div>
-					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
 						<p class="styled-point">
-							The normalized third central moment is called <code>skewness</code>. It is a measure of the asymmetry of the distribution.
+							The normalized third central moment is called <code>skewness</code>. It is a measure of the asymmetry of
+							the distribution.
 						</p>
 						<p class="styled-noPoint">
 							\[
@@ -1071,10 +1078,11 @@ Freedman  8   1.75</code></pre>
 							For a symmetric distribution, the skewness is zero.
 						</p>
 					</div>
-					<div style= "display: inline-block; width: 5%;"></div>
-					<div style= "display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
 						<p class="styled-point">
-							The normalized fourth central moment is called <code>kurtosis</code>. It is a measure of the roundness of the distribution.
+							The normalized fourth central moment is called <code>kurtosis</code>. It is a measure of the roundness of
+							the distribution.
 						</p>
 						<p class="styled-noPoint">
 							\[
@@ -1083,7 +1091,42 @@ Freedman  8   1.75</code></pre>
 							Where \(\sigma\) is the standard deviation. The \(n\) in the superscript indicates the normalization.
 						</p>
 						<p class="styled-point">
-							For a normal distribution, the kurtosis is three. For a leptokurtic distribution, the kurtosis is greater than three.
+							For a normal distribution, the kurtosis is three. For a leptokurtic distribution, the kurtosis is greater
+							than three.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Seminar Materials
+				</h4>
+				<div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							You can download the seminar materials for this lecture here:
+						</p>
+						<p class="styled-point2">
+							<a href="../resources/DataSets_Distributions.csv" download>DataSets_Distributions.csv</a>
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							Create a Whisker Boxplot and a Histogram for the data series given in the file.
+						</p>
+						<p class="styled-point2">
+							What are the characteristics of the data?
+						</p>
+						<p class="styled-point2">
+							Are there any outlier Candidates?
+						</p>
+						<p class="styled-point2">
+							How many bins would you choose for the histograms?
+						</p>
+						<p class="styled-point2">
+							What are the expected values, variances, skewness, and kurtosis of the data series?
 						</p>
 					</div>
 				</div>
