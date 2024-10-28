@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Chemometrics and Statistics</title>
+
+	<link rel="stylesheet" href="../dist/reset.css">
+	<link rel="stylesheet" href="../dist/reveal.css">
+	<link rel="stylesheet" href="../dist/theme/iac.css">
+	<link rel="stylesheet" href="../css/mystyles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="../plugin/highlight/monokai.css">
+	<link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+	<style>
+		.green-text {
+			color: rgb(133, 198, 42);
+		}
+
+		.teal-text {
+			color: rgb(0, 150, 136);
+		}
+
+		.small-text {
+			font-size: 0.8em;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+				<pre><code>03. Similarity Analysis 1</code></pre>
+				<h4>t-Test & f-Test</h4>
+				<p>by <a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
+			</section>
+
+			<section>
+				<h4>
+					Initial Thoughts: Limit values
+				</h4>
+				<div>
+					<div class="leftBox" style="width: 35%;">
+						<p class="styled-point">
+							You are asked to check a contaminant concentration in a sample.
+						</p>
+						<p class="styled-point2">
+							The limit value is 0.1 mg/L.
+						</p>
+						<p class="styled-point2">
+							The measured concentration \(\bar{x}\) is 0.09 mg/L.
+						</p>
+						<p class="styled-point3">
+							Is the sample's concentration lower than the limit?
+						</p>
+					</div>
+					<div class="spacer" style="width: 1%;"></div>
+					<div class="rightBox" style="width:61%">
+						<pre style="font-size: x-large;">
+          <code>      |       *                    *
+0.1   |=================== Limit (0.1)
+      |
+0.095 |                      *  
+      |
+0.09  |----*----------- Average (0.09)
+      |         *      *  
+0.085 | *          *      
+      |
+0.08  |                   *     *
+      |
+      |_______________________________
+        1  2  3  4  5  6  7  8  9  10  
+                Sample Index</code>
+        </pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Initial Thoughts: Similarity of samples
+				</h4>
+				<div>
+					<div class="leftBox" style="width: 35%;">
+						<p class="styled-point">
+							You are asked to check the similarity of two samples.
+						</p>
+						<p class="styled-point2">
+							The measured concentration of sample A is 0.09 mg/L.
+						</p>
+						<p class="styled-point2">
+							The measured concentration of sample B is 0.08 mg/L.
+						</p>
+						<p class="styled-point3">
+							Are the samples different?
+						</p>
+					</div>
+					<div class="spacer" style="width: 1%;"></div>
+					<div class="rightBox" style="width:61%">
+						<pre style="font-size: x-large;">
+						<code>      |     
+0.09  |---███----------- Sample A (0.09)
+			|   ███
+0.08  |---███-------███- Sample B (0.08)
+			|   ███       ███
+			|___███_______███______________
+			     Sample A      Sample B
+					 </code>
+					</pre>
+			</section>
+
+			<section>
+				<h4>
+					Hypothesis testing: general idea
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							In statistics, when it comes to comparing values, we often use <code>hypothesis testing</code>.
+						</p>
+						<p class="styled-point2">
+							I.e., we asume a model with well-defined probability distributions and check if our empirical data fits in an acceptable range.
+						</p>
+						<p class="styled-point2">
+							The model we choose depends on the context and the data we have.
+						</p>
+						<p class="styled-point2">
+							The definition of what is acceptable is arbitrary and depends on the context. However, it is often defined by the <code>significance level</code> \(\alpha = 0.05\).
+						</p>	
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point2">
+							The significance level \(\alpha\) describes the area of the probability distribution that is considered as <code>extreme</code> and, therefore, located at the <code>tails</code> of the distribution.
+						</p>
+						<img src="../resources/hypothesisPdf0.png" style="width: 80%;">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Hypothesis testing: h0 and h1
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							In <code>hypothesis testing</code>, we cannot prove that a hypothesis is true. Instead, we can only <code>reject</code> or <code>fail to reject</code> it. (Falsification principle)
+						</p>
+						<p class="styled-point2">
+							I.e., instead proving that the sample is lower than the limit, we can only check if the sample is equal or higher than the limit.
+						</p>
+						<p class="styled-point2">
+							If we can reject the hypothesis that the sample is equal or higher than the limit, we can <code>conclude</code> that the sample is lower than the limit. But we cannot <code>prove</code> it.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							For the hypotheses we consider the following scheme null hypothesis <code>h0</code> and alternative hypothesis <code>h1</code>:
+						</p>
+						<pre>
+              <code>h0: A == B   ;   h1: A != B
+h0: A >= B   ;   h1: A < B
+h0: A <= B   ;   h1: A > B</code>
+            </pre>
+						<p class="styled-noPoint">
+							Where A and B are the values to be compared, the symbols <code>==</code> and <code>!=</code> denote
+							equality and inequality, and the symbols <code><=</code>, <code>>=</code>, <code><</code>, and
+							<code>></code> denote the direction of the inequality.
+						</p>
+						<p class="styled-point3">
+							So, which hypotheses <code>h0</code> and <code>h1</code> do we need to check if the sample should be lower
+							than the limit?
+						</p>
+					</div>
+			</section>
+
+			<section>
+				<h4>
+					one-sided one-sample t-Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							We will use the <code>one-sided one-sample t-Test</code> to check if the sample is lower than the limit.
+						</p>
+						<p class="styled-point">
+							We can calculate the <code>t-Value</code> as follows:
+							\[
+							t = \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}}
+							\]
+							Where \(\bar{x}\) is the sample mean, \(\mu\) is the limit value, \(s\) is the sample standard deviation, and \(n\) is the sample size.
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<p class="styled-point">
+							For this test, we need the following information:
+						</p>
+						<p clas="styled-noPoint">
+						<pre>
+							<code>sampleMean = {0.09, 'mg/L'}
+sampleStd = {0.01, 'mg/L'}
+sampleSize = 10
+limitValue = {0.1, 'mg/L'}</code>
+						</pre>
+						</p>
+						<p class="styled-point">
+							In this test, we asume that the sample mean is equal to the limit value. So the difference should be zero. If this is true, the t-Value should follow a t-Distribution with \(n-1\) degrees of freedom.
+						</p>
+						<p class="styled-noPoint">
+							<pre>
+								<code>t = (0.09 - 0.1) / (0.01 / sqrt(10)) 
+>> t: -3.16</code>
+							</pre>
+						</p>
+						<p class="styled-point3">
+							What does the t-Value tell us?
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					one-sided one-sample t-Test diagram
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							We can visualize the t-Value in a diagram.
+						</p>
+						<form id="tTestForm"></form>
+							<label for="sampleMean" style="font-size: medium;">Sample Mean (mg/L):</label>
+							<input type="number" id="sampleMean" name="sampleMean" step="0.01" value="0.09" required>
+							<br>
+							<label for="sampleStd" style="font-size: medium;">Sample Std (mg/L):</label>
+							<input type="number" id="sampleStd" name="sampleStd" step="0.01" value="0.01" required>
+							<br>
+							<label for="sampleSize" style="font-size: medium;">Sample Size (n):</label>
+							<input type="number" id="sampleSize" name="sampleSize" value="10" required>
+							<br>
+							<label for="alpha" style="font-size: medium;">Significance Level (\(\alpha\)): </label>
+							<input type="number" id="alphaValue" name="alpha" step="0.01" value="0.05" required>
+							<br>
+							<button type="button" onclick="calculateTValue()">Calculate t-Value</button>
+						</form>
+						<p id="tValueResult" class="styled-point2"></p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<div class="image-box" style="height: 400px">
+							<canvas id="chart_tTest_oneSided"></canvas>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</div>
+		<div class="footer-global">
+			Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+			Last updated: October 22, 2024
+		</div>
+	</div>
+
+	<script src="../dist/reveal.js"></script>
+	<script src="../plugin/notes/notes.js"></script>
+	<script src="../plugin/markdown/markdown.js"></script>
+	<script src="../plugin/highlight/highlight.js"></script>
+	<script src="../plugin/math/math.js"></script>
+	<script src="../plugin/menu/menu.js"></script>
+	<!-- Chart plugin -->
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			menu: {
+				custom: [{
+					title: 'Topics',
+					icon: '<i class="fas fa-home"></i>',
+					src: 'menu.html'
+				}]
+			},
+			hash: true,
+			chart: {
+				defaults: {
+					color: 'gray', // color of labels
+					scale: {
+						beginAtZero: true,
+						ticks: { stepSize: 1 },
+						grid: { color: "lightgray" }, // color of grid lines
+					},
+				},
+				line: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"], "borderDash": [[5, 10], [0, 0]] },
+				bar: { backgroundColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
+				pie: { backgroundColor: [["rgba(0,0,0,.8)", "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"]] },
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealChart, RevealMenu],
+		});
+	</script>
+	<!-- Chart scripts -->
+	<script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+	<script src="../resources/chart_utils.js"></script>
+	<script src="../resources/chart_tTest_oneSided.js"></script>
+		
+</body>
+
+</html>

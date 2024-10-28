@@ -22,7 +22,7 @@
 
 /* Beim Hover über den Link */
 .topic-link:hover .hoverable::after {
-    color: aqua;
+    color: #f92672;
     content: " <<";
     /* Fügt das ">>" hinzu */
 }
@@ -144,10 +144,6 @@
     top: 0.75ex
 }
 
-.styled-point code {
-    color: #00C4D4;
-}
-
 .styled-point2 {
     font-size: x-large;
     position: relative;
@@ -170,8 +166,26 @@
     top: 0.75ex
 }
 
-.styled-point2 code {
-    color: #00C4D4;
+.styled-point3 {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    /* Platz für das Icon */
+}
+
+.styled-point3::before {
+    content: "\f128"; /* Unicode für das Font Awesome question symbol */
+    /* Unicode für das Font Awesome angles-right */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 900;
+    /* für solid icons */
+    color: rgb(12, 236, 94);
+    position: absolute;
+    font-size: medium;
+    left: -20px;
+    /* Icon links vom Text platzieren */
+    top: 0.75ex
 }
 
 .image-box {
@@ -195,26 +209,22 @@
     /* Platz für das Icon */
 }
 
-.styled-noPoint code {
-    color: #00C4D4;
-}
-
 .styled-noPoint .katex .mord,
 .styled-noPoint .katex .mop {
-    color: #00C4D4;
+    color: #b8103b;
     /* Deine gewünschte Farbe für LaTeX-Elemente */
 }
 
 
 .styled-point2 .katex .mord,
 .styled-point2 .katex .mop {
-    color: #00C4D4;
+    color: #b8103b;
     /* Deine gewünschte Farbe für LaTeX-Elemente */
 }
 
 .styled-point .katex .mord,
 .styled-point .katex .mop {
-    color: #00C4D4;
+    color: #b8103b;
     /* Deine gewünschte Farbe für LaTeX-Elemente */
 }
 
@@ -243,4 +253,33 @@
 
 .tab-content.active {
     display: block;
+}
+
+.leftBox {
+    display: inline-block;
+    width: 40%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.spacer {
+    display: inline-block;
+    width: 5%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.rightBox {
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.reveal {
+    background-image: url('../resources/bg.png');
+    background-size: 906px 117px;
+    background-position: top;
+    background-position-y: -50px; /* Adjust the value as needed for the vertical offset */
+    background-repeat: no-repeat;
 }

@@ -167,6 +167,7 @@ function tDistributionPDF(x, df) {
   return numerator / denominator;
 }
 
+
 // Näherung der Beta-Funktion für die t-Verteilungsformel
 function betaFunction(a, b) {
   return (gammaApprox(a) * gammaApprox(b)) / gammaApprox(a + b);
