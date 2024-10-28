@@ -122,22 +122,27 @@
 				<div>
 					<div class="leftBox">
 						<p class="styled-point">
-							In statistics, when it comes to comparing values, we often use <code>hypothesis testing</code>.
+							In statistics, when it comes to comparing values, we often use
+							<code>hypothesis testing</code>.
 						</p>
 						<p class="styled-point2">
-							I.e., we asume a model with well-defined probability distributions and check if our empirical data fits in an acceptable range.
+							I.e., we asume a model with well-defined probability distributions and check if our
+							empirical data fits in an acceptable range.
 						</p>
 						<p class="styled-point2">
 							The model we choose depends on the context and the data we have.
 						</p>
 						<p class="styled-point2">
-							The definition of what is acceptable is arbitrary and depends on the context. However, it is often defined by the <code>significance level</code> \(\alpha = 0.05\).
-						</p>	
+							The definition of what is acceptable is arbitrary and depends on the context. However, it is
+							often defined by the <code>significance level</code> \(\alpha = 0.05\).
+						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
 					<div class="rightBox">
 						<p class="styled-point2">
-							The significance level \(\alpha\) describes the area of the probability distribution that is considered as <code>extreme</code> and, therefore, located at the <code>tails</code> of the distribution.
+							The significance level \(\alpha\) describes the area of the probability distribution that is
+							considered as <code>extreme</code> and, therefore, located at the <code>tails</code> of the
+							distribution.
 						</p>
 						<img src="../resources/hypothesisPdf0.png" style="width: 80%;">
 					</div>
@@ -151,19 +156,24 @@
 				<div>
 					<div class="leftBox">
 						<p class="styled-point">
-							In <code>hypothesis testing</code>, we cannot prove that a hypothesis is true. Instead, we can only <code>reject</code> or <code>fail to reject</code> it. (Falsification principle)
+							In <code>hypothesis testing</code>, we cannot prove that a hypothesis is true. Instead, we
+							can only <code>reject</code> or <code>fail to reject</code> it. (Falsification principle)
 						</p>
 						<p class="styled-point2">
-							I.e., instead proving that the sample is lower than the limit, we can only check if the sample is equal or higher than the limit.
+							I.e., instead proving that the sample is lower than the limit, we can only check if the
+							sample is equal or higher than the limit.
 						</p>
 						<p class="styled-point2">
-							If we can reject the hypothesis that the sample is equal or higher than the limit, we can <code>conclude</code> that the sample is lower than the limit. But we cannot <code>prove</code> it.
+							If we can reject the hypothesis that the sample is equal or higher than the limit, we can
+							<code>conclude</code> that the sample is lower than the limit. But we cannot
+							<code>prove</code> it.
 						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
 					<div class="rightBox">
 						<p class="styled-point">
-							For the hypotheses we consider the following scheme null hypothesis <code>h0</code> and alternative hypothesis <code>h1</code>:
+							For the hypotheses we consider the following scheme null hypothesis <code>h0</code> and
+							alternative hypothesis <code>h1</code>:
 						</p>
 						<pre>
               <code>h0: A == B   ;   h1: A != B
@@ -171,12 +181,15 @@ h0: A >= B   ;   h1: A < B
 h0: A <= B   ;   h1: A > B</code>
             </pre>
 						<p class="styled-noPoint">
-							Where A and B are the values to be compared, the symbols <code>==</code> and <code>!=</code> denote
-							equality and inequality, and the symbols <code><=</code>, <code>>=</code>, <code><</code>, and
+							Where A and B are the values to be compared, the symbols <code>==</code> and <code>!=</code>
+							denote
+							equality and inequality, and the symbols <code><=</code>, <code>>=</code>, <code><</code>,
+							and
 							<code>></code> denote the direction of the inequality.
 						</p>
 						<p class="styled-point3">
-							So, which hypotheses <code>h0</code> and <code>h1</code> do we need to check if the sample should be lower
+							So, which hypotheses <code>h0</code> and <code>h1</code> do we need to check if the sample
+							should be lower
 							than the limit?
 						</p>
 					</div>
@@ -189,14 +202,16 @@ h0: A <= B   ;   h1: A > B</code>
 				<div>
 					<div class="leftBox">
 						<p class="styled-point">
-							We will use the <code>one-sided one-sample t-Test</code> to check if the sample is lower than the limit.
+							We will use the <code>one-sided one-sample t-Test</code> to check if the sample is lower
+							than the limit.
 						</p>
 						<p class="styled-point">
 							We can calculate the <code>t-Value</code> as follows:
 							\[
 							t = \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}}
 							\]
-							Where \(\bar{x}\) is the sample mean, \(\mu\) is the limit value, \(s\) is the sample standard deviation, and \(n\) is the sample size.
+							Where \(\bar{x}\) is the sample mean, \(\mu\) is the limit value, \(s\) is the sample
+							standard deviation, and \(n\) is the sample size.
 						</p>
 					</div>
 					<div class="spacer"></div>
@@ -213,10 +228,12 @@ limitValue = {0.1, 'mg/L'}</code>
 						</pre>
 						</p>
 						<p class="styled-point">
-							In this test, we asume that the sample mean is equal to the limit value. So the difference should be zero. If this is true, the t-Value should follow a t-Distribution with \(n-1\) degrees of freedom.
+							In this test, we asume that the sample mean is equal to the limit value. So the difference
+							should be zero. If this is true, the t-Value should follow a t-Distribution with \(n-1\)
+							degrees of freedom.
 						</p>
 						<p class="styled-noPoint">
-							<pre>
+						<pre>
 								<code>t = (0.09 - 0.1) / (0.01 / sqrt(10)) 
 >> t: -3.16</code>
 							</pre>
@@ -238,21 +255,24 @@ limitValue = {0.1, 'mg/L'}</code>
 							We can visualize the t-Value in a diagram.
 						</p>
 						<form id="tTestForm"></form>
-							<label for="sampleMean" style="font-size: medium;">Sample Mean (mg/L):</label>
-							<input type="number" id="sampleMean" name="sampleMean" step="0.01" value="0.09" required>
-							<br>
-							<label for="sampleStd" style="font-size: medium;">Sample Std (mg/L):</label>
-							<input type="number" id="sampleStd" name="sampleStd" step="0.01" value="0.01" required>
-							<br>
-							<label for="sampleSize" style="font-size: medium;">Sample Size (n):</label>
-							<input type="number" id="sampleSize" name="sampleSize" value="10" required>
-							<br>
-							<label for="alpha" style="font-size: medium;">Significance Level (\(\alpha\)): </label>
-							<input type="number" id="alphaValue" name="alpha" step="0.01" value="0.05" required>
-							<br>
-							<button type="button" onclick="calculateTValue()">Calculate t-Value</button>
+						<label for="sampleMean" style="font-size: medium;">Sample Mean (mg/L):</label>
+						<input type="number" id="sampleMean" name="sampleMean" step="0.01" value="0.09" required>
+						<br>
+						<label for="sampleStd" style="font-size: medium;">Sample Std (mg/L):</label>
+						<input type="number" id="sampleStd" name="sampleStd" step="0.01" value="0.01" required>
+						<br>
+						<label for="sampleSize" style="font-size: medium;">Sample Size (n):</label>
+						<input type="number" id="sampleSize" name="sampleSize" value="10" required>
+						<br>
+						<label for="alpha" style="font-size: medium;">Significance Level (\(\alpha\)): </label>
+						<input type="number" id="alphaValue" name="alpha" step="0.01" value="0.05" required>
+						<br>
+						<button type="button" onclick="calculateTValue()">Calculate t-Value</button>
 						</form>
-						<p id="tValueResult" class="styled-point2"></p>
+						<p id="tValueResult" class="styled-point2">t-Value: -3.16</p>
+						<p class="styled-point3">
+							How to get the critical t-Value(s)?
+						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
 					<div class="rightBox">
@@ -262,6 +282,936 @@ limitValue = {0.1, 'mg/L'}</code>
 					</div>
 				</div>
 			</section>
+
+			<section>
+				<h4>
+					critical t-Values
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							To get the critical t-Value(s), we can consider the CDF of the t-Distribution.
+						</p>
+						<p class="styled-noPoint">
+							\[\alpha = \text{CDF}(t, df) = 0.05\]
+							Where \(\alpha\) is the significance level, \(t\) is the t-Value, \(df\) is the degrees of
+							freedom, and CDF is the Cumulative Distribution Function of the t-Distribution.
+						</p>
+						<p class="styled-point2">
+							We now need the inverse of the CDF to get the critical t-Value(s).
+							\[\text{CDF}^{-1}(\alpha, df) = t_{\text{critical}}\]
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							The calculation the critical t-Value(s) is challenging. Therefore, there are lookup tables
+							and software tools available.
+						</p>
+						<img src="../resources/tvalueLookup.png"
+							style="width: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+						<p class="styled-point2">
+							ref: <a href="https://www.scribbr.com/statistics/students-t-table/"
+								target="_blank">Scribbr</a>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					t-values to p-values
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							Instead checking critical t-Values, we can also calculate the <code>p-Value</code> of the
+							t-Value and compare it to the significance level.
+						</p>
+						<p class="styled-point2">
+							For this, we can use the CDF of the t-Distribution and distinguish between three cases:
+						</p>
+						<p class="styled-noPoint" style="font-size: medium">
+							\[h0: A == B \rightarrow p = 2 \times \text{CDF}(-|t|, df)\]
+							\[h0: A >= B \rightarrow p = \text{CDF}(t, df)\]
+							\[h0: A <= B \rightarrow p=\text{CDF}(-t, df)\] </p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<img src="../resources/tT1_4.png"
+							style="width: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					How to formulate a suitable null hypothesis?
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							In many cases, we have the challenge of choosing the right null hypothesis.
+						</p>
+						<p class="styled-point2">
+							<code>H0: A ≤ limit value</code>
+						</p>
+						<p class="styled-point2">
+							<code>H0: A ≥ limit value</code>
+						</p>
+						<p class="styled-point3">
+							What's the difference between these two hypotheses?
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<div class="fragment">
+							<p class="styled-point">
+								Actually, we can use either hypothesis. However, from a <code>risk mitigation</code>
+								perspective, they serve different purposes.
+							</p>
+							<p class="styled-point2">
+								For <code>H0: A ≤ limit value</code>, we aim to <code>reject</code> the hypothesis if
+								the sample is significantly larger than the limit, indicating that the limit has been
+								exceeded. This would then prompt actions to mitigate the risk.
+							</p>
+							<p class="styled-point2">
+								For <code>H0: A ≥ limit value</code>, we fail to <code>reject</code> the hypothesis if
+								the sample is not significantly below the limit, suggesting the value may not be
+								sufficiently under the limit. In this case, actions are taken as a precautionary
+								measure.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Two-sided one-sample t-Test: Quality Threshold
+				</h4>
+				<div>
+					<div class="leftBox" style="width: 35%;">
+						<p class="styled-point">
+							Let's say we need to ensure a certain quality standard, measured by a value.
+						</p>
+						<p class="styled-point2">
+							The threshold quality value is set at 5.0.
+						</p>
+						<p class="styled-point2">
+							The measured average quality \(\bar{x}\) is 4.8.
+						</p>
+						<p class="styled-point3">
+							Does the average quality significantly differ from the threshold?
+						</p>
+					</div>
+					<div class="spacer" style="width: 1%;"></div>
+					<div class="rightBox" style="width: 61%;">
+						<pre style="font-size: x-large;">
+<code>      |                         
+5.2   |             *
+      |                   *
+5.0   |======== Quality Threshold (5.0)
+      |                      *
+4.8   |----*------- Average (4.8)
+      |          *   
+4.6   | *              *      
+      |                         *
+      |_______________________________
+        1  2  3  4  5  6  7  8  9  10  
+                Sample Index</code>
+            </pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Two-sided Hypothesis: Testing around a Quality Threshold
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For a two-sided test, we check whether the sample mean deviates significantly in
+							<code>either direction</code> from the threshold.
+						</p>
+						<p class="styled-point2">
+							We can formulate the hypotheses as follows:
+						</p>
+						<pre>
+<code>h0: A == threshold
+h1: A != threshold</code>
+            </pre>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point2">
+							Here, \(H_0\) states that the quality meets the threshold exactly, while \(H_1\) suggests a
+							significant deviation in either direction.
+						</p>
+						<p class="styled-point">
+							In this scenario, we are interested in both <code>underperformance</code> and
+							<code>overperformance</code> relative to the threshold.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Calculating the t-Value for a Two-sided Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For this test, we calculate the <code>t-Value</code> as:
+							\[
+							t = \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}}
+							\]
+							Where \(\bar{x}\) is the sample mean, \(\mu\) is the threshold quality value, \(s\) is the
+							sample standard deviation, and \(n\) is the sample size.
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<p class="styled-point2">
+							Suppose we have the following data:
+						</p>
+						<pre>
+<code>sampleMean = {4.8, 'units'}
+sampleStd = {0.2, 'units'}
+sampleSize = 15
+thresholdValue = {5.0, 'units'}</code>
+            </pre>
+						<p class="styled-noPoint">
+							Calculating:
+							\[
+							t = \frac{4.8 - 5.0}{\frac{0.2}{\sqrt{15}}} \approx -2.58
+							\]
+						</p>
+						<p class="styled-point2">
+							What does this t-Value tell us about our quality threshold?
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Comparing to Critical t-Values in a Two-sided Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							To determine if the quality deviates significantly, we compare the <code>t-Value</code> to
+							critical values for a two-sided test.
+						</p>
+						<p class="styled-point2">
+							For a two-sided test, we consider both tails of the t-Distribution:
+						</p>
+						<p class="styled-noPoint" style="font-size: medium;">
+							\[
+							\alpha = 2 \times (1 - \text{CDF}(|t|, df))
+							\]
+						</p>
+						<p class="styled-point2">
+							We use lookup tables or software tools to find the critical t-Value for \(\alpha = 0.05\)
+							and \(df = n-1\).
+						</p>
+						<p class="styled-point">
+							Since we want a two-sided comparison:
+						</p>
+						<p class="styled-noPoint">
+							\[
+							t_{\text{critical}} = \pm \text{CDF}^{-1}(\alpha/2, df)
+							\]
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<img src="../resources/tT1_4.png"
+							style="width: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Two-sided Test: Calculating p-Values
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							Instead of comparing t-Values, we can calculate the <code>p-Value</code> directly for a
+							two-sided test.
+						</p>
+						<p class="styled-point2">
+							The p-Value for a two-sided test is given by:
+						</p>
+						<p class="styled-noPoint" style="font-size: medium;">
+							\[
+							p = 2 \times \text{CDF}(-|t|, df)
+							\]
+						</p>
+						<p class="styled-point2">
+							Here, \( p \) represents the probability of obtaining a t-Value as extreme as the observed
+							value in either tail of the distribution.
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<p class="styled-point">
+							For our example:
+						</p>
+						<pre>
+<code>p = 2 * CDF(-|t| = 2.58, df = 14)</code>
+            </pre>
+						<p class="styled-point2">
+							If \( p < \alpha \), we reject the null hypothesis and conclude a significant deviation from
+								the threshold. </p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Two-Sample, Two-Sided t-Test: Comparing Two Groups
+				</h4>
+				<div>
+					<div class="leftBox" style="width: 35%;">
+						<p class="styled-point">
+							Suppose we want to compare the average quality scores of two different production batches.
+						</p>
+						<p class="styled-point2">
+							The measured average quality score for Batch A is 4.8, while for Batch B, it is 5.1.
+						</p>
+						<p class="styled-point3">
+							Is there a significant difference in quality between the two batches?
+						</p>
+					</div>
+					<div class="spacer" style="width: 1%;"></div>
+					<div class="rightBox" style="width: 61%;">
+						<pre style="font-size: x-large;">
+				<code>    |     
+5.1 |---███----------- Sample B (5.1)
+    |   ███
+4.8 |---███-------███- Sample A (4.8)
+    |   ███       ███
+    |___███_______███______________
+      Sample A  Sample B
+			 </code>
+			</pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Formulating Hypotheses for Two-Sample, Two-Sided Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For a two-sample, two-sided t-Test, we want to test if the mean of one sample differs from
+							the mean of another sample in <code>either direction</code>.
+						</p>
+						<p class="styled-point2">
+							We can set up the hypotheses as follows:
+						</p>
+						<pre>
+							<code>h0: μA = μB
+h1: μA ≠ μB</code>
+            			</pre>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point2">
+							Here, \( H_0 \) assumes that the average qualities of Batch A and Batch B are equal, while
+							\( H_1 \) suggests a significant difference in quality.
+						</p>
+						<p class="styled-point">
+							In this case, we are interested in detecting any significant <code>difference</code> between
+							the two batches, regardless of direction.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Calculating the t-Value for a Two-Sample, Two-Sided Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For this test, we calculate the <code>t-Value</code> as:
+							\[
+							t = \frac{\bar{x}_A - \bar{x}_B}{\sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}}}
+							\]
+							Where:
+						</p>
+						<p class="styled-noPoint">
+							- \(\bar{x}_A\), \(\bar{x}_B\): Mean of samples A and B<br>
+							- \(s_A\), \(s_B\): Standard deviations of samples A and B<br>
+							- \(n_A\), \(n_B\): Sample sizes of A and B
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<p class="styled-point2">
+							Given:
+						</p>
+						<pre>
+							<code>sampleMeanA = {4.8, 'units'}
+sampleMeanB = {5.1, 'units'}
+sampleStdA = {0.3, 'units'}
+sampleStdB = {0.4, 'units'}
+sampleSizeA = 12
+sampleSizeB = 15</code>
+           				</pre>
+						<p class="styled-noPoint">
+							Calculating:
+							\[
+							t = \frac{4.8 - 5.1}{\sqrt{\frac{0.3^2}{12} + \frac{0.4^2}{15}}} \approx -1.79
+							\]
+						</p>
+						<p class="styled-point2">
+							What does this t-Value tell us about the quality difference between the two batches?
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Degrees of Freedom in a Two-Sample Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For the two-sample t-Test, we need to calculate the <code>degrees of freedom (df)</code>:
+							The formula for <code>df</code> when variances are equal is:
+							\[
+							df = n_A + n_B - 2
+							\]
+							Where \( n_A \) and \( n_B \) are the sample sizes of batches A and B.
+						</p>
+						<p class="styled-noPoint">
+						<pre>
+									<code>df = 25</code>
+									</pre>
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point2">
+							However, we can also calculate the degrees of freedom
+							using the Welch-Satterthwaite formula, especially if the variances differ:
+							\[
+							df = \frac{\left(\frac{s_A^2}{n_A} +
+							\frac{s_B^2}{n_B}\right)^2}{\frac{\left(\frac{s_A^2}{n_A}\right)^2}{n_A - 1} +
+							\frac{\left(\frac{s_B^2}{n_B}\right)^2}{n_B - 1}}
+							\]
+						</p>
+						<p class="styled-point2">
+							This accounts for the sample sizes and variances in both samples and ensures a more accurate
+							critical value.
+						</p>
+						<p class="styled-noPoint">
+						<pre>
+								<code>df = 24.57</code>
+           					 </pre>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Critical t-Values for a Two-Sample, Two-Sided Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							To determine if the difference in quality is significant, we compare our
+							<code>t-Value</code> to the critical values for a two-sided test:
+							\[
+							t_{\text{critical}} = \pm \text{CDF}^{-1}(\alpha/2, df)
+							\]
+						</p>
+						<p class="styled-point2">
+							For example, with \(\alpha = 0.05\) and \(df \approx 24.57\), we look up or calculate the
+							critical t-values for both tails.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							Interpretation:
+						</p>
+						<p class="styled-noPoint">
+							If \( |t| > t_{\text{critical}} \), we reject \( H_0 \) and conclude a significant
+							difference between the batches.
+						<pre>
+								<code>t = -1.79
+t_critical = 
+		±CDF^-1(0.025, df = 24.57) 
+		= ± 2.06</code>
+								</code>
+							</pre>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Calculating p-Value for a Two-Sample, Two-Sided Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							Alternatively, we can calculate the <code>p-Value</code> directly and compare it to the
+							significance level \(\alpha\).
+						</p>
+						<p class="styled-point2">
+							For a two-sample, two-sided test:
+						</p>
+						<p class="styled-noPoint" style="font-size: medium;">
+							\[
+							p = 2 \times (1 - \text{CDF}(|t|, df))
+							\]
+						</p>
+						<p class="styled-point2">
+							This gives the probability of observing a difference as extreme as the one calculated.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							For our example:
+						</p>
+						<pre>
+<code>p = 2 * CDF(-|t| = 1.79, df = 24.57)</code>
+            </pre>
+						<p class="styled-point2">
+							If \( p < \alpha \), we reject the null hypothesis and conclude a significant difference in
+								quality between the two batches. <pre><code>p = 0.086</code></pre>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Introduction to the F-Test for Variance Comparison
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							The <code>F-Test</code> is used to compare the variances of two independent samples to see
+							if they are significantly different.
+						</p>
+						<p class="styled-point2">
+							The test is commonly used before conducting a t-Test to determine if equal or unequal
+							variance assumptions are appropriate.
+						</p>
+						<p class="styled-point3">
+							Key question: Are the variances in two groups (e.g., Batch A and Batch B) significantly
+							different?
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<div class="image-box" style="height: 400px">
+							<div style="width: 95%; height: 80%">
+								<canvas id="chart_fDist"></canvas>
+							</div>
+							<div>
+								<label for="df1Slider">Degrees of Freedom \(d_1\): </label>
+								<input type="range" id="df1Slider" min="1" max="60" value="5" step="1">
+								<span id="df1Value">5</span>
+							</div>
+							<div>
+								<label for="df2Slider">Degrees of Freedom \(d_2\): </label>
+								<input type="range" id="df2Slider" min="1" max="60" value="10" step="1">
+								<span id="df2Value">10</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Setting up Hypotheses for the F-Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							The F-Test compares the ratio of two sample variances to determine if there is a significant
+							difference.
+						</p>
+						<p class="styled-point2">
+							We define the hypotheses as:
+						</p>
+						<pre>
+			<code>h0: σA² = σB²
+h1: σA² ≠ σB²</code>
+						</pre>
+						<p class="styled-point2">
+							\( H_0 \): The variances of both groups are equal.
+						</p>
+						<p class="styled-point2">
+							\( H_1 \): The variances of both groups are not equal.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							If we reject \( H_0 \), it suggests that the variances are significantly different.
+						</p>
+						<img src="../resources/tT2_0.png" style="width: 80%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Calculating the F-Statistic
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							To calculate the <code>F-Statistic</code>, we take the ratio of the two sample variances:
+							\[
+							F = \frac{s_A^2}{s_B^2}
+							\]
+							where:
+						</p>
+						<p class="styled-noPoint">
+							- \( s_A^2 \): Variance of Sample A<br>
+							- \( s_B^2 \): Variance of Sample B
+						</p>
+						<p class="styled-point2">
+							Conventionally, the larger variance is placed in the numerator to ensure \( F \geq 1 \).
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							Example:
+						</p>
+						<pre>
+			<code>sampleVarA = {0.25, 'units²'}
+sampleVarB = {0.15, 'units²'}
+F = 0.25 / 0.15 ≈ 1.67</code>
+						</pre>
+						<p class="styled-point2">
+							The F-Statistic helps us determine if this ratio is large enough to indicate a significant
+							difference.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Determining the Critical F-Value
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							To decide if the F-Statistic is significant, we compare it to a
+							<code>critical F-Value</code> from the F-distribution.
+						</p>
+						<p class="styled-point">
+							The critical F-value depends on:
+						</p>
+						<p class="styled-point2">
+							The significance level \(\alpha\) (e.g., 0.05 for a 95% confidence level)
+						</p>
+						<p class="styled-point2">
+							The degrees of freedom for each sample: \( df_A = n_A - 1 \) and \( df_B = n_B - 1 \)
+						</p>
+						<p class="styled-point2">
+							If \( F > F_{\text{critical}} \), we reject \( H_0 \) and conclude the variances are
+							significantly different.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							For our example:
+						</p>
+						<pre>
+			<code>alpha = 0.05
+dfA = sampleSizeA - 1 = 11
+dfB = sampleSizeB - 1 = 14
+F_critical ≈ 2.76</code>
+						</pre>
+						<p class="styled-point2">
+							If \( F = 1.67 \) is less than \( F_{\text{critical}} = 2.76 \), we do not reject \( H_0 \).
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Calculating the p-Value for a Two-Sided F-Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For a two-sided F-Test, we calculate the <code>p-Value</code> considering both tails of the F-distribution:
+							\[
+							p = 2 \times \min(\text{CDF}(F_{\text{observed}}, df_1, df_2), 1 - \text{CDF}(F_{\text{observed}}, df_1, df_2))
+							\]
+						</p>
+						<p class="styled-point2">
+							This calculation provides the probability of observing an F-value as extreme as or more extreme than \( F_{\text{observed}} \) in either tail, assuming \( H_0 \) (equal variances) is true.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<div style="height: 130px;"></div>
+						<p class="styled-point">
+							Interpretation:
+						</p>
+						<p class="styled-noPoint">
+							If \( p < \alpha \), we reject \( H_0 \) and conclude that the variances are significantly different.
+							<pre><code>p = 0.18</code></pre>
+						</p>
+					</div>
+				</div>
+			</section>
+			
+
+			<section>
+				<h4>
+					Calculating the p-Value for the F-Test [Simplified with F greater 1]
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							By convention, we place the larger variance in the numerator so that \( F \geq 1 \).
+						</p>
+						<p class="styled-point2">
+							This allows us to calculate the <code>p-Value</code> using the CDF of the F-distribution:
+							\[
+							p = 1 - \text{CDF}(F_{\text{observed}}, df_1, df_2)
+							\]
+						</p>
+						<p class="styled-point2">
+							This represents the probability of obtaining an F-Statistic as extreme as or more extreme than the observed value, given \( H_0 \) is true.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							Interpretation:
+						</p>
+						<p class="styled-noPoint">
+							If \( p < \alpha \), we reject \( H_0 \) and conclude that the variances are significantly different.
+							<pre><code>p = 0.18</code></pre>
+						</p>
+					</div>
+				</div>
+			</section>		
+
+			<section>
+				<h4>
+					Introduction to the Paired Two-Sample t-Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							The <code>paired two-sample t-Test</code> is used to compare the means of two related groups.
+						</p>
+						<p class="styled-point2">
+							This test is ideal for scenarios where the samples are not independent, such as measurements before and after an intervention on the same subjects.
+						</p>
+						<p class="styled-point3">
+							Key question: Is there a significant difference between the two paired measurements?
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<img src="../resources/tT2_4.png" style="width: 100% !important; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+					</div>
+				</div>
+			</section>
+			
+			<section>
+				<h4>
+					Setting up Hypotheses for the Paired t-Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							In a paired t-Test, we test if the <code>average difference</code> between paired observations is zero.
+						</p>
+						<p class="styled-point2">
+							We define the hypotheses as:
+						</p>
+						<pre>
+			<code>h0: μd = 0
+h1: μd ≠ 0</code>
+						</pre>
+						<p class="styled-point2">
+							\( H_0 \): The mean difference (\( \mu_d \)) between paired measurements is zero (no effect).
+						</p>
+						<p class="styled-point2">
+							\( H_1 \): The mean difference (\( \mu_d \)) between paired measurements is not zero (significant effect).
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							If we reject \( H_0 \), it suggests a significant difference between the two paired conditions.
+						</p>
+						<p class="styled-point">
+							Depending on the research question, the alternative hypothesis can be one-sided as well.
+						</p>
+						
+					</div>
+				</div>
+			</section>
+			
+			<section>
+				<h4>
+					Calculating the Paired Differences
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For each pair, calculate the <code>difference</code> between the two measurements:
+							\[
+							d_i = X_{A,i} - X_{B,i}
+							\]
+							where: \( X_{A,i} \) and \( X_{B,i} \) are the measurements from the two conditions.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point2">
+							Example:
+						</p>
+						<pre>
+							<code>Measurement_before = {8, 7, 6, 5, 9}
+Measurement_after = {7, 6, 5, 5, 8}
+Differences_d = {1, 1, 1, 0, 1}</code>
+										</pre>
+						<p class="styled-point">
+							Next, calculate the mean (\(\bar{d}\)) and standard deviation (\(s_d\)) of the differences.
+						</p>
+						<p class="styled-noPoint">
+							\[ \bar{d} = \frac{\sum d_i}{n} \]
+							\[ s_d = \sqrt{\frac{\sum (d_i - \bar{d})^2}{n-1}} \]
+						</p>
+					</div>
+				</div>
+			</section>
+			
+			<section>
+				<h4>
+					Calculating the t-Value for the Paired t-Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							To calculate the <code>t-Value</code> for a paired test, use:
+							\[
+							t = \frac{\bar{d}}{\frac{s_d}{\sqrt{n}}}
+							\]
+							where \( \bar{d} \) is the mean difference, \( s_d \) is the standard deviation of differences, and \( n \) is the sample size.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point2">
+							Example with our differences:
+						</p>
+						<pre>
+			<code>meanDifference_d̄ = 0.8
+stdDevDifference_sd = 0.4
+sampleSize_n = 5
+t = 0.8 / (0.4 / sqrt(5)) ≈ 2.83</code>
+						</pre>
+						<p class="styled-point">
+							This t-Value can now be compared to critical values or used to calculate a p-value.
+						</p>
+					</div>
+				</div>
+			</section>
+			
+			<section>
+				<h4>
+					Degrees of Freedom and Critical t-Value
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For the paired t-Test, the <code>degrees of freedom (df)</code> is simply:
+							\[
+							df = n - 1
+							\]
+							where \( n \) is the number of pairs.
+						</p>
+						<p class="styled-point2">
+							Using \( df \) and the significance level \( \alpha \), we can find the critical t-value from a t-distribution table.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							Example:
+						</p>
+						<pre>
+			<code>sampleSize (n) = 5
+df = 5 - 1 = 4
+critical_t(α = 0.05, two-sided) 
+             ≈ ±2.776</code>
+						</pre>
+						<p class="styled-point2">
+							Compare \( t = 2.83 \) with \( t_{\text{critical}} = ±2.776 \). Since \( |t| > t_{\text{critical}} \), we reject \( H_0 \).
+						</p>
+					</div>
+				</div>
+			</section>
+			
+			<section>
+				<h4>
+					Calculating the p-Value for the Paired t-Test
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							Alternatively, we can calculate the <code>p-Value</code> directly for our t-Value.
+						</p>
+						<p class="styled-point2">
+							For a two-sided paired test:
+							\[
+							p = 2 \times (1 - \text{CDF}(|t|, df))
+							\]
+						</p>
+						<p class="styled-point2">
+							The p-value represents the probability of observing a difference as extreme as the calculated value, assuming \( H_0 \) is true.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							Interpretation:
+						</p>
+						<p class="styled-noPoint">
+							If \( p < \alpha \), we reject \( H_0 \) and conclude there is a significant difference between paired measurements.
+						</p>
+					</div>
+				</div>
+			</section>
+			
 
 		</div>
 		<div class="footer-global">
@@ -314,7 +1264,8 @@ limitValue = {0.1, 'mg/L'}</code>
 	<script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
 	<script src="../resources/chart_utils.js"></script>
 	<script src="../resources/chart_tTest_oneSided.js"></script>
-		
+	<script src="../resources/chart_fDist.js"></script>
+
 </body>
 
 </html>
