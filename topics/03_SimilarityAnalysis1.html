@@ -994,7 +994,7 @@ F_critical ≈ 2.76</code>
 
 			<section>
 				<h4>
-					Calculating the p-Value for the F-Test [Simplified with F greater 1]
+					Calculating the p-Value for the F-Test [ F greater 1 ]
 				</h4>
 				<div>
 					<div class="leftBox">
@@ -1435,6 +1435,7 @@ Cohens_d = (46.00 - 30.83) / 1.45
 			Last updated: October 22, 2024
 		</div>
 	</div>
+	<div id="clock">--:--</div>
 
 	<script src="../dist/reveal.js"></script>
 	<script src="../plugin/notes/notes.js"></script>
@@ -1475,6 +1476,18 @@ Cohens_d = (46.00 - 30.83) / 1.45
 			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealChart, RevealMenu],
 		});
+		// Funktion zum Aktualisieren der Uhrzeit
+		function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Uhrzeit sofort und dann jede Sekunde aktualisieren
+        updateClock();
+        setInterval(updateClock, 1000);
 	</script>
 	<!-- Chart scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>

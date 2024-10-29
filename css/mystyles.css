@@ -283,3 +283,16 @@
     background-position-y: -50px; /* Adjust the value as needed for the vertical offset */
     background-repeat: no-repeat;
 }
+
+#clock {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    font-size: 2.5em;
+    font-family: 'Noto Sans', Source Sans Pro, Helvetica, sans-serif;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
