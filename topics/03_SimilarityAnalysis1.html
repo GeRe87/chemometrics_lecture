@@ -964,13 +964,17 @@ F_critical ≈ 2.76</code>
 				<div>
 					<div class="leftBox">
 						<p class="styled-point">
-							For a two-sided F-Test, we calculate the <code>p-Value</code> considering both tails of the F-distribution:
+							For a two-sided F-Test, we calculate the <code>p-Value</code> considering both tails of the
+							F-distribution:
 							\[
-							p = 2 \times \min(\text{CDF}(F_{\text{observed}}, df_1, df_2), 1 - \text{CDF}(F_{\text{observed}}, df_1, df_2))
+							p = 2 \times \min(\text{CDF}(F_{\text{observed}}, df_1, df_2), 1 -
+							\text{CDF}(F_{\text{observed}}, df_1, df_2))
 							\]
 						</p>
 						<p class="styled-point2">
-							This calculation provides the probability of observing an F-value as extreme as or more extreme than \( F_{\text{observed}} \) in either tail, assuming \( H_0 \) (equal variances) is true.
+							This calculation provides the probability of observing an F-value as extreme as or more
+							extreme than \( F_{\text{observed}} \) in either tail, assuming \( H_0 \) (equal variances)
+							is true.
 						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
@@ -980,13 +984,13 @@ F_critical ≈ 2.76</code>
 							Interpretation:
 						</p>
 						<p class="styled-noPoint">
-							If \( p < \alpha \), we reject \( H_0 \) and conclude that the variances are significantly different.
-							<pre><code>p = 0.18</code></pre>
+							If \( p < \alpha \), we reject \( H_0 \) and conclude that the variances are significantly
+								different. <pre><code>p = 0.18</code></pre>
 						</p>
 					</div>
 				</div>
 			</section>
-			
+
 
 			<section>
 				<h4>
@@ -1004,7 +1008,8 @@ F_critical ≈ 2.76</code>
 							\]
 						</p>
 						<p class="styled-point2">
-							This represents the probability of obtaining an F-Statistic as extreme as or more extreme than the observed value, given \( H_0 \) is true.
+							This represents the probability of obtaining an F-Statistic as extreme as or more extreme
+							than the observed value, given \( H_0 \) is true.
 						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
@@ -1013,12 +1018,12 @@ F_critical ≈ 2.76</code>
 							Interpretation:
 						</p>
 						<p class="styled-noPoint">
-							If \( p < \alpha \), we reject \( H_0 \) and conclude that the variances are significantly different.
-							<pre><code>p = 0.18</code></pre>
+							If \( p < \alpha \), we reject \( H_0 \) and conclude that the variances are significantly
+								different. <pre><code>p = 0.18</code></pre>
 						</p>
 					</div>
 				</div>
-			</section>		
+			</section>
 
 			<section>
 				<h4>
@@ -1027,10 +1032,12 @@ F_critical ≈ 2.76</code>
 				<div>
 					<div class="leftBox">
 						<p class="styled-point">
-							The <code>paired two-sample t-Test</code> is used to compare the means of two related groups.
+							The <code>paired two-sample t-Test</code> is used to compare the means of two related
+							groups.
 						</p>
 						<p class="styled-point2">
-							This test is ideal for scenarios where the samples are not independent, such as measurements before and after an intervention on the same subjects.
+							This test is ideal for scenarios where the samples are not independent, such as measurements
+							before and after an intervention on the same subjects.
 						</p>
 						<p class="styled-point3">
 							Key question: Is there a significant difference between the two paired measurements?
@@ -1038,11 +1045,12 @@ F_critical ≈ 2.76</code>
 					</div>
 					<div class="spacer"></div>
 					<div class="rightBox">
-						<img src="../resources/tT2_4.png" style="width: 100% !important; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+						<img src="../resources/tT2_4.png"
+							style="width: 100% !important; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
 					</div>
 				</div>
 			</section>
-			
+
 			<section>
 				<h4>
 					Setting up Hypotheses for the Paired t-Test
@@ -1050,7 +1058,8 @@ F_critical ≈ 2.76</code>
 				<div>
 					<div class="leftBox">
 						<p class="styled-point">
-							In a paired t-Test, we test if the <code>average difference</code> between paired observations is zero.
+							In a paired t-Test, we test if the <code>average difference</code> between paired
+							observations is zero.
 						</p>
 						<p class="styled-point2">
 							We define the hypotheses as:
@@ -1060,25 +1069,28 @@ F_critical ≈ 2.76</code>
 h1: μd ≠ 0</code>
 						</pre>
 						<p class="styled-point2">
-							\( H_0 \): The mean difference (\( \mu_d \)) between paired measurements is zero (no effect).
+							\( H_0 \): The mean difference (\( \mu_d \)) between paired measurements is zero (no
+							effect).
 						</p>
 						<p class="styled-point2">
-							\( H_1 \): The mean difference (\( \mu_d \)) between paired measurements is not zero (significant effect).
+							\( H_1 \): The mean difference (\( \mu_d \)) between paired measurements is not zero
+							(significant effect).
 						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
 					<div class="rightBox">
 						<p class="styled-point">
-							If we reject \( H_0 \), it suggests a significant difference between the two paired conditions.
+							If we reject \( H_0 \), it suggests a significant difference between the two paired
+							conditions.
 						</p>
 						<p class="styled-point">
 							Depending on the research question, the alternative hypothesis can be one-sided as well.
 						</p>
-						
+
 					</div>
 				</div>
 			</section>
-			
+
 			<section>
 				<h4>
 					Calculating the Paired Differences
@@ -1113,7 +1125,7 @@ Differences_d = {1, 1, 1, 0, 1}</code>
 					</div>
 				</div>
 			</section>
-			
+
 			<section>
 				<h4>
 					Calculating the t-Value for the Paired t-Test
@@ -1125,7 +1137,8 @@ Differences_d = {1, 1, 1, 0, 1}</code>
 							\[
 							t = \frac{\bar{d}}{\frac{s_d}{\sqrt{n}}}
 							\]
-							where \( \bar{d} \) is the mean difference, \( s_d \) is the standard deviation of differences, and \( n \) is the sample size.
+							where \( \bar{d} \) is the mean difference, \( s_d \) is the standard deviation of
+							differences, and \( n \) is the sample size.
 						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
@@ -1145,7 +1158,7 @@ t = 0.8 / (0.4 / sqrt(5)) ≈ 2.83</code>
 					</div>
 				</div>
 			</section>
-			
+
 			<section>
 				<h4>
 					Degrees of Freedom and Critical t-Value
@@ -1160,7 +1173,8 @@ t = 0.8 / (0.4 / sqrt(5)) ≈ 2.83</code>
 							where \( n \) is the number of pairs.
 						</p>
 						<p class="styled-point2">
-							Using \( df \) and the significance level \( \alpha \), we can find the critical t-value from a t-distribution table.
+							Using \( df \) and the significance level \( \alpha \), we can find the critical t-value
+							from a t-distribution table.
 						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
@@ -1175,12 +1189,13 @@ critical_t(α = 0.05, two-sided)
              ≈ ±2.776</code>
 						</pre>
 						<p class="styled-point2">
-							Compare \( t = 2.83 \) with \( t_{\text{critical}} = ±2.776 \). Since \( |t| > t_{\text{critical}} \), we reject \( H_0 \).
+							Compare \( t = 2.83 \) with \( t_{\text{critical}} = ±2.776 \). Since \( |t| >
+							t_{\text{critical}} \), we reject \( H_0 \).
 						</p>
 					</div>
 				</div>
 			</section>
-			
+
 			<section>
 				<h4>
 					Calculating the p-Value for the Paired t-Test
@@ -1197,7 +1212,8 @@ critical_t(α = 0.05, two-sided)
 							\]
 						</p>
 						<p class="styled-point2">
-							The p-value represents the probability of observing a difference as extreme as the calculated value, assuming \( H_0 \) is true.
+							The p-value represents the probability of observing a difference as extreme as the
+							calculated value, assuming \( H_0 \) is true.
 						</p>
 					</div>
 					<div class="spacer"></div> <!-- spacer -->
@@ -1206,12 +1222,212 @@ critical_t(α = 0.05, two-sided)
 							Interpretation:
 						</p>
 						<p class="styled-noPoint">
-							If \( p < \alpha \), we reject \( H_0 \) and conclude there is a significant difference between paired measurements.
+							If \( p < \alpha \), we reject \( H_0 \) and conclude there is a significant difference
+								between paired measurements. </p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					What is Effect Size?
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							The <code>effect size</code> measures the magnitude of a difference, regardless of sample
+							size.
+						</p>
+						<p class="styled-point2">
+							Unlike the p-value, which only indicates if an effect is statistically significant, the
+							effect size shows the strength of that effect.
+						</p>
+						<p class="styled-point3">
+							Example key question: How meaningful is the observed improvement in pollutant degradation?
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<img src="../resources/boxplot5.png"
+							style="width: 100% !important; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Example: Testing a New Catalyst for Pollutant Degradation
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							A new catalyst is developed and tested for its efficiency in degrading pollutants in
+							wastewater.
+						</p>
+						<p class="styled-point">
+							Two groups of samples were tested:
+						</p>
+						<p class="styled-point2">
+							<code>Control group</code> (without catalyst)
+						</p>
+						<p class="styled-point2">
+							<code>Treatment group</code> (with new catalyst)
+						</p>
+					</div>
+					<div class="spacer"></div>
+					<div class="rightBox">
+						<p class="styled-point3">
+							Question: Is the degradation rate significantly different between the two groups? And if so,
+							how strong is the effect?
+						</p>
+						<pre style="font-size: x-large;">
+			<code>Control (no catalyst): 
+[30, 32, 31, 29, 30, 33]
+
+Treatment (new catalyst): 
+[45, 47, 44, 46, 48, 46]</code>
+						</pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Calculating the Effect Size: Cohen's d
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							For a two-sample comparison, the effect size is often measured with <code>Cohen's d</code>:
+							\[
+							d = \frac{\bar{X}_1 - \bar{X}_2}{s_p}
+							\]
+							where \( \bar{X}_1 \) and \( \bar{X}_2 \) are the means of the two groups, and \( s_p \) is
+							the pooled standard deviation.
+						</p>
+						<p class="styled-point2">
+							Cohen's d quantifies the size of the difference between the groups in terms of standard
+							deviations.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							The <code>pooled standard deviation</code> is calculated as:
+							\[
+							s_p = \sqrt{\frac{(n_1 - 1) \times s_1^2 + (n_2 - 1) \times s_2^2}{n_1 + n_2 - 2}}
+							\]
+							where \( n_1 \) and \( n_2 \) are the sample sizes, and \( s_1 \) and \( s_2 \) are the
+							standard deviations.
+						</p>
+						<p class="styled-point">
+							Example Calculation:
+						</p>
+						<pre>
+			<code>mean_control = 30.83
+mean_treatment = 46.00
+std_control = 1.37
+std_treatment = 1.52
+pooled_std = 1.45
+
+Cohens_d = (46.00 - 30.83) / 1.45 
+≈ 10.44</code>
+						</pre>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h4>
+					Interpreting Cohen's d
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							Cohen's d interpretation (general guidelines):
+						</p>
+						<p class="styled-point2">
+							<code>d = 0.2</code>: Small effect
+						</p>
+						<p class="styled-point2"><code>d = 0.5</code>: Medium effect</p>
+						<p class="styled-point2"><code>d = 0.8</code> or higher: Large effect</p>
+						<p class="styled-point2">
+							In our example, \(d \approx 10.44\) indicates a <strong>very large effect</strong>.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point">
+							Interpretation:
+						</p>
+						<p class="styled-noPoint">
+							The new catalyst has a very large effect on pollutant degradation, meaning it significantly
+							improves the degradation rate compared to no catalyst.
 						</p>
 					</div>
 				</div>
 			</section>
-			
+
+			<section>
+				<h4>
+					Advantages of Reporting Effect Size
+				</h4>
+				<div>
+					<div class="leftBox">
+						<p class="styled-point">
+							Reporting effect size provides a measure of practical significance:
+						</p>
+						<p class="styled-point2">
+							Contextualizes statistical significance with real-world relevance.</p>
+						<p class="styled-point2">Helps determine if observed effects are <code>meaningful</code> or
+							<code>trivial</code>.
+						</p>
+					</div>
+					<div class="spacer"></div> <!-- spacer -->
+					<div class="rightBox">
+						<p class="styled-point2">Supports <code>meta-analyses</code> by offering standardized effect
+							measurements.</p>
+						<p class="styled-point2">
+							Effect sizes help avoid over-reliance on p-values and clarify if the results have practical
+							importance.
+						</p>
+						<p class="styled-point2">
+							I.e., a small p-value may indicate statistical significance, but a large effect size shows a more meaningful difference.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<p class=title>
+					Seminar Materials
+				</p>
+				<div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							You can download the seminar materials for this lecture here:
+						</p>
+						<p class="styled-point2">
+							<a href="../resources/training_data2.txt" download>training data</a>
+						</p>
+					</div>
+					<div style="display: inline-block; width: 5%;"></div>
+					<div style="display: inline-block; width: 45%; text-align: left; vertical-align: top;">
+						<p class="styled-point">
+							The data shows two sampling locations, monitored for pollutant concentrations.
+						</p>
+						<p class="styled-point2">
+							Is there a significant difference between the two locations?
+						</p>
+						<p class="styled-point2">
+							Is the limit value of 20 mg/L exceeded at either location?
+						</p>
+						<p class="styled-point2">
+							What's the effect size of the difference in pollutant concentrations?
+						</p>
+					</div>
+				</div>
+			</section>
 
 		</div>
 		<div class="footer-global">
