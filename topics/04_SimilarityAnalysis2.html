@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Chemometrics and Statistics</title>
+
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <link rel="stylesheet" href="../dist/theme/iac.css">
+    <link rel="stylesheet" href="../css/mystyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+    <style>
+        .green-text {
+            color: rgb(133, 198, 42);
+        }
+
+        .teal-text {
+            color: rgb(0, 150, 136);
+        }
+
+        .small-text {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+                <pre><code>04. Similarity Analysis 2</code></pre>
+                <h4>Distribution Tests & Analysis of Variances</h4>
+                <p>by <a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
+            </section>
+
+            <section>
+                <h4> <!-- Title -->
+                    Initial Thoughts on Distributions
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            When working with data, it is important to know the <code>distribution</code> of the data.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            Knowing the <code>distribution</code>, we can describe and apply models to the data.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            E.g., knowing the data is normally distributed, we can apply <code>t-tests</code> to compare
+                            means.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Let's asume we have a dataset <code>x</code> with the following values:
+                        <p class="styled-noPoint"> <!-- Example Data -->
+                        <pre> <!-- thte column length is limited so keep it short.-->
+                            <code>x: [36.9, 38.0, 36.1, 34.1, 39.8,
+    35.0, 35.9, 38.7, 38.4, 35.1,
+    37.0, 36.7, 32.4, 38.6, 34.3,
+    36.9, 35.5, 36.0, 37.5, 37.0,
+    38.1, 36.7, 37.8, 38.3, 38.8]</code>
+                            </pre>
+                        </p>
+                        <p class="styled-point3"> <!-- Question -->
+                            What is the <code>distribution</code> of the data? (challenging)
+                        </p>
+                        <p class="styled-point3"> <!-- Question -->
+                            Is the data <code>normally distributed</code>? (most common)
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4> <!-- Title -->
+                    Testing for Normality: Chi-square Test
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            To determine if our dataset <code>x</code> follows a specific distribution, we can use
+                            statistical tests.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            The <code>Chi-square test</code> helps us test if observed data fit an expected
+                            distribution.
+                        </p>
+                        <p class="styled-noPoint"> <!-- Equation -->
+                            Chi-square Test Formula:
+                            \[
+                            \chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}
+                            \]
+                            where \( O_i \) are observed frequencies, and \( E_i \) are expected frequencies.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Example Application -->
+                            Let's apply the Chi-square test to see if <code>x</code> is normally distributed.
+                        </p>
+                        <p class="styled-point2"> <!-- Step 1 -->
+                            Step 1: Determine observed frequencies (e.g., counts within each range in <code>x</code>).
+                        </p>
+                        <p class="styled-point2"> <!-- Step 2 -->
+                            Step 2: Calculate expected frequencies based on a normal distribution.
+                        </p>
+                        <p class="styled-point2"> <!-- Step 3 -->
+                            Step 3: Compute \( \chi^2 \) and compare with the critical value for our confidence level.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4> <!-- Title -->
+                    Step 1: Determine Observed Frequencies
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Observed frequencies represent the actual counts of data points within specific ranges
+                            (bins).
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            For our dataset, we will divide the values into intervals and count how many data points
+                            fall into each interval.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Dataset -->
+                            Here is the dataset <code>x</code>:
+                        </p>
+                        <p class="styled-noPoint"> <!-- Data Display -->
+                        <pre>
+                                <code>x: [36.9, 38.0, 36.1, 34.1, 39.8,
+    35.0, 35.9, 38.7, 38.4, 35.1,
+    37.0, 36.7, 32.4, 38.6, 34.3,
+    36.9, 35.5, 36.0, 37.5, 37.0,
+    38.1, 36.7, 37.8, 38.3, 38.8]</code>
+                            </pre>
+                        </p>
+                        <p class="styled-point2"> <!-- Example Calculation -->
+                            Example: Divide into intervals such as <code>32-34, 34-36, 36-38, 38-40</code>.
+                        </p>
+                        <p class="styled-point2"> <!-- Observed Frequencies -->
+                            Observed Frequencies:
+                            <code>[1, 6, 10, 8]</code> (representing counts in each interval)
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4> <!-- Title -->
+                    Step 2: Calculate Expected Frequencies
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Expected frequencies represent the counts we would expect in each interval if the data
+                            followed a specified distribution (e.g., Normal).
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            To calculate expected frequencies, assume a normal distribution with the mean = 36.8 and
+                            standard deviation = 1.7.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            Use the normal distribution to estimate the proportion of values that should fall in each
+                            interval (CDF).
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Example Calculation -->
+                            For our dataset <code>x</code> with mean = 36.8 and standard deviation = 1.7:
+                        </p>
+                        <p class="styled-noPoint"> <!-- Expected Calculation -->
+                        <pre style="font-size: large;">
+                            <code>Interval: 32-34
+CDF_34 = CDF((34-36.8)/1.7) = 0.054
+CDF_32 = CDF((32-36.8)/1.7) = 0.003
+Exp_Proportion = CDF_34 - CDF_32 = 0.05
+Exp_Frequency = Exp_Proportion * 25 = 1.3</code>
+                        </pre>
+                        <pre style="font-size: large;">
+                    <code>Intervals | Exp. Proportion | Exp. Frequency
+32-34     |      ~5.1%      |     ~1.3
+34-36     |      ~27.0%     |     ~6.8
+36-38     |      ~43.2%     |     ~10.8
+38-40     |      ~21.1%     |     ~5.3</code>
+                </pre>
+                        </p>
+                        <p class="styled-point2"> <!-- Expected Frequencies Summary -->
+                            These values represent our expected frequencies for each interval.
+                        </p>
+                        <p class="styled-point3"> <!-- Guiding Question -->
+                            <strong>Are the observed frequencies similar to the expected ones?</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4> <!-- Title -->
+                    Step 3: Calculate the Chi-square Statistic
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            The Chi-square statistic measures how well the observed frequencies match the expected
+                            frequencies.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            Use the formula:
+                            \[
+                            \chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}
+                            \]
+                            where \( O_i \) are observed frequencies and \( E_i \) are expected frequencies for each
+                            interval.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            A higher Chi-square value suggests a larger deviation from the expected distribution.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Example Calculation -->
+                            For each interval, calculate \((O_i - E_i)^2 / E_i\):
+                        </p>
+                        <p class="styled-noPoint"> <!-- Example Calculation Table -->
+                        <pre style="font-size: large;">
+                                <code>
+Intervals | Observed | Expected | (O_i - E_i)^2 / E_i
+32-34     |    1     |  ~1.3    |   0.07
+34-36     |    6     |  ~6.8    |   0.09
+36-38     |   10     | ~10.8    |   0.06
+38-40     |    8     |  ~5.3    |   1.38
+                                </code>
+                            </pre>
+                        </p>
+                        <p class="styled-point2"> <!-- Chi-square Summary -->
+                            Sum these values to get the Chi-square statistic: \( \chi^2 = 1.60 \), \( df = 3 \), \( p =
+                            0.66 \).
+                        </p>
+                        <p class="styled-point3"> <!-- Guiding Question -->
+                            <strong>Is this Chi-square value high or low? What does it suggest about our data?</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4> <!-- Title -->
+                    Kolmogorov-Smirnov Test for Normality
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            The Kolmogorov-Smirnov (K-S) test is another way to test if a dataset follows a specified
+                            distribution.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            Unlike the Chi-square test, the K-S test compares the cumulative distribution function (CDF)
+                            of the data with the CDF of the specified distribution.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            The test statistic, \( D \), is the maximum difference between the empirical CDF of the data
+                            and the CDF of the expected distribution.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Formula and Calculation -->
+                            The K-S test statistic is calculated as:
+                            \[
+                            D = \max | F_{observed}(x) - F_{expected}(x) |
+                            \]
+                            where \( F_{observed}(x) \) is the empirical CDF of the data, and \( F_{expected}(x) \) is
+                            the CDF of the specified distribution.
+                            \[
+                            F_{observed}(x) = \frac{1}{n} \sum_{i=1}^{n} I(x_i \leq x)
+                            \]
+                            where \( I(x_i \leq x) \) is the indicator function, i.e. 1 if \( x_i \leq x \) and 0
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4> <!-- Title -->
+                    Step 1: Calculate the Empirical Cumulative Distribution Function (ECDF)
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            The ECDF represents the proportion of data points that are less than or equal to each value
+                            in the dataset.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            For each value \( x_i \) in the dataset, the ECDF is calculated as:
+                            \[
+                            F_{observed}(x) = \frac{1}{n} \sum_{i=1}^{n} I(x_i \leq x)
+                            \]
+                            where \( n \) is the total number of data points, and \( I(x_i \leq x) \) is 1 if \( x_i
+                            \leq x \), and 0 otherwise.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Example Calculation -->
+                            For our dataset:
+                        <pre style="font-size: large;">
+                                <code>x: [32.4, 34.1, 34.3, 35.0, 35.1, 
+    35.5, 35.9, 36.0, 36.1, 36.7, 
+    36.7, 36.9, 36.9, 37.0, 37.0, 
+    37.5, 37.8, 38.0, 38.1, 38.3, 
+    38.4, 38.6, 38.7, 38.8, 39.8]</code>
+                            </pre>
+                        </p>
+                        <p class="styled-noPoint"> <!-- ECDF Table -->
+                            <strong>Example ECDF Calculation:</strong>
+                        <pre style="font-size: large;">
+                                <code>Value (x) | Proportion <= x | ECDF
+32.4      | 1/25            | 0.04
+34.1      | 2/25            | 0.08
+34.3      | 3/25            | 0.12
+...       | ...             | ...
+38.8      | 24/25           | 0.96
+39.8      | 25/25           | 1.00
+                                </code>
+                            </pre>
+                        </p>
+                        <p class="styled-point2"> <!-- Explanation -->
+                            The ECDF provides the cumulative probability at each data point.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>
+                    Step 2: Calculate the Kolmogorov-Smirnov Test Statistic
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            The ECDF is a step function that increases by \( \frac{1}{n} \) at each data point.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            The ECDF is a non-parametric way to visualize the distribution of the data.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            It can be used to compare the distribution of two datasets or to check if a dataset follows
+                            a specific distribution.
+                        </p>
+                        <pre>
+                            <code>D = max(F_obs(x)-F_exp(x))</code>
+                            <code>>> D = 0.121</code>
+                        </pre>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <div class="tabs">
+                            <div class="tab active" data-tab="ecdf1">ECDF</div>
+                            <div class="tab" data-tab="ecdf2">Add Model</div>
+                            <div class="tab" data-tab="ecdf3">Harmonize Data</div>
+                        </div>
+                        <div class="tab-content active" id="ecdf1" style="height: 370px;">
+                            <canvas id="chart_ecdf1"></canvas>
+                        </div>
+                        <div class="tab-content" id="ecdf2" style="height: 370px;">
+                            <canvas id="chart_ecdf2"></canvas>
+                        </div>
+                        <div class="tab-content" id="ecdf3" style="height: 370px;">
+                            <canvas id="chart_ecdf3"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>
+                    Step 3: Calculate the p-value for the Kolmogorov-Smirnov Test
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            The \( p \)-value helps us determine if the observed differences between the ECDF of our
+                            data and the expected distribution are statistically significant.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            Using the Kolmogorov-Smirnov test statistic \( D \) and the sample size \( n \), we can
+                            calculate the \( p \)-value.
+                        </p>
+                        <p class="styled-noPoint"> <!-- Calculation -->
+                            Formula to approximate \( p \)-value:
+                            \[
+                            p \approx Q_{KS} \left( \sqrt{n} \cdot D \right)
+                            \]
+                            where \( Q_{KS} \) is a function related to the distribution of \( D \) under the null
+                            hypothesis.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-noPoint"> <!-- Example Calculation -->
+                            \[
+                            Q_{KS}(\lambda) = 2 \sum_{k=1}^{\infty} (-1)^{k-1} e^{-2k^2 \lambda^2}
+                            \]
+                            Here, \( \lambda = \sqrt{n} \cdot D \).
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            If \( p < 0.05 \), we reject the null hypothesis, suggesting our data does not follow the
+                                expected distribution. </p>
+                                <p class="styled-point"> <!-- Example Calculation -->
+                                    Example Calculation:
+                                <pre style="font-size: large;">
+                                <code>D = 0.121, n = 25
+sqrt(n) * D = 0.121 * 5 = 0.605
+p_value = 0.73</code>
+                            </pre>
+                        </p>
+                        <p class="styled-point2"> <!-- Interpretation -->
+                            Since \( p = 0.73 \), we do not reject the null hypothesis, indicating the data likely
+                            follows the expected distribution.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>
+                    Moving from t-tests to ANOVA
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            We used the t-test to compare means of two groups.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            ANOVA (Analysis of Variance) extends this to three or more groups.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            Instead of just comparing means, ANOVA uses variances to uncover group differences.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            This gives insight into whether observed differences are meaningful or due to random
+                            variation.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <canvas id="scatterChart" width="400" height="400"></canvas>
+                        <label for="varianceSlider">Adjust Variance:</label>
+                        <input type="range" id="varianceSlider" min="1" max="20" value="2" step="0.5">
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>
+                    When Are Groups Separately Identifiable?
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Group separability in ANOVA depends on two types of variance:
+                        </p>
+                        <p class="styled-point2"> <!-- Variance Between Groups -->
+                            <strong>1. Between-Group Variance:</strong> High values indicate distinct group means.
+                        </p>
+                        <p class="styled-point2"> <!-- Variance Within Groups -->
+                            <strong>2. Within-Group Variance:</strong> Low values indicate tight clustering around group
+                            means.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <canvas id="scatterChart2" width="400" height="250"></canvas>
+                        <label for="varianceSlider2" style="font-size: large;">Adjust Variance:</label>
+                        <input type="range" id="varianceSlider2" min="1" max="20" value="2" step="0.5">
+                        <canvas id="varianceBarChart" width="400" height="100"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>
+                    Understanding Total, Within-Group, and Between-Group Variance
+                </h4>
+                <div class="exam-box">
+                    <div class="styled-Point" style="font-size: medium;"> <!-- Total Variance Formula -->
+                        <strong>Relation of the Sum of Squares:</strong>
+                        \[
+                        \text{Total Sum of Squares} = \text{Sum of Squares Between-Group} + \text{Sum of Squares
+                        Within-Group}
+                        \]
+                    </div>
+                </div>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            In ANOVA, Total Variance is divided into two components:
+                        </p>
+                        <p class="styled-point2"> <!-- Between-Group Variance -->
+                            <strong>1. Between-Group Variance:</strong> Variance due to differences between group means.
+                            High values indicate distinct groups.
+                        </p>
+                        <p class="styled-point2"> <!-- Within-Group Variance -->
+                            <strong>2. Within-Group Variance:</strong> Variance within each group around its mean. Low
+                            values indicate tightly clustered data within groups.
+                        </p>
+                    </div>
+                    <div class="spacer"></div> <!-- spacer -->
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- ANOVA Explanation -->
+                            In ANOVA, we analyze how much of the total variance can be attributed to between-group
+                            differences, which helps determine if groups are meaningfully distinct.
+                        </p>
+                        <p class="styled-noPoint"> <!-- F-Statistic -->
+                            \( F \)-statistic:
+                            \[
+                            F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}}
+                            \]
+                            A high \( F \)-value suggests meaningful group differences.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Calculating Total Variance</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Total Variance \(T\) represents the overall spread of all data points from the overall mean
+                            \(\bar{X}\).
+                        </p>
+                        <p class="styled-noPoint"> <!-- Total Variance Formula -->
+                            <strong>Formula:</strong>
+                            \[
+                            T = \frac{1}{N - 1} \sum_{i=1}^{N} (x_i - \bar{X})^2
+                            \]
+                            where \( N \) is the total number of data points.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Step-by-Step Calculation -->
+                            <strong>Steps to Calculate Total Variance :</strong>
+                        </p>
+                        <p class="styled-point4"> <!-- Step 1 -->
+                            Calculate the overall mean of all data points across all groups.
+                        </p>
+                        <p class="styled-point4">
+                            For each data point, find the squared distance from the overall mean.
+                        </p>
+                        <p class="styled-point4">
+                            Sum these squared distances.
+                        </p>
+                        <p class="styled-point4">
+                            Divide by \( N - 1 \), where \( N \) is the total number of data points, to account for
+                            degrees of freedom.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Calculating Within-Group Variance</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Within-Group Variance \(W\) measures how data points vary within each group around their
+                            group mean \(\bar{X}_j\).
+                        </p>
+                        <p class="styled-noPoint"> <!-- Within-Group Variance Formula -->
+                            <strong>Formula:</strong>
+                            \[
+                            W = \frac{1}{N - G} \sum_{j=1}^{G} \sum_{i=1}^{n_j} (x_{ij} - \bar{X}_j)^2
+                            \]
+                            where \( G \) is the number of groups, \( n_j \) is the size of group \( j \), and \( N \)
+                            is the total number of data points.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Step-by-Step Calculation -->
+                            <strong>Steps to Calculate Within-Group Variance:</strong>
+                        </p>
+                        <p class="styled-point4"> <!-- Step 1 -->
+                            Calculate the mean for each group.
+                        </p>
+                        <p class="styled-point4">
+                            For each data point, find the squared distance from its group mean.
+                        </p>
+                        <p class="styled-point4">
+                            Sum the squared distances within each group.
+                        </p>
+                        <p class="styled-point4">
+                            Divide by \( N - G \), where \( N \) is the total number of data points and \( G \) is the
+                            number of groups, to account for degrees of freedom.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Calculating Between-Group Variance</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Between-Group Variance \(B\) measures how each group's mean \(\bar{X}_j\) differs from the
+                            overall mean \(\bar{X}\).
+                        </p>
+                        <p class="styled-noPoint"> <!-- Between-Group Variance Formula -->
+                            <strong>Formula:</strong>
+                            \[
+                            B = \frac{1}{G - 1} \sum_{j=1}^{G} n_j (\bar{X}_j - \bar{X})^2
+                            \]
+                            where \( G \) is the number of groups, \( n_j \) is the size of each group, and \( N \) is
+                            the total number of data points.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Step-by-Step Calculation -->
+                            <strong>Steps to Calculate Between-Group Variance:</strong>
+                        </p>
+                        <p class="styled-point4"> <!-- Step 1 -->
+                            Calculate the overall mean of all data points.
+                        </p>
+                        <p class="styled-point4">
+                            For each group, find the squared distance between the group mean and the overall mean.
+                        </p>
+                        <p class="styled-point4">
+                            Multiply each squared distance by the number of data points in that group.
+                        </p>
+                        <p class="styled-point4">
+                            Sum these values and divide by \( G - 1 \), where \( G \) is the number of groups, to
+                            account for degrees of freedom.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Example: Calculating for Three Groups</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Example Data -->
+                            Here are the data points for each group:
+                        </p>
+                        <pre><code>A: [8, 9, 7, 10]
+B: [15, 14, 16, 15, 14]
+C: [23, 21, 24, 22, 23, 22]</code>
+                        </pre>
+                        <p class="styled-point2"> <!-- DF Calculation -->
+                            <Strong>Degrees of Freedom:</Strong>
+                        </p>
+                        <pre><code>Tdf = N - 1 = 14
+Wdf = N - G = 12
+Bdf = G - 1 = 2</code>
+                        </pre>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Calculated Sum of Squares -->
+                            <strong>Calculated Sum of Squares:</strong>
+                        </p>
+                        <pre><code>SST = 498.4
+SSW = 13.3
+SSB = 485.1</code>
+                        </pre>
+                        <p class="styled-point2"> <!-- Calculated Variances -->
+                            <strong>Calculated Variances:</strong>
+                        </p>
+                        <pre><code>T = 35.61
+W = 1.11
+B = 242.55</code>
+                        </pre>
+                        <p class="styled-point2"> <!-- F-Statistic -->
+                            <strong>F-Statistic:</strong>
+                        </p>
+                        <pre><code>F = 218.67</code>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>ANOVA Table for Example Data</h4>
+                <div class="leftBox">
+                    <p class="styled-point">
+                        The ANOVA is commonly presented in a table to summarize the results.
+                    </p>
+                </div>
+                <div>
+                    <pre style="font-size: large;"><code>Source      | Sum of Squares (SS) | Degrees of Freedom (df) | Mean Square (MS)   | F-Statistic | p-value
+---------------------------------------------------------------------------------------------------------
+Between (B) | 485.1               | 2                       | 242.55             | 218.67      | < 0.001
+Within (W)  | 13.3                | 12                      | 1.11               |             |
+---------------------------------------------------------------------------------------------------------
+Total (T)   | 498.4               | 14                      | 35.61              </code></pre>
+                    </div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            The Within (W) is often called the Error term, representing variance not explained by group.
+                        </p>
+                    </div>
+            </section>
+
+            <section>
+                <h4>Extending ANOVA to Multiple Factors</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- One-Way ANOVA Introduction -->
+                            In a <strong>One-Way ANOVA</strong>, we analyze the effect of a single factor (variable) on
+                            the data.
+                            <br><br>
+                            However, when we want to study the effects of two or more factors, we need to use a
+                            <strong>Two-Way ANOVA</strong> (or higher).
+                        </p>
+                        <p class="styled-point2">
+                            For example, if we have two factors, like <strong>Sampling Location</strong> and
+                            <strong>Water Treatment Type</strong>, we can investigate:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            The effect of each factor independently (main effects)
+                        </p>
+                        <p class="styled-point4"> <!-- Interaction Effect -->
+                            The interaction effect between factors (combined effect)
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Example Data with Two Factors:</strong>
+                        </p>
+                        <pre style="font-size: large;"><code>Factor 1 (Sampling Location): 
+  >> River, Lake, Groundwater
+Factor 2 (Water Treatment): 
+  >> Untreated, Treated with Filter, Treated with UV
+
+Example Measurements 
+(e.g., pollutant concentration in mg/L):
+
+Location    | Treatment  | Concentration (mg/L)
+-----------------------------------------------
+River       | Untreated  | "2.5, 2.8, 3.1"
+River       | Filter     | "1.8, 2.0, 2.2"
+River       | UV         | "1.4, 1.6, 1.8"
+Lake        | Untreated  | "3.0, 3.2, 3.4"
+Lake        | Filter     | "2.1, 2.3, 2.5"
+Lake        | UV         | "1.9, 2.0, 2.1"
+Groundwater | Untreated  | "1.5, 1.7, 1.8"
+Groundwater | Filter     | "1.1, 1.2, 1.3"
+Groundwater | UV         | "0.9, 1.0, 1.1"</code></pre>
+                        <p class="styled-point3">
+                            How does multi way ANOVA works?
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Adjustments for Multi-Way ANOVA</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                        <p class="styled-point4"> <!-- Interaction Effects -->
+                            <strong>Interaction Effects:</strong> Combined effect of two or more factors (e.g., how
+                            Treatment Type varies by Sampling Location).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point4"> <!-- Degrees of Freedom -->
+                            <strong>Degrees of Freedom:</strong> Each factor and interaction adds df:
+                        <pre style="font-size: large;"><code>df_Factor A = Levels of Factor A - 1
+df_Factor B = Levels of Factor B - 1
+df_Interaction = (Levels of Factor A - 1) 
+               * (Levels of Factor B - 1)</code></pre>
+                        </p>
+                        <p class="styled-point2"> <!-- Example Calculation -->
+                            <strong>Example Degrees of Freedom Calculation:</strong>
+                        </p>
+                        <pre style="font-size: large;"><code>Factors: Sampling Location, Treatment Type 
+df_Factor A = 3 - 1 = 2
+df_Factor B = 3 - 1 = 2
+df_Interaction = (3 - 1) * (3 - 1) = 4
+
+df_Total = df_Factor A + df_Factor B + df_Interaction
+df_Error = Total observations - df_Total</code></pre>
+                        <p class="styled-point4"> <!-- Error Term -->
+                            <strong>Error Term:</strong> Variance not explained by main or interaction effects,
+                            calculated as Within-Group Sum of Squares (SSW).
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>ANOVA Table for Multi-Way ANOVA</h4>
+                <div>
+                    <pre style="font-size: large;">
+                        <code>Source      | Sum of Squares (SS) | Degrees of Freedom (df) | Mean Square (MS)   | F-Statistic | p-value
+---------------------------------------------------------------------------------------------------------
+Location    | 6.943               | 2                       | 3.47148            | 103         | < 0.001
+Treatment   | 4.9696              | 2                       | 2.4848             | 73.7        | < 0.001
+Loc * Treat | 0.3126              | 4                       | 0.07815            | 2.32        | 0.096
+---------------------------------------------------------------------------------------------------------
+Error       | 0.6067              | 18                      | 0.0337              
+Total       | 12.8329             | 26                      | 0.4936              </code>
+                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point3">
+                            Which factors have a significant effect on the data?
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point3">
+                            How to calculate Sum of Squares for the interaction term?
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+
+
+        </div>
+        <div class="footer-global">
+            Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+            Last updated: October 22, 2024
+        </div>
+    </div>
+    <div id="clock">--:--</div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/math/math.js"></script>
+    <script src="../plugin/menu/menu.js"></script>
+    <!-- Chart plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            menu: {
+                custom: [{
+                    title: 'Topics',
+                    icon: '<i class="fas fa-home"></i>',
+                    src: 'menu.html'
+                }]
+            },
+            hash: true,
+            chart: {
+                defaults: {
+                    color: 'gray', // color of labels
+                    scale: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1 },
+                        grid: { color: "lightgray" }, // color of grid lines
+                    },
+                },
+                line: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"], "borderDash": [[5, 10], [0, 0]] },
+                bar: { backgroundColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
+                pie: { backgroundColor: [["rgba(0,0,0,.8)", "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"]] },
+            },
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealChart, RevealMenu],
+        });
+        // Funktion zum Aktualisieren der Uhrzeit
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Uhrzeit sofort und dann jede Sekunde aktualisieren
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+    <!-- Chart scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+    <script src="../resources/chart_utils.js"></script>
+    <script src="../resources/chart_ecdf.js"></script>
+    <script src="../resources/chart_anova0.js"></script>
+</body>
+
+</html>

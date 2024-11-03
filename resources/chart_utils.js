@@ -1,3 +1,14 @@
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function () {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+    const tabContentId = this.getAttribute('data-tab');
+    document.getElementById(tabContentId).classList.add('active');
+    this.classList.add('active');
+  });
+});
+
 // create a scatter chart
 function createScatterChart(ctx, data, color = '#DE3163', label = 'Scatter Plot') {
   return new Chart(ctx, {
@@ -66,10 +77,12 @@ function addDataLine(chart, data, color = '#DE3163', label = 'Line Plot') {
   chart.update();
 }
 
+
+
 function addDataLineFilled(chart, data, color = '#DE3163', label = 'Line Plot') {
   chart.data.datasets.push({
     borderColor: color,
-    backgroundColor: color, 
+    backgroundColor: color,
     data: data,
     label: label,
     radius: 0,
@@ -78,19 +91,55 @@ function addDataLineFilled(chart, data, color = '#DE3163', label = 'Line Plot') 
   chart.update();
 }
 
+function createStairsChart(ctx, data, color = '#DE3163', label = 'Stairs Plot') {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      datasets: [{
+        borderColor: color,
+        data: data,
+        label: label,
+        radius: 3,
+        stepped: 'before',
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          type: 'linear',  // Setze die x-Achse auf eine lineare Skala
+          position: 'bottom'  // x-Achse unten
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+    }
+  });
+}
+
+// add Data to the stairs chart
+function addDataStairs(chart, data, color = '#DE3163', label = 'Stairs Plot') {
+  chart.data.datasets.push({
+    borderColor: color,
+    data: data,
+    label: label,
+    radius: 3,
+    stepped: 'before',
+  });
+  chart.update();
+}
 
 // create a histogram chart
 function createHistogramChart(ctx, data, nBins, color = '#00C4D4', label = 'Frequency') {
   const data_min = Math.min(...data.map(point => point.y));
   const data_max = Math.max(...data.map(point => point.y));
-  const binWidth = (data_max - data_min) / (nBins-1);
+  const binWidth = (data_max - data_min) / (nBins - 1);
   const binEdges = Array.from({ length: nBins + 1 }, (_, i) => data_min + i * binWidth);
   const binCounts = new Array(nBins).fill(0);
   for (let i = 0; i < nBins; i++) {
     binCounts[i] = data.filter(point => point.y >= binEdges[i] && point.y < binEdges[i + 1]).length;
   }
   // add the last bin
-  binCounts.push(data.filter(point => point.y > binEdges[nBins-1]).length);
+  binCounts.push(data.filter(point => point.y > binEdges[nBins - 1]).length);
 
   return new Chart(ctx, {
     type: 'bar',
@@ -144,13 +193,13 @@ function gaussianPDF(x, mean, sigma) {
 function erf(x) {
   const sign = x >= 0 ? 1 : -1;
   x = Math.abs(x);
-  
-  const a1 =  0.254829592;
+
+  const a1 = 0.254829592;
   const a2 = -0.284496736;
-  const a3 =  1.421413741;
+  const a3 = 1.421413741;
   const a4 = -1.453152027;
-  const a5 =  1.061405429;
-  const p  =  0.3275911;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
   const t = 1.0 / (1.0 + p * x);
   const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
   return sign * y;
@@ -177,9 +226,9 @@ function betaFunction(a, b) {
 function gammaApprox(z) {
   const g = 7;
   const C = [
-      0.99999999999980993, 676.5203681218851, -1259.1392167224028,
-      771.32342877765313, -176.61502916214059, 12.507343278686905,
-      -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
+    0.99999999999980993, 676.5203681218851, -1259.1392167224028,
+    771.32342877765313, -176.61502916214059, 12.507343278686905,
+    -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7
   ];
 
   if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gammaApprox(1 - z));
@@ -187,7 +236,7 @@ function gammaApprox(z) {
 
   let x = C[0];
   for (let i = 1; i < g + 2; i++) {
-      x += C[i] / (z + i);
+    x += C[i] / (z + i);
   }
 
   const t = z + g + 0.5;
@@ -207,4 +256,12 @@ function chiSquarePDF(x, df) {
   const numerator = Math.pow(x, (df / 2) - 1) * Math.exp(-x / 2);
   const denominator = Math.pow(2, df / 2) * gammaApprox(df / 2);
   return numerator / denominator;
+}
+
+function calcEcdf(data) {
+  const sortedData = data.slice().sort((a, b) => a - b);
+  const n = sortedData.length;
+  return sortedData.map((value, index) => {
+    return { x: value, y: (index) / n };
+  });
 }

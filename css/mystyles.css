@@ -188,6 +188,28 @@
     top: 0.75ex
 }
 
+.styled-point4 {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    /* Platz für das Icon */
+}
+
+.styled-point4::before {
+    content: "\f292"; /* Unicode für das Font Awesome Squarespace symbol */
+    /* Unicode für das Font Awesome angles-right */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 500;
+    /* für solid icons */
+    color: blue;
+    position: absolute;
+    font-size: medium;
+    left: -20px;
+    /* Icon links vom Text platzieren */
+    top: 0.75ex
+}
+
 .image-box {
     display: block;
     border: 5px solid #d4d4d4;
