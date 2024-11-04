@@ -281,7 +281,7 @@
     display: inline-block;
     width: 40%;
     text-align: left;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .spacer {
@@ -295,7 +295,7 @@
     display: inline-block;
     width: 50%;
     text-align: left;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .reveal {

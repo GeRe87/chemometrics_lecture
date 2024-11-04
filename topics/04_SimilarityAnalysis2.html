@@ -497,60 +497,60 @@ p_value = 0.73</code>
 
             <section>
                 <h4>
-                    Understanding Total, Within-Group, and Between-Group Variance
+                    Total, Within-Group, and Between-Group Sum of Squares
                 </h4>
-                <div class="exam-box">
-                    <div class="styled-Point" style="font-size: medium;"> <!-- Total Variance Formula -->
-                        <strong>Relation of the Sum of Squares:</strong>
-                        \[
-                        \text{Total Sum of Squares} = \text{Sum of Squares Between-Group} + \text{Sum of Squares
-                        Within-Group}
-                        \]
-                    </div>
-                </div>
                 <div>
                     <div class="leftBox">
                         <p class="styled-point"> <!-- Main Point -->
-                            In ANOVA, Total Variance is divided into two components:
+                            Definition: <br>Sum of Squares = \( \sum (x_i - \bar{x})^2 \)
+                        </p>
+                        <p class="styled-point"> <!-- Main Point -->
+                            In ANOVA, Total Sum of Squares (T) is divided into two components:
                         </p>
                         <p class="styled-point2"> <!-- Between-Group Variance -->
-                            <strong>1. Between-Group Variance:</strong> Variance due to differences between group means.
+                            <strong>1. Between-Group (B):</strong> Differences between group means.
                             High values indicate distinct groups.
                         </p>
                         <p class="styled-point2"> <!-- Within-Group Variance -->
-                            <strong>2. Within-Group Variance:</strong> Variance within each group around its mean. Low
+                            <strong>2. Within-Group (W):</strong> Differences within each group around its mean. Low
                             values indicate tightly clustered data within groups.
                         </p>
                     </div>
                     <div class="spacer"></div> <!-- spacer -->
                     <div class="rightBox">
                         <p class="styled-point2"> <!-- ANOVA Explanation -->
-                            In ANOVA, we analyze how much of the total variance can be attributed to between-group
-                            differences, which helps determine if groups are meaningfully distinct.
+                            In ANOVA, we analyze how much of <strong>T</strong> can be attributed to <strong>B</strong>
+                            , which helps determine if groups are meaningfully distinct.
                         </p>
-                        <p class="styled-noPoint"> <!-- F-Statistic -->
-                            \( F \)-statistic:
-                            \[
-                            F = \frac{\text{Between-Group Variance}}{\text{Within-Group Variance}}
-                            \]
-                            A high \( F \)-value suggests meaningful group differences.
+                        <p class="styled-point2"> <!-- ANOVA Explanation -->
+                            To do so, we calculate variances \(\bar{B}\) and \(\bar{W}\) from \(B\) and \(W\) and
+                            compare them.
+                        </p>
+                        <p class="styled-point2"> <!-- ANOVA Explanation -->
+                            To get \( \bar{B} \) and \( \bar{W} \), we divide the sum of squares by the degrees of
+                            freedom.
+                        </p>
+                        <p class="styled-point2"> <!-- ANOVA Explanation -->
+                            The comparison is done using the F-statistic, which is the ratio of \(\bar{B}\) to
+                            \(\bar{W}\).
                         </p>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h4>Calculating Total Variance</h4>
+                <h4>Steps in Detail: Calculating Total Sum of Squares</h4>
                 <div>
                     <div class="leftBox">
                         <p class="styled-point"> <!-- Main Point -->
-                            Total Variance \(T\) represents the overall spread of all data points from the overall mean
+                            Total Sum of Squares \(T\) represents the overall spread of all data points from the overall
+                            mean
                             \(\bar{X}\).
                         </p>
                         <p class="styled-noPoint"> <!-- Total Variance Formula -->
                             <strong>Formula:</strong>
                             \[
-                            T = \frac{1}{N - 1} \sum_{i=1}^{N} (x_i - \bar{X})^2
+                            T = \sum_{i=1}^{N} (x_i - \bar{X})^2
                             \]
                             where \( N \) is the total number of data points.
                         </p>
@@ -558,7 +558,7 @@ p_value = 0.73</code>
                     <div class="spacer"></div>
                     <div class="rightBox">
                         <p class="styled-point2"> <!-- Step-by-Step Calculation -->
-                            <strong>Steps to Calculate Total Variance :</strong>
+                            <strong>Steps to Calculate:</strong>
                         </p>
                         <p class="styled-point4"> <!-- Step 1 -->
                             Calculate the overall mean of all data points across all groups.
@@ -569,35 +569,31 @@ p_value = 0.73</code>
                         <p class="styled-point4">
                             Sum these squared distances.
                         </p>
-                        <p class="styled-point4">
-                            Divide by \( N - 1 \), where \( N \) is the total number of data points, to account for
-                            degrees of freedom.
-                        </p>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h4>Calculating Within-Group Variance</h4>
+                <h4>Steps in Detail: Calculating Within-Group Sum of Squares</h4>
                 <div>
                     <div class="leftBox">
                         <p class="styled-point"> <!-- Main Point -->
-                            Within-Group Variance \(W\) measures how data points vary within each group around their
+                            Within-Group Sum of Squares \(W\) measures how data points vary within each group around
+                            their
                             group mean \(\bar{X}_j\).
                         </p>
                         <p class="styled-noPoint"> <!-- Within-Group Variance Formula -->
                             <strong>Formula:</strong>
                             \[
-                            W = \frac{1}{N - G} \sum_{j=1}^{G} \sum_{i=1}^{n_j} (x_{ij} - \bar{X}_j)^2
+                            W = \sum_{j=1}^{G} \sum_{i=1}^{n_j} (x_{ij} - \bar{X}_j)^2
                             \]
-                            where \( G \) is the number of groups, \( n_j \) is the size of group \( j \), and \( N \)
-                            is the total number of data points.
+                            where \( G \) is the number of groups and \( n_j \) is the size of group \( j \).
                         </p>
                     </div>
                     <div class="spacer"></div>
                     <div class="rightBox">
                         <p class="styled-point2"> <!-- Step-by-Step Calculation -->
-                            <strong>Steps to Calculate Within-Group Variance:</strong>
+                            <strong>Steps to Calculate:</strong>
                         </p>
                         <p class="styled-point4"> <!-- Step 1 -->
                             Calculate the mean for each group.
@@ -609,34 +605,33 @@ p_value = 0.73</code>
                             Sum the squared distances within each group.
                         </p>
                         <p class="styled-point4">
-                            Divide by \( N - G \), where \( N \) is the total number of data points and \( G \) is the
-                            number of groups, to account for degrees of freedom.
+                            Sum these values across all groups.
                         </p>
                     </div>
                 </div>
             </section>
 
             <section>
-                <h4>Calculating Between-Group Variance</h4>
+                <h4>Steps in Detail: Calculating Between-Group Sum of Squares</h4>
                 <div>
                     <div class="leftBox">
                         <p class="styled-point"> <!-- Main Point -->
-                            Between-Group Variance \(B\) measures how each group's mean \(\bar{X}_j\) differs from the
+                            Between-Group Sum of Squares \(B\) measures how each group's mean \(\bar{X}_j\) differs from
+                            the
                             overall mean \(\bar{X}\).
                         </p>
                         <p class="styled-noPoint"> <!-- Between-Group Variance Formula -->
                             <strong>Formula:</strong>
                             \[
-                            B = \frac{1}{G - 1} \sum_{j=1}^{G} n_j (\bar{X}_j - \bar{X})^2
+                            B = \sum_{j=1}^{G} n_j (\bar{X}_j - \bar{X})^2
                             \]
-                            where \( G \) is the number of groups, \( n_j \) is the size of each group, and \( N \) is
-                            the total number of data points.
+                            where \( G \) is the number of groups and \( n_j \) is the size of each group.
                         </p>
                     </div>
                     <div class="spacer"></div>
                     <div class="rightBox">
                         <p class="styled-point2"> <!-- Step-by-Step Calculation -->
-                            <strong>Steps to Calculate Between-Group Variance:</strong>
+                            <strong>Steps to Calculate:</strong>
                         </p>
                         <p class="styled-point4"> <!-- Step 1 -->
                             Calculate the overall mean of all data points.
@@ -648,8 +643,34 @@ p_value = 0.73</code>
                             Multiply each squared distance by the number of data points in that group.
                         </p>
                         <p class="styled-point4">
-                            Sum these values and divide by \( G - 1 \), where \( G \) is the number of groups, to
-                            account for degrees of freedom.
+                            Sum these values across all groups.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Steps in Detail: Degree of Freedom</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            Degrees of Freedom (df) are used to calculate variances and test statistics.
+                        </p>
+                        <p class="styled-point2"> <!-- Sub Point -->
+                            In ANOVA, we have three types of degrees of freedom:
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point4"> <!-- Total Degrees of Freedom -->
+                            <strong>1. Total (Tdf):</strong> \( N - 1 \) where \( N \) is the total number of data
+                            points.
+                        </p>
+                        <p class="styled-point4"> <!-- Within-Group Degrees of Freedom -->
+                            <strong>2. Within-Group (Wdf):</strong> \( N - G \) where \( G \) is the number of groups.
+                        </p>
+                        <p class="styled-point4"> <!-- Between-Group Degrees of Freedom -->
+                            <strong>3. Between-Group (Bdf):</strong> \( G - 1 \) where \( G \) is the number of groups.
                         </p>
                     </div>
                 </div>
@@ -660,7 +681,9 @@ p_value = 0.73</code>
                 <div>
                     <div class="leftBox">
                         <p class="styled-point"> <!-- Example Data -->
-                            Here are the data points for each group:
+                            Let's assume we investigate degradation rates using three different pH levels.
+                        <p class="styled-point"> <!-- Example Data -->
+                            Here are the measured rates for each group:
                         </p>
                         <pre><code>A: [8, 9, 7, 10]
 B: [15, 14, 16, 15, 14]
@@ -679,16 +702,16 @@ Bdf = G - 1 = 2</code>
                         <p class="styled-point2"> <!-- Calculated Sum of Squares -->
                             <strong>Calculated Sum of Squares:</strong>
                         </p>
-                        <pre><code>SST = 498.4
-SSW = 13.3
-SSB = 485.1</code>
+                        <pre><code>T = 498.4
+W = 13.3
+B = 485.1</code>
                         </pre>
                         <p class="styled-point2"> <!-- Calculated Variances -->
                             <strong>Calculated Variances:</strong>
                         </p>
-                        <pre><code>T = 35.61
-W = 1.11
-B = 242.55</code>
+                        <pre><code>T_mean = 35.61
+W_mean = 1.11
+B_mean = 242.55</code>
                         </pre>
                         <p class="styled-point2"> <!-- F-Statistic -->
                             <strong>F-Statistic:</strong>
@@ -700,22 +723,33 @@ B = 242.55</code>
 
             <section>
                 <h4>ANOVA Table for Example Data</h4>
-                <div class="leftBox">
-                    <p class="styled-point">
-                        The ANOVA is commonly presented in a table to summarize the results.
-                    </p>
-                </div>
                 <div>
-                    <pre style="font-size: large;"><code>Source      | Sum of Squares (SS) | Degrees of Freedom (df) | Mean Square (MS)   | F-Statistic | p-value
+                    <pre style="font-size: large;"><code data-trim>
+Source      | Sum of Squares (SS) | Degrees of Freedom (df) | Mean Square (MS)   | F-Statistic | p-value
 ---------------------------------------------------------------------------------------------------------
 Between (B) | 485.1               | 2                       | 242.55             | 218.67      | < 0.001
 Within (W)  | 13.3                | 12                      | 1.11               |             |
 ---------------------------------------------------------------------------------------------------------
-Total (T)   | 498.4               | 14                      | 35.61              </code></pre>
+Total (T)   | 498.4               | 14                      | 35.61              
+                    </code></pre>
                     </div>
                     <div class="leftBox">
                         <p class="styled-point">
+                            The ANOVA is commonly presented in a table to summarize the results.
+                        </p>
+                        <p class="styled-point">
                             The Within (W) is often called the Error term, representing variance not explained by group.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Interpretation -->
+                            <strong>Interpretation:</strong>
+                        </p>
+                        <p class="styled-point4"> <!-- Between-Group -->
+                            The high F-statistic and low p-value suggest that the group means are significantly
+                            different. <strong>I.e., the pH level has a significant effect on the degradation
+                                rate.</strong>
                         </p>
                     </div>
             </section>
@@ -773,8 +807,10 @@ Groundwater | UV         | "0.9, 1.0, 1.1"</code></pre>
                 </div>
             </section>
 
-            <section>
-                <h4>Adjustments for Multi-Way ANOVA</h4>
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
                 <div>
                     <div class="leftBox">
                         <p class="styled-point"> <!-- Overview -->
@@ -784,9 +820,270 @@ Groundwater | UV         | "0.9, 1.0, 1.1"</code></pre>
                             <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
                             Location or Treatment Type independently).
                         </p>
-                        <p class="styled-point4"> <!-- Interaction Effects -->
-                            <strong>Interaction Effects:</strong> Combined effect of two or more factors (e.g., how
-                            Treatment Type varies by Sampling Location).
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>Location    | Treatment  | Concentration (mg/L)
+-----------------------------------------------
+River       |            | "2.5, 2.8, 3.1"
+River       |            | "1.8, 2.0, 2.2"
+River       |            | "1.4, 1.6, 1.8"
+Lake        |            | "3.0, 3.2, 3.4"
+Lake        |            | "2.1, 2.3, 2.5"
+Lake        |            | "1.9, 2.0, 2.1"
+Groundwater |            | "1.5, 1.7, 1.8"
+Groundwater |            | "1.1, 1.2, 1.3"
+Groundwater |            | "0.9, 1.0, 1.1"</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>Location    | Treatment  | Concentration (mg/L)
+-----------------------------------------------
+River       |            | "2.5, 2.8, 3.1"
+River       |            | "1.8, 2.0, 2.2"
+River       |            | "1.4, 1.6, 1.8"</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>Location    | Treatment  | Concentration (mg/L)
+-----------------------------------------------
+River       |            | "2.5, 2.8, 3.1"
+River       |            | "1.8, 2.0, 2.2"
+River       |            | "1.4, 1.6, 1.8"
+
+
+Location| Concentration (mg/L)
+-----------------------------------------------
+River   | 2.5, 2.8, 3.1, 1.8, 2.0, 2.2, 1.4, 1.6, 1.8</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>Location| Concentration (mg/L)
+-----------------------------------------------
+River   | 2.5, 2.8, 3.1, 1.8, 2.0, 2.2, 1.4, 1.6, 1.8
+Lake    | 3.0, 3.2, 3.4, 2.1, 2.3, 2.5, 1.9, 2.0, 2.1
+Ground- | 1.5, 1.7, 1.8, 1.1, 1.2, 1.3, 0.9, 1.0, 1.1
+water</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>
+Location    | Treatment  | Concentration (mg/L)
+-----------------------------------------------
+.           | Untreated  | "2.5, 2.8, 3.1"
+.           | Filter     | "1.8, 2.0, 2.2"
+.           | UV         | "1.4, 1.6, 1.8"
+.           | Untreated  | "3.0, 3.2, 3.4"
+.           | Filter     | "2.1, 2.3, 2.5"
+.           | UV         | "1.9, 2.0, 2.1"
+.           | Untreated  | "1.5, 1.7, 1.8"
+.           | Filter     | "1.1, 1.2, 1.3"
+.           | UV         | "0.9, 1.0, 1.1"
+                    </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>
+Location    | Treatment  | Concentration (mg/L)
+-----------------------------------------------
+.           | Untreated  | "2.5, 2.8, 3.1"
+. 
+.            
+.           | Untreated  | "3.0, 3.2, 3.4"
+.            
+.           
+.           | Untreated  | "1.5, 1.7, 1.8"
+.            
+.            
+                        </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>
+Location    | Treatment  | Concentration (mg/L)
+-----------------------------------------------
+.           | Untreated  | "2.5, 2.8, 3.1"
+. 
+.            
+.           | Untreated  | "3.0, 3.2, 3.4"
+.            
+.           
+.           | Untreated  | "1.5, 1.7, 1.8"
+.            
+.            
+
+
+Treatment| Concentration (mg/L)
+-----------------------------------------------
+Untr.| 2.5, 2.8, 3.1, 3.0, 3.2, 3.4, 1.5, 1.7, 1.8
+                        </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section data-auto-animate>
+                <h4>
+                    Adjustments for Multi-Way ANOVA: Sum of Squares
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Data for Two Factors -->
+                            <strong>Consider Factors one by one:</strong>
+                        </p>
+                        <pre data-id="code-animation" style="font-size: large;"><code data-trim>
+Treatment| Concentration (mg/L)
+-----------------------------------------------
+Untr.| 2.5, 2.8, 3.1, 3.0, 3.2, 3.4, 1.5, 1.7, 1.8
+Filt.| 1.8, 2.0, 2.2, 2.1, 2.3, 2.5, 1.1, 1.2, 1.3
+UV   | 1.4, 1.6, 1.8, 1.9, 2.0, 2.1, 0.9, 1.0, 1.1
+                        </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Adjustments for Multi-Way ANOVA: DF</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Overview -->
+                            In Multi-Way ANOVA, we analyze multiple factors, which requires accounting for:
+                        </p>
+                        <p class="styled-point4"> <!-- Main Effects -->
+                            <strong>Main Effects:</strong> The impact of each factor alone (e.g., effect of Sampling
+                            Location or Treatment Type independently).
                         </p>
                     </div>
                     <div class="spacer"></div>
@@ -794,9 +1091,7 @@ Groundwater | UV         | "0.9, 1.0, 1.1"</code></pre>
                         <p class="styled-point4"> <!-- Degrees of Freedom -->
                             <strong>Degrees of Freedom:</strong> Each factor and interaction adds df:
                         <pre style="font-size: large;"><code>df_Factor A = Levels of Factor A - 1
-df_Factor B = Levels of Factor B - 1
-df_Interaction = (Levels of Factor A - 1) 
-               * (Levels of Factor B - 1)</code></pre>
+df_Factor B = Levels of Factor B - 1</code></pre>
                         </p>
                         <p class="styled-point2"> <!-- Example Calculation -->
                             <strong>Example Degrees of Freedom Calculation:</strong>
@@ -804,18 +1099,152 @@ df_Interaction = (Levels of Factor A - 1)
                         <pre style="font-size: large;"><code>Factors: Sampling Location, Treatment Type 
 df_Factor A = 3 - 1 = 2
 df_Factor B = 3 - 1 = 2
-df_Interaction = (3 - 1) * (3 - 1) = 4
 
-df_Total = df_Factor A + df_Factor B + df_Interaction
+df_Total = df_Factor A + df_Factor B
 df_Error = Total observations - df_Total</code></pre>
                         <p class="styled-point4"> <!-- Error Term -->
                             <strong>Error Term:</strong> Variance not explained by main or interaction effects,
-                            calculated as Within-Group Sum of Squares (SSW).
+                            calculated as Within-Group Sum of Squares (W).
                         </p>
                     </div>
                 </div>
             </section>
 
+            <section>
+                <h4>ANOVA Table for Multi-Way ANOVA</h4>
+                <div>
+                    <pre style="font-size: large;">
+                        <code>Source      | Sum of Squares (SS) | Degrees of Freedom (df) | Mean Square (MS)   | F-Statistic | p-value
+---------------------------------------------------------------------------------------------------------
+Location    | 6.943               | 2                       | 3.47148            | 103         | < 0.001
+Treatment   | 4.9696              | 2                       | 2.4848             | 73.7        | < 0.001
+---------------------------------------------------------------------------------------------------------
+Error       | 0.6067              | 18                      | 0.0337              
+Total       | 12.8329             | 26                      | 0.4936              </code>
+                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point3">
+                            Which factors have a significant effect on the data?
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>
+                    Helpful Relationships in ANOVA
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Main Point -->
+                            In ANOVA, we often encounter relationships between different components:
+                        </p>
+                        <p class="styled-point2"> <!-- Relationship 1 -->
+                            <strong>1. Relationship between Total, Within-Group, and Between-Group Sum of
+                                Squares:</strong>
+                        </p>
+                        <p class="styled-noPoint"> <!-- Relationship 1 Explanation -->
+                            \[ T = W + B + I\]
+                            where \( I \) is the interaction term.
+                        </p>
+
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Relationship 2 -->
+                            <strong>2. Relationship between Degrees of Freedom:</strong>
+                        </p>
+                        <p class="styled-noPoint"> <!-- Relationship 2 Explanation -->
+                            \[ df_{T} = df_{W} + df_{B} + df_{I} \]
+                            where \( df_I \) is the interaction degrees of freedom.
+                        </p>
+                        <p class="styled-point"> <!-- Main Point -->
+                            We can use these relationships to check the consistency of our ANOVA results.
+                        </p>
+                    </div>
+            </section>
+
+            <section>
+                <h4>What is an Interaction in ANOVA?</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Definition of Interaction -->
+                            An <strong>interaction</strong> in ANOVA occurs when the effect of one factor depends on the level of another factor.
+                        </p>
+                        <p class="styled-point2"> <!-- Why Interactions Matter -->
+                            Interactions reveal combined effects that are not captured by examining each factor alone.
+                        </p>
+                        <p class="styled-point2"> <!-- Main Effects vs. Interaction -->
+                            In an interaction, the influence of one factor on the response variable changes based on the level of the other factor.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2"> <!-- Example Explanation -->
+                            <strong>Example:</strong> Plant growth may depend on both <strong>Soil Type</strong> and <strong>Fertilizer Type</strong>.
+                        </p>
+                        <p class="styled-point4"> <!-- Example of Interaction -->
+                            Without an interaction: Fertilizer Type has the same effect on all Soil Types.
+                        </p>
+                        <p class="styled-point4"> 
+                            With an interaction: The effect of Fertilizer Type changes depending on Soil Type.
+                            <br>
+                            For example, Organic fertilizer may work better in Sandy soil, while Synthetic fertilizer is more effective in Clay soil.
+                        </p>
+                        <p class="styled-point2">
+                            Interactions highlight complex relationships and help identify when factors are dependent on one another.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+
+            <section>
+                <h4>Interpreting ANOVA Results: Main Effects and Interactions</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point"> <!-- Scenario 1 -->
+                            <strong>1. No Significant Interaction, Significant Main Effects:</strong>
+                        </p>
+                        <p class="styled-point2"> 
+                            Each factor (e.g., Soil Type, Fertilizer Type) has a significant, independent effect.
+                            <br>
+                            No interaction means each factor’s effect is consistent across levels of the other.
+                            <br>
+                            <strong>Interpretation:</strong> Each factor impacts the outcome independently.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point"> <!-- Scenario 2 -->
+                            <strong>2. Significant Interaction, Significant Main Effects:</strong>
+                        </p>
+                        <p class="styled-point2">
+                            Both factors affect the outcome, with an interaction.
+                            <br>
+                            The effect of one factor depends on the level of the other.
+                            <br>
+                            <strong>Interpretation:</strong> Focus on interaction, as combined effects are more informative.
+                        </p>
+                        <p class="styled-point"> <!-- Scenario 3 -->
+                            <strong>3. Significant Interaction, No Significant Main Effects:</strong>
+                        </p>
+                        <p class="styled-point2">
+                            Neither factor alone affects the outcome, but their interaction does.
+                            <br>
+                            <strong>Interpretation:</strong> Impact emerges only with both factors combined.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
             <section>
                 <h4>ANOVA Table for Multi-Way ANOVA</h4>
                 <div>
@@ -834,19 +1263,92 @@ Total       | 12.8329             | 26                      | 0.4936            
                 <div>
                     <div class="leftBox">
                         <p class="styled-point3">
-                            Which factors have a significant effect on the data?
+                            What does this ANOVA table tell us about the factors?
                         </p>
                     </div>
                     <div class="spacer"></div>
                     <div class="rightBox">
-                        <p class="styled-point3">
-                            How to calculate Sum of Squares for the interaction term?
-                        </p>
+                        
                     </div>
                 </div>
             </section>
 
-
+            <section>
+                <h4>ANOVA Table for Multi-Way ANOVA</h4>
+                <div>
+                    <pre style="font-size: large;">
+                        <code data-trim>
+Source        | Sum of Squares (SS) | Degrees of Freedom (df) | Mean Square (MS) | F-Statistic  | p-value
+-----------------------------------------------------------------------------------------------------------
+Factor A      | 10.123              | 2                       | 5.0615           | 45.6         | < 0.001
+Factor B      | 8.456               | 3                       | 2.8187           | 25.4         | < 0.001
+Factor C      | 5.789               | 2                       | 2.8945           | 22.3         | < 0.001
+A * B         | 2.567               | 6                       | 0.4278           | 3.4          | 0.005
+A * C         | 1.987               | 4                       | 0.4968           | 3.9          | 0.003
+B * C         | 2.234               | 6                       | 0.3723           | 3.0          | 0.010
+A * B * C     | 0.876               | 12                      | 0.0730           | 1.8          | 0.081
+-----------------------------------------------------------------------------------------------------------
+Error         | 6.432               | 80                      | 0.0804           
+Total         | 38.464              | 115                     | 0.3345           
+                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point3">
+                            What insights does this ANOVA table provide about the three factors and their interactions?
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <!-- Additional interpretation or explanation can go here -->
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h4>Interactive One-Way ANOVA Table</h4>
+                <div>
+                    <pre style="font-size: large;">
+                        <code data-trim id="anovaTable">
+Source      | Sum of Squares (SS) | Degrees of Freedom (df) | Mean Square (MS)   | F-Statistic | p-value
+---------------------------------------------------------------------------------------------------------
+Between (B) | 0.0                 | 2                       | 0.0                | 0.0         | 1.000
+Within (W)  | 13.3                | 12                      | 1.11               |             |
+---------------------------------------------------------------------------------------------------------
+Total (T)   | 13.3                | 14                      | 0.95              
+                        </code>
+                    </pre>
+                </div>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            This experiment starts with three groups having similar means, yielding no significant difference.
+                        </p>
+                        <p class="styled-point2">
+                            Use the sliders to introduce an offset to one group’s mean and observe how the ANOVA table updates to show significance.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point">
+                            <label for="offsetSlider">Adjust Offset for Group 1:</label>
+                            <input type="range" id="offsetSlider1" min="0" max="3" step="0.01" value="0">
+                        </p>
+                        <p class="styled-point">
+                            <label for="offsetSlider">Adjust Offset for Group 2:</label>
+                            <input type="range" id="offsetSlider2" min="0" max="3" step="0.01" value="0">
+                        </p>
+                        <p class="styled-point">
+                            <label for="offsetSlider">Adjust Offset for Group 3:</label>
+                            <input type="range" id="offsetSlider3" min="0" max="3" step="0.01" value="0">
+                        </p>
+                        <p class="styled-point3"> <!-- Question -->
+                            If p < 0.05, how to locate the group(s) with significant differences?
+                        </p>              
+                    </div>
+                </div>
+            </section>
 
         </div>
         <div class="footer-global">
@@ -913,6 +1415,7 @@ Total       | 12.8329             | 26                      | 0.4936            
     <script src="../resources/chart_utils.js"></script>
     <script src="../resources/chart_ecdf.js"></script>
     <script src="../resources/chart_anova0.js"></script>
+    <script src="../resources/table_anova.js"></script>
 </body>
 
 </html>
