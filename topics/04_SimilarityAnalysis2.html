@@ -236,7 +236,7 @@ Exp_Frequency = Exp_Proportion * 25 = 1.3</code>
                     <div class="spacer"></div> <!-- spacer -->
                     <div class="rightBox">
                         <p class="styled-point"> <!-- Example Calculation -->
-                            For each interval, calculate \((O_i - E_i)^2 / E_i\):
+                            For each interval, calculate<br>\((O_i - E_i)^2 / E_i\):
                         </p>
                         <p class="styled-noPoint"> <!-- Example Calculation Table -->
                         <pre style="font-size: large;">
@@ -1245,6 +1245,61 @@ Total       | 12.8329             | 26                      | 0.4936            
                 </div>
             </section>
             
+            <!-- <section>
+                <h4>Calculating Sum of Squares for Interaction and Degrees of Freedom</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            <strong>Sum of Squares Interaction \( I \):</strong>
+                            <br>
+                            This captures variation due to the combined effect of factors (e.g., Location * Treatment).
+                        </p>
+                        <p class="styled-point2" style="font-size: large;">
+                            <strong>Steps:</strong>
+                        </p>
+                        <p class="styled-point4" style="font-size: large;">
+                            Calculate the overall mean (\( \bar{X} \)) of all observations
+                        </p>
+                        <p class="styled-point4" style="font-size: large;">
+                            Calculate the main effect means <br>(e.g., \( \bar{X}_{\text{Loc}} \), \( \bar{X}_{\text{Treat}} \))
+                        </p>
+                        <p class="styled-point4" style="font-size: large;">
+                            Calculate the mean for each combination (e.g., \( \bar{X}_{\text{Loc * Treat}} \)) called interaction means.
+                        </p>
+                        <p class="styled-point4" style="font-size: large;">
+                            For each combination, calculate the expected value as:
+                            \[ \bar{X}_{\text{AB}} = \bar{X}_{A} +\bar{X}_{B} - \bar{X} \]
+                        </p>
+                        <p class="styled-point4" style="font-size: large;">
+                            Sum the squared deviations:
+                            \[ \text{SS}_{\text{interaction}} = \sum_{A,B} n_{AB} (\bar{X}_{AB} - \text{Expected}_{AB})^2 \]
+                        </p>
+                    </div>
+                    <div class="spacer"></div>       
+                    <div class="rightBox">
+                        <p class="styled-point">
+                            <strong>Degrees of Freedom for Interaction (\( df_{\text{interaction}} \)):</strong>
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Formula:</strong>
+                            <br>
+                            \( df_{\text{interaction}} = (G_A - 1) \times (G_B - 1) \)
+                            <br><br>
+                            where \( G_A \) and \( G_B \) are the number of levels for each factor.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Example:</strong>
+                            <br>
+                            If **Location** has 3 levels and **Treatment** has 3 levels, then:
+                            \[
+                            df_{\text{interaction}} = (3 - 1) \times (3 - 1) = 4
+                            \]
+                        </p>
+                    </div>
+                </div>
+            </section> -->
+            
+
             <section>
                 <h4>ANOVA Table for Multi-Way ANOVA</h4>
                 <div>
@@ -1350,6 +1405,188 @@ Total (T)   | 13.3                | 14                      | 0.95
                 </div>
             </section>
 
+            <section>
+                <h4>Post-Hoc Analysis: Understanding Group Differences</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            ANOVA shows that at least one group differs, but it doesn’t specify which ones.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Post-hoc analysis</strong> identifies specific group differences after a significant ANOVA result.
+                        </p>
+                        <p class="styled-point2">
+                            <code>Tukey’s HSD</code>* is our primary method for comparing all pairs of groups while controlling for error rates.
+                        </p>
+                        <p class="styled-noPoint" style="font-size: medium;">
+                            *<code>HSD:</code> Honestly Significant Difference
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2">
+                            <strong>Purpose of Tukey’s HSD:</strong>
+                        </p>
+                        <p class="styled-point4">
+                            Detect where specific group differences lie.
+                        </p>
+                        <p class="styled-point4">
+                            Control for increased <code>Type I error</code>* in multiple comparisons.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>When to Use:</strong> After a significant ANOVA result.
+                        </p>
+                        <p class="styled-noPoint" style="font-size: medium;">
+                            *<code>Type I error:</code> Incorrectly rejecting a true null hypothesis (false positive).
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h4>Tukey’s Honestly Significant Difference (HSD) Test</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            <strong>Purpose:</strong> To identify specific group differences by comparing all pairs of means.
+                        </p>
+                        <p class="styled-point2">
+                            Tukey’s HSD calculates a critical value for each pairwise difference to determine significance.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Formula:</strong>
+                            \[
+                            HSD = q(g,N-g) \cdot \sqrt{\frac{\bar{W}}{n}}
+                            \]
+                        </p>
+                        <p class="styled-noPoint" style="font-size: medium;">
+                            where \( q(g,N-g) \) is the critical value based on the number of groups \( g \) and total observations \( N \), \( \bar{W} \) is the mean square error, and \( n \) is the number of observations per group.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point2">
+                            <strong>How it Works:</strong>
+                        </p>
+                        <p class="styled-point4">
+                            Calculates pairwise differences between group means.
+                        </p>
+                        <p class="styled-point4">
+                            Compares each difference to the HSD value; if it exceeds this, the pair is significantly different.
+                        </p>
+                        <p class="styled-point3">
+                            <strong>Benefit:</strong> Controls Type I error across multiple comparisons.
+                        </p>
+                        <p class="styled-point2">
+                            The critical value \( q(g,N-g) \) is based on the Studentized range distribution (similar to the t-distribution). Here is an example of such a table: 
+                            <a href="https://www2.stat.duke.edu/courses/Spring98/sta110c/qtable.html" target="_blank">Studentized Range Distribution Table</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h4>Example: Applying Tukey’s HSD in Environmental Analytics</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            Suppose we measured pollutant concentrations in three types of water sources:
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Sources:</strong> River, Lake, Groundwater
+                        </p>
+                        <p class="styled-point2">
+                            Objective: Use Tukey's HSD to find which sources have significantly different pollutant levels after a significant ANOVA result.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <pre style="font-size: large;">
+                            <code data-trim>
+Mean Pollutant Concentrations (mg/L):
+River:       3.2
+Lake:        5.1
+Groundwater: 4.0
+
+Calculated HSD: 1.5
+
+Comparisons:
+River vs. Lake        
+    ↳ Diff. = 1.9 > HSD → Significant
+
+River vs. Groundwater 
+    ↳ Diff. = 0.8 < HSD → Not Significant
+
+Lake vs. Groundwater  
+    ↳ Diff. = 1.1 < HSD → Not Significant
+                            </code>
+                        </pre>
+                        <p class="styled-point3">
+                            Interpretation: Pollutant levels are significantly higher in lakes compared to rivers.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h4>Interpreting Tukey’s HSD Results</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            Each comparison tells us if a specific pair of groups has a significant difference.
+                        </p>
+                        <p class="styled-point2">
+                            Significant Difference: Difference exceeds HSD critical value.
+                        </p>
+                        <p class="styled-point2">
+                            No Significant Difference: Difference is less than HSD critical value.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point3">
+                            In our example, only the comparison between <strong>River</strong> and <strong>Lake</strong> shows a significant difference.
+                        </p>
+                        <p class="styled-point4">
+                            Tukey's HSD allows us to focus on the most impactful differences and interpret how pollutant levels vary by source.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Why Use ANOVA + Post-Hoc Analysis Instead of Multiple t-Tests?</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            <strong>Problem with Multiple t-Tests:</strong>  
+                            Each t-test has a 5% false-positive rate. When comparing multiple groups, this compounds, increasing the chance of finding a false difference.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Example with Three Groups:</strong>  
+                            For groups A, B, and C, three pairwise comparisons (A vs. B, A vs. C, B vs. C) lead to an overall false-positive rate of:
+                            \[
+                            1 - (1 - 0.05)^{g=3} = 14.26\%
+                            \]
+                            This means a <strong>14.26%</strong> chance of a false positive across tests.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>        
+                    <div class="rightBox">
+                        <p class="styled-point">
+                            <strong>Solution with ANOVA + Post-Hoc:</strong>  
+                            ANOVA controls Type I error by first checking for overall differences among groups.
+                            <br><br>
+                            If significant, post-hoc tests like Tukey’s HSD ensure accurate pairwise comparisons while keeping the overall false-positive rate at 5%.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Takeaway:</strong>  
+                            ANOVA + post-hoc tests provide reliable multi-group comparison without inflating errors.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
         </div>
         <div class="footer-global">
             Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
@@ -1364,6 +1601,7 @@ Total (T)   | 13.3                | 14                      | 0.95
     <script src="../plugin/highlight/highlight.js"></script>
     <script src="../plugin/math/math.js"></script>
     <script src="../plugin/menu/menu.js"></script>
+    <!-- Anything plugin -->
     <!-- Chart plugin -->
     <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
