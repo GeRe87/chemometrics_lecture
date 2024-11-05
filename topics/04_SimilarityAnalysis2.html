@@ -1132,7 +1132,7 @@ Total       | 12.8329             | 26                      | 0.4936            
                     </div>
                     <div class="spacer"></div>
                     <div class="rightBox">
-                        
+
                     </div>
                 </div>
             </section>
@@ -1176,35 +1176,40 @@ Total       | 12.8329             | 26                      | 0.4936            
                 <div>
                     <div class="leftBox">
                         <p class="styled-point"> <!-- Definition of Interaction -->
-                            An <strong>interaction</strong> in ANOVA occurs when the effect of one factor depends on the level of another factor.
+                            An <strong>interaction</strong> in ANOVA occurs when the effect of one factor depends on the
+                            level of another factor.
                         </p>
                         <p class="styled-point2"> <!-- Why Interactions Matter -->
                             Interactions reveal combined effects that are not captured by examining each factor alone.
                         </p>
                         <p class="styled-point2"> <!-- Main Effects vs. Interaction -->
-                            In an interaction, the influence of one factor on the response variable changes based on the level of the other factor.
+                            In an interaction, the influence of one factor on the response variable changes based on the
+                            level of the other factor.
                         </p>
                     </div>
                     <div class="spacer"></div>
                     <div class="rightBox">
                         <p class="styled-point2"> <!-- Example Explanation -->
-                            <strong>Example:</strong> Plant growth may depend on both <strong>Soil Type</strong> and <strong>Fertilizer Type</strong>.
+                            <strong>Example:</strong> Plant growth may depend on both <strong>Soil Type</strong> and
+                            <strong>Fertilizer Type</strong>.
                         </p>
                         <p class="styled-point4"> <!-- Example of Interaction -->
                             Without an interaction: Fertilizer Type has the same effect on all Soil Types.
                         </p>
-                        <p class="styled-point4"> 
+                        <p class="styled-point4">
                             With an interaction: The effect of Fertilizer Type changes depending on Soil Type.
                             <br>
-                            For example, Organic fertilizer may work better in Sandy soil, while Synthetic fertilizer is more effective in Clay soil.
+                            For example, Organic fertilizer may work better in Sandy soil, while Synthetic fertilizer is
+                            more effective in Clay soil.
                         </p>
                         <p class="styled-point2">
-                            Interactions highlight complex relationships and help identify when factors are dependent on one another.
+                            Interactions highlight complex relationships and help identify when factors are dependent on
+                            one another.
                         </p>
                     </div>
                 </div>
             </section>
-            
+
 
             <section>
                 <h4>Interpreting ANOVA Results: Main Effects and Interactions</h4>
@@ -1213,7 +1218,7 @@ Total       | 12.8329             | 26                      | 0.4936            
                         <p class="styled-point"> <!-- Scenario 1 -->
                             <strong>1. No Significant Interaction, Significant Main Effects:</strong>
                         </p>
-                        <p class="styled-point2"> 
+                        <p class="styled-point2">
                             Each factor (e.g., Soil Type, Fertilizer Type) has a significant, independent effect.
                             <br>
                             No interaction means each factor’s effect is consistent across levels of the other.
@@ -1231,7 +1236,8 @@ Total       | 12.8329             | 26                      | 0.4936            
                             <br>
                             The effect of one factor depends on the level of the other.
                             <br>
-                            <strong>Interpretation:</strong> Focus on interaction, as combined effects are more informative.
+                            <strong>Interpretation:</strong> Focus on interaction, as combined effects are more
+                            informative.
                         </p>
                         <p class="styled-point"> <!-- Scenario 3 -->
                             <strong>3. Significant Interaction, No Significant Main Effects:</strong>
@@ -1244,7 +1250,151 @@ Total       | 12.8329             | 26                      | 0.4936            
                     </div>
                 </div>
             </section>
-            
+
+            <section>
+                <h4>Calculating Interaction Sum of Squares</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            The Interaction Sum of Squares \( I \) shows how much the effect of one factor depends on
+                            the level of another.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Steps to Calculate:</strong>
+                        </p>
+                        <p class="styled-point4">
+                            Calculate the overall mean \( \bar{X} \) across all observations.
+                        </p>
+                        <p class="styled-point4">
+                            Find main effect means for each factor (\( \bar{X}_{A_i} \) and \( \bar{X}_{B_j} \)).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point4">
+                            Calculate the expected mean for each cell, assuming no interaction:
+                        </p>
+                        <p class="styled-noPoint" style="font-size: large;">
+                            \[
+                            \text{Expected}_{A_iB_j} = \bar{X} + (\bar{X}_{A_i} - \bar{X}) + (\bar{X}_{B_j} - \bar{X})
+                            \]
+                        </p>
+                        <p class="styled-point4">
+                            Find the observed mean for each cell \( \text{Observed Mean}_{A_iB_j} \).
+                        </p>
+                        <p class="styled-point4">
+                            Compute \( I \) by summing squared differences between observed and expected means,
+                            multiplied by the number of observations in each cell:
+                        </p>
+                        <p class="styled-noPoint" style="font-size: large;">
+                            \[
+                            I = \sum_{i,j} n_{A_iB_j} \left( \text{Obs. Mean}_{A_iB_j} - \text{Expected}_{A_iB_j}
+                            \right)^2
+                            \]
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Example Calculation</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            Suppose we have two factors, <strong>Soil Type</strong> (Clay, Sand) and <strong>Fertilizer
+                                Type</strong> (Organic, Synthetic), with observed plant growth:
+                        </p>
+                        <pre style="font-size: large;"><code data-trim>
+Soil Type | Fertilizer Type | Obs. Mean
+----------------------------------------
+Clay      | Organic         | 20
+Clay      | Synthetic       | 25
+Sand      | Organic         | 15
+Sand      | Synthetic       | 30
+                        </code></pre>
+                        <p class="styled-point2">
+                            <strong>Steps:</strong>
+                        </p>
+                        <p class="styled-point4">
+                            Calculate the overall mean \( \bar{X} \) across all observations.
+                        </p>
+                        <p class="styled-noPoint">
+                        <pre style="font-size: large;">
+                                <code data-trim>
+T_mean = (20 + 25 + 15 + 30) / 4 = 22.5
+                                </code>
+                            </pre>
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point4">
+                            Calculate the main effect means:
+                        <pre style="font-size: large;">
+                                <code data-trim>
+Clay_mean = (20 + 25) / 2 = 22.5
+Sand_mean = (15 + 30) / 2 = 22.5
+Organic_mean = (20 + 15) / 2 = 17.5
+Synthetic_mean = (25 + 30) / 2 = 27.5
+                                </code>
+                            </pre>
+                        </p>
+                        <p class="styled-point4">
+                            Calculate expected means (assuming no interaction):
+                        <pre style="font-size: large;">
+                                <code data-trim>
+Exp_Clay_Organic=22.5+(20-22.5)+(17.5-22.5)   = 17.5
+Exp_Clay_Synthetic=22.5+(25-22.5)+(27.5-22.5) = 27.5
+Exp_Sand_Organic=22.5+(15-22.5)+(17.5-22.5)   = 17.5
+Exp_Sand_Synthetic=22.5+(30-22.5)+(27.5-22.5) = 27.5
+                                </code>
+                            </pre>
+                        </p>
+                        <p class="styled-point4">
+                            Calculate \( I \):
+                        <pre style="font-size: large;">
+                                <code data-trim>
+I = (20-17.5)^2 + (25-27.5)^2 
+    + (15-17.5)^2 + (30-27.5)^2 = 27
+                                </code>
+                            </pre>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>Degrees of Freedom for Interaction</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            The degrees of freedom for the interaction term measure how many independent comparisons can
+                            be made for interactions between factor levels.
+                        </p>
+                        <p class="styled-point2">
+                            <strong>Formula for \( dfI \):</strong>
+                        </p>
+                        <p class="styled-noPoint">
+                            \[
+                            dfI = (a - 1)(b - 1)
+                            \]
+                            where: \( a \) is the number of levels for Factor A, and \( b \) is the number of levels for
+                            Factor B.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="styled-point4">
+                            <strong>Example</strong> For 2 Soil Types and 2 Fertilizer Types:
+                            \[
+                            dfI = (2 - 1)(2 - 1) = 1
+                            \]
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+
             <!-- <section>
                 <h4>Calculating Sum of Squares for Interaction and Degrees of Freedom</h4>
                 <div>
@@ -1298,7 +1448,7 @@ Total       | 12.8329             | 26                      | 0.4936            
                     </div>
                 </div>
             </section> -->
-            
+
 
             <section>
                 <h4>ANOVA Table for Multi-Way ANOVA</h4>
@@ -1323,7 +1473,7 @@ Total       | 12.8329             | 26                      | 0.4936            
                     </div>
                     <div class="spacer"></div>
                     <div class="rightBox">
-                        
+
                     </div>
                 </div>
             </section>
@@ -1360,7 +1510,7 @@ Total         | 38.464              | 115                     | 0.3345
                     </div>
                 </div>
             </section>
-            
+
             <section>
                 <h4>Interactive One-Way ANOVA Table</h4>
                 <div>
@@ -1378,10 +1528,12 @@ Total (T)   | 13.3                | 14                      | 0.95
                 <div>
                     <div class="leftBox">
                         <p class="styled-point">
-                            This experiment starts with three groups having similar means, yielding no significant difference.
+                            This experiment starts with three groups having similar means, yielding no significant
+                            difference.
                         </p>
                         <p class="styled-point2">
-                            Use the sliders to introduce an offset to one group’s mean and observe how the ANOVA table updates to show significance.
+                            Use the sliders to introduce an offset to one group’s mean and observe how the ANOVA table
+                            updates to show significance.
                         </p>
                     </div>
                     <div class="spacer"></div>
@@ -1399,8 +1551,7 @@ Total (T)   | 13.3                | 14                      | 0.95
                             <input type="range" id="offsetSlider3" min="0" max="3" step="0.01" value="0">
                         </p>
                         <p class="styled-point3"> <!-- Question -->
-                            If p < 0.05, how to locate the group(s) with significant differences?
-                        </p>              
+                            If p < 0.05, how to locate the group(s) with significant differences? </p>
                     </div>
                 </div>
             </section>
@@ -1413,10 +1564,12 @@ Total (T)   | 13.3                | 14                      | 0.95
                             ANOVA shows that at least one group differs, but it doesn’t specify which ones.
                         </p>
                         <p class="styled-point2">
-                            <strong>Post-hoc analysis</strong> identifies specific group differences after a significant ANOVA result.
+                            <strong>Post-hoc analysis</strong> identifies specific group differences after a significant
+                            ANOVA result.
                         </p>
                         <p class="styled-point2">
-                            <code>Tukey’s HSD</code>* is our primary method for comparing all pairs of groups while controlling for error rates.
+                            <code>Tukey’s HSD</code>* is our primary method for comparing all pairs of groups while
+                            controlling for error rates.
                         </p>
                         <p class="styled-noPoint" style="font-size: medium;">
                             *<code>HSD:</code> Honestly Significant Difference
@@ -1442,16 +1595,18 @@ Total (T)   | 13.3                | 14                      | 0.95
                     </div>
                 </div>
             </section>
-            
+
             <section>
                 <h4>Tukey’s Honestly Significant Difference (HSD) Test</h4>
                 <div>
                     <div class="leftBox">
                         <p class="styled-point">
-                            <strong>Purpose:</strong> To identify specific group differences by comparing all pairs of means.
+                            <strong>Purpose:</strong> To identify specific group differences by comparing all pairs of
+                            means.
                         </p>
                         <p class="styled-point2">
-                            Tukey’s HSD calculates a critical value for each pairwise difference to determine significance.
+                            Tukey’s HSD calculates a critical value for each pairwise difference to determine
+                            significance.
                         </p>
                         <p class="styled-point2">
                             <strong>Formula:</strong>
@@ -1460,7 +1615,9 @@ Total (T)   | 13.3                | 14                      | 0.95
                             \]
                         </p>
                         <p class="styled-noPoint" style="font-size: medium;">
-                            where \( q(g,N-g) \) is the critical value based on the number of groups \( g \) and total observations \( N \), \( \bar{W} \) is the mean square error, and \( n \) is the number of observations per group.
+                            where \( q(g,N-g) \) is the critical value based on the number of groups \( g \) and total
+                            observations \( N \), \( \bar{W} \) is the mean square error, and \( n \) is the number of
+                            observations per group.
                         </p>
                     </div>
                     <div class="spacer"></div>
@@ -1472,19 +1629,22 @@ Total (T)   | 13.3                | 14                      | 0.95
                             Calculates pairwise differences between group means.
                         </p>
                         <p class="styled-point4">
-                            Compares each difference to the HSD value; if it exceeds this, the pair is significantly different.
+                            Compares each difference to the HSD value; if it exceeds this, the pair is significantly
+                            different.
                         </p>
                         <p class="styled-point3">
                             <strong>Benefit:</strong> Controls Type I error across multiple comparisons.
                         </p>
                         <p class="styled-point2">
-                            The critical value \( q(g,N-g) \) is based on the Studentized range distribution (similar to the t-distribution). Here is an example of such a table: 
-                            <a href="https://www2.stat.duke.edu/courses/Spring98/sta110c/qtable.html" target="_blank">Studentized Range Distribution Table</a>
+                            The critical value \( q(g,N-g) \) is based on the Studentized range distribution (similar to
+                            the t-distribution). Here is an example of such a table:
+                            <a href="https://www2.stat.duke.edu/courses/Spring98/sta110c/qtable.html"
+                                target="_blank">Studentized Range Distribution Table</a>
                         </p>
                     </div>
                 </div>
             </section>
-            
+
             <section>
                 <h4>Example: Applying Tukey’s HSD in Environmental Analytics</h4>
                 <div>
@@ -1496,7 +1656,8 @@ Total (T)   | 13.3                | 14                      | 0.95
                             <strong>Sources:</strong> River, Lake, Groundwater
                         </p>
                         <p class="styled-point2">
-                            Objective: Use Tukey's HSD to find which sources have significantly different pollutant levels after a significant ANOVA result.
+                            Objective: Use Tukey's HSD to find which sources have significantly different pollutant
+                            levels after a significant ANOVA result.
                         </p>
                     </div>
                     <div class="spacer"></div>
@@ -1527,7 +1688,7 @@ Lake vs. Groundwater
                     </div>
                 </div>
             </section>
-            
+
             <section>
                 <h4>Interpreting Tukey’s HSD Results</h4>
                 <div>
@@ -1545,10 +1706,12 @@ Lake vs. Groundwater
                     <div class="spacer"></div>
                     <div class="rightBox">
                         <p class="styled-point3">
-                            In our example, only the comparison between <strong>River</strong> and <strong>Lake</strong> shows a significant difference.
+                            In our example, only the comparison between <strong>River</strong> and <strong>Lake</strong>
+                            shows a significant difference.
                         </p>
                         <p class="styled-point4">
-                            Tukey's HSD allows us to focus on the most impactful differences and interpret how pollutant levels vary by source.
+                            Tukey's HSD allows us to focus on the most impactful differences and interpret how pollutant
+                            levels vary by source.
                         </p>
                     </div>
                 </div>
@@ -1559,29 +1722,148 @@ Lake vs. Groundwater
                 <div>
                     <div class="leftBox">
                         <p class="styled-point">
-                            <strong>Problem with Multiple t-Tests:</strong>  
-                            Each t-test has a 5% false-positive rate. When comparing multiple groups, this compounds, increasing the chance of finding a false difference.
+                            <strong>Problem with Multiple t-Tests:</strong>
+                            Each t-test has a 5% false-positive rate. When comparing multiple groups, this compounds,
+                            increasing the chance of finding a false difference.
                         </p>
                         <p class="styled-point2">
-                            <strong>Example with Three Groups:</strong>  
-                            For groups A, B, and C, three pairwise comparisons (A vs. B, A vs. C, B vs. C) lead to an overall false-positive rate of:
+                            <strong>Example with Three Groups:</strong>
+                            For groups A, B, and C, three pairwise comparisons (A vs. B, A vs. C, B vs. C) lead to an
+                            overall false-positive rate of:
                             \[
                             1 - (1 - 0.05)^{g=3} = 14.26\%
                             \]
                             This means a <strong>14.26%</strong> chance of a false positive across tests.
                         </p>
                     </div>
-                    <div class="spacer"></div>        
+                    <div class="spacer"></div>
                     <div class="rightBox">
                         <p class="styled-point">
-                            <strong>Solution with ANOVA + Post-Hoc:</strong>  
+                            <strong>Solution with ANOVA + Post-Hoc:</strong>
                             ANOVA controls Type I error by first checking for overall differences among groups.
                             <br><br>
-                            If significant, post-hoc tests like Tukey’s HSD ensure accurate pairwise comparisons while keeping the overall false-positive rate at 5%.
+                            If significant, post-hoc tests like Tukey’s HSD ensure accurate pairwise comparisons while
+                            keeping the overall false-positive rate at 5%.
                         </p>
                         <p class="styled-point2">
-                            <strong>Takeaway:</strong>  
+                            <strong>Takeaway:</strong>
                             ANOVA + post-hoc tests provide reliable multi-group comparison without inflating errors.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h4>
+                    Seminar Materials
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            The concentration of a critical environmental chemical was measured in five rivers across
+                            two distinct region types: <strong>urban</strong> and <strong>landside</strong>.
+                        </p>
+                        <p class="styled-point">
+                            These regions represent contrasting land uses, likely influencing pollution levels in nearby
+                            water bodies.
+                        </p>
+                        <p class="styled-point">
+                            Measurements were collected seasonally over one year to capture potential seasonal
+                            variations.
+                        </p>
+                        <p class="styled-point">
+                            <strong>Goal:</strong> Determine which factors significantly impact chemical concentration
+                            levels.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <pre style="font-size: large;">
+                            <code data-trim>
+Region Type | River    | Season | Diclofenac (µg/L)
+---------------------------------------------------
+Urban       | River1   | Winter | 2.5
+Urban       | River1   | Spring | 2.1
+Urban       | River1   | Summer | 3.0
+Urban       | River1   | Fall   | 2.8
+Urban       | River2   | Winter | 2.7
+Urban       | River2   | Spring | 2.0
+Urban       | River2   | Summer | 3.1
+Urban       | River2   | Fall   | 2.9
+Landside    | River3   | Winter | 1.5
+Landside    | River3   | Spring | 1.7
+Landside    | River3   | Summer | 1.8
+Landside    | River3   | Fall   | 1.6
+Landside    | River4   | Winter | 1.6
+Landside    | River4   | Spring | 1.8
+Landside    | River4   | Summer | 1.9
+Landside    | River4   | Fall   | 1.7
+Landside    | River5   | Winter | 2.2
+Landside    | River5   | Spring | 2.1
+Landside    | River5   | Summer | 2.0
+Landside    | River5   | Fall   | 1.9
+                            </code>
+                            </pre>
+                        <p class="styled-point3">
+                            Which properties can be considered as factors in this dataset?
+                        </p>
+                        <p class="styled-point3">
+                            What are the limitations of this dataset?
+                        </p>
+                    </div>
+            </section>
+
+            <section>
+                <h4>
+                    Seminar Materials
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="styled-point">
+                            In multi-way ANOVA, we examine "cells," which represent combinations of factor levels. For
+                            the factors Region Type, River, and Season, a cell like Urban-River1-Winter would indicate
+                            the chemical concentration measured in River1 during winter in an urban area.
+                        </p>
+                        <p class="styled-point">
+                            To consider all three factors in this cell, we need multiple measurements.
+                        </p>
+                        <p class="styled-point">
+                            If this is not the case, we may need to aggregate data, i.e., neglect one or more factors.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <pre style="font-size: large;">
+                            <code data-trim data-line-numbers="1-22|3|3-6|3,7">
+Region Type | River    | Season | Diclofenac (µg/L)
+---------------------------------------------------
+Urban       | River1   | Winter | 2.5
+Urban       | River1   | Spring | 2.1
+Urban       | River1   | Summer | 3.0
+Urban       | River1   | Fall   | 2.8
+Urban       | River2   | Winter | 2.7
+Urban       | River2   | Spring | 2.0
+Urban       | River2   | Summer | 3.1
+Urban       | River2   | Fall   | 2.9
+Landside    | River3   | Winter | 1.5
+Landside    | River3   | Spring | 1.7
+Landside    | River3   | Summer | 1.8
+Landside    | River3   | Fall   | 1.6
+Landside    | River4   | Winter | 1.6
+Landside    | River4   | Spring | 1.8
+Landside    | River4   | Summer | 1.9
+Landside    | River4   | Fall   | 1.7
+Landside    | River5   | Winter | 2.2
+Landside    | River5   | Spring | 2.1
+Landside    | River5   | Summer | 2.0
+Landside    | River5   | Fall   | 1.9
+                            </code>
+                            </pre>
+                        <p class="styled-point3">
+                            Which factors can form a valid cell in this dataset?
+                        </p>
+                        <p class="styled-point3">
+                            All three, two, or only one of the factors?
                         </p>
                     </div>
                 </div>
@@ -1590,7 +1872,7 @@ Lake vs. Groundwater
         </div>
         <div class="footer-global">
             Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
-            Last updated: October 22, 2024
+            Last updated: November 4, 2024
         </div>
     </div>
     <div id="clock">--:--</div>
