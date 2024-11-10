@@ -51,7 +51,7 @@
               Let's assume we have a data set that contains the following information:
             </p>
             <p class="styled-point2">
-              Each sample was measured with 10 replicates and the mean values are given in the table below. 
+              Each sample was measured with 10 replicates and the mean values are given in the table below.
             </p>
             <pre>
                 <code data-trim data-noescape>
@@ -89,7 +89,7 @@
               Now, let's assume we have a data set that contains the following information:
             </p>
             <p class="styled-point2">
-              Each sample was measured with 10 replicates and the mean values are given in the table below. 
+              Each sample was measured with 10 replicates and the mean values are given in the table below.
             </p>
             <pre style="font-size: large;">
                 <code data-trim data-noescape>
@@ -123,19 +123,554 @@
         <div>
           <div class="leftBox">
             <p class="styled-point">
-              There are several metrics available to calculate the similarity between samples with multiple variables (mutltivariate data).
+              There are several metrics available to calculate the similarity between samples with multiple variables
+              (multivariate data).
             </p>
-            <p class="styled-point">
-              <code>Manhattan distance</code> (L1 norm) is defined as:
-              \[ d = \sum_{i=1}^{n} |x_i - y_i| \]
-              Where \(x_i\) and \(y_i\) are the values of the \(i\)-th variable of the samples \(x\) and \(y\), respectively.
-            </p>
+            <div class="tab-content active" data-tab="dist0">
+              <p class="styled-point">
+                <code>Minkowski distance</code> is a generalization of distances and is defined as:
+                \[ d = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{1/p} \]
+                Where \(x_i\) and \(y_i\) are the values of the \(i\)-th variable of the samples \(x\) and \(y\),
+                respectively.
+              </p>
+            </div>
+            <div class="tab-content" data-tab="dist1">
+              <p class="styled-point">
+                <code>Manhattan distance</code> (L1 norm) is defined as:
+                \[ d = \sum_{i=1}^{n} |x_i - y_i| \]
+                Where \(x_i\) and \(y_i\) are the values of the \(i\)-th variable of the samples \(x\) and \(y\),
+                respectively.
+              </p>
+            </div>
+            <div class="tab-content" data-tab="dist2">
+              <p class="styled-point">
+                <code>Euclidean distance</code> (L2 norm) is defined as:
+                \[ d = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2} \]
+                Where \(x_i\) and \(y_i\) are the values of the \(i\)-th variable of the samples \(x\) and \(y\),
+                respectively.
+              </p>
+            </div>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
             <div class="image-box">
-              <div id="chart_distance1"></div>
+              <div class="tabs">
+                <div class="tab active" data-tab="dist0">off</div>
+                <div class="tab" data-tab="dist1">Manhattan</div>
+                <div class="tab" data-tab="dist2">Euclidean</div>
+              </div>
+              <div class="tab-content active" data-tab="dist0" style="height: 470px;">
+                <div id="chart_distance0"></div>
+              </div>
+              <div class="tab-content" data-tab="dist1" style="height: 470px;">
+                <div id="chart_distance1"></div>
+              </div>
+              <div class="tab-content" data-tab="dist2" style="height: 470px;">
+                <div id="chart_distance2"></div>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Minkowski Distance
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              The Minkowski distance is a generalized difference-based metric:
+              \[
+              d = \left( \sum_{i=1}^{n} |x_i - y_i|^p \right)^{1/p}
+              \]
+              where \( p \) is the order of the distance. Adjust \( p \) with the slider to see how the distance
+              calculation changes.
+            </p>
+            <label for="pSlider" style="font-size: large;">Order \( p \): <span id="pValue">1</span></label>
+            <input type="range" id="pSlider" min="1" max="4" step="1" value="1">
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">
+              Example: given the following data points:
+            <pre><code data-trim data-noescape>
+                A = [5.2, 3.9, 2.1, 1.8, 0.7]
+                B = [4.8, 3.7, 2.0, 1.7, 0.6]
+              </code></pre>
+            <pre id="distanceCalculation">
+                <code data-trim data-noescape>
+                  d = |5.2 - 4.8|^1 + |3.9 - 3.7|^1 
+                    + |2.1 - 2.0|^1 + |1.8 - 1.7|^1 
+                    + |0.7 - 0.6|^1
+      
+                  d = 0.40 + 0.20 + 0.10 + 0.10 + 0.10
+      
+                  d = 0.90
+                </code>
+              </pre>
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <h4>
+          Correlation-based Similarity Measures
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Correlation coefficients quantify the similarity between variables by measuring
+              linear relationships.</p>
+
+            <p class="styled-point2" style="font-size: large;">
+              <code>Pearson Correlation:</code> Measures linear relationships between two variables, ranging from -1 to
+              +1.
+              \[
+              r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}
+              \]
+              where \(\bar{x}\) and \(\bar{y}\) are the means of the variables.
+            </p>
+
+            <p class="styled-noPoint" style="font-size: large;">
+              \[d = 1 - r\]
+              where \(r\) is the Pearson correlation coefficient and \(d\) is the distance.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Example: given the following data points:
+            <pre><code data-trim data-noescape>
+                A = [5.2, 3.9, 2.1, 1.8, 0.7]
+                B = [4.8, 3.7, 1.8, 1.9, 0.6]
+              </code></pre>
+            <pre id="distanceCalculation">
+                <code data-trim data-noescape>
+                  A_mean = 2.94
+                  B_mean = 2.56
+
+                  Cov(A, B) = 1 / (N-1) * 
+                    [  
+                        (5.2 - 2.94) * (4.8 - 2.56) 
+                      + (3.9 - 2.94) * (3.7 - 2.56) 
+                      + (2.1 - 2.94) * (1.8 - 2.56) 
+                      + (1.8 - 2.94) * (1.9 - 2.56) 
+                      + (0.7 - 2.94) * (0.6 - 2.56)
+                    ]
+                  
+                  Cov(A, B) / (std(A) * std(B)) = 0.99
+                  >> d = 1 - 0.99 = 0.01
+                </code>
+              </pre>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Correlation-based Similarity Measures
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Correlation coefficients quantify the similarity between variables by measuring
+              linear relationships.</p>
+
+            <p class="styled-point2" style="font-size: large;">
+              <code>Spearman Correlation:</code> Ranks* data to assess monotonic relationships, useful for non-linear
+              data.
+              \[
+              r_s = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
+              \]
+              where \(d_i\) is the difference between ranks*.
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[d = 1 - r_s\]
+              where \(r_s\) is the Spearman correlation coefficient and \(d\) is the distance.
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Example: given the following data points:
+            <pre><code data-trim data-noescape>
+                A = [5.2, 3.9, 2.1, 1.8, 0.7]
+                B = [4.8, 3.7, 1.8, 1.9, 0.6]
+              </code></pre>
+            <pre id="distanceCalculation">
+                <code data-trim data-noescape>
+                  A_rank = [5, 4, 3, 2, 1]
+                  B_rank = [5, 4, 1, 2, 3]
+
+                  d = [0, 0, 2, 0, 2]
+
+                  r_s = 1 - 6 * 
+                    (0^2 + 0^2 + 2^2 + 0^2 + 2^2) / 
+                    (5 * (5^2 - 1))
+
+                  r_s = 0.6
+
+                  >> d = 1 - 0.6 = 0.4
+                </code>
+              </pre>
+            </p>
+          </div>
+          <p class="small-text" style="font-size: medium;">*Ranks are the position of the data in a sorted list.</p>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Cosine Similarity as a Similarity Measure
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Cosine similarity measures the similarity between two vectors by comparing their
+              direction, normalized by their magnitudes.</p>
+
+            <p class="styled-point2" style="font-size: large;">
+              <code>Cosine Similarity:</code> Defined as the dot product of two vectors divided by the product of their
+              norms.
+              \[
+              \text{similarity} = \frac{\sum_{i=1}^{n} x_i \cdot y_i}{||X|| \cdot ||Y||}
+              \]
+              where \( ||X|| = \sqrt{\sum_{i=1}^{n} x_i^2} \) and \( ||Y|| = \sqrt{\sum_{i=1}^{n} y_i^2} \).
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Example: given the following vectors:
+            <pre><code data-trim data-noescape>
+                X = [2, 3, 4]
+                Y = [1, 0, 5]
+              </code></pre>
+            <pre id="distanceCalculation">
+                <code data-trim data-noescape>
+                  dot_product = 2*1 + 3*0 + 4*5 = 22
+                  ||X|| = sqrt(2^2 + 3^2 + 4^2) = 5.39
+                  ||Y|| = sqrt(1^2 + 0^2 + 5^2) = 5.10
+      
+                  similarity = 22 / (5.39 * 5.10)
+      
+                  similarity ≈ 0.80
+                </code>
+              </pre>
+            </p>
+          </div>
+          <p class="small-text" style="font-size: medium;">The cosine similarity ranges from -1 to 1, with higher values
+            indicating greater similarity in direction.</p>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Overview: Choosing the Right Similarity Measure
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point"><code>Minkowski Distance</code></p>
+            <p class="styled-point2">General distance metric for multivariate data.</p>
+            <p class="styled-point2">Adjustable: Manhattan (p=1), Euclidean (p=2).</p>
+            <p class="styled-point2">Works best with continuous numeric data.</p>
+
+            <p class="styled-point"><code>Pearson Correlation</code></p>
+            <p class="styled-point2">Measures linear relationships.</p>
+            <p class="styled-point2">Good for continuous, normally distributed data.</p>
+            <p class="styled-point2">Sensitive to outliers.</p>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="rightBox">
+            <p class="styled-point"><code>Spearman Correlation</code></p>
+            <p class="styled-point2">For monotonic (ranked) relationships.</p>
+            <p class="styled-point2">Works with ordinal or non-linear data.</p>
+            <p class="styled-point2">Less sensitive to outliers than Pearson.</p>
+
+            <p class="styled-point"><code>Cosine Similarity</code></p>
+            <p class="styled-point2">Measures similarity in vector direction.</p>
+            <p class="styled-point2">Useful in high-dimensional data (e.g., text).</p>
+            <p class="styled-point2">Focuses on orientation, not magnitude.</p>
+            <p class="styled-point4">
+              There is no one-size-fits-all similarity measure. Choose the one that best fits your data and research
+              question.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Hierarchical Cluster Analysis (HCA)</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">HCA groups similar items into clusters based on their similarity or distance.</p>
+            <p class="styled-point">The result is a dendrogram, a tree-like structure showing the nested clusters.</p>
+            <p class="styled-point">Types of HCA:</p>
+            <p class="styled-point2"><strong>Agglomerative (bottom-up):</strong> Starts with individual items and merges
+              them into clusters.</p>
+            <p class="styled-point2"><strong>Divisive (top-down):</strong> Starts with one cluster of all items and
+              splits them into smaller clusters.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="tabs">
+              <div class="tab active" data-tab="dendrogram_data1">Data</div>
+              <div class="tab" data-tab="dendrogram_dendrogram1">Dendrogram</div>
+            </div>
+            <div class="tab-content active" data-tab="dendrogram_data1">
+              <div id="dendrogram_intro">
+                <pre style="font-size: large;">
+                  <code data-trim data-noescape>
+                    ┌────────┬───────┬───────┬───────┬───────┬───────┐
+                    │ Sample │ [Fe]  │ [Cu]  │ [Zn]  │ [Mn]  │ [Pb]  │
+                    ├────────┼───────┼───────┼───────┼───────┼───────┤
+                    │    1   │  2.3  │  1.2  │  0.5  │  0.2  │  0.1  │
+                    │    2   │  2.7  │  1.1  │  0.4  │  0.3  │  0.2  │
+                    │    3   │  1.9  │  1.3  │  0.6  │  0.1  │  0.2  │
+                    │    4   │  2.1  │  1.0  │  0.3  │  0.4  │  0.7  │
+                    │    5   │  2.5  │  1.4  │  0.7  │  0.5  │  0.6  │
+                    │    6   │  2.2  │  1.5  │  0.8  │  0.6  │  0.5  │
+                    │    7   │  2.4  │  1.6  │  0.9  │  0.7  │  0.1  │
+                    │    8   │  2.6  │  1.7  │  1.0  │  0.8  │  0.3  │
+                    └────────┴───────┴───────┴───────┴───────┴───────┘
+                  </code>
+                </pre>
+              </div>
+            </div>
+            <div class="tab-content" data-tab="dendrogram_dendrogram1">
+              <div id="dendrogram_step1"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 1: Calculating Pairwise Distances</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">HCA starts by calculating distances or similarities between all pairs of items.</p>
+            <p class="styled-point">The result is a distance matrix, showing how similar or different each pair of items
+              is.</p>
+            <p class="styled-point">Common distance measures include:</p>
+            <p class="styled-point2"><strong>Euclidean distance</strong>: Measures straight-line distance.</p>
+            <p class="styled-point2"><strong>Manhattan distance</strong>: Measures distance by summing absolute
+              differences.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for distance matrix visualization -->
+            <div id="distance_matrix"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 2: Merging the Closest Items</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">The two items with the smallest distance are merged to form a cluster.</p>
+            <p class="styled-point">This cluster is represented as a node in the dendrogram, showing the first grouping
+              of similar items.</p>
+            <p class="styled-point">Each node’s height represents the distance at which items or clusters are joined.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for dendrogram showing the first merge step -->
+            <div id="dendrogram_step1"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 3: Recomputing Distances and Continuing Merging</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">After each merge, recalculate distances between the new cluster and other items or
+              clusters.</p>
+            <p class="styled-point">Different linkage methods can be used to update distances:</p>
+            <p class="styled-point2"><strong>Single linkage:</strong> Uses the smallest distance between items in two
+              clusters.</p>
+            <p class="styled-point2"><strong>Complete linkage:</strong> Uses the largest distance between items in two
+              clusters.</p>
+            <p class="styled-point2"><strong>Average linkage:</strong> Uses the average distance between all items in
+              two clusters.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for dendrogram showing subsequent merges -->
+            <div id="dendrogram_step2"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 4: Building the Dendrogram</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">The process continues until all items are merged into a single cluster.</p>
+            <p class="styled-point">The dendrogram visually represents this nested grouping structure.</p>
+            <p class="styled-point">The height of each node indicates the distance at which clusters are merged.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for full dendrogram -->
+            <div id="dendrogram_full"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Reading a Dendrogram</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">A dendrogram helps identify clusters and understand the relationship between items:
+            </p>
+            <p class="styled-point2">Each leaf represents an individual item in the dataset.</p>
+            <p class="styled-point2">Clusters are formed by cutting the dendrogram at a certain height.</p>
+            <p class="styled-point2">The height of each node indicates the distance or similarity level at which
+              clusters are joined.</p>
+            <p class="styled-point">To identify clusters, look for branches that join at lower heights for more similar
+              items.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for a labeled dendrogram with clusters indicated -->
+            <div id="dendrogram_interpreted"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Introduction to k-means Clustering</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">k-means is a popular clustering algorithm for partitioning data into \( k \)
+              clusters.</p>
+            <p class="styled-point">The algorithm aims to minimize within-cluster variance, making clusters as compact
+              as possible.</p>
+            <p class="styled-point">Each cluster is defined by its centroid, which is the mean of all points within that
+              cluster.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for initial dataset plot with no clusters -->
+            <div id="kmeans_intro"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 1: Choosing the Number of Clusters (k)</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">The number of clusters \( k \) must be chosen before running k-means.</p>
+            <p class="styled-point">Selecting \( k \) can be challenging, as it affects the algorithm’s results
+              significantly.</p>
+            <p class="styled-point">Methods for choosing \( k \) include:</p>
+            <p class="styled-point2"><strong>Elbow Method:</strong> Plot the sum of within-cluster variance (inertia)
+              vs. \( k \) and look for an "elbow" point.</p>
+            <p class="styled-point2"><strong>Silhouette Score:</strong> Evaluates how well-separated clusters are for
+              each \( k \) value.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for elbow method plot or silhouette score example -->
+            <div id="choose_k"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 2: Initializing Cluster Centroids</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">k-means starts by randomly selecting \( k \) initial centroids in the data space.
+            </p>
+            <p class="styled-point">These centroids act as the starting points for forming clusters.</p>
+            <p class="styled-point">The choice of initial centroids can affect the final clustering results, so multiple
+              initializations may be tested.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for plot showing initial centroids on data -->
+            <div id="initial_centroids"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 3: Assigning Points to Nearest Centroids</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Each data point is assigned to the nearest centroid, forming initial clusters.</p>
+            <p class="styled-point">This assignment is based on minimizing the distance between points and centroids
+              (usually Euclidean distance).</p>
+            <p class="styled-point">Points closest to a centroid belong to that centroid’s cluster.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for plot showing points assigned to initial centroids -->
+            <div id="initial_assignment"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 4: Updating Centroids</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Once points are assigned, the centroids are recalculated as the mean of all points
+              in each cluster.</p>
+            <p class="styled-point">This step shifts each centroid to a new position, centered within its assigned
+              points.</p>
+            <p class="styled-point">After updating, points are reassigned to the nearest centroid, and the process
+              repeats.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for plot showing updated centroids -->
+            <div id="centroid_update"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 5: Iterating Until Convergence</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">k-means alternates between assigning points and updating centroids until
+              convergence.</p>
+            <p class="styled-point">Convergence is reached when centroid positions stop changing significantly.</p>
+            <p class="styled-point">The final clusters minimize within-cluster variance.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for plot showing final clusters -->
+            <div id="final_clusters"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Evaluating the Clustering Results</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">To assess clustering quality, metrics such as the following are commonly used:</p>
+            <p class="styled-point2"><strong>Inertia (within-cluster variance):</strong> Measures compactness within
+              clusters; lower is better.</p>
+            <p class="styled-point2"><strong>Silhouette Score:</strong> Measures cohesion and separation; ranges from -1
+              to 1.</p>
+            <p class="styled-point2"><strong>ANOVA:</strong> Evaluates the separation between clusters by comparing
+              between-cluster and within-cluster variance.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Placeholder for visualizations of inertia or silhouette score -->
+            <div id="evaluation_metrics"></div>
+          </div>
         </div>
       </section>
 
@@ -209,6 +744,7 @@
   <script src="../resources/chart_bar01.js"></script>
   <script src="../resources/chart_bar02.js"></script>
   <script src="../resources/chart_distance1.js"></script>
+  <script src="../resources/codebox_minkowski1.js"></script>
 
 
 

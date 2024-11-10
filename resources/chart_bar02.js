@@ -8,4 +8,4 @@ const dataBar2 = [
 ];
 
 // Call the function to create the chart in chart_bar02 container
-createGroupedBarChart("chart_bar02", dataBar2);
+createGroupedBarChart("chart_bar02", dataBar2, "sample", "concentration");
