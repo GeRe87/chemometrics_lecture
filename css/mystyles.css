@@ -222,6 +222,7 @@
     position: relative;
     font-size: large;
     width: 90%;
+    text-align: center;
 }
 
 .styled-noPoint {
@@ -311,10 +312,57 @@
     top: 10px;
     right: 20px;
     font-size: 2.5em;
-    font-family: 'Noto Sans', Source Sans Pro, Helvetica, sans-serif;
+    font-family: 'Mabook', 'Noto Sans', Source Sans Pro, Helvetica, sans-serif;
     color: #333;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 5px 10px;
     border-radius: 5px;
     z-index: 1000;
+}
+
+/* xkcd-style font */
+@font-face {
+    font-family: 'Humor Sans';
+    src: url('../dist/theme/fonts/humor-sans/Humor-Sans.ttf') format('truetype'); /* Update with actual path */
+}
+
+body {
+    font-family: 'Humor Sans', sans-serif;
+}
+
+/* xkcd-style chart */
+.xkcd-line {
+    stroke-width: 4px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.bar {
+    stroke: #343434;
+    stroke-width: 2px;
+}
+
+.line {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+}
+
+/* Axis styling */
+.axis path,
+.axis line {
+    stroke: #333;
+    stroke-width: 1.5px;
+    shape-rendering: crispEdges;
+}
+
+/* Wiggle effect for hand-drawn lines */
+.wiggle {
+    filter: url(#wiggle-filter);
+}
+
+.grid-line {
+    stroke: rgb(238, 238, 238);
+    stroke-width: 1px;
+    stroke-dasharray: 0;
 }

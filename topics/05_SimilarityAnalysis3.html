@@ -50,26 +50,95 @@
             <p class="styled-point">
               Let's assume we have a data set that contains the following information:
             </p>
-            <div id="data-table">
-              <pre>
-                    <code data-trim data-noescape>
-                        | sample | [Fe] |
-                        |--------|------|
-                        | 1      | 2.3  |
-                        | 2      | 2.7  |
-                        | 3      | 1.9  |
-                        | 4      | 2.1  |
-                        | 5      | 2.5  |
-                    </code>
-                </pre>
-            </div>
+            <p class="styled-point2">
+              Each sample was measured with 10 replicates and the mean values are given in the table below. 
+            </p>
+            <pre>
+                <code data-trim data-noescape>
+                  ┌────────┬───────┐
+                  │ Sample │ [Fe]  │
+                  ├────────┼───────┤
+                  │    1   │  2.3  │
+                  │    2   │  2.7  │
+                  │    3   │  1.9  │
+                  │    4   │  2.1  │
+                  │    5   │  2.5  │
+                  └────────┴───────┘
+                  </code>                  
+            </pre>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-            <pre class="chartscii"></pre>
+            <div class="image-box">
+              <div id="chart_bar01"></div>
+            </div>
+            <p class="styled-point4">
+              We already know how to compare these samples, e.g., using <code>ANOVA</code> or <code>t-test</code>.
+            </p>
           </div>
         </div>
       </section>
+
+      <section>
+        <h4>
+          Initial thoughts on multivariate data analysis
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              Now, let's assume we have a data set that contains the following information:
+            </p>
+            <p class="styled-point2">
+              Each sample was measured with 10 replicates and the mean values are given in the table below. 
+            </p>
+            <pre style="font-size: large;">
+                <code data-trim data-noescape>
+                  ┌────────┬───────┬───────┬───────┬───────┐
+                  │ Sample │ [Fe]  │ [Cu]  │ [Zn]  │ [Mn]  │
+                  ├────────┼───────┼───────┼───────┼───────┤
+                  │    1   │  2.3  │  1.2  │  0.5  │  0.2  │
+                  │    2   │  2.7  │  1.1  │  0.4  │  0.3  │
+                  │    3   │  1.9  │  1.3  │  0.6  │  0.1  │
+                  │    4   │  2.1  │  1.0  │  0.3  │  0.4  │
+                  │    5   │  2.5  │  1.4  │  0.7  │  0.5  │
+                  └────────┴───────┴───────┴───────┴───────┘
+                  </code>                  
+            </pre>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box">
+              <div id="chart_bar02"></div>
+            </div>
+            <p class="styled-point4">
+              How can we compare these samples?
+            </p>
+          </div>
+      </section>
+
+      <section>
+        <h4>
+          Similarity Measures - Metrics
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              There are several metrics available to calculate the similarity between samples with multiple variables (mutltivariate data).
+            </p>
+            <p class="styled-point">
+              <code>Manhattan distance</code> (L1 norm) is defined as:
+              \[ d = \sum_{i=1}^{n} |x_i - y_i| \]
+              Where \(x_i\) and \(y_i\) are the values of the \(i\)-th variable of the samples \(x\) and \(y\), respectively.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box">
+              <div id="chart_distance1"></div>
+            </div>
+        </div>
+      </section>
+
 
     </div>
     <div class="footer-global">
@@ -89,6 +158,7 @@
   <!-- Chart plugin -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../plugin/chartscii/dist/bundle.js"></script>
   <script>
     // More info about initialization & config:
@@ -135,7 +205,12 @@
   </script>
   <!-- Chart scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
-  <script src="../resources/chart_utils.js"></script>
+  <script src="../resources/d3_utils.js"></script>
+  <script src="../resources/chart_bar01.js"></script>
+  <script src="../resources/chart_bar02.js"></script>
+  <script src="../resources/chart_distance1.js"></script>
+
+
 
 </body>
 

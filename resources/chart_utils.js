@@ -265,3 +265,4 @@ function calcEcdf(data) {
     return { x: value, y: (index) / n };
   });
 }
+

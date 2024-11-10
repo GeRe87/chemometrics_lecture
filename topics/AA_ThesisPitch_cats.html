@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Chemometrics and Statistics</title>
+
+  <link rel="stylesheet" href="../dist/reset.css">
+  <link rel="stylesheet" href="../dist/reveal.css">
+  <link rel="stylesheet" href="../dist/theme/iac.css">
+  <link rel="stylesheet" href="../css/mystyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+  <style>
+    .green-text {
+      color: rgb(133, 198, 42);
+    }
+
+    .teal-text {
+      color: rgb(0, 150, 136);
+    }
+
+    .purple-text {
+      color: rgb(156, 39, 176);
+    }
+
+    .magenta-text {
+      color: rgb(233, 30, 99);
+    }
+
+    .small-text {
+      font-size: 0.8em;
+    }
+
+    .inline-block {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <div>
+          <div class="leftBox">
+            <img src="../resources/dogs_0.jpg" alt="Dogs"
+              style="height: 300px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); filter: grayscale(100%);">
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/cats_0.jpg" alt="Cats"
+              style="height: 300px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          </div>
+        </div>
+      </section>
+
+      <section data-id="dogs-slide">
+        <h4>Now it's your turn!</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">How many cats can you see?</p>
+            <p class="styled-point2">Be careful, not everything looking like a cat is a cat!</p>
+            <p id="countdown" class="styled-point">Time remaining: 25 seconds</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img id="dogsImage" src="../resources/cats_1.jpg" alt="Cats"
+              style="scale: 1.1; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          </div>
+        </div>
+        
+      </section>
+
+      <section data-id="dogs-slide2">
+        <h4>One more try!</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">How many dogs can you see?</p>
+            <p id="countdown2" class="styled-point">Time remaining: 12 seconds</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img id="dogsImage2" src="../resources/cats_2.png" alt="Cats"
+              style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Where is the connection to analytical data science?
+        </h4>
+      </section>
+
+      <section>
+        <h4>
+          It's all about pattern recognition!
+        </h4>
+        <img src="../resources/house_01.png" alt="House" style="height: 300px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">How do we recognize these as houses?</p>
+            <div class="fragment">
+              <p class="styled-point2">We have learned to recognize patterns in our environment.</p>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="fragment">
+            <pre><code>has walls ....checked ✅</code></pre>
+            </div>
+            <div class="fragment">
+            <pre><code>has roof  ....checked ✅</code></pre>
+            </div>
+            <div class="fragment">
+            <pre><code>has door  ....checked ✅</code></pre>
+            </div>
+            <div class="fragment">
+            <pre><code>has windows ..checked ✅</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          From houses to peaks
+        </h4>
+        <img src="../resources/ml_peaks0.png" alt="Peaks" style="scale: 1 ; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      </section>
+
+      <section>
+        <h4>
+          Ask some Experts
+        </h4>
+        <img src="../resources/ml_peaks.png" alt="Peaks" style="scale: 1 ; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      </section>
+
+      <section>
+        <h4>
+          Find suitable properties
+        </h4>
+        <img src="../resources/ml_text2.png" alt="Peaks" style="scale: 1 ; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      </section>
+
+      <section>
+        <h4>
+          What <span class="magenta-text">< we ></span> provide
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Learn how to create machine learning models.</p>
+            <p class="styled-point2">Apply these models to your data to find peaks.</p>
+            <p class="styled-point">Learn basics of programming and data analysis.</p>
+            <p class="styled-point">Get to know the tools for data analysis.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point3">
+              Interested?
+            </p>
+            <p class="styled-point2">
+              Contact me for more information.
+            </p>
+            <p class="styled-point4">
+              gerrit.renner@uni-due.de
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <div class="footer-global">
+      Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+      Last updated: November 6, 2024
+    </div>
+  </div>
+  <div id="clock">--:--</div>
+
+  <script src="../dist/reveal.js"></script>
+  <script src="../plugin/notes/notes.js"></script>
+  <script src="../plugin/markdown/markdown.js"></script>
+  <script src="../plugin/highlight/highlight.js"></script>
+  <script src="../plugin/math/math.js"></script>
+  <script src="../plugin/menu/menu.js"></script>
+  <!-- Anything plugin -->
+  <!-- Chart plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../plugin/chartscii/dist/bundle.js"></script>
+  <script>
+    let countdownInterval; // Globale Variable für das Countdown-Interval
+
+// Funktion zum Abdunkeln des Bildes
+function dimImage() {
+  const img = document.getElementById('dogsImage');
+  if (img) {
+    img.style.filter = 'brightness(10%)';
+  }
+}
+
+// Countdown-Funktion
+function startCountdown() {
+  let timeRemaining = 25; // 30 Sekunden Countdown
+  const countdownElement = document.getElementById('countdown');
+  
+  // Zuvor gestartete Intervalle stoppen
+  clearInterval(countdownInterval);
+  
+  // Countdown-Interval neu starten
+  countdownInterval = setInterval(() => {
+    if (timeRemaining > 0) {
+      timeRemaining--;
+      countdownElement.textContent = `Time remaining: ${timeRemaining} seconds`;
+    } else {
+      clearInterval(countdownInterval); // Countdown beenden
+      dimImage(); // Bild abdunkeln
+      countdownElement.textContent = "Time is up!";
+    }
+  }, 1000);
+}
+
+// Event-Listener für das Wechseln der Folien
+Reveal.on('slidechanged', function(event) {
+  // Überprüfen, ob wir auf die gewünschte Slide gewechselt haben
+  if (event.currentSlide.getAttribute('data-id') === 'dogs-slide') {
+    // Entfernen Sie die Abdunkelung, falls diese bereits angewendet wurde
+    const img = document.getElementById('dogsImage');
+    if (img) {
+      img.style.filter = 'brightness(100%)';
+    }
+    // Countdown starten
+    startCountdown();
+  } else {
+    // Countdown stoppen, falls die Slide verlassen wird
+    clearInterval(countdownInterval);
+  }
+});
+  </script>
+
+<script>
+  let countdownInterval2; // Globale Variable für das Countdown-Interval
+
+// Funktion zum Abdunkeln des Bildes
+function dimImage2() {
+const img = document.getElementById('dogsImage2');
+if (img) {
+  img.style.filter = 'brightness(10%)';
+}
+}
+
+// Countdown-Funktion
+function startCountdown2() {
+let timeRemaining = 12; // 30 Sekunden Countdown
+const countdownElement = document.getElementById('countdown2');
+
+// Zuvor gestartete Intervalle stoppen
+clearInterval(countdownInterval2);
+
+// Countdown-Interval neu starten
+countdownInterval2 = setInterval(() => {
+  if (timeRemaining > 0) {
+    timeRemaining--;
+    countdownElement.textContent = `Time remaining: ${timeRemaining} seconds`;
+  } else {
+    clearInterval(countdownInterval2); // Countdown beenden
+    dimImage2(); // Bild abdunkeln
+    countdownElement.textContent = "Time is up!";
+  }
+}, 1000);
+}
+
+// Event-Listener für das Wechseln der Folien
+Reveal.on('slidechanged', function(event) {
+// Überprüfen, ob wir auf die gewünschte Slide gewechselt haben
+if (event.currentSlide.getAttribute('data-id') === 'dogs-slide2') {
+  // Entfernen Sie die Abdunkelung, falls diese bereits angewendet wurde
+  const img = document.getElementById('dogsImage2');
+  if (img) {
+    img.style.filter = 'brightness(100%)';
+  }
+  // Countdown starten
+  startCountdown2();
+} else {
+  // Countdown stoppen, falls die Slide verlassen wird
+  clearInterval(countdownInterval2);
+}
+});
+</script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      menu: {
+        custom: [{
+          title: 'Topics',
+          icon: '<i class="fas fa-home"></i>',
+          src: 'menu.html'
+        }]
+      },
+      hash: true,
+      chart: {
+        defaults: {
+          color: 'gray', // color of labels
+          scale: {
+            beginAtZero: true,
+            ticks: { stepSize: 1 },
+            grid: { color: "lightgray" }, // color of grid lines
+          },
+        },
+        line: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"], "borderDash": [[5, 10], [0, 0]] },
+        bar: { backgroundColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
+        pie: { backgroundColor: [["rgba(0,0,0,.8)", "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"]] },
+      },
+
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealChart, RevealMenu, AsciiChartPlugin],
+    });
+    // Funktion zum Aktualisieren der Uhrzeit
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Uhrzeit sofort und dann jede Sekunde aktualisieren
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+  <!-- Chart scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+  <script src="../resources/d3_utils.js"></script>
+  <script src="../resources/chart_bar01.js"></script>
+  <script src="../resources/chart_bar02.js"></script>
+  <script src="../resources/chart_distance1.js"></script>
+
+
+
+</body>
+
+</html>
