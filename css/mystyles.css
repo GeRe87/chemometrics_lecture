@@ -6,6 +6,10 @@
     color: #666;
 }
 
+.magenta-text {
+    color: rgb(233, 30, 99);
+  }
+
 .icon-link {
     position: relative;
     /* oder absolute/fixed, je nach Layout */

@@ -5,8 +5,8 @@ function generateKmeansData() {
     const means = [
         { x: 1, y: 1 },
         { x: 2, y: 4 },
-        { x: 4, y: 1 },
-        { x: 4, y: 3 }
+        { x: 4, y: 2 },
+        { x: 5, y: 3 }
     ];
     const stdDev = 1.5;
     for (let i = 0; i < 100; i++) {
@@ -97,22 +97,22 @@ const initialCentroids = selectRandomCentroids(kmeansData1);
 
 
 
-createXYLineChart("kmeans_intro", kmeansData1, "x", "y", "x", "y",  false, true, false, 0, 5, 0, 5);
-const chart_kmeans_scales1 = createXYLineChart("choose_k", kmeansData1, "x", "y", "x", "y",  false, true, false, 0, 5, 0, 5);
+createXYLineChart("kmeans_intro", kmeansData1, "x", "y", "x", "y",  false, true, false, 0, 6, 0, 5);
+const chart_kmeans_scales1 = createXYLineChart("choose_k", kmeansData1, "x", "y", "x", "y",  false, true, false, 0, 6, 0, 5);
 
-const chart_kmeans_scales2 = createXYLineChart("initial_centroids", kmeansData1, "x", "y", "x", "y",  false, true, false, 0, 5, 0, 5);
+const chart_kmeans_scales2 = createXYLineChart("initial_centroids", kmeansData1, "x", "y", "x", "y",  false, true, false, 0, 6, 0, 5);
 addPlotSeries("initial_centroids", initialCentroids, chart_kmeans_scales2.xScale, chart_kmeans_scales2.yScale, "x", "y", "black", "black", false, true);
 
 assignPointsToCentroids(kmeansData1, initialCentroids); // stores cluster information in property "cluster" of each point
 // create a new chart that contains only cluster 0 data points
 const cluster0 = kmeansData1.filter(point => point.cluster === 0);
 const cluster1 = kmeansData1.filter(point => point.cluster === 1);
-const chart_kmeans_scales3 = createXYLineChart("initial_assignment", cluster0, "x", "y", "x", "y",  false, true, false, 0, 5, 0, 5);
+const chart_kmeans_scales3 = createXYLineChart("initial_assignment", cluster0, "x", "y", "x", "y",  false, true, false, 0, 6, 0, 5);
 addPlotSeries("initial_assignment", cluster1, chart_kmeans_scales3.xScale, chart_kmeans_scales3.yScale, "x", "y", "black", "#118ab2", false, true);
 addPlotSeries("initial_assignment", initialCentroids, chart_kmeans_scales3.xScale, chart_kmeans_scales3.yScale, "x", "y", "black", "black", false, true);
 
 const updatedCentroids = updateCentroids(kmeansData1, initialCentroids);
-const chart_kmeans_scales4 = createXYLineChart("centroid_current", cluster0, "x", "y", "x", "y",  false, true, false, 0, 5, 0, 5);
+const chart_kmeans_scales4 = createXYLineChart("centroid_current", cluster0, "x", "y", "x", "y",  false, true, false, 0, 6, 0, 5);
 addPlotSeries("centroid_current", cluster1, chart_kmeans_scales4.xScale, chart_kmeans_scales4.yScale, "x", "y", "black", "#118ab2", false, true);
 addPlotSeries("centroid_current", updatedCentroids, chart_kmeans_scales4.xScale, chart_kmeans_scales4.yScale, "x", "y", "black", "black", false, true);
 
@@ -120,7 +120,7 @@ addPlotSeries("centroid_current", updatedCentroids, chart_kmeans_scales4.xScale,
 assignPointsToCentroids(kmeansData1, updatedCentroids);
 const updatedCluster0 = kmeansData1.filter(point => point.cluster === 0);
 const updatedCluster1 = kmeansData1.filter(point => point.cluster === 1);
-const chart_kmeans_scales5 = createXYLineChart("centroid_update", updatedCluster0, "x", "y", "x", "y",  false, true, false, 0, 5, 0, 5);
+const chart_kmeans_scales5 = createXYLineChart("centroid_update", updatedCluster0, "x", "y", "x", "y",  false, true, false, 0, 6, 0, 5);
 addPlotSeries("centroid_update", updatedCluster1, chart_kmeans_scales5.xScale, chart_kmeans_scales5.yScale, "x", "y", "black", "#118ab2", false, true);
 addPlotSeries("centroid_update", updatedCentroids, chart_kmeans_scales5.xScale, chart_kmeans_scales5.yScale, "x", "y", "black", "black", false, true);
 
@@ -155,7 +155,7 @@ function updateKmeansChart(k) {
     kmeansChart.innerHTML = '';
 
     // Plot each cluster on a single chart
-    const chartScales = createXYLineChart("final_clusters", [], "x", "y", "x", "y", false, true, false, 0, 5, 0, 5);
+    const chartScales = createXYLineChart("final_clusters", [], "x", "y", "x", "y", false, true, false, 0, 6, 0, 5);
 
     clusters.forEach((cluster, index) => {
         addPlotSeries("final_clusters", cluster, chartScales.xScale, chartScales.yScale, "x", "y", null, d3.schemeCategory10[index], false, true);
