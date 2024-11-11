@@ -366,3 +366,14 @@ body {
     stroke-width: 1px;
     stroke-dasharray: 0;
 }
+
+
+.node circle {
+    fill: #69b3a2;
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+.node text {
+    font: 12px sans-serif;
+    text-anchor: start;
+}

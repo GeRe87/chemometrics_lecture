@@ -1,19 +1,19 @@
 // JavaScript für die Tab-Umschaltfunktion
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
-      const tabId = tab.getAttribute('data-tab');
-      
-      // Entfernen der 'active'-Klasse von allen Tabs
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      // Hinzufügen der 'active'-Klasse zum angeklickten Tab
-      tab.classList.add('active');
-      
-      // Entfernen der 'active'-Klasse von allen Tab-Inhalten
-      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-      // Hinzufügen der 'active'-Klasse zu den passenden Inhalten
-      document.querySelectorAll(`.tab-content[data-tab="${tabId}"]`).forEach(content => content.classList.add('active'));
+        const tabId = tab.getAttribute('data-tab');
+
+        // Entfernen der 'active'-Klasse von allen Tabs
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        // Hinzufügen der 'active'-Klasse zum angeklickten Tab
+        tab.classList.add('active');
+
+        // Entfernen der 'active'-Klasse von allen Tab-Inhalten
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        // Hinzufügen der 'active'-Klasse zu den passenden Inhalten
+        document.querySelectorAll(`.tab-content[data-tab="${tabId}"]`).forEach(content => content.classList.add('active'));
     });
-  });  
+});
 
 // Helper function to create SVG container with xkcd wiggle filter
 function createSVG(containerId, width, height, margin) {
@@ -37,8 +37,8 @@ function createSVG(containerId, width, height, margin) {
     return svg;
 }
 
- // Helper function to create scales for line chart
- function createXYScales(data, width, height, xKey, yKey, xMin = null, xMax = null, yMin = null, yMax = null) {
+// Helper function to create scales for line chart
+function createXYScales(data, width, height, xKey, yKey, xMin = null, xMax = null, yMin = null, yMax = null) {
     const x = d3.scaleLinear()
         .domain(xMin !== null && xMax !== null ? [xMin, xMax] : d3.extent(data, d => d[xKey]))
         .range([0, width]);
@@ -107,7 +107,7 @@ function addAxes(svg, xScale, yScale, width, height, margin, xLabel, yLabel) {
 // Helper function to add legend
 function addLegend(svg, metals, colorScale, width) {
     const legend = svg.append("g")
-        .attr("transform", `translate(${width-10}, 0)`)
+        .attr("transform", `translate(${width - 10}, 0)`)
         .selectAll("g")
         .data(metals)
         .join("g")
@@ -194,8 +194,8 @@ function createGroupedBarChart(containerId, data, xLabel, yLabel, yMin = null, y
     addLegend(svg, metals, color, width);
 }
 
- // Main function to create XY line chart with optional markers and grid
- function createXYLineChart(containerId, data, xKey, yKey, xLabel, yLabel, showLines = true, showMarkers = false, showGrid = false, xMin = null, xMax = null, yMin = null, yMax = null) {
+// Main function to create XY line chart with optional markers and grid
+function createXYLineChart(containerId, data, xKey, yKey, xLabel, yLabel, showLines = true, showMarkers = false, showGrid = false, xMin = null, xMax = null, yMin = null, yMax = null) {
     // Chart dimensions
     const width = 300;
     const height = 400;
@@ -223,14 +223,14 @@ function createGroupedBarChart(containerId, data, xLabel, yLabel, yMin = null, y
 
     // Draw line with xkcd styling
     if (showLines) {
-    svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 4)
-        .attr("class", "xkcd-line")
-        .style("filter", "url(#wiggle-filter)") // Apply wiggle filter
-        .attr("d", line);
+        svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 4)
+            .attr("class", "xkcd-line")
+            .style("filter", "url(#wiggle-filter)") // Apply wiggle filter
+            .attr("d", line);
     }
 
     // Optionally add markers
@@ -334,7 +334,202 @@ function createDistanceMatrix(data, distanceFunction) {
     return matrix;
 }
 
-// hierarchical clustering
+// Generate linkage matrix for dendrogram based on distance matrix
+function hierarchicalClustering(data, distanceFunction) {
+    const matrix = createDistanceMatrix(data, distanceFunction);
+    const clusters = data.map((_, i) => [i]);  // Start with each point as a separate cluster
+    const linkageMatrix = [];
+
+    while (clusters.length > 1) {
+        let minDistance = Infinity;
+        let mergeIndexA = -1;
+        let mergeIndexB = -1;
+
+        // Find the two closest clusters
+        for (let i = 0; i < clusters.length; i++) {
+            for (let j = i + 1; j < clusters.length; j++) {
+                const dist = calculateClusterDistance(clusters[i], clusters[j], matrix);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    mergeIndexA = i;
+                    mergeIndexB = j;
+                }
+            }
+        }
+
+        // Merge the two closest clusters
+        const mergedCluster = clusters[mergeIndexA].concat(clusters[mergeIndexB]);
+        clusters.splice(mergeIndexB, 1);  // Remove the second cluster
+        clusters[mergeIndexA] = mergedCluster;  // Update the first cluster
+
+        // Record the merge in the linkage matrix (structure: [index1, index2, distance, cluster size])
+        linkageMatrix.push([mergeIndexA, mergeIndexB, minDistance, mergedCluster.length]);
+    }
+
+    return linkageMatrix;
+}
+
+// Calculate distance between two clusters
+function calculateClusterDistance(clusterA, clusterB, matrix) {
+    let minDistance = Infinity;
+    for (let i of clusterA) {
+        for (let j of clusterB) {
+            minDistance = Math.min(minDistance, matrix[i][j]);
+        }
+    }
+    return minDistance;
+}
+
+function dendrogram(data, options = {}) {
+    const {
+        width: width = 420,
+        height: height = 320,
+        hideLabels: hideLabels = false,
+        paddingBottom: paddingBottom = hideLabels ? 20 : 200,
+        innerHeight = height - paddingBottom,
+        innerWidth = width - 10,
+        paddingLeft = 30,
+        h: cutHeight = undefined,
+        yLabel: yLabel = "↑ Height",
+        colors: colors = d3.schemeTableau10,
+        fontFamily: fontFamily = "Inter, sans-serif",
+        linkColor: linkColor = "grey",
+        fontSize: fontSize = 10,
+        strokeWidth: strokeWidth = 3
+    } = options;
+
+    const svg = d3
+        .create("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [0, 0, width, innerHeight])
+        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+    var clusterLayout = d3.cluster().size([width - paddingLeft * 2, innerHeight]);
+
+    const root = d3.hierarchy(data);
+    const maxHeight = root.data.height;
+
+    const yScaleLinear = d3
+        .scaleLinear()
+        .domain([0, maxHeight])
+        .range([hideLabels ? innerHeight - 35 : innerHeight, 0]);
+
+    const yAxisLinear = d3.axisLeft(yScaleLinear).tickSize(5);
+
+    function transformY(data) {
+        const height = hideLabels ? innerHeight - 15 : innerHeight;
+        return height - (data.data.height / maxHeight) * height;
+    }
+
+    // traverse through first order children and assign colors
+    if (cutHeight) {
+        let curIndex = -1;
+        root.each((child) => {
+            if (
+                child.data.height <= cutHeight &&
+                child.data.height > 0 &&
+                child.parent &&
+                !child.parent.color
+            ) {
+                curIndex++;
+                child.color = colors[curIndex];
+            } else if (child.parent && child.parent.color) {
+                child.color = child.parent.color;
+            }
+        });
+    }
+
+    clusterLayout(root);
+
+    // y-axis
+    svg
+        .append("g")
+        .attr("transform", `translate(0, ${hideLabels ? 20 : 0})`)
+        .append("g")
+        .attr("class", "axis")
+        .attr("transform", `translate(${paddingLeft},${hideLabels ? 20 : 0})`)
+        .call(yAxisLinear)
+        .call((g) => g.select(".domain").remove())
+        .call((g) =>
+            g
+                .append("text")
+                .attr("x", -paddingLeft)
+                .attr("y", -20)
+                .attr("fill", "currentColor")
+                .attr("text-anchor", "start")
+                .style("font-family", fontFamily)
+                .text(yLabel)
+        )
+        .selectAll(".tick")
+        .classed("baseline", (d) => d == 0)
+        .style("font-size", `${fontSize}px`)
+        .style("font-family", fontFamily);
+
+    // Links
+    // Links with configurable color and stroke width
+    root.links().forEach((link) => {
+        svg
+            .append("path")
+            .attr("class", "link")
+            .attr("stroke", link.source.color || options.linkColor || "#000000") // Default to grey if no color specified
+            .attr("stroke-width", options.strokeWidth || 3.5) // Default to 1.5 if not specified
+            .attr("fill", "none")
+            .attr("transform", `translate(${paddingLeft}, ${options.hideLabels ? 20 : 0})`)
+            .attr("d", elbow(link));
+    });
+
+
+    // Nodes
+    // Sample labels at the x-axis for each leaf node, rotated 90 degrees
+    root.descendants().forEach((desc) => {
+        if (desc.data.isLeaf && !options.hideLabels) {
+            svg.append("text")
+                .attr("x", desc.x + paddingLeft) // Horizontal position based on dendrogram layout
+                .attr("y", innerHeight + 15) // Position below the dendrogram
+                .attr("text-anchor", "end")
+                .attr("font-size", `${fontSize}px`)
+                .attr("font-family", fontFamily)
+                .attr("transform", `rotate(-90, ${desc.x + paddingLeft}, ${innerHeight + 15})`) // Rotate text
+                .text(desc.data.name || desc.data.index); // Use name or index as label
+        }
+    });
+
+
+    // Custom path generator
+    function elbow(d) {
+        return (
+            "M" +
+            d.source.x +
+            "," +
+            transformY(d.source) +
+            "H" +
+            d.target.x +
+            "V" +
+            transformY(d.target)
+        );
+    }
+
+    return svg.node();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
