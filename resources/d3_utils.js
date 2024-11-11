@@ -1,19 +1,22 @@
-// JavaScript für die Tab-Umschaltfunktion
-document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        const tabId = tab.getAttribute('data-tab');
+// JavaScript für die Tab-Umschaltfunktion pro Folie
+document.querySelectorAll('.reveal .slides section').forEach(slide => {
+    slide.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const tabId = tab.getAttribute('data-tab');
 
-        // Entfernen der 'active'-Klasse von allen Tabs
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        // Hinzufügen der 'active'-Klasse zum angeklickten Tab
-        tab.classList.add('active');
+            // Entfernen der 'active'-Klasse von allen Tabs auf der aktuellen Folie
+            slide.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            // Hinzufügen der 'active'-Klasse zum angeklickten Tab
+            tab.classList.add('active');
 
-        // Entfernen der 'active'-Klasse von allen Tab-Inhalten
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-        // Hinzufügen der 'active'-Klasse zu den passenden Inhalten
-        document.querySelectorAll(`.tab-content[data-tab="${tabId}"]`).forEach(content => content.classList.add('active'));
+            // Entfernen der 'active'-Klasse von allen Tab-Inhalten auf der aktuellen Folie
+            slide.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            // Hinzufügen der 'active'-Klasse zu den passenden Inhalten auf der aktuellen Folie
+            slide.querySelectorAll(`.tab-content[data-tab="${tabId}"]`).forEach(content => content.classList.add('active'));
+        });
     });
 });
+
 
 // Helper function to create SVG container with xkcd wiggle filter
 function createSVG(containerId, width, height, margin) {
@@ -249,16 +252,15 @@ function createXYLineChart(containerId, data, xKey, yKey, xLabel, yLabel, showLi
     return { xScale: x, yScale: y };
 }
 
-// Function to add a new series to an existing XY chart
-function addPlotSeries(containerId, data, xScale, yScale, xKey, yKey, lineColor = "steelblue", markerColor = "#ef476f", showLine = true, showMarkers = false) {
-    const svg = d3.select(`#${containerId} svg g`);
+function addPlotSeries(containerId, data, xScale, yScale, xKey, yKey, lineColor = "steelblue", markerColor = "#ef476f", showLine = true, showMarkers = true) {
+    const svg = d3.select(`#${containerId} svg g`); // Wählt das bestehende `g`-Element aus
 
     const line = d3.line()
         .x(d => xScale(d[xKey]))
         .y(d => yScale(d[yKey]))
         .curve(d3.curveCatmullRom.alpha(0.5));
 
-    // Add line if showLine is true
+    // Linie hinzufügen, falls aktiviert
     if (showLine) {
         svg.append("path")
             .datum(data)
@@ -266,21 +268,25 @@ function addPlotSeries(containerId, data, xScale, yScale, xKey, yKey, lineColor 
             .attr("stroke", lineColor)
             .attr("stroke-width", 4)
             .style("filter", "url(#wiggle-filter)")
-            .attr("d", line);
+            .attr("d", line)
+            .raise(); // Bringt das neue Element ganz nach oben
     }
 
-    // Add markers if showMarkers is true
+    // Marker hinzufügen, falls aktiviert
     if (showMarkers) {
-        svg.selectAll(".marker")
+        svg.selectAll(null) // Leere Auswahl, um neue Elemente hinzuzufügen
             .data(data)
-            .join("circle")
+            .enter()
+            .append("circle")
             .attr("cx", d => xScale(d[xKey]))
             .attr("cy", d => yScale(d[yKey]))
             .attr("r", 7)
             .attr("fill", markerColor)
-            .style("filter", "url(#wiggle-filter)");
+            .style("filter", "url(#wiggle-filter)")
+            .raise(); // Bringt die neuen Punkte ganz nach oben
     }
 }
+
 
 // stuff for dendrogram
 // distance functions

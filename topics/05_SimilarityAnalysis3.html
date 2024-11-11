@@ -599,7 +599,6 @@ average linkage:
               <div class="tab" data-tab="dendrogram_data5">4</div>
               <div class="tab" data-tab="dendrogram_data6">5</div>
               <div class="tab" data-tab="dendrogram_data7">6</div>
-              <div class="tab" data-tab="dendrogram_data8">7</div>
             </div>
             <!-- Placeholder for full dendrogram -->
             <div class="tab-content active" data-tab="dendrogram_data2">
@@ -686,7 +685,109 @@ average linkage:
 └─────┴─────┴─────┴─────┴─────┴─────┘
 </pre> 
 </div>                
+<div class="tab-content" data-tab="dendrogram_data5">
+<pre style="font-size: large;">
+┌─────┬─────┬─────┬─────┬─────┬─────┐
+│Smpl │ #12 │ #3  │ #4  │ <span style="color: blue; font-weight: bold;">#56</span> │ <span style="color: blue; font-weight: bold;">#78</span> │
+├─────┼─────┼─────┼─────┼─────┼─────┤
+│ #12 │ .   │ .66 │ .76 │ <span style="color: blue; font-weight: bold;">.73</span> │ <span style="color: blue; font-weight: bold;">.91</span> │
+│ #3  │ .66 │ .   │ .75 │ <span style="color: blue; font-weight: bold;">.78</span> │ <span style="color: blue; font-weight: bold;">1.0</span> │
+│ #4  │ .76 │ .75 │ .   │ <span style="color: blue; font-weight: bold;">.74</span> │ <span style="color: blue; font-weight: bold;">1.2</span> │
+│ <span style="color: blue; font-weight: bold;">#56</span> │ <span style="color: blue; font-weight: bold;">.73</span> │ <span style="color: blue; font-weight: bold;">.78</span> │ <span style="color: blue; font-weight: bold;">.74</span> │ .   │ <span style="color: red; font-weight: bold;">.58</span> │
+│ <span style="color: blue; font-weight: bold;">#78</span> │ <span style="color: blue; font-weight: bold;">.91</span> │ <span style="color: blue; font-weight: bold;">1.0</span> │ <span style="color: blue; font-weight: bold;">1.2</span> │ <span style="color: red; font-weight: bold;">.58</span> │ .   │
+└─────┴─────┴─────┴─────┴─────┴─────┘
+</pre>
+<pre style="font-size: large;">
+average linkage:
+┌───────┬─────┬─────┬─────┬───────┐
+│ Smpl  │ #12 │ #3  │ #4  │ <span style="color: blue; font-weight: bold;">#5678</span> │
+├───────┼─────┼─────┼─────┼───────┤
+│ #12   │ .   │ .66 │ .76 │ <span style="color: blue; font-weight: bold;">.82</span>   │
+│ #3    │ .66 │ .   │ .75 │ <span style="color: blue; font-weight: bold;">.89</span>   │
+│ #4    │ .76 │ .75 │ .   │ <span style="color: blue; font-weight: bold;">.97</span>   │
+│ <span style="color: blue; font-weight: bold;">#5678</span> │ <span style="color: blue; font-weight: bold;">.82</span> │ <span style="color: blue; font-weight: bold;">.89</span> │ <span style="color: blue; font-weight: bold;">.97</span> │ .     │
+└───────┴─────┴─────┴─────┴───────┘
+</pre>
+</div>
+<div class="tab-content" data-tab="dendrogram_data6">
+<pre style="font-size: large;">
+┌───────┬─────┬─────┬─────┬───────┐
+│ Smpl  │ <span style="color: blue; font-weight: bold;">#12</span> │ <span style="color: blue; font-weight: bold;">#3</span>  │ #4  │ #5678 │
+├───────┼─────┼─────┼─────┼───────┤
+│ <span style="color: blue; font-weight: bold;">#12</span>   │ .   │ <span style="color: red; font-weight: bold;">.66</span> │ <span style="color: blue; font-weight: bold;">.76</span> │ <span style="color: blue; font-weight: bold;">.82</span>   │
+│ <span style="color: blue; font-weight: bold;">#3</span>    │ <span style="color: red; font-weight: bold;">.66</span> │ .   │ <span style="color: blue; font-weight: bold;">.75</span> │ <span style="color: blue; font-weight: bold;">.89</span>   │
+│ #4    │ <span style="color: blue; font-weight: bold;">.76</span> │ <span style="color: blue; font-weight: bold;">.75</span> │ .   │ .97   │
+│ #5678 │ <span style="color: blue; font-weight: bold;">.82</span> │ <span style="color: blue; font-weight: bold;">.89</span> │ .97 │ .     │
+└───────┴─────┴─────┴─────┴───────┘
+</pre>
+<pre style="font-size: large;">
+average linkage:
+┌───────┬─────┬─────┬──────┐
+│ Smpl  │ <span style="color: blue; font-weight: bold;">#123</span>│ #4  │ #5678│
+├───────┼─────┼─────┼──────┤
+│ <span style="color: blue; font-weight: bold;">#123</span>  │ .   │ <span style="color: blue; font-weight: bold;">.76</span> │ <span style="color: blue; font-weight: bold;">.86</span>  │
+│ #4    │ <span style="color: blue; font-weight: bold;">.76</span> │ .   │ .97  │
+│ #5678 │ <span style="color: blue; font-weight: bold;">.86</span> │ .97 │ .    │
+└───────┴─────┴─────┴──────┘
+</pre>
+</div>
+<div class="tab-content" data-tab="dendrogram_data7">
+<pre style="font-size: large;">
+┌───────┬─────┬─────┬──────┐
+│ Smpl  │ <span style="color: blue; font-weight: bold;">#123</span>│ <span style="color: blue; font-weight: bold;">#4</span>  │ #5678│
+├───────┼─────┼─────┼──────┤
+│ <span style="color: blue; font-weight: bold;">#123</span>  │ .   │ <span style="color: red; font-weight: bold;">.76</span> │ <span style="color: blue; font-weight: bold;">.86</span>  │
+│ <span style="color: blue; font-weight: bold;">#4</span>    │ <span style="color: red; font-weight: bold;">.76</span> │ .   │ <span style="color: blue; font-weight: bold;">.97</span>  │
+│ #5678 │ <span style="color: blue; font-weight: bold;">.86</span> │ <span style="color: blue; font-weight: bold;">.97</span> │ .    │
+└───────┴─────┴─────┴──────┘
+</pre>
+<pre style="font-size: large;">
+average linkage:
+┌───────┬───────┬───────┐
+│ Smpl  │ <span style="color: blue; font-weight: bold;">#1234</span> │ #5678 │
+├───────┼───────┼───────┤
+│ <span style="color: blue; font-weight: bold;">#1234</span> │ .     │ <span style="color: blue; font-weight: bold;">.92</span>   │
+│ #5678 │ <span style="color: blue; font-weight: bold;">.92</span>   │ .     │
+└───────┴───────┴───────┘
+</pre>
+</div>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 4: Building the Dendrogram</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">The process continues until all items are merged into a single cluster.</p>
+            <p class="styled-point">The dendrogram visually represents this nested grouping structure.</p>
+            <p class="styled-point">The height of each node indicates the distance at which clusters are merged.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="tabs">
+              <div class="tab active" data-tab="dendrogram_data8">1</div>
+              <div class="tab" data-tab="dendrogram_data9">2</div>
+              <div class="tab" data-tab="dendrogram_data10">3</div>
+              <div class="tab" data-tab="dendrogram_data11">4</div>
+              <div class="tab" data-tab="dendrogram_data12">5</div>
+            </div>
+            <div class="tab-content active" data-tab="dendrogram_data8">
+              <div id="dendrogram_data8"></div>
+            </div>
+            <div class="tab-content" data-tab="dendrogram_data9">
+              <div id="dendrogram_data9"></div>
+            </div>
+            <div class="tab-content" data-tab="dendrogram_data10">
+              <div id="dendrogram_data10"></div>
+            </div>
+            <div class="tab-content" data-tab="dendrogram_data11">
+              <div id="dendrogram_data11"></div>
+            </div>
+            <div class="tab-content" data-tab="dendrogram_data12">
+              <div id="dendrogram_data12"></div>
+            </div>
+          </div>	
         </div>
       </section>
 
@@ -705,7 +806,6 @@ average linkage:
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-            <!-- Placeholder for a labeled dendrogram with clusters indicated -->
             <div id="dendrogram_interpreted"></div>
           </div>
         </div>
@@ -734,14 +834,16 @@ average linkage:
         <h4>Step 1: Choosing the Number of Clusters (k)</h4>
         <div>
           <div class="leftBox">
-            <p class="styled-point">The number of clusters \( k \) must be chosen before running k-means.</p>
-            <p class="styled-point">Selecting \( k \) can be challenging, as it affects the algorithm’s results
-              significantly.</p>
-            <p class="styled-point">Methods for choosing \( k \) include:</p>
-            <p class="styled-point2"><strong>Elbow Method:</strong> Plot the sum of within-cluster variance (inertia)
-              vs. \( k \) and look for an "elbow" point.</p>
-            <p class="styled-point2"><strong>Silhouette Score:</strong> Evaluates how well-separated clusters are for
-              each \( k \) value.</p>
+            <p class="styled-point">
+              The number of clusters \( k \) must be chosen before running k-means.
+            </p>
+            <p class="styled-point">
+              Selecting \( k \) can be challenging, as it affects the algorithm’s results
+              significantly.
+            </p>
+            <p class="styled-point">
+              A common approach is to start with <code>k=2</code> and increase until the clustering quality stabilizes.
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
@@ -799,8 +901,17 @@ average linkage:
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
+            <div tabs>
+              <div class="tab active " data-tab="centroid_data1">current assignment</div>
+              <div class="tab" data-tab="centroid_data2">updated assignment</div>
+            </div>
             <!-- Placeholder for plot showing updated centroids -->
-            <div id="centroid_update"></div>
+            <div class="tab-content active" data-tab="centroid_data1">
+              <div id="centroid_current"></div>
+            </div>
+            <div class="tab-content" data-tab="centroid_data2">
+              <div id="centroid_update"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -816,6 +927,8 @@ average linkage:
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
+            <label for="kSlider" style="font-size: large;">no. clusters \( k \): <span id="kValue">1</span></label>
+            <input type="range" id="kSlider" min="1" max="6" step="1" value="1">
             <!-- Placeholder for plot showing final clusters -->
             <div id="final_clusters"></div>
           </div>
@@ -825,22 +938,42 @@ average linkage:
       <section>
         <h4>Evaluating the Clustering Results</h4>
         <div>
-          <div class="leftBox">
-            <p class="styled-point">To assess clustering quality, metrics such as the following are commonly used:</p>
-            <p class="styled-point2"><strong>Inertia (within-cluster variance):</strong> Measures compactness within
-              clusters; lower is better.</p>
-            <p class="styled-point2"><strong>Silhouette Score:</strong> Measures cohesion and separation; ranges from -1
-              to 1.</p>
-            <p class="styled-point2"><strong>ANOVA:</strong> Evaluates the separation between clusters by comparing
-              between-cluster and within-cluster variance.</p>
-          </div>
-          <div class="spacer"></div>
-          <div class="rightBox">
-            <!-- Placeholder for visualizations of inertia or silhouette score -->
-            <div id="evaluation_metrics"></div>
-          </div>
+            <div class="leftBox">
+                <p class="styled-point">To assess clustering quality, metrics such as the following are commonly used:</p>
+                <p class="styled-point2"><strong>Inertia (within-cluster variance):</strong> Measures compactness within clusters; lower is better.</p>
+                <p class="styled-point2"><strong>Silhouette Score:</strong> Measures cohesion and separation; ranges from -1 to 1.</p>
+                <p class="styled-point2"><strong>ANOVA:</strong> Evaluates the separation between clusters by comparing between-cluster and within-cluster variance.</p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+                <div tabs>
+                    <div class="tab active" data-tab="evaluation_data1">inertia</div>
+                    <div class="tab" data-tab="evaluation_data2">silhouette score</div>
+                    <div class="tab" data-tab="evaluation_data3">ANOVA</div>
+                </div>
+                <div class="tab-content active" data-tab="evaluation_data1">
+                    <p class="styled-noPoint">\[
+                        \text{Inertia} = \sum_{i=1}^{k} \sum_{x \in C_i} \| x - \mu_i \|^2
+                    \]</p>
+                    <p class="styled-noPoint">where \( x \) represents a data point in cluster \( C_i \), and \( \mu_i \) is the centroid of cluster \( C_i \).</p>
+                </div>
+                <div class="tab-content" data-tab="evaluation_data2">
+                    <p class="styled-noPoint">\[
+                        \text{Silhouette Score} = \frac{b - a}{\max(a, b)}
+                    \]</p>
+                    <p class="styled-noPoint">where \( a \) is the mean intra-cluster distance for each sample, and \( b \) is the mean nearest-cluster distance for each sample.</p>
+                </div>
+                <div class="tab-content" data-tab="evaluation_data3">
+                    <p class="styled-noPoint">\[
+                        F = \frac{\text{Between-Cluster Variance}}{\text{Within-Cluster Variance}}
+                    \]</p>
+                    <p class="styled-noPoint">Used in ANOVA to assess the ratio of variance between clusters to the variance within clusters.</p>
+                </div>
+                <img src="../resources/kmeans.png" alt="k-means evaluation metrics" style="width: 50%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); display: block; margin: 0 auto;">
+            </div>
         </div>
-      </section>
+    </section>
+    
 
 
     </div>
@@ -914,6 +1047,7 @@ average linkage:
   <script src="../resources/chart_distance1.js"></script>
   <script src="../resources/codebox_minkowski1.js"></script>
   <script src="../resources/chart_dendrogram1.js"></script>
+  <script src="../resources/chart_kmeans.js"></script>
 
 
 
