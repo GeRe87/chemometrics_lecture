@@ -255,7 +255,7 @@
 /* Stil für Tabs */
 .tab {
     display: inline-block;
-    padding: 5px 20px;
+    padding: 5px 10px;
     cursor: pointer;
     background-color: lightgray;
     border: 1px solid #c5c3c3;

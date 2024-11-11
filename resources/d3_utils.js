@@ -513,6 +513,81 @@ function dendrogram(data, options = {}) {
     return svg.node();
 }
 
+// Function to create a distance matrix given data and a distance function
+function createDistanceMatrix(data, distanceFunction) {
+    const n = data.length;
+    const matrix = Array.from({ length: n }, () => Array(n).fill(0));
+  
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const dist = distanceFunction(data[i], data[j]);
+        matrix[i][j] = dist;
+        matrix[j][i] = dist; // Symmetric matrix
+      }
+    }
+    return matrix;
+  }
+
+
+  // Agglomerative clustering function (from previous example)
+function agglomerativeClustering(distances, labels) {
+    let clusters = labels.map((label, i) => ({
+      name: `Sample ${label}`,
+      height: 0,
+      isLeaf: true,
+      index: i
+    }));
+  
+    const n = clusters.length;
+    let currentClusterIndex = n;
+  
+    function calculateAverageDistance(cluster1, cluster2) {
+      let totalDistance = 0;
+      let count = 0;
+      cluster1.indices.forEach(i => {
+        cluster2.indices.forEach(j => {
+          totalDistance += distances[i][j];
+          count += 1;
+        });
+      });
+      return totalDistance / count;
+    }
+  
+    clusters.forEach(cluster => {
+      cluster.indices = [cluster.index];
+    });
+  
+    while (clusters.length > 1) {
+      let minDistance = Infinity;
+      let mergeIndices = [0, 1];
+  
+      for (let i = 0; i < clusters.length - 1; i++) {
+        for (let j = i + 1; j < clusters.length; j++) {
+          const distance = calculateAverageDistance(clusters[i], clusters[j]);
+          if (distance < minDistance) {
+            minDistance = distance;
+            mergeIndices = [i, j];
+          }
+        }
+      }
+  
+      const [index1, index2] = mergeIndices;
+      const newCluster = {
+        name: `Cluster ${currentClusterIndex++}`,
+        height: minDistance,
+        children: [clusters[index1], clusters[index2]],
+        indices: [...clusters[index1].indices, ...clusters[index2].indices]
+      };
+  
+      clusters.splice(index2, 1);
+      clusters.splice(index1, 1);
+      clusters.push(newCluster);
+    }
+  
+    return clusters[0];
+  }
+  
+
 
 
 
