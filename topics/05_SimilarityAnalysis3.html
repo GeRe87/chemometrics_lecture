@@ -1454,7 +1454,6 @@ average linkage:
             <pre style="font-size: large;">
                   <code data-trim data-noescape>
                       Data × Eigenvectors = Scores
-  
                       ┌       ┐   ┌                  ┐   ┌        ┐
                       │ x1 x2 │ × │ v_1   v_2  ...   │ = │  PC1   │
                       │ ...   │   │ ...   ...  ...   │   │  PC2   │
@@ -1466,6 +1465,10 @@ average linkage:
               Each row of <code>Scores</code> represents a transformed data point, and each column of
               <code>Loadings</code> shows the contribution of each variable to a principal component.
             </p>
+            <p class="styled-point2">
+              PCA is data decomposition, breaking down the data into loadings \(l\) & scores \(s\).
+              \[ Data = s \cdot l^T \]
+              Where \(l^T\) is the transpose of the loadings matrix (loadings are the eigenvectors).
           </div>
         </div>
       </section>
