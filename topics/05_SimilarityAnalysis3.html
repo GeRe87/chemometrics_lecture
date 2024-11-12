@@ -812,6 +812,44 @@ average linkage:
       </section>
 
       <section>
+        <h4>Advantages and Limitations of HCA</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point"><code>Advantages</code></p>
+            <p class="styled-point2">
+              Does not require a predefined number of clusters; HCA provides a complete hierarchy.
+            </p>
+            <p class="styled-point2">
+              Generates a <code>dendrogram</code> that visually represents cluster relationships at multiple levels.
+            </p>
+            <p class="styled-point2">
+              Effective for small to medium datasets, especially when clusters are well-separated.
+            </p>
+            <p class="styled-point2">
+              Ideal for discovering nested or hierarchical data structures, useful in fields like taxonomy and genomics.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point"><code>Limitations</code></p>
+            <p class="styled-point2">
+              Computationally demanding, especially for large datasets (complexity of \(O(n^2)\)).
+            </p>
+            <p class="styled-point2">
+              Sensitive to noise and outliers; even small variations can affect cluster results.
+            </p>
+            <p class="styled-point2">
+              Does not allow reassignment of points after merging, which can lead to misclassification.
+            </p>
+            <p class="styled-point2">
+              Challenging with high-dimensional data, as distance-based calculations may become less reliable.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
         <h4>Introduction to k-means Clustering</h4>
         <div>
           <div class="leftBox">
@@ -982,6 +1020,42 @@ average linkage:
       </section>
 
       <section>
+        <h4>Advantages and Limitations of K-Means</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point"><code>Advantages</code></p>
+            <p class="styled-point2">
+              Simple and efficient for large datasets with low computational complexity, especially when clusters are
+              well-separated.
+            </p>
+            <p class="styled-point2">
+              Can be easily adapted for different use cases, such as image compression and document clustering.
+            </p>
+            <p class="styled-point2">
+              Works well with spherical-shaped clusters where data points are evenly distributed around a centroid.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point"><code>Limitations</code></p>
+            <p class="styled-point2">
+              Requires the number of clusters, <code>k</code>, to be specified in advance, which can be challenging to
+              determine.
+            </p>
+            <p class="styled-point2">
+              Sensitive to initial centroid placement, potentially leading to different clustering results in each run.
+            </p>
+            <p class="styled-point2">
+              Not suitable for non-spherical clusters or clusters with varying sizes and densities.
+            </p>
+            <p class="styled-point2">
+              Struggles with outliers, which can significantly impact the cluster centroids and overall result.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
         <h4>What is Principal Component Analysis (PCA)?</h4>
         <div>
           <div class="leftBox">
@@ -1014,7 +1088,8 @@ average linkage:
         <h4>
           Dimensionality Reduction through Axis Transformation
         </h4>
-        <img src="../resources/pca_princ.png" alt="PCA axis transformation" style="width: 100%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
+        <img src="../resources/pca_princ.png" alt="PCA axis transformation"
+          style="width: 100%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
       </section>
 
       <section>
@@ -1125,6 +1200,8 @@ average linkage:
               Retaining the largest <code>eigenvalues</code> reduces dimensionality, focusing on the primary sources of
               information in the data.
             </p>
+            <img src="../resources/pca_spread.png" alt="PCA eigenvectors"
+              style="width: 70%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); display: block; margin: 0 auto;">
           </div>
         </div>
       </section>
@@ -1197,7 +1274,8 @@ average linkage:
               <code>Example:</code> For a 4D dataset, the eigenvectors might show directions of maximum spread,
               while eigenvalues indicate the strength of each direction.
             </p>
-            <p class="styled-point">Example 2: <span style="color: blue;">original vec</span> & <span style="color: red;">transformed vec</span></p>
+            <p class="styled-point">Example 2: <span style="color: blue;">original vec</span> & <span
+                style="color: red;">transformed vec</span></p>
             <div style="display: inline-block;">
               <div style="display: inline-block;">
                 <pre style="font-size: large;">
@@ -1226,9 +1304,9 @@ average linkage:
       <section>
         <h4>Covariance Matrix and Its Eigenvectors & Eigenvalues</h4>
         <div>
-            <div class="leftBox">
-                <p class="styled-point">The covariance matrix of the data:</p>
-                <pre style="font-size: large;">
+          <div class="leftBox">
+            <p class="styled-point">The covariance matrix of the data:</p>
+            <pre style="font-size: large;">
                     <code data-trim data-noescape>
                            ┌                    ┐
                            │ 2.5  0.8  0.6  1.2 │
@@ -1238,11 +1316,11 @@ average linkage:
                            └                    ┘
                     </code>
                 </pre>
-            </div>
-            <div class="spacer"></div>
-            <div class="rightBox">
-                <p class="styled-point">Eigenvector matrix and corresponding eigenvalues:</p>
-                <pre style="font-size: large;">
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">Eigenvector matrix and corresponding eigenvalues:</p>
+            <pre style="font-size: large;">
                     <code data-trim data-noescape>
                          ┌                               ┐
                          │  1.617  -0.777  -3.007  0.731 │
@@ -1253,37 +1331,77 @@ average linkage:
                      λ_1 ≈ 1.3, λ_2 ≈ 1.5, λ_3 ≈ 1.9, λ_4 ≈ 5.2
                     </code>
                 </pre>
-                <p class="styled-point2">
-                    Each <code>eigenvalue</code> λ indicates the variance captured along the direction of its <code>eigenvector</code>.
-                </p>
-                <p class="styled-point2">
-                    The <code>eigenvectors</code> v_4 and v_3 with the highest <code>eigenvalues</code> capture the most variance and are the first and second principal components.
-                </p>
-            </div>
+            <p class="styled-point2">
+              Each <code>eigenvalue</code> λ indicates the variance captured along the direction of its
+              <code>eigenvector</code>.
+            </p>
+            <p class="styled-point2">
+              The <code>eigenvectors</code> v_4 and v_3 with the highest <code>eigenvalues</code> capture the most
+              variance and are the first and second principal components.
+            </p>
+          </div>
         </div>
-    </section>
-    
-    <section>
-      <h4>Transforming Data: Loadings and Scores</h4>
-      <div>
+      </section>
+
+      <section>
+        <h4>Interpreting the Role of Eigenvectors and Eigenvalues in PCA</h4>
+        <div>
           <div class="leftBox">
-              <p class="styled-point">
-                  To transform the data, we use the <code>eigenvectors</code> of the covariance matrix. These eigenvectors form a new basis for the data.
-              </p>
-              <p class="styled-point2">
-                  Each data point is projected onto this new basis, creating two key components:
-              </p>
-              <p class="styled-point2">
-                  <code>Scores</code>: Represent the data points in the new coordinate system defined by the principal components.
-              </p>
-              <p class="styled-point2">
-                  <code>Loadings</code>: Show how the original variables contribute to each principal component.
-              </p>
+            <p class="styled-point">
+              <code>Eigenvectors</code> represent the <code>new axes</code> in PCA, also known as
+              <code>principal components</code>.
+            </p>
+            <p class="styled-point2">
+              The individual values within an eigenvector describe how much each <code>original feature</code>
+              contributes to the principal component.
+            </p>
+            <p class="styled-point2">
+              A larger value indicates that a specific feature plays a more significant role in this component.
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-              <p class="styled-point">Transformation process:</p>
-              <pre style="font-size: large;">
+            <p class="styled-point">
+              <code>Eigenvalues</code> reflect the amount of <code>variance</code> captured by each principal component.
+            </p>
+            <p class="styled-point2">
+              The sum of all eigenvalues represents the <code>total variance</code> in the data.
+            </p>
+            <p class="styled-point2">
+              Higher eigenvalues mean a component captures more variance, ideally with the first few components covering
+              a substantial portion.
+            </p>
+            <p class="styled-point2">
+              If eigenvalues are distributed evenly, PCA might not significantly reduce dimensions, suggesting it may be
+              less effective for the data.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Transforming Data: Loadings and Scores</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              To transform the data, we use the <code>eigenvectors</code> of the covariance matrix. These eigenvectors
+              form a new basis for the data.
+            </p>
+            <p class="styled-point2">
+              Each data point is projected onto this new basis, creating two key components:
+            </p>
+            <p class="styled-point2">
+              <code>Scores</code>: Represent the data points in the new coordinate system defined by the principal
+              components.
+            </p>
+            <p class="styled-point2">
+              <code>Loadings</code>: Show how the original variables contribute to each principal component.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">Transformation process:</p>
+            <pre style="font-size: large;">
                   <code data-trim data-noescape>
                       Data × Eigenvectors = Scores
   
@@ -1294,38 +1412,39 @@ average linkage:
                       └       ┘   └                  ┘   └        ┘
                   </code>
               </pre>
-              <p class="styled-point2">
-                  Each row of <code>Scores</code> represents a transformed data point, and each column of <code>Loadings</code> shows the contribution of each variable to a principal component.
-              </p>
+            <p class="styled-point2">
+              Each row of <code>Scores</code> represents a transformed data point, and each column of
+              <code>Loadings</code> shows the contribution of each variable to a principal component.
+            </p>
           </div>
-      </div>
-  </section>
-  
-  <section>
-    <h4>
-      Working Example: PCA on Fruits Dataset
-    </h4>
-    <div>
-      <div class="leftBox">
-        <p class="styled-point">
-          Different Fruits as Samples.
-        </p>
-        <p class="styled-point2">
-          Apple, Banana, Lime, Grape, Pineapple
-        </p>
-        <p class="styled-point">
-          Different measurements methods as Features.
-        </p>
-        <p class="styled-point2">
-          Sweetness, Weight, Price
-        </p>
-        <p class="styled-point2">
-          Sourness, Color(Red), Color(Blue), Color(Green)
-        </p>
-      </div>
-      <div class="spacer"></div>
-      <div class="rightBox">
-        <pre style="font-size: medium;">
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Working Example: PCA on Fruits Dataset
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              Different Fruits as Samples.
+            </p>
+            <p class="styled-point2">
+              Apple, Banana, Lime, Grape, Pineapple
+            </p>
+            <p class="styled-point">
+              Different measurements methods as Features.
+            </p>
+            <p class="styled-point2">
+              Sweetness, Weight, Price
+            </p>
+            <p class="styled-point2">
+              Sourness, Color(Red), Color(Blue), Color(Green)
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <pre style="font-size: medium;">
 Sweetness Weight Price Sourness Color(R) Color(G) Color(B)
    9.0     995.6  5.0    1.0      246      255      38
    7.3     156.1  2.9    3.9      249       16      12
@@ -1355,50 +1474,166 @@ Sweetness Weight Price Sourness Color(R) Color(G) Color(B)
    8.1     984.8  5.3    1.1      253      255      33
    7.7      13.1  3.8    2.8      124        8     115
         </pre>
-      </div>
-    </div>
-  </section>
+          </div>
+        </div>
+      </section>
 
-  <section>
-    <h4>
-      Working Example: PCA on Fruits Dataset <span class="magenta-text">< Scores Plot ></span> 
-    </h4>
-    <img src="../resources/pca_fruits_scores.png" alt="PCA on Fruits Dataset" style="width: 70%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
-  </section>
+      <section>
+        <h4>
+          Working Example: PCA on Fruits Dataset <span class="magenta-text">
+            < Scores Plot>
+          </span>
+        </h4>
+        <img src="../resources/pca_fruits_scores.png" alt="PCA on Fruits Dataset"
+          style="width: 70%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
+      </section>
 
-  <section>
-    <h4>
-      Working Example: PCA on Fruits Dataset <span class="magenta-text">< Bi-Plot ></span>
-    </h4>
-    <img src="../resources/pca_fruits_biplot.png" alt="PCA on Fruits Dataset" style="width: 70%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
-  </section>
+      <section>
+        <h4>
+          Working Example: PCA on Fruits Dataset <span class="magenta-text">
+            < Bi-Plot>
+          </span>
+        </h4>
+        <img src="../resources/pca_fruits_biplot.png" alt="PCA on Fruits Dataset"
+          style="width: 70%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
+      </section>
 
-  <section>
-    <h4>
-      Working Example: PCA on Fruits Dataset <span class="magenta-text">< Interpretation ></span>
-    </h4>
-    <div>
-      <div class="leftBox">
-        <p class="styled-point">
-          The PCA bi-plot shows the relationship between samples and features in the transformed space.
-        </p>
-        <p class="styled-point2">
-          Samples are represented by points, while features are shown as vectors.
-        </p>
-        <p class="styled-point2">
-          The length and direction of feature vectors indicate their importance and relationship to samples.
-        </p>
+      <section>
+        <h4>
+          Working Example: PCA on Fruits Dataset <span class="magenta-text">
+            < Interpretation>
+          </span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              The PCA bi-plot shows the relationship between samples and features in the transformed space.
+            </p>
+            <p class="styled-point2">
+              Samples are represented by points, while features are shown as vectors.
+            </p>
+            <p class="styled-point2">
+              The length and direction of feature vectors indicate their importance and relationship to samples.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/pca_fruits_biplot.png" alt="PCA on Fruits Dataset"
+              style="width: 100%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
+            <p class="styled-point2">
+              In this example, the first principal component (PC1) is strongly influenced weight, while the second
+              principal component (PC2) is driven by color features.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Advantages and Limitations of PCA</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Advantages of PCA</p>
+            <p class="styled-point2">
+              <code>Dimensionality Reduction</code>: Simplifies datasets by reducing variables, preserving core
+              information.
+            </p>
+            <p class="styled-point2">
+              <code>Noise Reduction</code>: Filters noise by focusing on components with the highest variance.
+            </p>
+            <p class="styled-point2">
+              <code>Improved Visualization</code>: Enables visualization of high-dimensional data in 2D or 3D.
+            </p>
+            <p class="styled-point2">
+              <code>Feature Extraction</code>: Highlights uncorrelated variables, making dominant features clear.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">Limitations of PCA</p>
+            <p class="styled-point2">
+              <code>Linear Assumptions</code>: Captures linear relationships but may miss non-linear structures.
+            </p>
+            <p class="styled-point2">
+              <code>Loss of Interpretability</code>: Principal components lack intuitive meaning compared to original
+              features.
+            </p>
+            <p class="styled-point2">
+              <code>Variance-Based Selection</code>: Ignores low-variance components that may still hold relevant
+              information.
+            </p>
+            <p class="styled-point2">
+              <code>Scaling Sensitivity</code>: Results can vary with inconsistent feature scaling.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Excursion to Linear Discriminant Analysis (LDA)</h4>
+        <div>
+            <div class="leftBox">
+                <p class="styled-point">
+                    <code>Linear Discriminant Analysis (LDA)</code> is similar to PCA, but with a focus on distinguishing between predefined groups.
+                </p>
+                <p class="styled-point2">
+                    Instead of maximizing overall <code>variance</code>, LDA aims to maximize <code>separation</code> between groups.
+                </p>
+                <p class="styled-point2">
+                    LDA uses the <code>within-group covariance matrix</code> inverse, multiplied by the <code>between-group covariance matrix</code>, to find new axes.
+                    \[ C = \Sigma_w^{-1} \cdot \Sigma_b \]
+                </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+                <p class="styled-point2">
+                    The new axes (or <code>discriminant components</code>) in LDA are chosen to best separate the groups, not just capture variance.
+                </p>
+                <p class="styled-point2">
+                    <code>Applications</code>: Often used in classification tasks, as it enhances differences between categories, improving separability.
+                </p>
+                <p class="styled-point2">
+                    <code>Limitations</code>: LDA assumes normally distributed data within each group and may struggle with non-linear boundaries.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+      <h4>LDA vs. PCA</h4>
+      <div style="display: inline-block;">
+        <img src="../resources/lda1.png" alt="LDA vs. PCA" style="width: 45%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
+        <img src="../resources/lda2.png" alt="LDA vs. PCA" style="width: 45%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
       </div>
-      <div class="spacer"></div>
-      <div class="rightBox">
-        <img src="../resources/pca_fruits_biplot.png" alt="PCA on Fruits Dataset" style="width: 100%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
-        <p class="styled-point2">
-          In this example, the first principal component (PC1) is strongly influenced weight, while the second principal component (PC2) is driven by color features.
-        </p>
+    </section>
+
+    <section>
+      <h4>
+        Seminar Material
+      </h4>
+      <div>
+        <div class="leftBox">
+          <p class="styled-point">
+            We will have a look on a dataset of 178 different Wines.
+          </p>
+          <p class="styled-point2">
+            Multiple measurements were taken for each wine.
+          </p>
+          <p class="styled-point2">
+            Using PCA, we will try to reduce the dimensionality of the dataset.
+          </p>
+          <p class="styled-point2">
+            Using K-Means, we will try to cluster the wines into different groups.
+          </p>
+        </div>
+        <div class="spacer"></div>
+        <div class="rightBox">
+          <p class="styled-point">
+            Download the data set here: <a href="../resources/Wine.csv">Wine.csv</a>
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
     
-  </section>
 
     </div>
     <div class="footer-global">
