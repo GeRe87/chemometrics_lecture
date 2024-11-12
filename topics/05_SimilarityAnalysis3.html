@@ -1093,6 +1093,56 @@ average linkage:
       </section>
 
       <section>
+        <h4>Coordinate Axes as a Matrix</h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              The <code>coordinate axes</code> of a space can be represented as a matrix. In its simplest form, this is
+              the <code>identity matrix</code>, where all axes are perpendicular.
+            </p>
+            <p class="styled-point2">
+              The <code>identity matrix</code> (or unity matrix) has values of 1 along its diagonal and 0 elsewhere,
+              representing standard perpendicular axes.
+            </p>
+            <p class="styled-point2">
+              By modifying the <code>angles</code> between the axes, we can adjust this matrix to define
+              <code>new coordinate systems</code>.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <pre style="font-size: large;">
+                    <code data-trim data-noescape>
+                         Identity Matrix:
+                         ┌     ┐
+                         │ 1 0 │
+                         │ 0 1 │
+                         └     ┘
+                    </code>
+                </pre>
+            <p class="styled-point2">
+              Example: Adjusting the identity matrix by changing angles between axes allows transformations to define
+              new directions or rotations in data.
+            </p>
+            <pre style="font-size: large;">
+                  <code data-trim data-noescape>
+                       Identity Matrix:
+                       ┌     ┐          ┌     ┐  
+                       │ 1 0 │  Strech  │ 2 0 │  
+                       │ 0 1 │  along   │ 0 1 │  
+                       └     ┘  x-axis  └     ┘  
+          coordinates:  (5, 3)    ->  s (10, 3)
+                  </code>
+              </pre>
+            <p class="styled-point4">
+              Remember: Matrix x Vector means row-wise multiplication of the matrix with the vector. E.g.
+              <code>2 * 5 + 0 * 3</code> and <code>0 * 5 + 1 * 3</code> in the example above.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
         <h4>Dimensionality Reduction through Axis Transformation</h4>
         <div>
           <div class="leftBox">
@@ -1571,69 +1621,77 @@ Sweetness Weight Price Sourness Color(R) Color(G) Color(B)
       <section>
         <h4>Excursion to Linear Discriminant Analysis (LDA)</h4>
         <div>
-            <div class="leftBox">
-                <p class="styled-point">
-                    <code>Linear Discriminant Analysis (LDA)</code> is similar to PCA, but with a focus on distinguishing between predefined groups.
-                </p>
-                <p class="styled-point2">
-                    Instead of maximizing overall <code>variance</code>, LDA aims to maximize <code>separation</code> between groups.
-                </p>
-                <p class="styled-point2">
-                    LDA uses the <code>within-group covariance matrix</code> inverse, multiplied by the <code>between-group covariance matrix</code>, to find new axes.
-                    \[ C = \Sigma_w^{-1} \cdot \Sigma_b \]
-                </p>
-            </div>
-            <div class="spacer"></div>
-            <div class="rightBox">
-                <p class="styled-point2">
-                    The new axes (or <code>discriminant components</code>) in LDA are chosen to best separate the groups, not just capture variance.
-                </p>
-                <p class="styled-point2">
-                    <code>Applications</code>: Often used in classification tasks, as it enhances differences between categories, improving separability.
-                </p>
-                <p class="styled-point2">
-                    <code>Limitations</code>: LDA assumes normally distributed data within each group and may struggle with non-linear boundaries.
-                </p>
-            </div>
+          <div class="leftBox">
+            <p class="styled-point">
+              <code>Linear Discriminant Analysis (LDA)</code> is similar to PCA, but with a focus on distinguishing
+              between predefined groups.
+            </p>
+            <p class="styled-point2">
+              Instead of maximizing overall <code>variance</code>, LDA aims to maximize <code>separation</code> between
+              groups.
+            </p>
+            <p class="styled-point2">
+              LDA uses the <code>within-group covariance matrix</code> inverse, multiplied by the
+              <code>between-group covariance matrix</code>, to find new axes.
+              \[ C = \Sigma_w^{-1} \cdot \Sigma_b \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              The new axes (or <code>discriminant components</code>) in LDA are chosen to best separate the groups, not
+              just capture variance.
+            </p>
+            <p class="styled-point2">
+              <code>Applications</code>: Often used in classification tasks, as it enhances differences between
+              categories, improving separability.
+            </p>
+            <p class="styled-point2">
+              <code>Limitations</code>: LDA assumes normally distributed data within each group and may struggle with
+              non-linear boundaries.
+            </p>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <section>
-      <h4>LDA vs. PCA</h4>
-      <div style="display: inline-block;">
-        <img src="../resources/lda1.png" alt="LDA vs. PCA" style="width: 45%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
-        <img src="../resources/lda2.png" alt="LDA vs. PCA" style="width: 45%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
-      </div>
-    </section>
+      <section>
+        <h4>LDA vs. PCA</h4>
+        <div style="display: inline-block;">
+          <img src="../resources/lda1.png" alt="LDA vs. PCA"
+            style="width: 45%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
+          <img src="../resources/lda2.png" alt="LDA vs. PCA"
+            style="width: 45%; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);">
+        </div>
+      </section>
 
-    <section>
-      <h4>
-        Seminar Material
-      </h4>
-      <div>
-        <div class="leftBox">
-          <p class="styled-point">
-            We will have a look on a dataset of 178 different Wines.
-          </p>
-          <p class="styled-point2">
-            Multiple measurements were taken for each wine.
-          </p>
-          <p class="styled-point2">
-            Using PCA, we will try to reduce the dimensionality of the dataset.
-          </p>
-          <p class="styled-point2">
-            Using K-Means, we will try to cluster the wines into different groups.
-          </p>
+      <section>
+        <h4>
+          Seminar Material
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              We will have a look on a dataset of 178 different Wines.
+            </p>
+            <p class="styled-point2">
+              Multiple measurements were taken for each wine.
+            </p>
+            <p class="styled-point2">
+              Using PCA, we will try to reduce the dimensionality of the dataset.
+            </p>
+            <p class="styled-point2">
+              Using K-Means, we will try to cluster the wines into different groups.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">
+              Download the data set here: <a href="../resources/Wine.csv">Wine.csv</a>
+            </p>
+          </div>
         </div>
-        <div class="spacer"></div>
-        <div class="rightBox">
-          <p class="styled-point">
-            Download the data set here: <a href="../resources/Wine.csv">Wine.csv</a>
-          </p>
-        </div>
-      </div>
-    </section>
-    
+      </section>
+
 
     </div>
     <div class="footer-global">
