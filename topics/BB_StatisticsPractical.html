@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Chemometrics and Statistics</title>
+
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <link rel="stylesheet" href="../dist/theme/iac.css">
+    <link rel="stylesheet" href="../css/mystyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+    <style>
+        .green-text {
+            color: rgb(133, 198, 42);
+        }
+
+        .teal-text {
+            color: rgb(0, 150, 136);
+        }
+
+        .small-text {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <div
+                    style="width: 100%; height: 100%; background-color: beige;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; padding: 20px;">
+                    <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+                    <pre><code>05. Similarity Analysis 3</code></pre>
+                    <h4>Mulitvariate Similarity Analysis</h4>
+                    <p style="font-size: large; text-align: right;">by <a
+                            href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
+                </div>
+            </section>
+
+            <section>
+                <div
+                    style="width: 100%; height: 100%; background-color: beige;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; padding: 20px;">
+                    <h4>
+                        Some Title
+                    </h4>
+                    <div>
+                        <div class="leftBox">
+                            <p class="styled-point">some <span class="post-it-strip">Keyword</span> in my text.</p>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="rightBox">
+                            <p class="styled-point">some <span class="post-it-strip">Keyword</span> in my text.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <div class="footer-global">
+            Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+            Last updated: November 11, 2024
+        </div>
+    </div>
+    <div id="clock">--:--</div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/math/math.js"></script>
+    <script src="../plugin/menu/menu.js"></script>
+    <!-- Anything plugin -->
+    <!-- Chart plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            // Parallax background image
+            parallaxBackgroundImage: '../resources/bg2.png', // URL of your background image
+
+            // Parallax background size (optional)
+            parallaxBackgroundSize: '3840px 2160px', // Adjust to your desired size
+
+            // Parallax background horizontal movement (optional)
+            parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
+
+            // Parallax background vertical movement (optional)
+            parallaxBackgroundVertical: 50, // Vertical movement, adjust as needed
+            menu: {
+                custom: [{
+                    title: 'Topics',
+                    icon: '<i class="fas fa-home"></i>',
+                    src: 'menu.html'
+                }]
+            },
+            hash: true,
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealChart, RevealMenu],
+        });
+        // Funktion zum Aktualisieren der Uhrzeit
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Uhrzeit sofort und dann jede Sekunde aktualisieren
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+    <!-- Chart scripts -->
+
+
+
+
+
+</body>
+
+</html>

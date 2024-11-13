@@ -303,13 +303,14 @@
     vertical-align: top;
 }
 
-.reveal {
-    background-image: url('../resources/bg.png');
-    background-size: 906px 117px;
-    background-position: top;
+/* .reveal {
+    background-image: url('../resources/bg2.png');
+    background-size: 3840px 2160px;/*906px 117px;*/
+    /* background-attachment: fixed; */
+    /* background-position: top;
     background-position-y: -50px; /* Adjust the value as needed for the vertical offset */
-    background-repeat: no-repeat;
-}
+    /* background-repeat: no-repeat; */
+/* } */ 
 
 #clock {
     position: fixed;
@@ -381,3 +382,19 @@ body {
     font: 12px sans-serif;
     text-anchor: start;
 }
+
+.post-it-strip {
+    position: relative;
+    height: 1.5em; /* Höhe des Streifens */
+    background-color: #fff395; /* Gelbe Farbe für Post-it */
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Schatten */
+    transform: perspective(300px) rotateX(5deg) rotateZ(2deg) rotateY(-5deg); /* Perspektive und leichte Neigung */
+    padding: 0 10px; /* Polsterung für den Inhalt */
+    display: inline-block;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Mabook", "Noto Sans", "Source Sans Pro", Helvetica, sans-serif;
+    color: #AA3A39;
+}
+
