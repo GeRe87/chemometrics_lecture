@@ -1712,8 +1712,6 @@ Sweetness Weight Price Sourness Color(R) Color(G) Color(B)
   <script src="../plugin/menu/menu.js"></script>
   <!-- Anything plugin -->
   <!-- Chart plugin -->
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/chart/plugin.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../plugin/chartscii/dist/bundle.js"></script>
   <script>
@@ -1721,6 +1719,13 @@ Sweetness Weight Price Sourness Color(R) Color(G) Color(B)
     // - https://revealjs.com/initialization/
     // - https://revealjs.com/config/
     Reveal.initialize({
+      parallaxBackgroundImage: '../resources/bg3.png', // URL of your background image
+
+      // Parallax background size (optional)
+      parallaxBackgroundSize: '5376px 1512px', // Adjust to your desired size
+
+      // Parallax background horizontal movement (optional)
+      parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
       menu: {
         custom: [{
           title: 'Topics',
@@ -1729,22 +1734,8 @@ Sweetness Weight Price Sourness Color(R) Color(G) Color(B)
         }]
       },
       hash: true,
-      chart: {
-        defaults: {
-          color: 'gray', // color of labels
-          scale: {
-            beginAtZero: true,
-            ticks: { stepSize: 1 },
-            grid: { color: "lightgray" }, // color of grid lines
-          },
-        },
-        line: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"], "borderDash": [[5, 10], [0, 0]] },
-        bar: { backgroundColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
-        pie: { backgroundColor: [["rgba(0,0,0,.8)", "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"]] },
-      },
-
       // Learn about plugins: https://revealjs.com/plugins/
-      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealChart, RevealMenu, AsciiChartPlugin],
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu],
     });
     // Funktion zum Aktualisieren der Uhrzeit
     function updateClock() {
