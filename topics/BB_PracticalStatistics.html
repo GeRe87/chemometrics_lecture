@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Chemometrics and Statistics</title>
+
+  <link rel="stylesheet" href="../dist/reset.css">
+  <link rel="stylesheet" href="../dist/reveal.css">
+  <link rel="stylesheet" href="../dist/theme/iac.css">
+  <link rel="stylesheet" href="../css/mystyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+  <style>
+    .green-text {
+      color: rgb(133, 198, 42);
+    }
+
+    .teal-text {
+      color: rgb(0, 150, 136);
+    }
+
+    .purple-text {
+      color: rgb(156, 39, 176);
+    }
+
+    .red-text {
+      color: rgb(244, 67, 54);
+    }
+
+    .small-text {
+      font-size: 0.5em;
+    }
+
+    .inline-block {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h3>
+          <span class="color-text-1">Statistische</span> <span class="color-text-2">Auswertung</span> <span
+            class="color-text-3">Analytischer</span> <span class="color-text-4">Messergebnisse</span>
+        </h3>
+        <pre><code>Praktikum in der Analytik</code></pre>
+        <p class="small-text" style="text-align: right;">
+          by <a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a>
+        </p>
+      </section>
+
+      <section>
+        <h4>
+          Warum Analytik?
+        </h4>
+        <img src="../resources/practical/qualiqanti01.drawio_page_1.png" alt="Analytik" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Qualitative Analytik z.B. <span class="post-it-strip">Chromatographie</span>
+        </h4>
+        <img src="../resources/practical/quali01_page_1.png" alt="Qualitative Analytik" style="width: 100%;">
+        <div style="position: absolute; top: 45%; left: 72%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            Welche Substanz gehört<br>
+            zu welchem Peak?
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Qualitative Analytik z.B. <span class="post-it-strip">Chromatographie</span>
+        </h4>
+        <img src="../resources/practical/quali02_page_1.png" alt="Qualitative Analytik" style="width: 100%;">
+        <div style="position: absolute; top: 45%; left: 72%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            Aufstockung:<br>
+            <span style="font-size: large;"># 2-3x Menge<br>
+              # Identifizierung über Signalerhöhung</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Qualitative Analytik z.B. <span class="post-it-strip">Spektroskopie</span>
+        </h4>
+        <img src="../resources/practical/quali03_page_1.png" alt="Qualitative Analytik" style="width: 100%;">
+        <div style="position: absolute; top: 45%; left: 72%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            Welche Substanz steckt<br>
+            hinter diesem Spektrum?
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Qualitative Analytik z.B. <span class="post-it-strip">Spektroskopie</span>
+        </h4>
+        <img src="../resources/practical/quali04_page_1.png" alt="Qualitative Analytik" style="width: 100%;">
+        <div style="position: absolute; top: 25%; left: 72%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            Identifizierung mittels Ähnlichkeit von Daten:<br>
+            <span style="font-size: large;"># Hit Quality Index</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Quantitative Analytik
+        </h4>
+        <img src="../resources/practical/quanti01_page_1.png" alt="Quantitative Analytik" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Quantitative Analytik <span class="post-it-strip">Übersicht</span>
+        </h4>
+        <img src="../resources/practical/quanti02_page_1.png" alt="Quantitative Analytik" style="width: 100%;">
+        <div style="position: absolute; top: 82%; left: 72%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            sehr gebräuchlich<br>
+            in der Analytik
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Externe Kalibration
+        </h4>
+        <img src="../resources/practical/kali01_page_1.png" alt="External calibration" style="width: 100%;">
+        <div style="position: absolute; top: 60%; left: 75%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            y = m ⋅ x + b
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Interner Standard
+        </h4>
+        <img src="../resources/practical/kali02_page_1.png" alt="Internal standard" style="width: 100%;">
+        <div style="position: absolute; top: 45%; left: 72%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            Interner Standard:<br>
+            <span style="font-size: large;"># messtechnisch unterscheidbar<br>
+              # chemisch ähnlich</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Standardaddition
+        </h4>
+        <img src="../resources/practical/kali03_page_1.png" alt="Standard addition" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Methoden der Quantifizierung <span class="post-it-strip">Auswertung</span>
+        </h4>
+        <img src="../resources/practical/quanti_uebersicht.drawio_page_1.png" alt="Quantification methods"
+          style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression
+        </h4>
+        <img src="../resources/practical/linreg01.drawio_page_1.png" alt="Linear regression" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Kenngrößen</span>
+        </h4>
+        <img src="../resources/practical/kenngr01.drawio_page_1.png" alt="Linear regression" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Theorie</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <div class="tabs">
+              <div class="tab active tab1" data-tab="function1">Allgemein</div>
+              <div class="tab tab1" data-tab="function2">1. Ordnung</div>
+              <div class="tab tab1" data-tab="function3">2. Ordnung</div>
+            </div>
+            <div class="tab-content active" data-tab="function1">
+              <p class="styled-noPoint">
+                \[
+                \hat{y} = \sum_{i=1}^{n} a_i \cdot x_i + b
+                \]
+              </p>
+            </div>
+            <div class="tab-content" data-tab="function2">
+              <p class="styled-noPoint">
+                \[
+                \hat{y} = m \cdot x + b
+                \]
+              </p>
+            </div>
+            <div class="tab-content" data-tab="function3">
+              <p class="styled-noPoint">
+                \[
+                \hat{y} = a \cdot x^2 + b \cdot x + c
+                \]
+              </p>
+            </div>
+            <p class="styled-point">
+              Ziel: Bestimmung der Ausgleichsgeraden, die die <span class="post-it-strip">Residuenquadrate
+                minimiert.</span>
+            </p>
+            <p class="styled-point">
+              Ansatz: Minimierung der Funktion der Fehlerquadrate:
+              \[
+              \text{RSS} = \sum_{i=1}^{n} (y_i - (m \cdot x_i + b))^2
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">
+              Berechnung: Ableitungen nach \( m \) und \( b \) setzen:
+            </p>
+            <p class="styled-point">
+              \[
+              \frac{\partial \text{RSS}}{\partial m} = 0 \quad \text{und} \quad \frac{\partial \text{RSS}}{\partial b} =
+              0
+              \]
+            </p>
+            <p class="styled-point">
+              Durch Lösen dieser Gleichungen finden wir die Werte für \( m \) und \( b \), die die Summe der
+              Fehlerquadrate minimieren und so die beste Anpassung liefern.
+            </p>
+          </div>
+        </div>
+        <div style="position: absolute; top: 65%; left: 72%; transform: rotate(5deg);">
+          <img src="../resources/practical/homer_meme.jpg" alt="Linear regression"
+            style="width: 40%; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);">
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Matrixlösung</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">
+              Die Berechnung der optimalen Werte für \( m \) und \( b \) kann effizient mit Matrizen durchgeführt
+              werden:
+            </p>
+            <p class="styled-point">
+              Ziel: Finde die Lösung für die Gleichung
+              \[
+              \mathbf{\hat{y}} = \mathbf{X} \cdot \mathbf{b}
+              \]
+            </p>
+            <p class="styled-point">
+              Damit sind die Fehlerquadrate definiert als:
+              \[
+              \text{RSS} = (\mathbf{y} - \mathbf{X} \cdot \mathbf{b})^T \cdot (\mathbf{y} - \mathbf{X} \cdot \mathbf{b})
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">
+              Dies wird nun nach \( \mathbf{b} \) abgeleitet und gleich Null gesetzt:
+              \[
+              \frac{\partial \text{RSS}}{\partial \mathbf{b}} = -2 \cdot \mathbf{X}^T \cdot (\mathbf{y} - \mathbf{X}
+              \cdot \mathbf{b}) = 0
+              \]
+            </p>
+            <p class="styled-point">
+              Die Lösung ist dann:
+              \[
+              \mathbf{b} = (\mathbf{X}^T \cdot \mathbf{X})^{-1} \cdot \mathbf{X}^T \cdot \mathbf{y}
+              \]
+          </div>
+        </div>
+        <div style="position: absolute; top: 65%; left: 72%; transform: rotate(5deg);">
+          <img src="../resources/practical/homer_meme.jpg" alt="Linear regression"
+            style="width: 40%; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);">
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Beipsiel</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point">Gib die Konzentrationswerte in die Tabelle ein und starte die Messung.</p>
+            <table id="inputTable" style="width: 100%; font-size: large;">
+              <thead>
+                <tr>
+                  <th>Konzentration (mg/L)</th>
+                  <th>Signal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="number" class="concentration" value="0"></td>
+                  <td><span class="signal">0.0</span></td>
+                </tr>
+                <tr>
+                  <td><input type="number" class="concentration" value="0"></td>
+                  <td><span class="signal">0.0</span></td>
+                </tr>
+                <tr>
+                  <td><input type="number" class="concentration" value="0"></td>
+                  <td><span class="signal">0.0</span></td>
+                </tr>
+                <tr>
+                  <td><input type="number" class="concentration" value="0"></td>
+                  <td><span class="signal">0.0</span></td>
+                </tr>
+                <tr>
+                  <td><input type="number" class="concentration" value="0"></td>
+                  <td><span class="signal">0.0</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <button onclick="startMeasurement()">Messung Starten</button>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="tabs">
+              <div class="tab active tab2" data-tab="designMatrix">Matrix Berechnung</div>
+              <div class="tab tab2" data-tab="bMatrix">Koeffizienten</div>
+              <div class="tab tab2" data-tab="result">Diagramm</div>
+            </div>
+            <div class="tab-content active" data-tab="designMatrix">
+              <p class="styled-noPoint">
+                Designmatrix \(\mathbf{X}\):
+              </p>
+              <pre id="designMatrix"></pre>
+              <p class="styled-noPoint">
+                Pseudo Inverse \( (\mathbf{X}^T \cdot \mathbf{X})^{-1} \cdot \mathbf{X}^T \):
+              </p>
+              <pre id="pMatrix"></pre>
+            </div>
+            <div class="tab-content" data-tab="bMatrix">
+              <p class="styled-noPoint">
+                Koeffizienten \(\mathbf{b}\):
+              </p>
+              <pre id="bMatrix"></pre>
+            </div>
+            <div class="tab-content" data-tab="result">
+              <div id="chart"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Die Normalverteilung
+        </h4>
+        <img src="../resources/practical/normvert.png" alt="Normal distribution" style="width: 100%;">
+        <div style="position: absolute; top: 65%; left: 72%; transform: rotate(5deg);">
+          <img src="../resources/practical/imagine-a-normal.jpg" alt="Linear regression"
+            style="width: 100%; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);">
+        </div>
+        <div style="position: absolute; top: 72%; left: 0%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            \(\sigma\) Standardabweichung:
+            \[ \sigma = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2} \]
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Unsicherheiten</span>
+        </h4>
+
+        <!-- Slider zur Auswahl des Bildes -->
+        <input type="range" min="1" max="7" value="1" id="imageSlider" oninput="showImage(this.value)">
+
+        <!-- Container für die Bilder -->
+        <div id="imageContainer" style="position: relative; width: 100%; height: 400px;">
+          <img src="../resources/practical/linreg_1.png" class="slider-image" id="img1" style="display: block;">
+          <img src="../resources/practical/linreg_2.png" class="slider-image" id="img2" style="display: none;">
+          <img src="../resources/practical/linreg_3.png" class="slider-image" id="img3" style="display: none;">
+          <img src="../resources/practical/linreg_4.png" class="slider-image" id="img4" style="display: none;">
+          <img src="../resources/practical/linreg_5.png" class="slider-image" id="img5" style="display: none;">
+          <img src="../resources/practical/linreg_6.png" class="slider-image" id="img6" style="display: none;">
+          <img src="../resources/practical/linreg_7.png" class="slider-image" id="img7" style="display: none;">
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Unsicherheiten der Regreressionsparameter
+        </h4>
+        <img src="../resources/practical/kenngr01b.drawio_page_1.png" alt="Linear regression" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Kenngrößen 2</span>
+        </h4>
+        <img src="../resources/practical/kenngr01c.drawio_page_1.png" alt="Linear regression" style="width: 100%;">
+        <div style="position: absolute; top: 38%; left: 70%">
+          <div class="post-it-strip">
+            S<span style="font-size: x-large;">x0</span> = S<span style="font-size: x-large;">y</span> / m <br>
+            <span style="font-size: x-large;">
+              Methodenvergleich
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Vertrauensband</span> und <span
+            class="post-it-strip">Prognoseinterval</span>
+        </h4>
+        <div style="display: inline-block;">
+          <img src="../resources/practical/confInv1.png" alt="Linear regression" style="width: 45%;">
+          <img src="../resources/practical/confInv2.png" alt="Linear regression" style="width: 45%;">
+        </div>
+        <div style="position: absolute; top: 88%; left: 0%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(\hat{y}\) geschtätze Intensität
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 88%; left: 26%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(t\left(\alpha,f\right)\) Sicherheitsfaktor
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 88%; left: 53%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(S_y\) Reststandardabweichung
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 94%; left: 0%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(\mathbf{x}\) Design-Matrix der Konzentrationen
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 94%; left: 37%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(\mathbf{C}\) Varianz-Kovarianz-Matrix der Koeffizienten
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Lineare Regression <span class="post-it-strip">Vertrauensband</span> und <span
+            class="post-it-strip">Prognoseinterval</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Vertrauensband (VB):
+            </p>
+            <p class="styled-point2">
+              Abschätzung der Kalibriergeraden-Schar auf Basis der Streuung der Residuen.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Prognoseintervall (PI):
+            </p>
+            <p class="styled-point2">
+              Da die Probe nicht Teil der Kalibriergeraden ist, muss eine größere Unsicherheit angenommen werden. Diese
+              ist ebenfalls von der Streuung der Residuen abhängig.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/practical/confInv3.png" alt="Linear regression" style="width: 100%;">
+          </div>
+        </div>
+        <div style="position: absolute; top: 88%; left: 0%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(\hat{y}\) geschtätze Intensität
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 88%; left: 26%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(t\left(\alpha,f\right)\) Sicherheitsfaktor
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 88%; left: 53%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(S_y\) Reststandardabweichung
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 94%; left: 0%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(\mathbf{x}\) Design-Matrix der Konzentrationen
+            </div>
+          </div>
+        </div>
+        <div style="position: absolute; top: 94%; left: 37%">
+          <div class="post-it-strip" style="font-size: large;">
+            <div class="styled-noPoint" style="font-size: large;">
+              \(\mathbf{C}\) Varianz-Kovarianz-Matrix der Koeffizienten
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Konzentration ablesen & berechnen
+        </h4>
+        <img src="../resources/practical/read_linreg.drawio_page_1.png" alt="Linear regression" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Grundkonzept der Nachweisgrenze
+        </h4>
+        <img src="../resources/practical/nwg.drawio_page_1.png" alt="Linear regression" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Abschätzung der Nachweisgrenze
+        </h4>
+        <img src="../resources/practical/nwg2.drawio_page_1.png" alt="Linear regression" style="width: 100%;">
+      </section>
+
+      <section>
+        <h4>
+          Bestimmungsgrenze
+        </h4>
+        <div>
+          <div class="leftBox">
+            <div class="tabs">
+              <div class="tab active" data-tab="kali1">Kalibration 1</div>
+              <div class="tab" data-tab="kali2">Kalibration 2</div>
+            </div>
+            <div class="tab-content active" data-tab="kali1">
+              <img src="../resources/practical/bg0.png" alt="Linear regression" style="width: 100%;">
+            </div>
+            <div class="tab-content" data-tab="kali2">
+              <img src="../resources/practical/bg1.png" alt="Linear regression" style="width: 100%;">
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point">
+              Konzentration mit vorher definierter maximal zulässiger relativer Unsicherheit: z.B. 33%
+            </p>
+            <p class="styled-point2">
+              z.B. 15 mg/L ± 5 mg/L
+              \[
+              PI = \hat{y}\pm t\left(\alpha,f\right)\sqrt{s_y^2+\left(\mathbf{xC}\bullet\mathbf{x}\right)\mathbf{1}}
+              \]
+            </p>
+            <p class="styled-point3">
+              Wie Verbessern wir NWG und BG?
+            </p>
+            <p class="styled-point4">
+              Mehr Messungen: reduziert t-Wert
+            </p>
+            <p class="styled-point4">
+              Präzieseres Handling: reduziert \(s_y\)
+            </p>
+            <p class="styled-point4">
+              Empfindlichere Detektion: reduziert \(\mathbf{C}\)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Unsicherheiten von Messergebnissen
+        </h4>
+        <img src="../resources/practical/se1.png" alt="Linear regression" style="width: 100%;">
+        <div style="position: absolute; top: 15%; left: 62%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            schätzt Abweichung von<br>
+            Messergebnis zu wahrem Wert
+          </div>
+        </div>
+        <div style="position: absolute; top: 23%; left: 62%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            Erfordert Mehrfachmessung
+          </div>
+        </div>
+        <div style="position: absolute; top: 15%; left: 0%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            Unischerheit kann über <br>
+            Prognoseintervall <br>
+            abgeschätzt werden
+          </div>
+        </div>
+        <div style="position: absolute; top: 35%; left: 30%">
+          <div class="post-it-strip" style="font-size: x-large;">
+            ODER
+          </div>
+        </div>
+      </section>
+
+      <section>
+        Ende
+      </section>
+
+    </div>
+    <div class="footer-global">
+      Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+      Last updated: November 6, 2024
+    </div>
+  </div>
+  <div id="clock">--:--</div>
+
+  <script src="../dist/reveal.js"></script>
+  <script src="../plugin/notes/notes.js"></script>
+  <script src="../plugin/markdown/markdown.js"></script>
+  <script src="../plugin/highlight/highlight.js"></script>
+  <script src="../plugin/math/math.js"></script>
+  <script src="../plugin/menu/menu.js"></script>
+  <!-- Anything plugin -->
+  <!-- Chart plugin -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      parallaxBackgroundImage: '../resources/bg3.png', // URL of your background image
+      // Parallax background size (optional)
+      parallaxBackgroundSize: '5376px 1512px', // Adjust to your desired size
+      // Parallax background horizontal movement (optional)
+      parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
+      menu: {
+        custom: [{
+          title: 'Topics',
+          icon: '<i class="fas fa-home"></i>',
+          src: 'menu.html'
+        }]
+      },
+      hash: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu],
+    });
+    // Funktion zum Aktualisieren der Uhrzeit
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Uhrzeit sofort und dann jede Sekunde aktualisieren
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+  <!-- Chart scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+  <script src="../resources/d3_utils.js"></script>
+  <script src="../resources/tab_designmatrix.js"></script>
+
+
+
+</body>
+
+</html>

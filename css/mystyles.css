@@ -130,6 +130,7 @@
     font-size: x-large;
     position: relative;
     margin-left: 25px;
+    text-align: left;
     /* Platz für das Icon */
 }
 
@@ -152,6 +153,7 @@
     font-size: x-large;
     position: relative;
     margin-left: 25px;
+    text-align: left;
     /* Platz für das Icon */
 }
 
@@ -174,6 +176,7 @@
     font-size: x-large;
     position: relative;
     margin-left: 25px;
+    text-align: left;
     /* Platz für das Icon */
 }
 
@@ -184,7 +187,7 @@
     /* Font Awesome verwenden */
     font-weight: 900;
     /* für solid icons */
-    color: rgb(12, 236, 94);
+    color: rgb(13, 180, 74);
     position: absolute;
     font-size: medium;
     left: -20px;
@@ -196,6 +199,7 @@
     font-size: x-large;
     position: relative;
     margin-left: 25px;
+    text-align: left;
     /* Platz für das Icon */
 }
 
@@ -233,6 +237,7 @@
     font-size: x-large;
     position: relative;
     margin-left: 25px;
+    text-align: left;
     /* Platz für das Icon */
 }
 
@@ -385,10 +390,10 @@ body {
 
 .post-it-strip {
     position: relative;
-    height: 1.5em; /* Höhe des Streifens */
+    min-height: 1.5em; /* Höhe des Streifens */
     background-color: #fff395; /* Gelbe Farbe für Post-it */
     border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Schatten */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25); /* Schatten */
     transform: perspective(300px) rotateX(5deg) rotateZ(2deg) rotateY(-5deg); /* Perspektive und leichte Neigung */
     padding: 0 10px; /* Polsterung für den Inhalt */
     display: inline-block;
@@ -404,4 +409,26 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Leichter Schlagschatten */
     padding: 20px;                      /* Innenabstand für Inhalt */
     margin: 20px;                       /* Abstand zwischen Abschnitten */
+}
+
+
+/* Color texts ["#ef476f", "#ffd166", "#06d6a0", "#118ab2", "#073b4c"] */
+.color-text-1 {
+    color: #ef476f;
+}
+
+.color-text-2 {
+    color: #ffd166;
+}
+
+.color-text-3 {
+    color: #06d6a0;
+}
+
+.color-text-4 {
+    color: #118ab2;
+}
+
+.color-text-5 {
+    color: #073b4c;
 }
