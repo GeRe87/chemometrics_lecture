@@ -34,19 +34,20 @@
 <body>
 	<div class="reveal">
 		<div class="slides">
-				<section>
-					<h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
-					</h4>
-					<pre><code>Topics{ # click to select a topic</code>
+			<section>
+				<h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+				</h4>
+				<pre><code>Topics{ # click to select a topic</code>
 						<a href="topics/00_Introduction.html" class="topic-link"><code class="hoverable">       00. Introduction,</code></a>
 						<a href="topics/01_DataCharacterization1.html" class="topic-link"><code class="hoverable">       01. Data Characterization 1,</code></a>
 						<a href="topics/02_DataCharacterization2.html" class="topic-link"><code class="hoverable">       02. Data Characterization 2,</code></a>
 						<a href="topics/03_SimilarityAnalysis1.html" class="topic-link"><code class="hoverable">       03. Similarity Analysis 1</code></a>
 						<a href="topics/04_SimilarityAnalysis2.html" class="topic-link"><code class="hoverable">       04. Similarity Analysis 2</code></a>
 						<a href="topics/05_SimilarityAnalysis3.html" class="topic-link"><code class="hoverable">       05. Similarity Analysis 3</code></a>
+						<a href="topics/06_DataModeling1.html" class="topic-link"><code class="hoverable">       06. Data Modeling 1</code></a>
 						<code>};</code></pre>
-					<p>by <a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
-				</section>
+				<p>by <a href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
+			</section>
 		</div>
 		<footer class="footer" style="font-size: medium; color: #666666;">
 			Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
@@ -64,6 +65,11 @@
 		// - https://revealjs.com/initialization/
 		// - https://revealjs.com/config/
 		Reveal.initialize({
+			parallaxBackgroundImage: 'resources/bg3.png', // URL of your background image
+			// Parallax background size (optional)
+			parallaxBackgroundSize: '5376px 1512px', // Adjust to your desired size
+			// Parallax background horizontal movement (optional)
+			parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
 			hash: true,
 			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX]

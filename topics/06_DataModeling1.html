@@ -43,15 +43,42 @@
 
       <section>
         <h4>
-          Initial thoughts on <span class="post-it-strip">linear regression</span>
+          Imagine you have measured some data: <span class="post-it-strip">Water quality and nutrient levels</span>
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point">
+              You monitor nitrate levels and algal growth in a lake.
+            </p>
+            <p class="styled-point2">
+              Nitrate concentration
+            <pre>
+  x (Nitrate) mg/L
+    = [1, 2, 3, 4, 5] 
+              </pre>
+            </p>
+            <p class="styled-point2">
+              Algal growth (chlorophyll-a)
+            <pre>
+  y (Algal growth) µg/L 
+    = [10, 20, 35, 50, 70] 
+              </pre>
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point3">
+              Is there a trend between nutrient levels and algal growth?
+            </p>
+            <p class="styled-point3">
+              Can we predict algal growth if nitrate levels increase further?
+            </p>
+            <p class="styled-noPoint">
+              \[
+              y = f(x) + \varepsilon
+              \]
+              Can this model capture the relationship?
+            </p>
           </div>
         </div>
       </section>
@@ -62,14 +89,43 @@
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Trend analysis
+            </p>
+            <p class="styled-point2">
+              Detecting changes in pollutant levels over time.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Calibration
+            </p>
+            <p class="styled-point2">
+              Relating instrument response to known concentrations.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Predictive modeling
+            </p>
+            <p class="styled-point2">
+              Estimating future values (e.g., water quality metrics).
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point4">
+              Example 1: <br>
+              Monitoring nitrate levels in a river over 10 years to detect trends.
+            </p>
+            <p class="styled-point4">
+              Example 2: <br>
+              Calibrating a spectrophotometer for phosphate detection.
+            </p>
+            <p class="styled-point4">
+              Example 3: <br>
+              Predicting algal bloom occurrence based on nutrient inputs.
+            </p>
           </div>
         </div>
       </section>
+
 
       <section>
         <h4>
@@ -77,13 +133,67 @@
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Dependent variable (\(y\))
+            </p>
+            <p class="styled-point2">
+              The value we explain or predict.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Independent variable (\(x\))
+            </p>
+            <p class="styled-point2">
+              The input or predictor variable(s).
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Error term (\(\varepsilon\))
+            </p>
+            <p class="styled-point2">
+              The difference between observed and predicted \(y\).
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Coefficients (\(\beta_0, \beta_1, \dots \beta_n\))
+            </p>
+            <p class="styled-point2">
+              Intercept, slope, quadratic terms, etc. These describe the layout of the regression line.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Estimates \(y\) <i class="fas fa-arrows-alt-h"></i> \(\hat{y}\), \(\beta\) <i
+                class="fas fa-arrows-alt-h"></i> \(\hat{\beta}\)
+            </p>
+            <p class="styled-point2">
+              Predicted value based on the regression model and estimated coefficients. The hat symbol denotes
+              estimates.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Uncertainties \(\sigma^2\), \(s^2\)
+            </p>
+            <p class="styled-point2">
+              How confident are we in the model? How precise are the coefficients?
+            </p>
           </div>
         </div>
+      </section>
+
+      <section>
+        <h4>
+          Some important <span class="post-it-strip">terms</span> <span
+            style="font-size: large; color: mediumvioletred;">cont,</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Squared error term (\(SSE\))
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+          </div>
+        </div>
+        <img src="../resources/linreg_error2.png" alt="Linear regression terms" style="width: 100%;">
       </section>
 
       <section>
@@ -92,11 +202,53 @@
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Linear Model Definition:
+            </p>
+            <p class="styled-noPoint">
+              \[ y = \sum\left(\beta_i x_i\right) + \varepsilon = \hat{y} + \varepsilon \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Strategy:
+            </p>
+            <p class="styled-point2">
+              Find coefficients \(\beta_i\) that minimize the error term \(\varepsilon\).
+            </p>
+            <p class="styled-point2">
+              Error: Difference between observed \(y\) and predicted \(\hat{y}\).
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Objective:
+            </p>
+            <p class="styled-point2">
+              Minimize the sum of squared errors (SSE):
+              \[
+              \text{SSE} = \sum (y_i - \hat{y}_i)^2
+              \]
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <div>
+              <label for="b0-slider" style="font-size: large;">b0:</label>
+              <input type="range" id="b0-slider" name="b0-slider" min="-10" max="10" step="0.1" value="0">
+              <span id="b0-value" style="font-size: large;">0</span>
+            </div>
+            <div>
+              <label for="b1-slider" style="font-size: large;">b1:</label>
+              <input type="range" id="b1-slider" name="b1-slider" min="-10" max="10" step="0.1" value="1">
+              <span id="b1-value" style="font-size: large;">1</span>
+            </div>
+            <div class="tabs">
+              <div class="tab active" data-tab="linreg1">xy Plot</div>
+              <div class="tab" data-tab="linreg2">Error Plot</div>
+            </div>
+            <div class="tab-content active" data-tab="linreg1" style="height: 470px;">
+              <div id="chart_linreg1"></div>
+            </div>
+            <div class="tab-content" data-tab="linreg2" style="height: 470px;">
+              <div id="chart_linreg2"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -107,11 +259,51 @@
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Strategy:
+            </p>
+            <p class="styled-point2">
+              Minimize the Sum of Squared Errors (SSE): <br>
+              \[
+              \text{SSE} = \sum_{i=1}^n \left(y_i - (\beta_0 + \beta_1 x_i)\right)^2
+              \]
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              where \(n\) is the number of data points, \(y_i\) is the observed value, \(x_i\) is the predictor, and
+              \(\beta_i\) are the coefficients.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              How to find the minimum:
+            </p>
+            <p class="styled-point4">
+              Take the derivative of SSE with respect to \(\beta_0\) and \(\beta_1\).
+            </p>
+            <p class="styled-point4">
+              Solve the resulting equations for \(\beta_0\) and \(\beta_1\).
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-noPoint">
+              Derivative with respect to \(\beta_1\): <br>
+              \[
+              \frac{\partial \text{SSE}}{\partial \beta_1} = -2 \sum_{i=1}^n x_i \left(y_i - (\beta_0 + \beta_1
+              x_i)\right)
+              \]
+            </p>
+            <p class="styled-noPoint">
+              Derivative with respect to \(\beta_0\): <br>
+              \[
+              \frac{\partial \text{SSE}}{\partial \beta_0} = -2 \sum_{i=1}^n \left(y_i - (\beta_0 + \beta_1 x_i)\right)
+              \]
+            </p>
+            <p class="styled-noPoint">
+              Setting both derivatives to zero gives equations for \(\beta_0\) and \(\beta_1\).
+            </p>
+            <p class="styled-point">
+              Instead of solving these equations by hand, we can use <span class="post-it-strip">matrix
+                operations</span>.
+            </p>
           </div>
         </div>
       </section>
@@ -122,11 +314,177 @@
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              What is a matrix?
+            </p>
+            <p class="styled-noPoint">
+              A rectangular array of numbers arranged in rows and columns: <br>
+              \[
+              \mathbf{A} = \begin{bmatrix}
+              a_{11} & a_{12} & \cdots & a_{1n} \\
+              a_{21} & a_{22} & \cdots & a_{2n} \\
+              \vdots & \vdots & \ddots & \vdots \\
+              a_{m1} & a_{m2} & \cdots & a_{mn}
+              \end{bmatrix}
+              \]
+              \(m\): Number of rows. <br>
+              \(n\): Number of columns.
+            </p>
+            <p class="styled-point2">
+              A matrix is often denoted by a bold uppercase letter.
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Key matrix operations:
+            </p>
+            <p class="styled-noPoint">
+              <span class="post-it-strip">Transpose:</span> Flips rows and columns. <br>
+              \[
+              \mathbf{A}^\top = \begin{bmatrix}
+              a_{11} & a_{21} & \cdots & a_{m1} \\
+              a_{12} & a_{22} & \cdots & a_{m2} \\
+              \vdots & \vdots & \ddots & \vdots \\
+              a_{1n} & a_{2n} & \cdots & a_{mn}
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              an (n x m) matrix becomes an (m x n) matrix.
+            </p>
+            <p class="styled-point">
+              Transpose is denoted by a superscript T or a prime symbol, e.g., \(\mathbf{A}^T\) or \(\mathbf{A}'\).
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              <i class="fas fa-arrow-right"></i> continue on next slide.
+            </p>
+          </div>
+        </div>
+      </section>
 
+      <section>
+        <h4>
+          Some words on <span class="post-it-strip">matrix</span> operations <span
+            style="font-size: large; color: mediumvioletred;">cont,</span>
+        </h4>
+        <p class="styled-noPoint">
+          <span class="post-it-strip">Adding</span> or <span class="post-it-strip">subtracting</span> matrices:
+          \[
+          \mathbf{A} + \mathbf{B} = \begin{bmatrix}
+          a_{11} & a_{12} \\
+          a_{21} & a_{22}
+          \end{bmatrix} + \begin{bmatrix}
+          b_{11} & b_{12} \\
+          b_{21} & b_{22}
+          \end{bmatrix} = \begin{bmatrix}
+          a_{11} + b_{11} & a_{12} + b_{12} \\
+          a_{21} + b_{21} & a_{22} + b_{22}
+          \end{bmatrix}
+          \]
+        </p>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point2">
+              Every element of the first matrix is added to the corresponding element of the second matrix.
+            </p>
+            <p class="styled-point2">
+              The resulting matrix has the same number of rows and columns as the original matrices.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Therefore, it requires that both matrices have the same number of rows and columns.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Some words on <span class="post-it-strip">matrix</span> operations <span
+            style="font-size: large; color: mediumvioletred;">cont,</span>
+        </h4>
+        <p class="styled-noPoint">
+          <span class="post-it-strip">Multiplying</span> matrices:
+          \[
+          \mathbf{A} = \begin{bmatrix}
+          1 & 2 \\
+          3 & 4
+          \end{bmatrix}, \quad
+          \mathbf{B} = \begin{bmatrix}
+          5 & 6 \\
+          7 & 8
+          \end{bmatrix}
+          \]
+          \[
+          \mathbf{C} = \mathbf{A} \cdot \mathbf{B} = \begin{bmatrix}
+          1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\
+          3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8
+          \end{bmatrix} = \begin{bmatrix}
+          19 & 22 \\
+          43 & 50
+          \end{bmatrix}
+          \]
+        </p>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point2">
+              Every element of a row in the first matrix is multiplied by every element of a column in the second
+              matrix.
+            </p>
+            <p class="styled-point2">
+              The resulting matrix has the same number of rows as the first matrix and the same number of columns as the
+              second matrix, i.e., (m x p) * (p x n) = (m x n).
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Therefore, it requires that the number of columns in the first matrix equals the number of rows in the
+              second matrix.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Some words on <span class="post-it-strip">matrix</span> operations <span
+            style="font-size: large; color: mediumvioletred;">cont,</span>
+        </h4>
+        <p class="styled-noPoint">
+          <span class="post-it-strip">Inverting</span> a matrix:
+          \[
+          \mathbf{A} = \begin{bmatrix}
+          a & b \\
+          c & d
+          \end{bmatrix}, \quad
+          \mathbf{A}^{-1} = \frac{1}{ad - bc} \begin{bmatrix}
+          d & -b \\
+          -c & a
+          \end{bmatrix}
+          \]
+        </p>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point2">
+              The inverse of a matrix is a matrix that, when multiplied with the original matrix, results in the
+              identity matrix. \( \mathbf{A} \cdot \mathbf{A}^{-1} = \mathbf{I} \).
+            </p>
+            <p class="styled-point2">
+              The identity matrix is a square matrix with ones on the diagonal and zeros elsewhere.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              The inverse of a matrix is denoted by a superscript -1, e.g., \(\mathbf{A}^{-1}\).
+            </p>
+            <p class="styled-point2">
+              It is the analog of a division.
+            </p>
           </div>
         </div>
       </section>
@@ -137,14 +495,135 @@
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Regression equation:
+            </p>
+            <p class="styled-noPoint">
+              In scalar form: <br>
+              \[
+              y_i = \beta_0 + \beta_1 x_{i1} + \ldots + \beta_p x_{ip} + \varepsilon_i
+              \]
+              In matrix form: <br>
+              \[
+              \mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}
+              \]
+              where \(\mathbf{y}\) is the vector of observed values, \(\mathbf{X}\) is the matrix of predictors, and
+              \(\mathbf{\beta}\) is the vector of coefficients.
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Objective:
+            </p>
+            <p class="styled-noPoint">
+              Minimize the Sum of Squared Errors (SSE): <br>
+              \[
+              \text{SSE} = \|\mathbf{y} - \mathbf{X} \mathbf{\beta}\|^2
+              \]
+            </p>
+            <p class="styled-point2">
+              The \(\|\cdot\|^2\) denotes the squared Euclidean norm and is equivalent to:
+              \[\underbrace{(\mathbf{y} - \mathbf{X} \mathbf{\beta})^\top}_{\varepsilon^\top} \underbrace{(\mathbf{y} -
+              \mathbf{X} \mathbf{\beta})}_{\varepsilon}\]
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              e.g.,
+              \[
+              \begin{bmatrix}
+              1 \\
+              2 \\
+              3
+              \end{bmatrix}^\top
+              \begin{bmatrix}
+              1 \\
+              2 \\
+              3
+              \end{bmatrix}
+              = \begin{bmatrix}
+              1 & 2 & 3
+              \end{bmatrix}
+              \begin{bmatrix}
+              1 \\
+              2 \\
+              3
+              \end{bmatrix}
+              = 1 \cdot 1 + 2 \cdot 2 + 3 \cdot 3 = 14
+              \]
+            </p>
           </div>
         </div>
       </section>
+
+      <section>
+        <h4>
+          Deriving the <span class="post-it-strip">Normal Equation</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Start with SSE:
+            </p>
+            <p class="styled-noPoint">
+              The objective is to minimize the Sum of Squared Errors (SSE):
+              \[
+              \text{SSE} = (\mathbf{y} - \mathbf{X} \mathbf{\beta})^\top (\mathbf{y} - \mathbf{X} \mathbf{\beta})
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Expand SSE:
+            </p>
+            <p class="styled-noPoint">
+              Expand the quadratic form:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{SSE} = \mathbf{y}^\top \mathbf{y} - 2 \mathbf{\beta}^\top \mathbf{X}^\top \mathbf{y} +
+              \mathbf{\beta}^\top \mathbf{X}^\top \mathbf{X} \mathbf{\beta}
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Derivative with respect to \(\mathbf{\beta}\):
+            </p>
+            <p class="styled-noPoint">
+              Take the derivative to find the minimum: <br>
+              \[
+              \frac{\partial \text{SSE}}{\partial \mathbf{\beta}} = -2 \mathbf{X}^\top \mathbf{y} + 2 \mathbf{X}^\top
+              \mathbf{X} \mathbf{\beta}.
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Set derivative to zero:
+            </p>
+            <p class="styled-noPoint">
+              Solve for \(\mathbf{\beta}\): <br>
+              \[
+              -2 \mathbf{X}^\top \mathbf{y} + 2 \mathbf{X}^\top \mathbf{X} \mathbf{\beta} = 0
+              \]
+              Simplify: <br>
+              \[
+              \mathbf{X}^\top \mathbf{X} \mathbf{\beta} = \mathbf{X}^\top \mathbf{y}
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Solution (Normal Equation):
+            </p>
+            <p class="styled-noPoint">
+              Multiply by the inverse of \(\mathbf{X}^\top \mathbf{X}\): <br>
+              \[
+              \mathbf{\hat{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}
+              \]
+            </p>
+            <p class="styled-noPoint">
+              This gives the least-squares solution for \(\mathbf{\beta}\).
+            </p>
+          </div>
+        </div>
+      </section>
+
 
       <section>
         <h4>
@@ -152,134 +631,1017 @@
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Data setup:
+            </p>
+            <p class="styled-point2">
+              Observations (\(n = 4\))
+            </p>
+            <p class="styled-point2">
+              Predictors <code> x = [1, 2, 3, 4] </code>
+            </p>
+            <p class="styled-point2">
+              Response <code> y = [3, 6, 8, 11] </code>
+            </p>
+            <p class="styled-point2">
+              Coefficients: <code> b0, b1, b2 </code>, i.e., intercept, slope, quadratic term.
+            </p>
+            <p class="styled-point4">
+              The selection of coefficients sets up the model layout and depends on the data.
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Set up the Design matrix (\(\mathbf{X}\)):
+            </p>
+            <p class="styled-point2">
+              Based on the predictors \(x\) and the model layout, we set up the matrix like:
+              \[
+              \mathbf{X} = \begin{bmatrix}
+              x_1^0 & x_1^1 & x_1^2 \\
+              x_2^0 & x_2^1 & x_2^2 \\
+              \vdots & \vdots & \vdots \\
+              x_n^0 & x_n^1 & x_n^2
+              \end{bmatrix} =
+              \begin{bmatrix}
+              1 & 1 & 1 \\
+              1 & 2 & 4 \\
+              1 & 3 & 9 \\
+              1 & 4 & 16
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              The columns represent the predictors and their powers, e.g., first colum is the intercept, so x to the
+              power of 0, second column is the linear term, so x to the power of 1, and so on.
+            </p>
           </div>
         </div>
       </section>
 
       <section>
         <h4>
-          <span class="post-it-strip">Uncertainties</span> in linear Regressions
+          Example <span style="font-size: large; color: mediumvioletred;">cont,</span>
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Step 1: Compute \(\mathbf{X}^\top \mathbf{X}\)
+            </p>
+            <p class="styled-noPoint">
+              <span style="font-weight: bold;">A)</span> Recall the Design matrix:
+              \[
+              \mathbf{X} =
+              \begin{bmatrix}
+              1 & 1 & 1 \\
+              1 & 2 & 4 \\
+              1 & 3 & 9 \\
+              1 & 4 & 16
+              \end{bmatrix}
+              \]
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
+            <p class="styled-noPoint">
+              <span style="font-weight: bold;">B)</span> Transpose of \(\mathbf{X}\):
+              \[
+              \mathbf{X}^\top =
+              \begin{bmatrix}
+              1 & 1 & 1 & 1 \\
+              1 & 2 & 3 & 4 \\
+              1 & 4 & 9 & 16
+              \end{bmatrix}
+              \]
+          </div>
+          <p class="styled-noPoint">
+            <span style="font-weight: bold;">C)</span> Multiply \(\mathbf{X}^\top \mathbf{X}\):
+            \[
+            \mathbf{X}^\top \mathbf{X} =
+            \begin{bmatrix}
+            1 & 1 & 1 & 1 \\
+            1 & 2 & 3 & 4 \\
+            1 & 4 & 9 & 16
+            \end{bmatrix}
+            \begin{bmatrix}
+            1 & 1 & 1 \\
+            1 & 2 & 4 \\
+            1 & 3 & 9 \\
+            1 & 4 & 16
+            \end{bmatrix} =
+            \begin{bmatrix}
+            4 & 10 & 30 \\
+            10 & 30 & 100 \\
+            30 & 100 & 354
+            \end{bmatrix}
+            \]
+          </p>
+        </div>
+      </section>
 
+      <section>
+        <h4>
+          Example <span style="font-size: large; color: mediumvioletred;">cont.</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Step 3: Compute \((\mathbf{X}^\top \mathbf{X})^{-1}\)
+            </p>
+            <p class="styled-noPoint">
+              <span style="font-weight: bold;">A)</span> Recall \(\mathbf{X}^\top \mathbf{X}\):
+              \[
+              \mathbf{X}^\top \mathbf{X} =
+              \begin{bmatrix}
+              4 & 10 & 30 \\
+              10 & 30 & 100 \\
+              30 & 100 & 354
+              \end{bmatrix}
+              \]
+              The matrix is symmetric and positive-definite, so it is invertible.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-noPoint">
+              <span style="font-weight: bold;">B)</span> Inverse of \(\mathbf{X}^\top \mathbf{X}\):
+              \[
+              (\mathbf{X}^\top \mathbf{X})^{-1} =
+              \begin{bmatrix}
+              7.75 & -6.75 & 1.25 \\
+              -6.75 & 6.45 & -1.25 \\
+              1.25 & -1.25 & 0.25
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Why is this important?
+            </p>
+            <p class="styled-noPoint">
+              \((\mathbf{X}^\top \mathbf{X})^{-1}\) is crucial for calculating the coefficients \(\mathbf{\beta}\): <br>
+              \[
+              \mathbf{\hat{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}.
+              \]
+              It also provides information about the variance-covariance structure of \(\mathbf{\beta}\).
+            </p>
           </div>
         </div>
       </section>
 
       <section>
         <h4>
-          Variance-Covariance Matrix of Coefficients
+          Example <span style="font-size: large; color: mediumvioletred;">cont.</span>
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Step 4: Compute the Pseudo-Inverse of \(\mathbf{X}\)
+            </p>
+            <p class="styled-noPoint">
+              The pseudo-inverse of \(\mathbf{X}\) is defined as:
+              \[
+              \mathbf{X}^+ = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top
+              \]
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
 
+          </div>
+          <p class="styled-noPoint">
+            Multiply \((\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top\):
+            \[
+            \mathbf{X}^+ =
+            \begin{bmatrix}
+            7.8 & -6.8 & 1.3 \\
+            -6.8 & 6.5 & -1.3 \\
+            1.3 & -1.3 & 0.3
+            \end{bmatrix}
+            \begin{bmatrix}
+            1 & 1 & 1 & 1 \\
+            1 & 2 & 3 & 4 \\
+            1 & 4 & 9 & 16
+            \end{bmatrix} =
+            \begin{bmatrix}
+            2.3 & -0.8 & -0.3 & 0.8 \\
+            -1.6 & 1.2 & 1.4 & -1.0 \\
+            0.3 & -0.3 & -0.3 & 0.3
+            \end{bmatrix}
+            \]
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Example <span style="font-size: large; color: mediumvioletred;">cont.</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Step 5: Calculate \(\mathbf{\hat{\beta}}\) (the coefficients)
+            </p>
+            <p class="styled-noPoint">
+              The coefficients are calculated using the pseudo-inverse:
+              \[
+              \mathbf{\hat{\beta}} = \mathbf{X}^+ \mathbf{y}
+              \]
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              Recall:
+              \[
+              \mathbf{X}^+ =
+              \begin{bmatrix}
+              2.3 & -0.8 & -0.3 & 0.8 \\
+              -1.6 & 1.2 & 1.4 & -1.0 \\
+              0.3 & -0.3 & -0.3 & 0.3
+              \end{bmatrix}
+              \]
+              \[
+              \mathbf{y} =
+              \begin{bmatrix}
+              3 \\
+              6 \\
+              8 \\
+              11
+              \end{bmatrix}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-noPoint">
+              Multiply \(\mathbf{X}^+\) and \(\mathbf{y}\):
+              \[
+              \mathbf{\hat{\beta}} =
+              \begin{bmatrix}
+              0.5 \\
+              2.6 \\
+              0.0
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Interpretation:
+            </p>
+            <p class="styled-noPoint">
+              The estimated coefficients are:<br>
+              \(b_0 = 0.5\): Intercept (baseline \(x = 0\)). <br>
+              \(b_1 = 2.6\): Linear slope of \(x\). <br>
+              \(b_2 = 0.0\): Quadratic effect of \(x^2\).
+            </p>
           </div>
         </div>
       </section>
 
       <section>
         <h4>
-          <span class="post-it-strip">Significane</span> of Coefficients
+          Example <span style="font-size: large; color: mediumvioletred;">cont.</span>
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Visualizing the Model
+            </p>
+            <p class="styled-noPoint">
+              The estimated coefficients:
+              \[
+              \mathbf{\hat{\beta}} =
+              \begin{bmatrix}
+              0.5 \\
+              2.6 \\
+              0.0
+              \end{bmatrix}
+              \]
+              The equation of the fitted model:
+              \[
+              y = 0.5 + 2.6x + 0.0x^2
+              \]
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <div id="chart"></div>
           </div>
         </div>
       </section>
 
       <section>
         <h4>
-          <span class="post-it-strip">Confidence</span> in linear Regressions
+          <span class="post-it-strip">Uncertainties</span> in Linear Regressions
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Variance of \(y\) (\(\sigma^2\)):
+            </p>
+            <p class="styled-point2">
+              The total variance in the observed data (\(y\)) is denoted by \(\sigma^2\).
+            </p>
+            <p class="styled-point2">
+              It measures the spread of the actual \(y\)-values around the fitted model (\(\hat{y}\)):
+              \[
+              \sigma^2 = \frac{\sum (y_i - \hat{y}_i)^2}{n - p - 1}
+              \]
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              where \(n\) is the number of observations and \(p\) is the number of coefficients excluding the intercept.
+            </p>
+            <p class="styled-point2">
+              This is also called the residual variance or mean squared error (MSE).
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Key Insights:
+            </p>
+            <p class="styled-point2">
+              Higher variance in \(y\) leads to higher uncertainty in the predictions.
+            </p>
+            <p class="styled-point2">
+              A poorly fitted model will have larger residuals, increasing \(\sigma^2\).
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Variance of \(\beta\) (\(\sigma^2_\beta\)):
+            </p>
+            <p class="styled-point2">
+              The coefficients \(\beta\) are also estimated with uncertainty, which depends on:
+            </p>
+            <p class="styled-point4">
+              The residual variance (\(\sigma^2\)).
+            </p>
+            <p class="styled-point4">
+              The structure of the predictor matrix (\(\mathbf{X}\)).
+            </p>
           </div>
         </div>
       </section>
 
       <section>
         <h4>
-          <span class="post-it-strip">Predictions</span> in linear Regressions
+          Uncertainties of Coefficients: <span class="post-it-strip">Introduction</span>
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Ideal Case: Multiple Measurement Series
+            </p>
+            <p class="styled-point2">
+              If we had multiple measurement series (\(k\)) with the same predictors, we could estimate multiple sets of
+              coefficients \(\mathbf{\beta}_1, \mathbf{\beta}_2, \ldots, \mathbf{\beta}_k\).
+            </p>
+            <p class="styled-point2">
+              By analyzing the variability between these sets, we could directly calculate the variances and covariances
+              of the coefficients:
+              \[
+              \text{Var}(\beta_i) = \frac{1}{k} \sum_{j=1}^k (\beta_{i,j} - \overline{\beta}_i)^2
+              \]
+            </p>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point2">
+              I.e., the variance of the intercept (\(\beta_0\)) would be the average squared difference between the
+              intercepts of the different sets.
+            <p class="styled-point" style="font-weight: bold;">
+              The Problem:
+            </p>
+            <p class="styled-point2">
+              In practice, we often only have <strong>one measurement series</strong>, which means:
+            </p>
+            <p class="styled-point4">
+              We cannot directly calculate the variability of \(\beta\) from multiple sets.
+            </p>
           </div>
         </div>
       </section>
+
+      <section>
+        <h4>
+          Uncertainties of Coefficients: <span class="post-it-strip">Derivation</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Start from the Model:
+            </p>
+            <p class="styled-point2">
+              The linear regression model is:
+              \[
+              \mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}
+              \]
+            <p class="styled-point2">
+              The OLS estimator for \(\mathbf{\beta}\) is:
+              \[
+              \mathbf{\hat{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Deriving \(\text{Var}(\mathbf{\beta})\):
+            </p>
+            <p class="styled-point2">
+              Substitute \(\mathbf{y} = \mathbf{X} \mathbf{\beta} + \mathbf{\varepsilon}\) into
+              \(\mathbf{\hat{\beta}}\):
+              \[
+              \mathbf{\hat{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top (\mathbf{X} \mathbf{\beta} +
+              \mathbf{\varepsilon})
+              \]
+            </p>
+            <p class="styled-point2">
+              Expand:
+              \[
+              \mathbf{\hat{\beta}} = \mathbf{\beta} + (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top
+              \mathbf{\varepsilon}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Take the variance (\(\text{Var}(\beta)=0\)):
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = \text{Var}((\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top
+              \mathbf{\varepsilon})
+              \]
+            </p>
+            <p class="styled-point2">
+              Since \((\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top\) is a constant, we can pull it out like:
+              \(\text{Var}(\mathbf{A}\varepsilon) = \mathbf{A} \text{Var}(\varepsilon) \mathbf{A}^\top\) and get:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = \underbrace{(\mathbf{X}^\top \mathbf{X})^{-1}
+              \mathbf{X}^\top}_{\mathbf{A}} \text{Var}(\varepsilon) \underbrace{\left((\mathbf{X}^\top \mathbf{X})^{-1}
+              \mathbf{X}^\top\right)^\top}_{\mathbf{A}^\top}
+              \]
+            </p>
+            <p class="styled-point2">
+              This can be simplified to:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top
+              \text{Var}(\varepsilon) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1}
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Uncertainties of Coefficients: <span class="post-it-strip">Derivation</span> <span
+            style="font-size: large; color: mediumvioletred;">cont.</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Recall:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top
+              \text{Var}(\varepsilon) \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1}
+              \]
+            </p>
+            <p class="styled-point2">
+              To solve this we apply the <span class="post-it-strip">Gauss-Markov</span> theorem.
+              \[
+              \text{Var}(\varepsilon) = \sigma^2
+              \]
+              i.e., the variance of the residuals is a homoscedastic constant (scalar) that can be moved within the
+              equation.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Move the variance...
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1} \underbrace{\mathbf{X}^\top
+              \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1}}_{A \cdot A^{-1} = 1}
+              \]
+            </p>
+            <p class="styled-point2">
+              ...and the terms collapse:
+            </p>
+            <p class="styled-noPoint">
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1}
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Variance-Covariance Matrix: <span class="post-it-strip">Example</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Data Overview:
+            </p>
+            <p class="styled-point2">
+              Observed values (\(y\)) and predicted values (\(\hat{y}\)) based on the model:
+            <pre><code data-trim data-noescape>
+x = [1, 2, 3, 4]
+y = [3, 6, 8, 11]
+y_hat = [3.1, 5.7, 8.3, 10.9]
+              </code></pre>
+            </p>
+            <p class="styled-point2">
+              Residual variance (\(\text{MSE}\)):
+            <pre><code data-trim data-noescape>
+mse = 0.2
+              </code></pre>
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Inverse of \(\mathbf{X}^\top \mathbf{X}\):
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              \[
+              (\mathbf{X}^\top \mathbf{X})^{-1} =
+              \begin{bmatrix}
+              7.75 & -6.75 & 1.25 \\
+              -6.75 & 6.45 & -1.25 \\
+              1.25 & -1.25 & 0.25
+              \end{bmatrix}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Calculating the Variance-Covariance Matrix:
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              Using the formula:
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = \sigma^2 (\mathbf{X}^\top \mathbf{X})^{-1},
+              \]
+              we compute:
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) = 0.2 \cdot
+              \begin{bmatrix}
+              7.75 & -6.75 & 1.25 \\
+              -6.75 & 6.45 & -1.25 \\
+              1.25 & -1.25 & 0.25
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              Result:
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) =
+              \begin{bmatrix}
+              1.55 & -1.35 & 0.25 \\
+              -1.35 & 1.29 & -0.25 \\
+              0.25 & -0.25 & 0.05
+              \end{bmatrix}
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          <span class="post-it-strip">Significance</span> of Coefficients
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Using the Variance-Covariance Matrix:
+            </p>
+            <p class="styled-point2">
+              From the variance-covariance matrix \(\text{Var}(\mathbf{\hat{\beta}})\), we can derive:
+            </p>
+            <p class="styled-point4">
+              Standard Error (SE) of each coefficient (\(b_i\)):
+              \[
+              \text{SE}(b_i) = \sqrt{\text{diag}(\text{Var}(\mathbf{\hat{\beta}}))}
+              \]
+            </p>
+            <p class="styled-point4">
+              t-statistic for each coefficient:
+              \[
+              t_i = \frac{b_i}{\text{SE}(b_i)}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              These values allow us to test the null hypothesis:
+              \[
+              H_0: b_i = 0 \quad \text{(no effect)}.
+              \]
+              \[
+              H_1: b_i \neq 0 \quad \text{(significant effect)}.
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Interpreting the Results:
+            </p>
+            <p class="styled-point2">
+              Compare the \(t_i\)-statistic to the critical value from the t-distribution:
+            </p>
+            <p class="styled-point4">
+              Degrees of freedom: \(n - p - 1\) (number of observations minus number of predictors and intercept).
+            </p>
+            <p class="styled-point4">
+              If \(|t_i| > t_{\text{critical}}\), the coefficient is significant, i.e., it has a statistically
+              significant effect.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          <span class="post-it-strip">Example:</span> Significance Testing of Coefficients
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Coefficients and Standard Errors:
+            </p>
+            <p class="styled-point2">
+              From the regression model, we have:
+            <pre><code data-trim data-noescape>
+b0 = 0.5, b1 = 2.6, b2 = 0.0
+</code>
+              </pre>
+            </p>
+            <p class="styled-point2">
+              Calculated standard errors:
+            <pre><code data-trim data-noescape>
+SE(b0) = sqrt(1.55) = 1.24
+SE(b1) = sqrt(1.29) = 1.14
+SE(b2) = sqrt(0.05) = 0.22
+</code>
+  </pre>
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Calculate t-statistics:
+            </p>
+            <p class="styled-point2">
+            <pre><code data-trim data-noescape>
+t0 =  0.5 / 1.24 = 0.40
+t1 = 2.6 / 1.14 = 2.28
+t2 = 0.0 / 0.22 = 0.00
+</code>
+              </pre>
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Interpreting the Results:
+            </p>
+            <p class="styled-point2">
+              Degrees of freedom:<br> \(n - p - 1 = 4 - 2 - 1 = 1\).
+            </p>
+            <p class="styled-point2">
+              Critical value for \(t_{\text{critical}}\) at \(\alpha = 0.05\) (two-tailed): \(\pm 12.71\).
+            </p>
+            <p class="styled-point4">
+              \(t_0 = 0.40\): Not significant
+            </p>
+            <p class="styled-point4">
+              \(t_1 = 2.28\): Not significant
+            </p>
+            <p class="styled-point4">
+              \(t_2 = 0.00\): Not significant
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Conclusion:
+            </p>
+            <p class="styled-point2">
+              Model not suitable, remove coefficient with worst t-statistic and re-evaluate.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          <span class="post-it-strip">Recalculated</span> Model Results
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              New Model:
+            </p>
+            <p class="styled-point2">
+              After excluding \(b_2\) (quadratic term), the design matrix becomes:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \mathbf{X} = 
+              \begin{bmatrix}
+              1 & 1 \\
+              1 & 2 \\
+              1 & 3 \\
+              1 & 4
+              \end{bmatrix}
+              \quad \text{and} \quad
+              \mathbf{X}^\top \mathbf{X} =
+              \begin{bmatrix}
+              4 & 10 \\
+              10 & 30
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              The inverse of \(\mathbf{X}^\top \mathbf{X}\):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              (\mathbf{X}^\top \mathbf{X})^{-1} =
+              \begin{bmatrix}
+              1.5 & -0.5 \\
+              -0.5 & 0.2
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              New coefficients:
+              \[
+              \mathbf{\hat{\beta}} =
+              \begin{bmatrix}
+              0.5 \\
+              2.6
+              \end{bmatrix}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Variance-Covariance Matrix:
+            </p>
+            <p class="styled-point2">
+              The recalculated variance-covariance matrix:
+              \[
+              \text{Var}(\mathbf{\hat{\beta}}) =
+              \begin{bmatrix}
+              0.3 & -0.1 \\
+              -0.1 & 0.04
+              \end{bmatrix}.
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Significance of Coefficients:
+            </p>
+            <p class="styled-point2">
+              t-statistics:
+              <pre><code data-trim data-noescape>
+t0 = 0.5 / 0.55 = 0.91
+t1 = 2.6 / 0.2 = 13.00
+                </code>
+              </pre>
+            </p>
+            <p class="styled-point2">
+              \(t_1\) is highly significant (\(t_1 > t_{\text{critical}}\)), confirming the importance of \(x_1\).
+            </p>
+            <p class="styled-point2">
+              The intercept \(b_0\) should not be removed even though it is not significant.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          <span class="post-it-strip">Global</span> F-Test in Linear Regression
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Purpose:
+            </p>
+            <p class="styled-point2">
+              Test whether the entire regression model is significant.
+            </p>
+            <p class="styled-point2">
+              Null hypothesis (\(H_0\)): <br>All coefficients except the intercept are 0 <br>(\(\beta_1 = \beta_2 = \ldots = \beta_p = 0\)).
+            </p>
+            <p class="styled-point4">
+              Alternative hypothesis (\(H_1\)): At least one coefficient is not zero.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              F-statistic Formula:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              F = \frac{\text{SSR} / p}{\text{SSE} / (n - p - 1)}
+              \]
+              where \(p\) is the number of predictors and \(n\) is the number of observations.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-noPoint" style="font-size: large;">
+              Thereby,
+              \[
+              \text{SSR} = \sum (\hat{y}_i - \overline{y})^2 \quad \text{and} \quad \text{SSE} = \sum (y_i - \hat{y}_i)^2
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Interpreting the F-statistic:
+            </p>
+            <p class="styled-point2">
+              Compare \(F\) to the critical value from the F-distribution:
+            </p>
+            <p class="styled-point4">
+              Degrees of freedom: \(p\) (numerator) and \(n - p - 1\) (denominator).
+            </p>
+            <p class="styled-point4">
+              If \(F > F_{\text{critical}}\), reject \(H_0\): The model is significant.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          <span class="post-it-strip">Quality Metrics</span> for Regression
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Evaluating the Regression Model:
+            </p>
+            <p class="styled-point2">
+              \(R^2\) (Coefficient of Determination):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              R^2 = 1 - \frac{\text{SSE}}{\text{SST}}
+              \]
+              Measures the proportion of variance in \(y\) explained by the model. Ranges from 0 to 1.
+              \(\text{SST}\) is the total sum of squares and \(\text{SSE}\) is the sum of squared errors.
+            </p>
+            <p class="styled-point2">
+              Adjusted \(R^2\):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              R^2_{\text{adj}} = 1 - \frac{\text{SSE}/(n - p - 1)}{\text{SST}/(n - 1)}
+              \]
+              Adjusts \(R^2\) for the number of predictors. Useful when comparing models with different numbers of predictors.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              RMSE (Root Mean Squared Error):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{RMSE} = \sqrt{\frac{\text{SSE}}{n - p - 1}}
+              \]
+              Measures the average error of the model in predicting \(y\).
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Other Useful Metrics:
+            </p>
+            <p class="styled-point2">
+              MAE (Mean Absolute Error):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{MAE} = \frac{\sum_{i=1}^n |y_i - \hat{y}_i|}{n}
+              \]
+              Measures the average absolute difference between observed and predicted values.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+
+      <section>
+        <h4>
+          <span class="post-it-strip">Confidence</span> in Linear Regressions
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              What is a Confidence Interval (CI)?
+            </p>
+            <p class="styled-point2">
+              A confidence interval estimates the range in which the true population parameter (e.g., coefficient) is likely to lie with a specified level of confidence (e.g., 95%).
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              CI for Fitted Values (\(\hat{y}\)):
+            </p>
+            <p class="styled-point2">
+              For a given predictor vector \(\mathbf{x}\), the confidence interval of the fitted value is:
+              \[
+              \text{CI}(\hat{y}) = \hat{y} \pm t_{\text{critical}} \cdot \sqrt{\mathbf{x}^\top \text{Var}(\mathbf{\hat{\beta}}) \mathbf{x}}
+              \]
+              where \(\text{Var}(\mathbf{\hat{\beta}})\) is the variance-covariance matrix of the coefficients and \(\mathbf{x}\) is the predictor vector (not the design matrix). I.e., for \(x = 3\): \(\mathbf{x} = [1, 3]\).
+            </p>
+          </div>
+        </div>
+      </section>      
+
+      <section>
+        <h4>
+          <span class="post-it-strip">Predictions</span> in Linear Regressions
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              What is a Prediction Interval (PI)?
+            </p>
+            <p class="styled-point2">
+              A prediction interval estimates the range in which a new observation (\(y_{\text{new}}\)) is likely to fall, given the model.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Formula for Prediction Interval:
+            </p>
+            <p class="styled-point2">
+              For a given predictor vector \(\mathbf{x}\), the prediction interval is:
+              \[
+              \text{PI}(y_{\text{new}}) = \hat{y} \pm t_{\text{critical}} \cdot \sqrt{\mathbf{x}^\top \text{Var}(\mathbf{\hat{\beta}}) \mathbf{x} + \sigma^2}
+              \]
+            <p class="styled-noPoint" style="font-size: large;">
+              where \(\sigma^2\) is the residual variance (MSE) and \(\text{Var}(\mathbf{\hat{\beta}})\) is the variance-covariance matrix of the coefficients.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Key Differences Between CI and PI:
+            </p>
+            <p class="styled-point2">
+              Confidence Intervals: Uncertainty about the mean response (\(\hat{y}\)).
+            </p>
+            <p class="styled-point2">
+              Prediction Intervals: Uncertainty about a new observation (\(y_{\text{new}}\)).
+            </p>
+            <p class="styled-point2">
+              PI includes both the variability in \(\hat{y}\) and the residual variance (\(\sigma^2\)).
+            </p>
+          </div>
+        </div>
+      </section>
+      
 
       <section>
         <h4>
           Example
         </h4>
         <div>
-          <div class="leftBox">
-
-          </div>
-          <div class="spacer"></div>
-          <div class="rightBox">
-
-          </div>
+          <div id="chart_linreg3"></div>
         </div>
       </section>
 
       <section>
         <h4>
-          <span class="post-it-strip">Multi</span> linear Regressions
+          Linear Regression: <span class="post-it-strip">Seminar</span>
         </h4>
         <div>
           <div class="leftBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Data Overview:
+            </p>
+            <pre class="styled-noPoint">
+      x     y
+      0     5.9968
+      2.5   10.2135
+      5     13.3713
+      7.5   18.6136
+      10    18.5819
+            </pre>
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-
+            <p class="styled-point" style="font-weight: bold;">
+              Task:
+            </p>
+            <p class="styled-point2">
+              Fit a linear regression model to the data.
+            </p>
+            <p class="styled-point2">
+              Calculate the Confidence Interval (CI) for the regression line.
+            </p>
+            <p class="styled-point2">
+              Calculate the Prediction Interval (PI) for new observations.
+            </p>
           </div>
         </div>
       </section>
-
-      <section>
-        <h4>
-          <span class="post-it-strip">Principal</span> Component Regressions
-        </h4>
-        <div>
-          <div class="leftBox">
-
-          </div>
-          <div class="spacer"></div>
-          <div class="rightBox">
-
-          </div>
-        </div>
-      </section>
+      
 
     </div>
     <div class="footer-global">
@@ -336,5 +1698,10 @@
   <!-- Chart scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
   <script src="../resources/d3_utils.js"></script>
+  <script src="../resources/chart_linreg1.js"></script>
+  <script src="../resources/chart_linreg2.js"></script>
+  <script src="../resources/chart_linreg3.js"></script>
+
 </body>
+
 </html>
