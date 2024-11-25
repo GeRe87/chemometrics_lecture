@@ -567,7 +567,7 @@
       
       <section>
         <h4>
-          Challenges in Non-linear Regression Compared to <span class="post-it-strip">Linear Regression</span>
+          Challenges in <span class="post-it-strip">Non-Linear</span> Compared to <span class="post-it-strip">Linear Regression</span>
         </h4>
         <div>
           <div class="leftBox">
@@ -602,6 +602,11 @@
             </p>
             <p class="styled-point2">
               SSE leads to non-linear equations in \(\boldsymbol{\beta}\).
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \boldsymbol{\beta} = \text{argmin}_{\boldsymbol{\beta}} \sum_{i=1}^{n} [ y_i - f(x_i, \boldsymbol{\beta}) ]^2
+              \]
             </p>
             <p class="styled-point2">
               No closed-form solution is available.
@@ -972,39 +977,15 @@
               \]
             </p>
             <p class="styled-point2">
-              We have the following data:
-            </p>
-            <table style="font-size: medium;">
-              <tr>
-                <th>x_i</th>
-                <th>y_i</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>2.718</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>7.389</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>20.085</td>
-              </tr>
-            </table>
-            <p class="styled-point2">
               Initial parameter estimates:
             </p>
             <p class="styled-noPoint" style="font-size: large;">
               \[
-              \beta_0^{(0)} = 1.0,\quad \beta_1^{(0)} = 0.5
+              \beta_0^{(0)} = .9,\quad \beta_1^{(0)} = .8
               \]
             </p>
-          </div>
-          <div class="spacer"></div>
-          <div class="rightBox">
             <p class="styled-point2">
-              Compute predicted values and residuals:
+              We have the following data:
             </p>
             <table style="font-size: medium;">
               <tr>
@@ -1016,33 +997,26 @@
               <tr>
                 <td>1</td>
                 <td>2.718</td>
-                <td>\( e^{0.5 \times 1} = 1.649 \)</td>
-                <td>\( 2.718 - 1.649 = 1.069 \)</td>
+                <td>\( 0.9 e^{0.8 \times 1} = 2.003 \)</td>
+                <td>\( 2.718 - 2.003 = 0.715 \)</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>7.389</td>
-                <td>\( e^{0.5 \times 2} = 2.718 \)</td>
-                <td>\( 7.389 - 2.718 = 4.671 \)</td>
+                <td>\( 0.9 e^{0.8 \times 2} = 4.458 \)</td>
+                <td>\( 7.389 - 4.458 = 2.931 \)</td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>20.085</td>
-                <td>\( e^{0.5 \times 3} = 4.482 \)</td>
-                <td>\( 20.085 - 4.482 = 15.603 \)</td>
+                <td>\( 0.9 e^{0.8 \times 3} = 9.921 \)</td>
+                <td>\( 20.085 - 9.921 = 10.164 \)</td>
               </tr>
             </table>
-            <p class="styled-point" style="font-weight: bold;">
-              Setting Up the Jacobian Matrix \( \mathbf{J} \):
-            </p>
-            <p class="styled-point2">
-              Analytical derivatives:
-            </p>
-            <p class="styled-noPoint" style="font-size: large;">
-              \[
-              \frac{\partial y}{\partial \beta_0} = e^{\beta_1 x}, \quad \frac{\partial y}{\partial \beta_1} = \beta_0 x e^{\beta_1 x}
-              \]
-            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">   
+            <div id="chart_it0"></div>
           </div>
         </div>
       </section>
@@ -1053,6 +1027,9 @@
         </h4>
         <div>
           <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Setting Up the Jacobian Matrix \( \mathbf{J} \):
+            </p>
             <p class="styled-point2">
               Analytical derivatives:
             </p>
@@ -1072,18 +1049,18 @@
               </tr>
               <tr>
                 <td>i = 1</td>
-                <td>\( e^{0.5 \times 1} = 1.649 \)</td>
-                <td>\( 1.0 \times 1 \times 1.649 = 1.649 \)</td>
+                <td>\( .9 e^{0.8 \times 1} = 2.226 \)</td>
+                <td>\( .9 \times 1 \times 2.226 = 2.003 \)</td>
               </tr>
               <tr>
                 <td>i = 2</td>
-                <td>\( e^{0.5 \times 2} = 2.718 \)</td>
-                <td>\( 1.0 \times 2 \times 2.718 = 5.436 \)</td>
+                <td>\( .9 e^{0.8 \times 2} = 4.953 \)</td>
+                <td>\( .9 \times 2 \times 4.953 = 8.916 \)</td>
               </tr>
               <tr>
                 <td>i = 3</td>
-                <td>\( e^{0.5 \times 3} = 4.482 \)</td>
-                <td>\( 1.0 \times 3 \times 4.482 = 13.446 \)</td>
+                <td>\( .9 e^{0.8 \times 3} = 11.023 \)</td>
+                <td>\( .9 \times 3 \times 11.023 = 29.763 \)</td>
               </tr>
             </table>
           </div>
@@ -1095,9 +1072,9 @@
             <p class="styled-noPoint" style="font-size: large;">
               \[
               \mathbf{J} = \begin{bmatrix}
-              1.649 & 1.649 \\
-              2.718 & 5.436 \\
-              4.482 & 13.446 \\
+              2.226 & 2.003 \\
+              4.953 & 8.916 \\
+              11.023 & 29.763 \\
               \end{bmatrix}
               \]
             </p>
@@ -1107,9 +1084,9 @@
             <p class="styled-noPoint" style="font-size: large;">
               \[
               \mathbf{r} = \begin{bmatrix}
-              1.069 \\
-              4.671 \\
-              15.603 \\
+              0.715 \\
+              2.931 \\
+              10.164 \\
               \end{bmatrix}
               \]
             </p>
@@ -1129,16 +1106,16 @@
             <p class="styled-noPoint" style="font-size: large;">
               \[
               \mathbf{J}^\top \mathbf{J} = \begin{bmatrix}
-              1.649 & 2.718 & 4.482 \\
-              1.649 & 5.436 & 13.446 \\
+              2.226 & 4.953 & 11.023 \\
+              2.003 & 8.916 & 29.763 \\
               \end{bmatrix}
               \begin{bmatrix}
-              1.649 & 1.649 \\
-              2.718 & 5.436 \\
-              4.482 & 13.446 \\
+              2.226 & 2.003 \\
+              4.953 & 8.916 \\
+              11.023 & 29.763 \\
               \end{bmatrix} = \begin{bmatrix}
-              30.2 & 77.8 \\
-              77.8 & 213.0 \\
+              151.0 & 376.7 \\
+              376.7 & 969.3 \\
               \end{bmatrix}
               \]
             </p>
@@ -1148,16 +1125,16 @@
             <p class="styled-noPoint" style="font-size: large;">
               \[
               \mathbf{J}^\top \mathbf{r} = \begin{bmatrix}
-              1.649 & 2.718 & 4.482 \\
-              1.649 & 5.436 & 13.446 \\
+              2.226 & 4.953 & 11.023 \\
+              2.003 & 8.916 & 29.763 \\
               \end{bmatrix}
               \begin{bmatrix}
-              1.069 \\
-              4.671 \\
-              15.603 \\
+              0.715 \\
+              2.931 \\
+              10.164 \\
               \end{bmatrix} = \mathbf{J}^\top \mathbf{r} = \begin{bmatrix}
-              84.4 \\
-              236.9 \\
+              128.2 \\
+              330.1 \\
               \end{bmatrix}
               \]
             </p>
@@ -1167,8 +1144,8 @@
             <p class="styled-noPoint" style="font-size: large;">
               \[
               \Delta \boldsymbol{\beta} = \left( \mathbf{J}^\top \mathbf{J} \right)^{-1} \mathbf{J}^\top \mathbf{r} = \begin{bmatrix}
-              -1.15 \\
-              1.53 \\
+              -0.027 \\
+              0.351 \\
               \end{bmatrix}
               \]
             </p>
@@ -1177,17 +1154,130 @@
             </p>
             <p class="styled-noPoint" style="font-size: large;">
               \[
-              \beta_0^{(1)} = \beta_0^{(0)} + \Delta \beta_0 = 1.0 - 1.15 = -0.15
+              \beta_0^{(1)} = \beta_0^{(0)} + \Delta \beta_0 = 0.9 - 0.027 = 0.873
               \]
               \[
-              \beta_1^{(1)} = \beta_1^{(0)} + \Delta \beta_1 = 0.5 + 1.53 = 2.03
+              \beta_1^{(1)} = \beta_1^{(0)} + \Delta \beta_1 = 0.8 + 0.351 = 1.151
               \]
             </p>
           </div>
         </div>
       </section>
-      
 
+      <section>
+        <h4>
+          Iterating the <span class="post-it-strip">Parameter Update</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point"><strong>Initial Parameters Matter</strong></p>
+            <p class="styled-point2" style="font-size: large;">Good estimates lead to quick convergence.</p>
+            <p class="styled-point2" style="font-size: large;">Poor estimates may prevent finding a solution.</p>
+          
+            <p class="styled-point"><strong>Sensitivity to Starting Values</strong></p>
+            <p class="styled-point2" style="font-size: large;">Small changes can yield different results.</p>
+            <p class="styled-point2" style="font-size: large;">Algorithms may get stuck in local minima.</p>
+          
+            <p class="styled-point"><strong>Practical Implications</strong></p>
+            <p class="styled-point2" style="font-size: large;">Choose initial parameters carefully.</p>
+            <p class="styled-point2" style="font-size: large;">Use domain knowledge for better estimates.</p>
+          </div>          
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- Your existing tabs and charts -->
+            <div class="tabs">
+              <div class="tab active" data-tab="it1">Good Initial Parameters</div>
+              <div class="tab" data-tab="it2">Poor Initial Parameters</div>
+            </div>
+            <div class="tab-content active" data-tab="it1" style="height: 500px;">
+              <!-- Plot will be rendered here -->
+              <div id="chart_with_slider"></div>
+              <!-- Slider and parameter display -->
+              <div id="slider-container" style="margin-top: -10px;"></div>
+            </div>
+            <div class="tab-content" data-tab="it2" style="height: 500px;">
+              <!-- Plot will be rendered here -->
+              <div id="chart_with_slider2"></div>
+              <!-- Slider and parameter display -->
+              <div id="slider-container2" style="margin-top: -10px;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          Estimating <span class="post-it-strip">Uncertainties</span> of the Coefficients in Non-linear Regression
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point"><strong>Understanding Parameter Uncertainties</strong></p>
+            <p class="styled-point2">In non-linear regression, estimating the uncertainties (standard errors) of the parameters is more complex than in linear regression.</p>
+            <p class="styled-point"><strong>Covariance Matrix Calculation</strong></p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{Cov}(\boldsymbol{\beta}) = \sigma^2 (\mathbf{J}^\top \mathbf{J})^{-1}
+              \]
+              where \( \sigma^2 \) is the estimated variance of the residuals.
+              
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point"><strong>Estimated Variance of Residuals</strong></p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \sigma^2 = \frac{\text{RSS}}{n - p}
+              \]
+              where \( \text{RSS} \) is the residual sum of squares and \( n \) is the number of observations and \( p \) is the number of parameters.
+            </p>
+            <p class="styled-point"><strong>Constructing Confidence Intervals</strong></p>
+            <p class="styled-point2">Instead of SE of the coefficients, we can compute confidence intervals (CIs) as we cannot assume normality.</p>
+            <p class="styled-point2">This also means that hypothesis tests are not applicable.</p>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Estimating <span class="post-it-strip">Uncertainties</span> of the Coefficients
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point"><strong>Constructing Confidence Intervals</strong></p>
+            <p class="styled-point2" style="font-size: large;">The standard errors \( SE(\beta_j) \) are the square roots of the diagonal elements of the covariance matrix.</p>
+            <p class="styled-point2" style="font-size: large;">The \( (1 - \alpha) \times 100\% \) confidence interval for \( \beta_j \) is:</p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \beta_j \pm z \times SE(\beta_j)
+              \]
+              where \( z \) is the critical value from the normal distribution, e.g., \( z = 1.96 \) for a 95% CI.
+            </p>
+            <p class="styled-point"><strong>Interpreting CIs</strong></p>
+            <p class="styled-point2" style="font-size: large;">The CI indicates the range in which the true parameter value is expected.</p>
+            <p class="styled-point2" style="font-size: large;">If the CI includes zero, the parameter is not significantly different from zero.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="tabs">
+              <div class="tab active tab3" data-tab="it3">0 Iterations</div>
+              <div class="tab tab3" data-tab="it4">10 Iteration</div>
+            </div>
+            <div class="tab-content active" data-tab="it3" style="height: 500px;">
+              <!-- Plot will be rendered here -->
+              <div id="chart_with_uncertainties"></div>
+              <!-- Parameter display -->
+              <div id="parameter-display3" style="margin-top: -10px; font-family: 'Humor Sans'; font-size: large;"></div>
+            </div>
+            <div class="tab-content" data-tab="it4" style="height: 500px;">
+              <!-- Plot will be rendered here -->
+              <div id="chart_with_uncertainties2"></div>
+              <!-- Parameter display -->
+              <div id="parameter-display4" style="margin-top: -10px; font-family: 'Humor Sans'; font-size: large;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
     </div>
     <div class="footer-global">
       Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
@@ -1204,6 +1294,7 @@
   <script src="../plugin/menu/menu.js"></script>
   <!-- Anything plugin -->
   <!-- Chart plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="../plugin/chartscii/dist/bundle.js"></script>
   <script>
@@ -1246,6 +1337,11 @@
   <script src="../resources/chart_nonlinreg1.js"></script>
   <script src="../resources/chart_nonlinreg2.js"></script>
   <script src="../resources/chart_nonlinreg3.js"></script>
+  <script src="../resources/chart_nonlinreg4.js"></script>
+  <script src="../resources/chart_nonlinreg5.js"></script>
+  <script src="../resources/chart_nonlinreg6.js"></script>
+  <script src="../resources/chart_nonlinreg7.js"></script>
+  <script src="../resources/chart_nonlinreg8.js"></script>
 
 </body>
 
