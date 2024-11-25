@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Chemometrics and Statistics</title>
+
+  <link rel="stylesheet" href="../dist/reset.css">
+  <link rel="stylesheet" href="../dist/reveal.css">
+  <link rel="stylesheet" href="../dist/theme/iac.css">
+  <link rel="stylesheet" href="../css/mystyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+  <style>
+    .green-text {
+      color: rgb(133, 198, 42);
+    }
+
+    .teal-text {
+      color: rgb(0, 150, 136);
+    }
+
+    .small-text {
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+        <pre><code>07. Data Modeling 2</code></pre>
+        <h4>Non-Linear Regression</h4>
+        <p style="text-align: right; font-size: medium;">by <a href="https://www.uni-due.de/iac/gerrit_renner.php"
+            target="_blank">Gerrit Renner</a></p>
+      </section>
+
+      <section>
+        <h4>
+          What is the <span class="post-it-strip">Leverage Effect</span> in Regression?
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Introduction:
+            </p>
+            <p class="styled-point2">
+              The <strong>leverage effect</strong> measures how far an observation's predictor values are from the mean
+              of all predictor values.
+            </p>
+            <p class="styled-point2">
+              Observations with high leverage have the potential to exert significant influence on the estimated
+              regression coefficients.
+            </p>
+            <p class="styled-point2">
+              Understanding leverage is crucial for identifying influential data points and ensuring the robustness of
+              your regression model.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/leverage1.jpg" alt="Leverage Effect Illustration" style="width: 100%;">
+            <!-- Replace the src with the actual path to your image -->
+            <p class="styled-point4" style="font-size: large;">
+              High leverage points significantly influence the regression model, i.e., regression coefficients.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Mathematical Foundations of the <span class="post-it-strip">Leverage Effect</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              The Hat Matrix (\(\mathbf{H}\)):
+            </p>
+            <p class="styled-noPoint">
+              The leverage of each observation is given by the <b>diagonal elements</b> \(h_{ii}\) of the Hat Matrix:
+              \[
+              \mathbf{H} = \mathbf{X} (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Properties of \(h_{ii}\):
+            </p>
+            <p class="styled-point2">
+              \(0 \leq h_{ii} \leq 1\)
+            </p>
+            <p class="styled-point2">
+              \(\sum_{i=1}^{n} h_{ii} = p\) (number of parameters)
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Interpretation:
+            </p>
+            <p class="styled-point2">
+              A high leverage value \(h_{ii}\) indicates that observation \(i\) is far from the mean of the predictor
+              variables.
+            </p>
+            <p class="styled-point2">
+              Such observations can significantly influence the estimated regression coefficients.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Example:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \mathbf{X} = \begin{pmatrix}
+              1 & 1 & 1 \\
+              1 & 2 & 4 \\
+              1 & 3 & 9 \\
+              1 & 4 & 16 \\
+              1 & 5 & 25 \\
+              \end{pmatrix}
+              \quad
+              \mathbf{H} = \begin{pmatrix}
+              .9 & . & . & . & . \\
+              . & .4 & . & . & . \\
+              . & . & .5 & . & . \\
+              . & . & . & .4 & . \\
+              . & . & . & . & .9 \\
+              \end{pmatrix}
+              \]
+              The diagonal elements of \(\mathbf{H}\) are the leverage values.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Interpretation of <span class="post-it-strip">Leverage Values</span> \(h_{ii}\)
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              High Leverage Indicates:
+            </p>
+            <p class="styled-point2">
+              An observation with a high leverage value \(h_{ii}\) is far from the mean of the predictor variables.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Identifying High Leverage Points:
+            </p>
+            <p class="styled-noPoint">
+              A commonly used threshold:
+              \[
+              h_{ii} > \frac{2p}{n}
+              \]
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              where \(p\) is the number of parameters and \(n\) is the number of observations.
+            </p>
+            <p class="styled-point2">
+              Observations beyond the threshold are considered high-leverage points.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Example:
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              a) Equidistant predictor values:
+              \[
+              thr = .8
+              \quad
+              \mathbf{X} = \begin{pmatrix}
+              1 & 10 \\
+              1 & 20 \\
+              1 & 30 \\
+              1 & 40 \\
+              1 & 50 \\
+              \end{pmatrix}
+              \quad
+              \text{diag}\left(\mathbf{H}\right) = \begin{pmatrix}
+              .6 \\
+              .3 \\
+              .2 \\
+              .3 \\
+              .6 \\
+              \end{pmatrix}
+              \quad
+              \checkmark
+              \]
+              b) Non-equidistant predictor values:
+              \[
+              \mathbf{X} = \begin{pmatrix}
+              1 & 1 \\
+              1 & 2 \\
+              1 & 5 \\
+              1 & 10 \\
+              1 & 50 \\
+              \end{pmatrix}
+              \quad
+              \text{diag}\left(\mathbf{H}\right) = \begin{pmatrix}
+              .3 \\
+              .3 \\
+              .2 \\
+              .2 \\
+              1. \\
+              \end{pmatrix}
+              \quad
+              \text{⚠︎}
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Practical Implications:
+            </p>
+            <p class="styled-point2">
+              High-leverage points may not necessarily be outliers in the response variable but can disproportionately
+              affect the regression model.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Relationship between <span class="post-it-strip">Leverage</span> and <span
+            class="post-it-strip">Influence</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Influence of an Observation:
+            </p>
+            <p class="styled-point2">
+              depends on both its leverage and its residual.
+            </p>
+            <p class="styled-point2">
+              an observation with high leverage and a large residual can have a significant impact on the regression
+              model.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Cook's Distance (\(D_i\)):
+            </p>
+            <p class="styled-noPoint">
+              measures the influence of an observation:
+              \[
+              D_i = \frac{(e_i)^2}{p \cdot \hat{\sigma}^2} \frac{h_{ii}}{(1 - h_{ii})^2}
+              \]
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              where \(e_i\) is the residual of observation \(i\), \(p\) is the number of parameters, and
+              \(\hat{\sigma}^2\) is the estimated variance.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Interpretation of Cook's Distance:
+            </p>
+            <p class="styled-point2">
+              A larger \(D_i\) indicates a more influential observation.
+            </p>
+            <p class="styled-point2">
+              Common threshold:
+              \[
+              D_i > \frac{4}{n}
+              \]
+              where \(n\) is the number of observations.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Calculation Example: <span class="post-it-strip">Cook's Distance</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Case 1: Low Leverage Outlier
+            </p>
+            <p class="styled-point2">
+              Dataset:
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              \[
+              \begin{array}{c|ccccc}
+              x_i & 1 & 2 & 5 & 10 & 50 \\
+              y_i & 1.6 & 2.0 & 5.4 & 4.3 & 15.6 \\
+              \end{array}
+              \]
+            </p>
+            <p class="styled-point2">
+              Steps:
+            </p>
+            <p class="styled-point4" style="font-size: large;">
+              Fit the regression model \(y = \beta_0 + \beta_1 x\)
+            </p>
+            <p class="styled-point4" style="font-size: large;">
+              Compute residuals \(e_i\) and leverage values \(h_{ii}\)
+            </p>
+            <p class="styled-point4" style="font-size: large;">
+              Calculate Cook's Distance \(D_i\) for each observation
+            </p>
+            <p class="styled-point2">
+              Cook's Distance \(D_i\):
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              \[
+              \begin{array}{c|ccccc}
+              \text{Observation} & 1 & 2 & 3 & 4 & 5 \\
+              \hline
+              D_i & 0.10 & 0.06 & 0.48 & 0.03 & 1.37 \\
+              \end{array}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Case 2: High Leverage Outlier
+            </p>
+            <p class="styled-point2">
+              Dataset:
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              \[
+              \begin{array}{c|ccccc}
+              x_i & 1 & 2 & 5 & 10 & 50 \\
+              y_i & 1.6 & 2.0 & 2.7 & 4.3 & 22.1 \\
+              \end{array}
+              \]
+            </p>
+            <p class="styled-point2">
+              Steps:
+            </p>
+            <p class="styled-point4" style="font-size: large;">
+              Fit the regression model \(y = \beta_0 + \beta_1 x\)
+            </p>
+            <p class="styled-point4" style="font-size: large;">
+              Compute residuals \(e_i\) and leverage values \(h_{ii}\)
+            </p>
+            <p class="styled-point4" style="font-size: large;">
+              Calculate Cook's Distance \(D_i\) for each observation
+            </p>
+            <p class="styled-point2">
+              Cook's Distance \(D_i\):
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              \[
+              \begin{array}{c|ccccc}
+              \text{Observation} & 1 & 2 & 3 & 4 & 5 \\
+              \hline
+              D_i & 0.17 & 0.12 & 0.03 & 0.29 & 62.50 \\
+              \end{array}
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Conclusions: The <span class="post-it-strip">Leverage Effect</span> in Regression
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Key Takeaways:
+            </p>
+            <p class="styled-point2">
+              The <b>leverage effect</b> measures how far an observation's predictors are from the mean.
+            </p>
+            <p class="styled-point2">
+              High-leverage points can significantly influence regression coefficients.
+            </p>
+            <p class="styled-point2">
+              <b>Cook's Distance</b> measures observation influence using leverage and residuals.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Practical Implications:
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              Identifying influential points ensures robust regression analysis.
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              Such points may indicate errors, outliers, or important data variations.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Conclusions for Experimental Design:
+            </p>
+            <p class="styled-point2">
+              <b>Data Quality:</b> Check for errors or anomalies causing high leverage.
+            </p>
+            <p class="styled-point2">
+              <b>Balanced Design:</b> Plan experiments to minimize unintended high leverage.
+            </p>
+            <p class="styled-point2">
+              <b>Robustness Checks:</b> Use diagnostics (e.g., Cook's Distance) to assess influence.
+            </p>
+            <p class="styled-point2">
+              <b>Decision Making:</b> Consider context when deciding on influential points.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          Introduction to <span class="post-it-strip">Non-linear Regression</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              General Form of Linear Regression:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \varepsilon
+              \]
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              General Form of Non-linear Regression:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              y = f(x, \boldsymbol{\beta}) + \varepsilon
+              \]
+            </p>
+            <p class="styled-point2">
+              \(f\) is a non-linear function of the parameters \(\boldsymbol{\beta}\).
+            </p>
+            <p class="styled-point2">
+              Models complex relationships that linear regression cannot capture.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- D3.js Diagram -->
+            <div id="chart_nonlinear_regression"></div>
+            <p class="styled-noPoint" style="font-size: medium;">
+              <em>Figure:</em> Non-linear regression fitting a sigmoid function to data.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          Common <span class="post-it-strip">Non-linear Functions</span> in Regression
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Typical Non-linear Functions:
+            </p>
+            <p class="styled-point2">
+              <b>Exponential Function</b>:
+              \[
+              y = \beta_0 e^{\beta_1 x} + \varepsilon
+              \]
+            </p>
+            <p class="styled-point2">
+              <b>Reciprocal Function</b>:
+              \[
+              y = \frac{\beta_0}{x} + \varepsilon
+              \]
+            </p>
+            <p class="styled-point2">
+              <b>Logarithmic Function</b>:
+              \[
+              y = \beta_0 + \beta_1 \ln(x) + \varepsilon
+              \]
+            </p>
+            <p class="styled-point2">
+              <b>Sigmoid Function</b>:
+              \[
+              y = \frac{\beta_0}{1 + e^{-\beta_1(x - \beta_2)}} + \varepsilon
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- D3.js Diagram -->
+            <div id="chart_nonlinear_functions"></div>
+            <p class="styled-noPoint" style="font-size: medium;">
+              <em>Figure:</em> Examples of common non-linear functions.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          Non-linear Functions Can Fit <span class="post-it-strip">Anything</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point2">
+              Non-linear functions are incredibly versatile and can model complex patterns.
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Famous Quote:
+            </p>
+            <p class="styled-point2" style="font-style: italic;">
+              "With four parameters I can fit an elephant, and with five I can make him wiggle his trunk." <br> – John von Neumann
+            </p>
+            <p class="styled-point">
+              Non-Linear models are powerful but require experience to avoid overfitting.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- D3.js Diagram -->
+            <div id="chart_elephant"></div>
+            <p class="styled-point" style="font-weight: bold;">
+              Elephant Equations:
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              \[
+              x(t) = -60 \cos(t) + 30 \sin(t) - 8 \sin(2t) + 10 \sin(3t) \\
+              y(t) = 50 \sin(t) + 18 \sin(2t) - 12 \cos(3t) + 14 \cos(5t)
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Minimizing the <span class="post-it-strip">Sum of Squared Errors</span> in Non-linear Regression
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point2">
+              The goal is to find parameters \(\boldsymbol{\beta}\) that minimize the sum of squared errors (SSE):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \text{SSE} = \sum_{i=1}^{n} [ y_i - f(x_i, \boldsymbol{\beta}) ]^2
+              \]
+            </p>
+            <p class="styled-point2">
+              Similar to linear regression, but \(f(x, \boldsymbol{\beta})\) is a non-linear function of \(\boldsymbol{\beta}\).
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <!-- D3.js Diagram (Optional) -->
+            <div id="chart_sse_nonlinear"></div>
+            <p class="styled-noPoint" style="font-size: medium;">
+              <em>Figure:</em> Visualization of SSE in non-linear regression.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          Challenges in Non-linear Regression Compared to <span class="post-it-strip">Linear Regression</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Linear Regression:
+            </p>
+            <p class="styled-point2">
+              Minimizes SSE by solving the normal equations.
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \boldsymbol{\beta} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}
+              \]
+            </p>
+            <p class="styled-point2">
+              Closed-form solution: Direct computation of parameters without iteration.
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              Closed-form means the solution can be expressed explicitly using a finite number of standard mathematical operations.
+            </p>
+            <p class="styled-point2">
+              Example:
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              Given data points \((x_i, y_i)\), calculate \(\beta_0\) and \(\beta_1\) in \(y = \beta_0 + \beta_1 x\) analytically.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Non-linear Regression:
+            </p>
+            <p class="styled-point2">
+              SSE leads to non-linear equations in \(\boldsymbol{\beta}\).
+            </p>
+            <p class="styled-point2">
+              No closed-form solution is available.
+            </p>
+            <p class="styled-point2">
+              Parameters must be estimated using iterative optimization methods.
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              No closed-form solution means we cannot solve for \(\boldsymbol{\beta}\) explicitly and must use numerical methods.
+            </p>
+            <p class="styled-point2">
+              Example:
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              Fitting \( y = \beta_0 e^{\beta_1 x} \) requires iterative algorithms like Gauss-Newton or Levenberg-Marquardt.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      
+      <section>
+        <h4>
+          Using the <span class="post-it-strip">Taylor Series Expansion</span> for Optimization
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point2">
+              <strong>Why use the Taylor Series?</strong>
+            </p>
+            <p class="styled-point2">
+              To approximate how changes in parameters \(\boldsymbol{\beta}\) affect the model predictions \(f(x_i, \boldsymbol{\beta})\).
+            </p>
+            <p class="styled-point2">
+              Helps understand how residuals and RSS change when adjusting \(\boldsymbol{\beta}\).
+            </p>
+            <p class="styled-point2">
+              Allows linearization of the non-linear function around current parameter estimates.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Taylor Series Approximation:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \underbrace{f(x_i, \boldsymbol{\beta})}_{\text{updated model}} \approx \underbrace{f(x_i, \boldsymbol{\beta}^{(k)})}_{\text{current model}} + \underbrace{\nabla f(x_i, \boldsymbol{\beta}^{(k)})}_{\text{change per update}} \underbrace{(\boldsymbol{\beta} - \boldsymbol{\beta}^{(k)})}_{\text{update}}
+              \]
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              \(\boldsymbol{\beta}^{(k)}\): Current estimate of parameters.
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              \(\nabla f(x_i, \boldsymbol{\beta}^{(k)})\): Gradient (Jacobian) with respect to \(\boldsymbol{\beta}\), i.e., partial derivatives of \(f\) with respect to \(\boldsymbol{\beta}\).
+            </p>
+            <p class="styled-point2">
+              <strong>Purpose:</strong>
+            </p>
+            <p class="styled-point2">
+              Linearizes the model to approximate the change in residuals when \(\boldsymbol{\beta}\) is updated.
+            </p>
+            <p class="styled-point2">
+              Facilitates computation of parameter updates in iterative optimization.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Identifying the Update Direction with the <span class="post-it-strip">Jacobian Matrix</span>
+        </h4>
+        <div>
+          <div class="leftBox" style="width: 95%;">
+            <p class="styled-point" style="font-weight: bold;">
+              From Function Approximation to Residual Approximation:
+            </p>
+            <p class="styled-point2">
+              Starting with the Taylor series expansion:
+            </p>
+            <table style="font-size: medium;">
+              <tr>
+                <td style="color: blue;">new model = current model + gradient * update</td>
+                <td><i class="fas fa-arrow-right"></i></td>
+                <td style="color: #b8103b;">
+                  \(
+                  f(x_i, \boldsymbol{\beta}) \approx f(x_i, \boldsymbol{\beta}^{(k)}) + \nabla f(x_i, \boldsymbol{\beta}^{(k)}) (\boldsymbol{\beta} - \boldsymbol{\beta}^{(k)})
+                  \)
+                </td>
+              </tr>
+            </table>
+              
+            <p class="styled-point2">
+              Residuals are defined as:
+            </p>
+            <table style="font-size: medium;">
+              <tr>
+                <td style="color: blue;">residuals = observed - predicted</td>
+                <td><i class="fas fa-arrow-right"></i></td>
+                <td style="color: #b8103b;">
+                  \(
+                    r_i(\boldsymbol{\beta}) = y_i - f(x_i, \boldsymbol{\beta})
+                  \)
+                </td>
+              </tr>
+            </table>
+            <p class="styled-point2">
+              Substitute the approximation of <span style="color: blue;">new model</span>:
+            </p>
+            <table style="font-size: medium;">
+              <tr>
+                <td style="color: blue;">residuals = obs. - [ cur. model + gradient * update ]</td>
+                <td><i class="fas fa-arrow-right"></i></td>
+                <td style="color: #b8103b;">
+                  \(
+                    r_i(\boldsymbol{\beta}) \approx y_i - \left[ f(x_i, \boldsymbol{\beta}^{(k)}) + \nabla f(x_i, \boldsymbol{\beta}^{(k)}) (\boldsymbol{\beta} - \boldsymbol{\beta}^{(k)}) \right]
+                  \)
+                </td>
+              </tr>
+            </table>
+
+            <p class="styled-point2">
+              Simplify the expression:
+            </p>
+            <table style="font-size: medium;">
+              <tr>
+                <td style="color: blue;">residuals = residuals at cur. model - gradient * update</td>
+                <td><i class="fas fa-arrow-right"></i></td>
+                <td style="color: #b8103b;">
+                  \(
+                    r_i(\boldsymbol{\beta}) \approx \underbrace{ \left[ y_i - f(x_i, \boldsymbol{\beta}^{(k)}) \right] }_{ r_i(\boldsymbol{\beta}^{(k)}) } - \nabla f(x_i, \boldsymbol{\beta}^{(k)}) (\boldsymbol{\beta} - \boldsymbol{\beta}^{(k)})
+                  \)
+                </td>
+              </tr>
+            </table>
+          </div> 
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          The Central Role of the <span class="post-it-strip">Jacobian Matrix</span> in Parameter Updates
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              The Gradient as a Central Element:
+            </p>
+            <p class="styled-point2">
+              \( \nabla f(x_i, \boldsymbol{\beta}^{(k)}) \) shows how changes in parameters affect model predictions.
+            </p>
+            <p class="styled-point2">
+              The Jacobian matrix \(\mathbf{J}\) encapsulates all partial derivatives and can be used for \(\nabla f(x_i, \boldsymbol{\beta}^{(k)})\):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              J_{ij} = \frac{\partial f(x_i, \boldsymbol{\beta}^{(k)})}{\partial \beta_j}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Using the Jacobian to Update Parameters:
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              With the residual approximation:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              r_i(\boldsymbol{\beta}) \approx r_i(\boldsymbol{\beta}^{(k)}) - \mathbf{J}_i (\boldsymbol{\beta} - \boldsymbol{\beta}^{(k)})
+              \]
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              We aim to minimize the sum of squared residuals:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \min_{\Delta \boldsymbol{\beta}} \sum_{i=1}^{n} \left[ r_i(\boldsymbol{\beta}^{(k)}) - \mathbf{J}_i \Delta \boldsymbol{\beta} \right]^2
+              \]
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              This is a linear least squares problem in \( \Delta \boldsymbol{\beta} \).
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              The solution gives the parameter update:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \Delta \boldsymbol{\beta} = \left( \mathbf{J}^\top \mathbf{J} \right)^{-1} \mathbf{J}^\top \mathbf{r}(\boldsymbol{\beta}^{(k)})
+              \]
+            </p>
+            <p class="styled-point2" style="font-size: large;">
+              Update parameters:
+              \[
+              \boldsymbol{\beta}^{(k+1)} = \boldsymbol{\beta}^{(k)} + \Delta \boldsymbol{\beta}
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          TL;DR: Non-linear Regression in a Nutshell
+        </h4>
+        <div>
+          <div class="leftBox" style="width: 95%;">
+            <p class="styled-point2">
+              Non-linear regression is fundamentally similar to linear regression.
+            </p>
+            <p class="styled-point2">
+              Instead of using the <b>design matrix</b> \( \mathbf{X} \) and observations \( \mathbf{y} \), we use the <b>Jacobian matrix</b> \( \mathbf{J} \) and <b>residuals</b> \( \mathbf{r} \).
+            </p>
+            <p class="styled-point2">
+              We iteratively update parameters to minimize the residuals:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \Delta \boldsymbol{\beta} = \left( \mathbf{J}^\top \mathbf{J} \right)^{-1} \mathbf{J}^\top \mathbf{r}
+              \]
+              \[
+              \boldsymbol{\beta}^{(k+1)} = \boldsymbol{\beta}^{(k)} + \Delta \boldsymbol{\beta}
+              \]
+            </p>
+            <p class="styled-point2">
+              Repeat until convergence: Each iteration recalculates coefficients, ideally reducing residuals.
+            </p>
+            <p class="styled-point2">
+              The process continues until the changes in parameters or residuals are below a specified threshold.
+            </p>
+            <p class="styled-point2">
+              This method leverages linear regression techniques in each iteration on the linearized model.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Example: Setting Up the <span class="post-it-strip">Jacobian Matrix</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Non-linear Function with Two Parameters:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              y = \beta_0 e^{\beta_1 x}
+              \]
+            </p>
+            <p class="styled-point2">
+              \( \beta_0 \) and \( \beta_1 \) are the parameters to estimate
+            </p>
+            <p class="styled-point2">
+              The function is non-linear in parameters due to \( e^{\beta_1 x} \)
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Compute Partial Derivatives Analytically:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \frac{\partial y}{\partial \beta_0} = e^{\beta_1 x}
+              \]
+              \[
+              \frac{\partial y}{\partial \beta_1} = \beta_0 x e^{\beta_1 x}
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Forming the Jacobian Matrix \( \mathbf{J} \):
+            </p>
+            <p class="styled-point2">
+              For each observation \( x_i \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              J_{i1} = \frac{\partial f(x_i, \boldsymbol{\beta})}{\partial \beta_0} = e^{\beta_1 x_i}
+              \]
+              \[
+              J_{i2} = \frac{\partial f(x_i, \boldsymbol{\beta})}{\partial \beta_1} = \beta_0 x_i e^{\beta_1 x_i}
+              \]
+            </p>
+            <p class="styled-point2">
+              The Jacobian matrix \( \mathbf{J} \) is an \( n \times 2 \) matrix.
+            </p>
+            <p class="styled-point2">
+              It is used in the parameter update equation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Numerical Computation of <span class="post-it-strip">Partial Derivatives</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              When Analytical Derivatives are Difficult:
+            </p>
+            <p class="styled-point2">
+              Analytical computation may be complex or infeasible
+            </p>
+            <p class="styled-point2">
+              Use numerical differentiation (finite differences)
+            </p>
+            <p class="styled-point" style="font-weight: bold;">
+              Finite Difference Approximation:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \frac{\partial f(x_i, \boldsymbol{\beta})}{\partial \beta_j} \approx \frac{f(x_i, \boldsymbol{\beta} + h \mathbf{e}_j) - f(x_i, \boldsymbol{\beta})}{h}
+              \]
+            </p>
+            <p class="styled-point2">
+              \( h \): Small increment (e.g., \( h = 10^{-5} \))
+            </p>
+            <p class="styled-point2">
+              \( \mathbf{e}_j \): Unit vector with 1 at position \( j \)
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Example with Our Function:
+            </p>
+            <p class="styled-point2">
+              Compute \( \frac{\partial y}{\partial \beta_0} \) numerically at \( \boldsymbol{\beta}^{(k)} \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \frac{\partial y}{\partial \beta_0} \approx \frac{f(x_i, \beta_0^{(k)} + h, \beta_1^{(k)}) - f(x_i, \beta_0^{(k)}, \beta_1^{(k)})}{h}
+              \]
+            </p>
+            <p class="styled-point2">
+              Similarly for \( \frac{\partial y}{\partial \beta_1} \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \frac{\partial y}{\partial \beta_1} \approx \frac{f(x_i, \beta_0^{(k)}, \beta_1^{(k)} + h) - f(x_i, \beta_0^{(k)}, \beta_1^{(k)})}{h}
+              \]
+            </p>
+            <p class="styled-point2">
+              Repeat for all observations \( x_i \) to form \( \mathbf{J} \).
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          Concrete Example: Calculating the <span class="post-it-strip">Jacobian Matrix</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Given Model:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              y = \beta_0 e^{\beta_1 x}
+              \]
+            </p>
+            <p class="styled-point2">
+              We have the following data:
+            </p>
+            <table style="font-size: medium;">
+              <tr>
+                <th>x_i</th>
+                <th>y_i</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>2.718</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>7.389</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>20.085</td>
+              </tr>
+            </table>
+            <p class="styled-point2">
+              Initial parameter estimates:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \beta_0^{(0)} = 1.0,\quad \beta_1^{(0)} = 0.5
+              \]
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Compute predicted values and residuals:
+            </p>
+            <table style="font-size: medium;">
+              <tr>
+                <th>x_i</th>
+                <th>y_i</th>
+                <th>\( f(x_i, \boldsymbol{\beta}^{(0)}) \)</th>
+                <th>Residual \( r_i \)</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>2.718</td>
+                <td>\( e^{0.5 \times 1} = 1.649 \)</td>
+                <td>\( 2.718 - 1.649 = 1.069 \)</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>7.389</td>
+                <td>\( e^{0.5 \times 2} = 2.718 \)</td>
+                <td>\( 7.389 - 2.718 = 4.671 \)</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>20.085</td>
+                <td>\( e^{0.5 \times 3} = 4.482 \)</td>
+                <td>\( 20.085 - 4.482 = 15.603 \)</td>
+              </tr>
+            </table>
+            <p class="styled-point" style="font-weight: bold;">
+              Setting Up the Jacobian Matrix \( \mathbf{J} \):
+            </p>
+            <p class="styled-point2">
+              Analytical derivatives:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \frac{\partial y}{\partial \beta_0} = e^{\beta_1 x}, \quad \frac{\partial y}{\partial \beta_1} = \beta_0 x e^{\beta_1 x}
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Concrete Example: Calculating the <span class="post-it-strip">Jacobian Matrix</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point2">
+              Analytical derivatives:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \frac{\partial y}{\partial \beta_0} = e^{\beta_1 x}, \quad \frac{\partial y}{\partial \beta_1} = \beta_0 x e^{\beta_1 x}
+              \]
+            </p>
+            <p class="styled-point2">
+              Compute Jacobian matrix at \( \boldsymbol{\beta}^{(0)} \):
+            </p>
+            <table style="font-size: medium;">
+              <tr>
+                <th> </th>
+                <th>\( \frac{\partial y}{\partial \beta_0} \)</th>
+                <th>\( \frac{\partial y}{\partial \beta_1} \)</th>
+              </tr>
+              <tr>
+                <td>i = 1</td>
+                <td>\( e^{0.5 \times 1} = 1.649 \)</td>
+                <td>\( 1.0 \times 1 \times 1.649 = 1.649 \)</td>
+              </tr>
+              <tr>
+                <td>i = 2</td>
+                <td>\( e^{0.5 \times 2} = 2.718 \)</td>
+                <td>\( 1.0 \times 2 \times 2.718 = 5.436 \)</td>
+              </tr>
+              <tr>
+                <td>i = 3</td>
+                <td>\( e^{0.5 \times 3} = 4.482 \)</td>
+                <td>\( 1.0 \times 3 \times 4.482 = 13.446 \)</td>
+              </tr>
+            </table>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point2">
+              Jacobian matrix \( \mathbf{J} \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \mathbf{J} = \begin{bmatrix}
+              1.649 & 1.649 \\
+              2.718 & 5.436 \\
+              4.482 & 13.446 \\
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              Residual vector \( \mathbf{r} \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \mathbf{r} = \begin{bmatrix}
+              1.069 \\
+              4.671 \\
+              15.603 \\
+              \end{bmatrix}
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <h4>
+          Continuation: Calculating the <span class="post-it-strip">Parameter Update</span>
+        </h4>
+        <div>
+          <div class="leftBox" style="width: 95%;">
+            <p class="styled-point2">
+              Compute \( \mathbf{J}^\top \mathbf{J} \) and \( \mathbf{J}^\top \mathbf{r} \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \mathbf{J}^\top \mathbf{J} = \begin{bmatrix}
+              1.649 & 2.718 & 4.482 \\
+              1.649 & 5.436 & 13.446 \\
+              \end{bmatrix}
+              \begin{bmatrix}
+              1.649 & 1.649 \\
+              2.718 & 5.436 \\
+              4.482 & 13.446 \\
+              \end{bmatrix} = \begin{bmatrix}
+              30.2 & 77.8 \\
+              77.8 & 213.0 \\
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              Compute \( \mathbf{J}^\top \mathbf{r} \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \mathbf{J}^\top \mathbf{r} = \begin{bmatrix}
+              1.649 & 2.718 & 4.482 \\
+              1.649 & 5.436 & 13.446 \\
+              \end{bmatrix}
+              \begin{bmatrix}
+              1.069 \\
+              4.671 \\
+              15.603 \\
+              \end{bmatrix} = \mathbf{J}^\top \mathbf{r} = \begin{bmatrix}
+              84.4 \\
+              236.9 \\
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              Compute the parameter update \( \Delta \boldsymbol{\beta} \):
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \Delta \boldsymbol{\beta} = \left( \mathbf{J}^\top \mathbf{J} \right)^{-1} \mathbf{J}^\top \mathbf{r} = \begin{bmatrix}
+              -1.15 \\
+              1.53 \\
+              \end{bmatrix}
+              \]
+            </p>
+            <p class="styled-point2">
+              Updated parameters:
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \beta_0^{(1)} = \beta_0^{(0)} + \Delta \beta_0 = 1.0 - 1.15 = -0.15
+              \]
+              \[
+              \beta_1^{(1)} = \beta_1^{(0)} + \Delta \beta_1 = 0.5 + 1.53 = 2.03
+              \]
+            </p>
+          </div>
+        </div>
+      </section>
+      
+
+    </div>
+    <div class="footer-global">
+      Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+      Last updated: November 15, 2024
+    </div>
+  </div>
+  <div id="clock">--:--</div>
+
+  <script src="../dist/reveal.js"></script>
+  <script src="../plugin/notes/notes.js"></script>
+  <script src="../plugin/markdown/markdown.js"></script>
+  <script src="../plugin/highlight/highlight.js"></script>
+  <script src="../plugin/math/math.js"></script>
+  <script src="../plugin/menu/menu.js"></script>
+  <!-- Anything plugin -->
+  <!-- Chart plugin -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../plugin/chartscii/dist/bundle.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      parallaxBackgroundImage: '../resources/bg3.png', // URL of your background image
+      // Parallax background size (optional)
+      parallaxBackgroundSize: '5376px 1512px', // Adjust to your desired size
+      // Parallax background horizontal movement (optional)
+      parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
+      menu: {
+        custom: [{
+          title: 'Topics',
+          icon: '<i class="fas fa-home"></i>',
+          src: 'menu.html'
+        }]
+      },
+      hash: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu],
+    });
+    // Funktion zum Aktualisieren der Uhrzeit
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Uhrzeit sofort und dann jede Sekunde aktualisieren
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+  <!-- Chart scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+  <script src="../resources/d3_utils.js"></script>
+  <script src="../resources/chart_nonlinreg1.js"></script>
+  <script src="../resources/chart_nonlinreg2.js"></script>
+  <script src="../resources/chart_nonlinreg3.js"></script>
+
+</body>
+
+</html>
