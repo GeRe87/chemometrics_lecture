@@ -414,6 +414,41 @@
           </div>
         </div>
       </section>
+
+      <section>
+        <h4>
+          Mitigating the <span class="post-it-strip">Leverage Effect</span> with Weighted Regression
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point"><strong>Weighted Regression with Cook's Distance</strong></p>
+            <p class="styled-point2" style="font-size: large;">Assign weights inversely related to Cook's Distance: \( w_i = \frac{1}{1 + D_i} \).</p>
+            
+            <p class="styled-point"><strong>Normal Equations with Weights</strong></p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              (\mathbf{X}^\top \mathbf{W} \mathbf{X}) \boldsymbol{\beta} = \mathbf{X}^\top \mathbf{W} \mathbf{y}
+              \]
+            </p>
+            <p class="styled-noPoint" style="font-size: medium;">
+              where \(\mathbf{W}\) is a diagonal matrix with weights \(w_i\) on the diagonal.
+            </p>
+            
+            <p class="styled-point"><strong>Benefits</strong></p>
+            <p class="styled-point2" style="font-size: large;">Reduces the influence of observations with high Cook's Distance.</p>
+            <p class="styled-point2" style="font-size: large;">Provides more robust estimates in the presence of influential points.</p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div id="weighted_regression_chart"></div>
+            <p class="styled-noPoint" style="font-size: medium;">
+              <em>Figure:</em> Weighted regression assigns lower weights to influential points. (<span style="color: red;">red: common regression</span>, <span style="color: blue;">blue: weighted regression</span>)
+            </p>
+          </div>
+          
+        </div>
+      </section>
+      
       
       <section>
         <h4>
@@ -557,9 +592,9 @@
           <div class="spacer"></div>
           <div class="rightBox">
             <!-- D3.js Diagram (Optional) -->
-            <div id="chart_sse_nonlinear"></div>
+            <img src="../resources/desingspace.webp" alt="Design Space" style="width: 100%;">
             <p class="styled-noPoint" style="font-size: medium;">
-              <em>Figure:</em> Visualization of SSE in non-linear regression.
+              <em>Figure:</em> Visualization of SSE in non-linear regression. (Amini, Alexander, et al. “Spatial uncertainty sampling for end-to-end control.” arXiv preprint arXiv:1805.04829 (2018).)
             </p>
           </div>
         </div>
@@ -927,10 +962,10 @@
               \frac{\partial f(x_i, \boldsymbol{\beta})}{\partial \beta_j} \approx \frac{f(x_i, \boldsymbol{\beta} + h \mathbf{e}_j) - f(x_i, \boldsymbol{\beta})}{h}
               \]
             </p>
-            <p class="styled-point2">
+            <p class="styled-point2" style="font-size: medium;">
               \( h \): Small increment (e.g., \( h = 10^{-5} \))
             </p>
-            <p class="styled-point2">
+            <p class="styled-point2" style="font-size: medium;">
               \( \mathbf{e}_j \): Unit vector with 1 at position \( j \)
             </p>
           </div>
@@ -1017,6 +1052,8 @@
           <div class="spacer"></div>
           <div class="rightBox">   
             <div id="chart_it0"></div>
+            <p class="styled-noPoint" style="font-size: medium;">
+              <em>Figure:</em> Initial model fit to data points. (<span style="color: red;">red: model</span>, <span style="color: blue;">blue: data</span>)
           </div>
         </div>
       </section>
@@ -1259,8 +1296,8 @@
           <div class="spacer"></div>
           <div class="rightBox">
             <div class="tabs">
-              <div class="tab active tab3" data-tab="it3">0 Iterations</div>
-              <div class="tab tab3" data-tab="it4">10 Iteration</div>
+              <div class="tab active tab3" data-tab="it3">2 Iterations</div>
+              <div class="tab tab3" data-tab="it4">10 Iterations</div>
             </div>
             <div class="tab-content active" data-tab="it3" style="height: 500px;">
               <!-- Plot will be rendered here -->
@@ -1274,6 +1311,50 @@
               <!-- Parameter display -->
               <div id="parameter-display4" style="margin-top: -10px; font-family: 'Humor Sans'; font-size: large;"></div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Non-Linear Regression: <span class="post-it-strip">Seminar</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Data Overview:
+            </p>
+            <pre class="styled-noPoint">
+      x     y
+      1.9   351.8
+      2     545.0
+      2.1   717.3
+      2.2   947.1
+      2.3   1070.8
+      2.4   1048.8
+      2.5   806.4
+      2.6   761.7
+      2.7   826.1      
+            </pre>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-point" style="font-weight: bold;">
+              Task:
+            </p>
+            <p class="styled-point2">
+              Fit a non-linear regression model to the data. Use the function: 
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[y = a \cdot \exp\left(-0.5 \frac{(x - b)^2}{c^2}\right) + d \cdot x^2 + e\]
+            </p>
+            <p class="styled-point2">
+              Estimate the parameters \(a\), \(b\), \(c\), \(d\), and \(e\).
+            </p>
+            <p class="styled-point2" style="font-size: medium;">
+              Hint: for check-up these should be quite good parameters:<br>
+              a = 600, b = 2.3, c = 0.15, d = 100, e = 20
+            </p>
           </div>
         </div>
       </section>
@@ -1342,6 +1423,7 @@
   <script src="../resources/chart_nonlinreg6.js"></script>
   <script src="../resources/chart_nonlinreg7.js"></script>
   <script src="../resources/chart_nonlinreg8.js"></script>
+  <script src="../resources/chart_nonlinreg9.js"></script>
 
 </body>
 

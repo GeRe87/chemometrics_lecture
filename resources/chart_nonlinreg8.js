@@ -46,6 +46,15 @@ function createExponentialRegressionChartWithUncertainties2() {
         return beta0 * Math.exp(beta1 * x);
     }
 
+    // Function to compute gradient at x
+    function computeGradient(x, params) {
+        const { beta0, beta1 } = params;
+        const expTerm = Math.exp(beta1 * x);
+        const dFdBeta0 = expTerm;
+        const dFdBeta1 = beta0 * x * expTerm;
+        return [dFdBeta0, dFdBeta1];
+    }
+
     // Function to fit the exponential model using the Gauss-Newton method
     function fitExponentialGaussNewton(data, iterations) {
         // Initial parameter estimates
@@ -130,7 +139,9 @@ function createExponentialRegressionChartWithUncertainties2() {
             beta0,
             beta1,
             SE_beta0,
-            SE_beta1
+            SE_beta1,
+            covarianceMatrix, // Include covariance matrix for further calculations
+            sigma2 // Include sigma2 if needed
         };
     }
 
@@ -139,15 +150,55 @@ function createExponentialRegressionChartWithUncertainties2() {
         // Fit the model
         const fittedParams = fitExponentialGaussNewton(data, iterations);
 
-        // Generate data for the fitted exponential curve
+        // Extract covariance matrix
+        const covarianceMatrix = fittedParams.covarianceMatrix;
+
+        // Generate data for the fitted exponential curve and confidence intervals
         const modelData = [];
+        const n = data.length;
+        const p = 2;
+        const degreesOfFreedom = n - p;
+        const tValue = jStat.studentt.inv(0.975, degreesOfFreedom); // 95% CI
+
         for (let xi = xMin; xi <= xMax; xi += 0.01) {
             const yi = exponentialModel(xi, fittedParams);
-            modelData.push({ x: xi, y: yi });
+
+            // Compute gradient at xi
+            const gradient = computeGradient(xi, fittedParams);
+
+            // Compute variance of y_pred
+            // Convert gradient and covariance matrix to math.js matrices
+            const g = math.matrix([gradient]);
+            const covMatrix = math.matrix(covarianceMatrix);
+
+            // Var(y_pred) = g * Cov(beta) * g^T
+            const varianceY = math.multiply(g, covMatrix, math.transpose(g)).toArray()[0][0];
+            const SE_Y = Math.sqrt(varianceY);
+
+            // Compute confidence intervals
+            const CI_lower = yi - tValue * SE_Y;
+            const CI_upper = yi + tValue * SE_Y;
+
+            modelData.push({ x: xi, y: yi, y_lower: CI_lower, y_upper: CI_upper });
         }
 
-        // Remove previous curve if it exists
+        // Remove previous elements if they exist
         svg.selectAll('.model-curve').remove();
+        svg.selectAll('.confidence-band').remove();
+
+        // Plot the confidence band
+        svg.append('path')
+            .datum(modelData)
+            .attr('class', 'confidence-band')
+            .attr('fill', 'lightblue')
+            .attr('stroke', 'none')
+            .attr('opacity', 0.5)
+            .attr('d', d3.area()
+                .x(d => xScale(d.x))
+                .y0(d => yScale(d.y_lower))
+                .y1(d => yScale(d.y_upper))
+            )
+            .style('filter', 'url(#wiggle-filter)');
 
         // Plot the fitted exponential curve
         const lineGenerator = d3.line()
@@ -165,11 +216,6 @@ function createExponentialRegressionChartWithUncertainties2() {
             .attr('d', lineGenerator);
 
         // Update parameter display with standard errors
-        const n = data.length;
-        const p = 2;
-        const degreesOfFreedom = n - p;
-        const tValue = jStat.studentt.inv(0.975, degreesOfFreedom); // Using jStat library for t-value
-
         const CI_beta0 = [
             fittedParams.beta0 - tValue * fittedParams.SE_beta0,
             fittedParams.beta0 + tValue * fittedParams.SE_beta0
