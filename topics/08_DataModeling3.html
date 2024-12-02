@@ -138,20 +138,26 @@
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-            <p class="mainBullet fragment fade-up" data-fragment-index="2">
-              <strong>Ambiguity is a challenge:</strong>
+            <p class="mainBullet fragment fade-up" data-fragment-index="2"">
+              <strong>Some classifications are challenging:</strong>
             </p>
-            <p class="subBullet fragment fade-up" data-fragment-index="2">
-              Overlap in features (e.g., dogs vs. muffins) creates confusion.
+            <p class="subBullet fragment fade-up" data-fragment-index="2"">
+              We do not have prior knowledge (e.g., coffee beans).
             </p>
             <p class="mainBullet fragment fade-up" data-fragment-index="3">
+              <strong>Ambiguity is a challenge:</strong>
+            </p>
+            <p class="subBullet fragment fade-up" data-fragment-index="3">
+              Overlap in features (e.g., dogs vs. muffins) creates confusion.
+            </p>
+            <p class="mainBullet fragment fade-up" data-fragment-index="4">
               <strong>Machine Learning's key questions:</strong>
             </p>
-            <p class="subBullet fragment fade-up" data-fragment-index="3">
-              How can algorithms recognize patterns like humans?
+            <p class="subBullet fragment fade-up" data-fragment-index="4">
+              How can algorithms recognize patterns like humans? <span class="post-it-strip">characteristic features</span>
             </p>
-            <p class="subBullet fragment fade-up" data-fragment-index="3">
-              How can ambiguity and errors be reduced?
+            <p class="subBullet fragment fade-up" data-fragment-index="4">
+              How can ambiguity and errors be reduced? <span class="post-it-strip">high quality data</span>
             </p>
           </div>
         </div>
@@ -477,22 +483,15 @@
         </h4>
         <div>
           <div class="leftBox">
-            <!-- here some interactive plot that shows a small decision tree with root, nodes, and leaves etc. 
-               there should be 3 edit boxes to enter values for 3 parameters and a slider that can be used to follow
-               the data along the tree
-               -->
-            <div id="decisionTreeInteractive" style="width: 300px; height: 300px;"></div>
-            <div style="margin-top: 10px;">
-              <label for="parameter1" style="font-size: large;">Parameter 1:</label>
-              <input id="parameter1" type="number" value="5" style="width: 60px;"><br>
-              <label for="parameter2" style="font-size: large;">Parameter 2:</label>
-              <input id="parameter2" type="number" value="3" style="width: 60px;"><br>
-              <label for="parameter3" style="font-size: large;">Parameter 3:</label>
-              <input id="parameter3" type="number" value="7" style="width: 60px;">
+            <div class="tabs">
+              <div class="tab active decision-tree-tab" data-tab="node">Node</div>
+              <div class="tab decision-tree-tab" data-tab="split">Tree</div>
             </div>
-            <div style="margin-top: 10px;">
-              <label for="pathSlider" style="font-size: large;">Tree Path:</label>
-              <input id="pathSlider" type="range" min="0" max="2" value="0" step="1" style="width: 200px;">
+            <div class="tab-content active decision-tree-tab" data-tab="node">
+              <img src="../resources/decision_tree_node.png" alt="Decision Tree Node" style="width: auto; height: 350px;">
+            </div>
+            <div class="tab-content decision-tree-tab" data-tab="split">
+              <img src="../resources/decision_tree_node2.png" alt="Decision Tree Split" style="width: auto; height: 350px;">
             </div>
           </div>
           <div class="spacer"></div>
@@ -524,58 +523,6 @@
 
       <section>
         <h4>
-          What is <span class="post-it-strip">Boot Strap Sampling</span> in RF?
-        </h4>
-        <div>
-          <div class="leftBox">
-            <p class="mainBullet">
-              <strong>Definition:</strong><br>
-              <span style="font-size: large; font-style: italic;">
-                Resampling technique used to create subsets of data for training individual decision trees.
-              </span>
-            </p>
-            <p class="mainBullet">
-              <strong>Key Features:</strong><br>
-              <span style="font-size: large; font-style: italic;">
-                a) Each tree is trained on a unique bootstrapped dataset.<br>
-                b) Samples are drawn with replacement.<br>
-                c) Around 1/3 of data, "out-of-bag" (OOB), is left out for validation.
-              </span>
-            </p>
-            <p class="mainBullet">
-              <strong>Why it matters:</strong><br>
-              <span style="font-size: large; font-style: italic;">
-                a) Ensures diversity in decision trees.<br>
-                b) Provides built-in validation using OOB samples.
-            </p>
-          </div>
-          <div class="spacer"></div>
-          <div class="rightBox">
-            <p class="mainBullet">
-              <strong>In Practice:</strong>
-              <pre><code data-trim data-noescape>
-                original_dataset = [1, 2, 3, 4, 5]
-                bootstrapped_tree1 = [2, 4, 5, 1, 2]
-                bootstrapped_tree2 = [3, 5, 1, 3, 3]
-                oob_sample_tree1 = [3]
-                oob_sample_tree2 = [2, 4]
-              </code>
-            </pre>
-            </p>
-            <p class="mainBullet">
-              <strong>How many trees are built?</strong><br>
-              <span style="font-size: large; font-style: italic;">
-                Typically, hundreds to thousands of trees are trained in a Random Forest. <strong>
-                  It is a hyperparameter that can be optimized.</strong>
-                </strong>
-              </span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h4>
           What is an <span class="post-it-strip">Ensemble Approach</span>?
         </h4>
         <div>
@@ -590,7 +537,7 @@
               <strong>How it works:</strong>
             </p>
             <p class="subBullet">
-              Builds multiple decision trees from bootstrapped datasets.
+              Builds multiple decision trees from different subsets of data.
             </p>
             <p class="subBullet">
               Each tree contributes a vote (classification) or prediction (regression).
@@ -634,6 +581,65 @@
         </div>
 </section>
 
+<section>
+  <h4>
+    What is <span class="post-it-strip">Boot Strap Sampling</span> in RF?
+  </h4>
+  <div>
+    <div class="leftBox">
+      <p class="mainBullet">
+        <strong>Definition:</strong><br>
+        <span style="font-size: large; font-style: italic;">
+          Resampling technique used to create subsets of data for training individual decision trees.
+        </span>
+      </p>
+      <p class="mainBullet">
+        <strong>Idea behind Bootstrapping:</strong><br>
+        <span style="font-size: large; font-style: italic;">
+          From a dataset of size N, create multiple subsets of size N by randomly sampling with replacement.
+        </span>
+      </p>
+      <p class="mainBullet">
+        <strong>Why it matters:</strong><br>
+        <span style="font-size: large; font-style: italic;">
+          a) Ensures diversity in decision trees.<br>
+          b) Provides built-in validation using out-of-bag samples.
+      </p>
+    </div>
+    <div class="spacer"></div>
+    <div class="rightBox">
+      <p class="mainBullet">
+        <strong>In Practice:</strong>
+        <pre><code data-trim data-noescape>
+          original_dataset = [1, 2, 3, 4, 5]
+          bootstrapped_tree1 = [2, 4, 5, 1, 2]
+          bootstrapped_tree2 = [3, 5, 1, 3, 3]
+          oob_sample_tree1 = [3]
+          oob_sample_tree2 = [2, 4]
+        </code>
+      </pre>
+      </p>
+      <p class="mainBullet">
+        <strong>How many trees are built?</strong><br>
+        <span style="font-size: large; font-style: italic;">
+          Typically, hundreds to thousands of trees are trained in a Random Forest. <strong>
+            It is a hyperparameter that can be optimized.</strong>
+          </strong>
+        </span>
+      </p>
+      <p class="mainBullet">
+        <strong>Example:</strong> <button onclick="drawBootstrapSample()">Draw Bootstrap Sample</button>
+        <pre id="originalDataset" style="font-size: x-large;">
+x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</pre>
+        <pre id="bootstrapSample" style="font-size: large; color: teal;">
+          <!-- Bootstrap sample will appear here --></pre>
+        <pre id="oobSample" style="font-size: large; color: gray;">
+          <!-- OOB sample will appear here --></pre>
+      </p>
+    </div>
+  </div>
+</section>
+
 
 <section>
   <h4>
@@ -651,7 +657,7 @@
         Each tree is trained on a unique bootstrapped dataset.
       </p>
       <p class="subBullet">
-        For every split in the trees, a random subset of features is chosen.
+        Not only the data but also the features are randomly sampled for each node in each tree.
       </p>
       <p class="subBullet">
         Feature that provides the best split of the data is selected.
@@ -683,29 +689,258 @@
 
 
 
-      <section>
-        <h4>
-          Find the best <span class="post-it-strip">Criterion</span> for a knot
-        </h4>
-        <div>
-          <div class="leftBox"></div>
-          <div class="spacer"></div>
-          <div class="rightBox">
-            <div class="image-box"></div>
-          </div>
-        </div>
-      </section>
+<section>
+  <h4>
+    Find the best <span class="post-it-strip">Criterion</span> for a Knot
+  </h4>
+  <div>
+    <div class="leftBox">
+      <p class="mainBullet">
+        <strong>Choosing the Best Feature:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        At each node, a random subset of features is selected from the total features.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Each feature in the subset is evaluated to determine the best split for the data.
+      </p>
+      <p class="mainBullet">
+        <strong>Criterion for Splitting:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Common criteria evaluate <strong>purity</strong> of the resulting child nodes after a split.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>For classification:</strong><br>
+        <span style="font-size: large; font-style: italic;">
+          Gini Index: Measures impurity. Lower values are better.<br>
+          \[ Gini = 1 - \sum_{i=1}^{n} p_i^2 \]
+          where p is the proportion of samples in class i.
+        </span>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>For regression:</strong><br>
+        <span style="font-size: large; font-style: italic;">
+          Mean Squared Error (MSE): Evaluates the reduction in variance after a split.
+        </span>
+      </p>
+    </div>
+    <div class="spacer"></div>
+    <div class="rightBox">
+      <p class="mainBullet">
+        <strong>How the Best Criterion is Determined:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        For each feature and potential split point, calculate the criterion value.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Choose the split point that maximizes the improvement in purity or minimizes the error.)
+      </p>
+      <p class="mainBullet">
+        <strong>Example:</strong>
+      </p>
+      <pre style="font-size: large;"><code data-trim data-noescape>
+Feature Subset: [Turbidity, Conductivity, pH]
+Turbidity (GI) | Conductivity (GI) | pH (GI)
+  < 5.0: 0.2   |  < 100: 0.1       |  < 7.0: 0.3
+  < 5.2: 0.3   |  < 150: 0.2       |  < 7.2: 0.2
+  < 5.5: 0.4   |  < 200: 0.3       |  < 7.5: 0.4
+  < 6.0: 0.8   |  < 250: 0.4       |  < 8.0: 0.2
 
-      <section>
-        <h4>
-          Random Forest Example: <span class="post-it-strip">Classification</span>
-        </h4>
-        <div>
-          <div class="leftBox"></div>
-          <div class="spacer"></div>
-          <div class="rightBox"></div>
-        </div>
-      </section>
+Best Split: Conductivity < 100 (Gini Index = 0.1)
+      </code></pre>
+      <p class="mainBullet">
+        <strong>Why it Matters:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Ensures the tree makes the most informative splits, leading to accurate predictions.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Balances complexity and data splitting quality.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h4>
+    What if I have <span class="post-it-strip">Multiple classes</span>?
+  </h4>
+  <div>
+    <div class="leftBox">
+      <p class="mainBullet">
+        <strong>Handling Multiple Classes:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        For classification tasks with more than two classes, Random Forest uses a one-vs-all approach.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Each tree is trained to distinguish one class from all others.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        The final prediction is based on the majority vote of all trees.
+      </p>
+    </div>
+    <div class="spacer"></div>
+    <div class="rightBox">
+      <p class="mainBullet">
+        <strong>Example:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>Classes:</strong> A, B, C
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>Tree 1:</strong> A vs. B, C (e.g., vote for A)
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>Tree 2:</strong> B vs. A, C (e.g., vote for A, C)
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>Tree 3:</strong> C vs. A, B (e.g., vote for A, B)
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>Final Prediction:</strong> Majority vote of all trees. (e.g., A)
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h4>
+    Understanding <span class="post-it-strip">Feature Importance</span> in RF
+  </h4>
+  <div>
+    <div class="leftBox">
+      <p class="mainBullet">
+        <strong>What is Feature Importance?</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        A measure of how valuable each feature is for improving the model's performance.
+      </p>
+      <p class="mainBullet">
+        <strong>How is it calculated?</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        <strong>Impurity-Based Importance:</strong> Sum of impurity reduction (e.g., Gini Index or MSE) for splits using the feature.
+        \[ \text{Importance of feat.} = \sum_{\text{all trees}} \sum_{\text{all nodes}} \text{Impurity Reduction} \div \text{Total Impurity Reduction} \]
+      </p>
+      <p class="subBullet" style="font-size: large;">
+      <strong>Permutation Importance:</strong> Decrease in model performance when feature values are shuffled.
+      </p>
+      <p class="mainBullet">
+        <strong>Why is it important?</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Identifies which features contribute most to predictions, aiding interpretability and model refinement.
+      </p>
+    </div>
+    <div class="spacer"></div>
+    <div class="rightBox">
+      <p class="mainBullet">
+        <strong>Example:</strong>
+      </p>
+      <pre style="font-size: large;">
+        <code data-trim data-noescape>
+Feature Importance:
+Turbidity: 0.7
+pH: 0.2
+Conductivity: 0.1
+      </code>
+      </pre>
+    </div>
+  </div>
+</section>
+
+
+
+<section>
+  <h4>
+    Random Forest Example: <span class="post-it-strip">Classification</span>
+  </h4>
+  <div>
+    <div class="leftBox">
+    <p class="mainBullet">
+      <strong>Problem:</strong><br>
+      <span style="font-size: large; font-style: italic;">
+        Classify water samples as "Potable" or "Non-Potable" based on turbidity, conductivity, and pH.
+      </span>
+<pre style="font-size: large;">
+Turbidity | Conductivity | pH | Class
+-------------------------------------
+  5.0    |  100        |  7.0 | Potable
+  5.2    |  150        |  7.2 | Non-Potable
+  5.5    |  200        |  7.5 | Potable
+  6.0    |  250        |  8.0 | Non-Potable
+-------------------------------------
+unknown samples:
+  5.2    |  160        |  7.1 | ?
+  6.5    |  300        |  8.5 | ?</pre>
+    </p>
+  </div>
+    <div class="spacer"></div>
+    <div class="rightBox">
+      <div class="tabs">
+        <div class="tab active" data-tab="step1">Step 1</div>
+        <div class="tab" data-tab="step2">Step 2</div>
+        <div class="tab" data-tab="step3">Step 3</div>
+      </div>
+      <div class="tab-content active" data-tab="step1">
+        <p class="mainBullet">
+          <strong>Step 1: Set Up Decision Trees</strong><br>
+          <span style="font-size: large; font-style: italic;">
+            Let's build 5 decision trees using bootstrapped samples and random feature selection.
+          </span>
+          <pre style="font-size: large;">
+bootstrap_sample1 =
+  [5.0, 100, 7.0, Potable]
+  [5.0, 100, 7.0, Potable]
+  [6.0, 250, 8.0, Non-Potable]
+  [6.0, 250, 8.0, Non-Potable]
+
+bootstrap_sample2 = ...</pre>
+        </p>
+    </div>
+      <div class="tab-content" data-tab="step2">
+        <p class="mainBullet">
+          <strong>Step 2: Train Trees</strong><br>
+          <span style="font-size: large; font-style: italic;">
+            Train each tree on a bootstrapped sample and aggregate predictions.
+          </span>
+          <pre style="font-size: large;">
+Tree 1: 
+Root Node: Conductivity < 250 (Gini = 0.0)
+No further splits needed (Purity = 100%)
+OOB Samples for validation: 
+[5.2, 150, 7.2, Non-Potable] -> Predicted: Potable
+[5.5, 200, 7.5, Potable] -> Predicted: Potable
+
+Tree 2: ...</pre>
+</div>
+      <div class="tab-content" data-tab="step3">
+        <p class="mainBullet">
+          <strong>Validation and Feature Importance</strong><br>
+          <span style="font-size: large; font-style: italic;">
+            Validate model performance by using out-of-bag samples.
+          </span>
+          <pre style="font-size: large;">
+Out-of-Bag Samples:
+T1: [5.2, 150, 7.2, Non-Potable] -> Potable
+T1: [5.5, 200, 7.5, Potable] -> Potable
+T2: [5.0, 100, 7.0, Potable] -> Potable
+T3: [6.0, 250, 8.0, Non-Potable] -> Non-Potable
+Error Rate: 25%</pre>  
+<span style="font-size: large; font-style: italic;">
+  Feature Importance:<br>
+</span>
+<pre style="font-size: large;">
+  Conductivity = 0.6
+  Turbidity = 0.3
+  pH = 0.1</pre>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section>
         <h4>
@@ -776,7 +1011,32 @@
   <script src="../resources/d3_utils.js"></script>
   <script src="../resources/chart_ml_fittings1.js"></script>
   <script src="../resources/chart_logistic_reg.js"></script>
-  <script src="../resources/chart_decision_tree.js"></script>
+  <script>
+    function drawBootstrapSample() {
+      const dataset = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const bootstrapSample = [];
+      const oobSample = [...dataset]; // Clone the original dataset for OOB calculation
+  
+      // Draw bootstrap samples
+      for (let i = 0; i < dataset.length; i++) {
+        const index = Math.floor(Math.random() * dataset.length);
+        const value = dataset[index];
+        bootstrapSample.push(value);
+  
+        // Remove value from OOB if it's in bootstrap
+        const oobIndex = oobSample.indexOf(value);
+        if (oobIndex > -1) {
+          oobSample.splice(oobIndex, 1);
+        }
+      }
+  
+      // Update UI with formatted bootstrap and OOB samples
+      document.getElementById("bootstrapSample").textContent = 
+        `sample = [ ${bootstrapSample.join(", ")} ]`;
+      document.getElementById("oobSample").textContent = 
+        `out-of-bag = [ ${oobSample.join(", ")} ]`;
+    }
+  </script>
 </body>
 
 </html>
