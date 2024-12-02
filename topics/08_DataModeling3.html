@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Chemometrics and Statistics</title>
+
+  <link rel="stylesheet" href="../dist/reset.css">
+  <link rel="stylesheet" href="../dist/reveal.css">
+  <link rel="stylesheet" href="../dist/theme/iac.css">
+  <link rel="stylesheet" href="../css/mystyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+  <style>
+    .green-text {
+      color: rgb(133, 198, 42);
+    }
+
+    .teal-text {
+      color: rgb(0, 150, 136);
+    }
+
+    .small-text {
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+        <pre><code>08. Data Modeling 3</code></pre>
+        <h4>Machine Learning</h4>
+        <p style="text-align: right; font-size: medium;">by <a href="https://www.uni-due.de/iac/gerrit_renner.php"
+            target="_blank">Gerrit Renner</a></p>
+      </section>
+
+      <section>
+        <h4>Initial Thoughts on <span class="post-it-strip">Machine Learning</span></h4>
+        <img src="../resources/apple.jpeg" alt="Apple Image" style="width: auto; height: 400px;">
+        <div>
+          <div class="leftBox">
+            <p class="question">
+              What is shown in the image?
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="task">
+              Describe how you draw your conclusion.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section data-transition="zoom-in slide-out">
+        <h4>Initial Thoughts on <span class="post-it-strip">Machine Learning</span></h4>
+        <img src="../resources/dragon fruit.jpeg" alt="Dragon Fruit Image" style="width: auto; height: 400px;">
+        <div>
+          <div class="leftBox">
+            <p class="question">
+              What is shown in the image?
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="task">
+              Describe how you draw your conclusion.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section data-transition="zoom-in slide-out">
+        <h4>Initial Thoughts on <span class="post-it-strip">Machine Learning</span></h4>
+        <img src="../resources/coffee beans.jpeg" alt="Coffee Beans Image" style="width: auto; height: 400px;">
+        <div>
+          <div class="leftBox">
+            <p class="question">
+              What is shown in the image?
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="task">
+              Describe how you draw your conclusion.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section data-transition="zoom-in slide-out">
+        <h4>Initial Thoughts on <span class="post-it-strip">Machine Learning</span></h4>
+        <img src="../resources/dogs_1.jpeg" alt="Dogs or Muffins Image" style="width: auto; height: 400px;">
+        <div>
+          <div class="leftBox">
+            <p class="question">
+              Can we classify the images as dogs or muffins?
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="task">
+              Describe how you draw your conclusion.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Insights from <span class="post-it-strip">Initial Thoughts</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Humans recognize patterns instinctively:</strong>
+            </p>
+            <p class="subBullet">
+              We rely on prior knowledge (e.g., apples, dragon fruit).
+            </p>
+            <p class="subBullet">
+              Familiar features like color, texture, and shape help us make decisions.
+            </p>
+            <p class="mainBullet fragment fade-up" data-fragment-index="1">
+              <strong>Some classifications are straightforward:</strong>
+            </p>
+            <p class="subBullet fragment fade-up" data-fragment-index="1">
+              Distinctive features make certain objects easy to identify.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet fragment fade-up" data-fragment-index="2">
+              <strong>Ambiguity is a challenge:</strong>
+            </p>
+            <p class="subBullet fragment fade-up" data-fragment-index="2">
+              Overlap in features (e.g., dogs vs. muffins) creates confusion.
+            </p>
+            <p class="mainBullet fragment fade-up" data-fragment-index="3">
+              <strong>Machine Learning's key questions:</strong>
+            </p>
+            <p class="subBullet fragment fade-up" data-fragment-index="3">
+              How can algorithms recognize patterns like humans?
+            </p>
+            <p class="subBullet fragment fade-up" data-fragment-index="3">
+              How can ambiguity and errors be reduced?
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <h4>
+          What is <span class="post-it-strip">Machine Learning</span>?
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Definition:</strong><br>
+              <span style="font-size: x-large; font-style: italic;">
+                Machine Learning is a subset of Artificial Intelligence (AI) that enables systems to learn and improve
+                from data without explicit programming.
+              </span>
+            </p>
+            <div class="fragment fade-up" data-fragment-index="1">
+              <p class="mainBullet">
+                <strong>Objectives</strong> of ML:
+              </p>
+              <div class="fragment fade-up" data-fragment-index="2">
+                <p class="subBullet">
+                  Classification<br>
+                  <span style="font-size: large; font-style: italic;">
+                    Predicting discrete categories, e.g., identifying spam emails, or classifying water quality.
+                  </span>
+                </p>
+              </div>
+              <div class="fragment fade-up" data-fragment-index="3">
+                <p class="subBullet">
+                  Regression<br>
+                  <span style="font-size: large; font-style: italic;">
+                    Predicting continuous values, e.g., forecasting house prices, or estimating chemical concentrations.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="fragment fade-up" data-fragment-index="4">
+              <p class="mainBullet">
+                <strong>Types</strong> of ML:
+              </p>
+              <div class="fragment fade-up" data-fragment-index="5">
+                <p class="subBullet">
+                  Supervised Learning<br>
+                  <span style="font-size: large; font-style: italic;">
+                    Learning from labeled data, e.g., classifying images as "cat" or "dog" or predicting blood glucose
+                    levels. <span class="post-it-strip">Reference data</span>
+                  </span>
+                </p>
+              </div>
+              <div class="fragment fade-up" data-fragment-index="6">
+                <p class="subBullet">
+                  Unsupervised Learning<br>
+                  <span style="font-size: large; font-style: italic;">
+                    Finding hidden patterns in unlabeled data, e.g., customer segmentation or anomaly detection. <span
+                      class="post-it-strip">No reference data</span>
+                  </span>
+                </p>
+              </div>
+              <div class="fragment fade-up" data-fragment-index="7">
+                <p class="subBullet">
+                  Reinforcement Learning<br>
+                  <span style="font-size: large; font-style: italic;">
+                    Learning by interacting with an environment, e.g., training robots or game-playing AI. <span
+                      class="post-it-strip">Feedback from environment</span>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <h4>
+          Important <span class="post-it-strip">Terms</span> in ML
+        </h4>
+        <div>
+          <div class="leftBox"></div>
+          <div class="spacer"></div>
+          <div class="rightBox"></div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Complexity, Generalization, and <span class="post-it-strip">Over- & Underfitting</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Underfitting:</strong> Model is too simple, fails to capture patterns (high bias).
+            </p>
+            <p class="mainBullet">
+              <strong>Overfitting:</strong> Model is too complex, captures noise instead of patterns (high variance).
+            </p>
+            <p class="mainBullet">
+              <strong>Generalization:</strong> Balance between bias and variance, enabling good performance on unseen
+              data.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box">
+              <div class="tabs">
+                <div class="tab active" data-tab="underfit">Underfitting</div>
+                <div class="tab" data-tab="overfit">Overfitting</div>
+                <div class="tab" data-tab="general">Generalization</div>
+              </div>
+              <div class="tab-content active" data-tab="underfit" style="height: 400px;">
+                <!-- Plot will be rendered here -->
+                <div id="chart_underfit"></div>
+              </div>
+              <div class="tab-content" data-tab="overfit" style="height: 400px;">
+                <!-- Plot will be rendered here -->
+                <div id="chart_overfit"></div>
+              </div>
+              <div class="tab-content" data-tab="general" style="height: 400px;">
+                <!-- Plot will be rendered here -->
+                <div id="chart_general"></div>
+              </div>
+              <p class="caption" style="text-align: center; font-size: small; color: gray;">
+                Balancing Model Complexity: A trade-off between underfitting and overfitting.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section>
+        <h4>
+          The principle of <span class="post-it-strip">Logistic Regression</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>What is Logistic Regression?</strong>
+            </p>
+            <p class="subBullet">
+              A statistical method used to predict the probability of a binary outcome (e.g., yes/no, 0/1).
+            </p>
+            <p class="mainBullet">
+              <strong>How does it work?</strong>
+            </p>
+            <p class="subBullet">
+              Maps input variables to probabilities using the sigmoid function:
+              <code> P = 1 / (1 + exp(-z)) </code>, where <code>z</code> is a linear combination of inputs.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box">
+              <div id="chart_logistic1"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Applications, Pros, and Cons of <span class="post-it-strip">Logistic Regression</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Applications:</strong>
+            </p>
+            <p class="subBullet">
+              Environmental Toxicology:<br>
+              <span style="font-size: large; font-style: italic;">
+                a) Predicting acute toxicity levels in water samples based on chemical concentrations.
+              </span>
+            </p>
+            <p class="subBullet">
+              Water Quality Monitoring:<br>
+              <span style="font-size: large; font-style: italic;">
+                a) Classifying water samples as "potable" or "non-potable" based on parameters like turbidity,
+                conductivity, and bacterial count.
+                <br>
+                b) Identifying pollution sources by classifying samples into "industrial" vs. "agricultural"
+                contamination.
+              </span>
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box">
+              <div id="chart_decision_boundary"></div>
+            </div>
+            <p class="mainBullet">
+              <strong>Pros:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Simple and interpretable, works well for linearly separable data.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Cons:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Limited to binary outcomes, struggles with non-linear relationships and outliers.
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          The principle of <span class="post-it-strip">Support Vector Machines</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>What is a Support Vector Machine?</strong>
+            </p>
+            <p class="subBullet">
+              A supervised machine learning algorithm used for classification and regression tasks.
+            </p>
+            <p class="mainBullet">
+              <strong>How does it work?</strong>
+            </p>
+            <p class="subBullet">
+              SVMs find the hyperplane that best separates data points into different classes, maximizing the margin
+              between the closest points (support vectors) of each class.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box">
+              <!-- Placeholder for SVM margin and hyperplane illustration -->
+              <p style="text-align: center; font-style: italic;">Insert SVM Hyperplane and Margin Diagram Here</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Applications, Pros, and Cons of <span class="post-it-strip">Support Vector Machines</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Applications:</strong>
+            </p>
+            <p class="subBullet">
+              Environmental Toxicology:<br>
+              <span style="font-size: large; font-style: italic;">
+                a) Classifying pollutants in water samples based on chemical fingerprints.
+              </span>
+            </p>
+            <p class="subBullet">
+              Water Quality Monitoring:<br>
+              <span style="font-size: large; font-style: italic;">
+                a) Detecting harmful algae blooms by analyzing spectral data.
+                <br>
+                b) Identifying contamination sources using multi-parameter datasets.
+              </span>
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box">
+              <!-- Placeholder for SVM kernel transformation illustration -->
+              <p style="text-align: center; font-style: italic;">Insert SVM Kernel Transformation Diagram Here</p>
+            </div>
+            <p class="mainBullet">
+              <strong>Pros:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Effective for high-dimensional spaces, works well with non-linear data using kernel trick.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Cons:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Computationally expensive for large datasets, sensitive to choice of kernel and hyperparameters.
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          The principle of <span class="post-it-strip">Random Forest</span>
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>What is Random Forest?</strong>
+            </p>
+            <p class="subBullet">
+              An ensemble learning method that combines multiple decision trees to improve accuracy and reduce
+              overfitting.
+            </p>
+            <p class="mainBullet">
+              <strong>Key Features:</strong>
+            </p>
+            <p class="subBullet">
+              Uses bootstrapping and random feature selection.<br>
+              Aggregates outputs (majority vote for classification, average for regression).
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/rf_scheme.png" alt="Random Forest Scheme" style="width: auto; height: 100%;">
+            <p style="text-align: center; font-style: italic; font-size: medium;">Random Forest Scheme
+              (https://www.datacamp.com/de/tutorial/random-forests-classifier-python)</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          What is a <span class="post-it-strip">Decision Tree</span>?
+        </h4>
+        <div>
+          <div class="leftBox">
+            <!-- here some interactive plot that shows a small decision tree with root, nodes, and leaves etc. 
+               there should be 3 edit boxes to enter values for 3 parameters and a slider that can be used to follow
+               the data along the tree
+               -->
+            <div id="decisionTreeInteractive" style="width: 300px; height: 300px;"></div>
+            <div style="margin-top: 10px;">
+              <label for="parameter1" style="font-size: large;">Parameter 1:</label>
+              <input id="parameter1" type="number" value="5" style="width: 60px;"><br>
+              <label for="parameter2" style="font-size: large;">Parameter 2:</label>
+              <input id="parameter2" type="number" value="3" style="width: 60px;"><br>
+              <label for="parameter3" style="font-size: large;">Parameter 3:</label>
+              <input id="parameter3" type="number" value="7" style="width: 60px;">
+            </div>
+            <div style="margin-top: 10px;">
+              <label for="pathSlider" style="font-size: large;">Tree Path:</label>
+              <input id="pathSlider" type="range" min="0" max="2" value="0" step="1" style="width: 200px;">
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              <strong>What is a Decision Tree?</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                A tree-like model for making decisions based on splitting data by specific criteria.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>How it works:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                a) Splits data based on a feature and threshold to maximize separation.<br>
+                b) Grows branches until a stopping criterion is met (e.g., min samples or max depth).
+            </p>
+            <p class="mainBullet">
+              <strong>Components of a Decision Tree:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                <strong>Root Node:</strong> Represents the entire dataset and the first split.<br>
+                <strong>Decision Nodes:</strong> Points where the data is split further.<br>
+                <strong>Leaf Nodes:</strong> Terminal nodes showing the final result.<br>
+                <strong>Branches:</strong> Connect nodes and represent the outcome of a decision.
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          What is <span class="post-it-strip">Boot Strap Sampling</span> in RF?
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Definition:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Resampling technique used to create subsets of data for training individual decision trees.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Key Features:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                a) Each tree is trained on a unique bootstrapped dataset.<br>
+                b) Samples are drawn with replacement.<br>
+                c) Around 1/3 of data, "out-of-bag" (OOB), is left out for validation.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Why it matters:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                a) Ensures diversity in decision trees.<br>
+                b) Provides built-in validation using OOB samples.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              <strong>In Practice:</strong>
+              <pre><code data-trim data-noescape>
+                original_dataset = [1, 2, 3, 4, 5]
+                bootstrapped_tree1 = [2, 4, 5, 1, 2]
+                bootstrapped_tree2 = [3, 5, 1, 3, 3]
+                oob_sample_tree1 = [3]
+                oob_sample_tree2 = [2, 4]
+              </code>
+            </pre>
+            </p>
+            <p class="mainBullet">
+              <strong>How many trees are built?</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Typically, hundreds to thousands of trees are trained in a Random Forest. <strong>
+                  It is a hyperparameter that can be optimized.</strong>
+                </strong>
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          What is an <span class="post-it-strip">Ensemble Approach</span>?
+        </h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Definition:</strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Combining predictions from multiple decision trees to improve overall model performance.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>How it works:</strong>
+            </p>
+            <p class="subBullet">
+              Builds multiple decision trees from bootstrapped datasets.
+            </p>
+            <p class="subBullet">
+              Each tree contributes a vote (classification) or prediction (regression).
+            </p>
+            <p class="subBullet">
+              The final output is based on majority vote (classification) or average (regression).
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              <strong>Example in RF:</strong><br>
+              <pre style="font-size: large;">
+                <code data-trim data-noescape>
+                  Tree 1: Class A
+                  Tree 2: Class B
+                  Tree 3: Class A
+                  Final Prediction: Majority vote = Class A
+
+                  Regression:
+                  Tree 1: 5.2
+                  Tree 2: 5.5
+                  Tree 3: 5.1
+                  Final Prediction: Average = 5.27
+                </code>
+              </pre>
+            </p>
+            <p class="mainBullet">
+              <strong>Why use an ensemble?</strong>
+            </p>
+            <p class="subBullet">
+              Reduces overfitting by averaging predictions.
+            </p>
+            <p class="subBullet">
+              Improves robustness and accuracy.
+            </p>
+            <p class="subBullet">
+              Handles noisy data better than a single tree.
+            </p>
+          </div>
+        </div>
+</section>
+
+
+<section>
+  <h4>
+    How to <span class="post-it-strip">set up</span> an RF?
+  </h4>
+  <div>
+    <div class="leftBox">
+      <p class="mainBullet">
+        <strong>Structure of a Random Forest:</strong>
+      </p>
+      <p class="subBullet">
+        Composed of multiple decision trees.
+      </p>
+      <p class="subBullet">
+        Each tree is trained on a unique bootstrapped dataset.
+      </p>
+      <p class="subBullet">
+        For every split in the trees, a random subset of features is chosen.
+      </p>
+      <p class="subBullet">
+        Feature that provides the best split of the data is selected.
+      </p>
+      <p class="subBullet">
+        Trees grow independently until a stopping condition (e.g., max depth, min samples per leaf).
+      </p>
+    </div>
+    <div class="spacer"></div>
+    <div class="rightBox">
+      <img src="../resources/rf_scheme2.webp" alt="Random Forest Scheme" style="width: auto; height: 100%;">
+      <p style="text-align: center; font-style: italic; font-size: medium;">Random Forest Scheme
+        (https://blog.dailydoseofds.com/p/your-random-forest-is-underperforming)</p>
+      <p class="mainBullet">
+        <strong>Key Features:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Combines outputs of trees using majority vote (classification) or averaging (regression).
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Randomness ensures diversity in trees, reducing overfitting.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        Out-of-bag (OOB) samples can validate model performance.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+      <section>
+        <h4>
+          Find the best <span class="post-it-strip">Criterion</span> for a knot
+        </h4>
+        <div>
+          <div class="leftBox"></div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="image-box"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Random Forest Example: <span class="post-it-strip">Classification</span>
+        </h4>
+        <div>
+          <div class="leftBox"></div>
+          <div class="spacer"></div>
+          <div class="rightBox"></div>
+        </div>
+      </section>
+
+      <section>
+        <h4>
+          Random Forest Example: <span class="post-it-strip">Regression</span>
+        </h4>
+        <div>
+          <div class="leftBox"></div>
+          <div class="spacer"></div>
+          <div class="rightBox"></div>
+        </div>
+      </section>
+
+    </div>
+    <div class="footer-global">
+      Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+      Last updated: November 30, 2024
+    </div>
+  </div>
+  <div id="clock">--:--</div>
+
+  <script src="../dist/reveal.js"></script>
+  <script src="../plugin/notes/notes.js"></script>
+  <script src="../plugin/markdown/markdown.js"></script>
+  <script src="../plugin/highlight/highlight.js"></script>
+  <script src="../plugin/math/math.js"></script>
+  <script src="../plugin/menu/menu.js"></script>
+  <!-- Anything plugin -->
+  <!-- Chart plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../plugin/chartscii/dist/bundle.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      parallaxBackgroundImage: '../resources/bg3.png', // URL of your background image
+      // Parallax background size (optional)
+      parallaxBackgroundSize: '5376px 1512px', // Adjust to your desired size
+      // Parallax background horizontal movement (optional)
+      parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
+      menu: {
+        custom: [{
+          title: 'Topics',
+          icon: '<i class="fas fa-home"></i>',
+          src: 'menu.html'
+        }]
+      },
+      hash: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu],
+    });
+    // Funktion zum Aktualisieren der Uhrzeit
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Uhrzeit sofort und dann jede Sekunde aktualisieren
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+  <!-- Chart scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+  <script src="../resources/d3_utils.js"></script>
+  <script src="../resources/chart_ml_fittings1.js"></script>
+  <script src="../resources/chart_logistic_reg.js"></script>
+  <script src="../resources/chart_decision_tree.js"></script>
+</body>
+
+</html>

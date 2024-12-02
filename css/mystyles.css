@@ -218,6 +218,100 @@
     top: 0.75ex
 }
 
+.mainBullet {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    text-align: left;
+    /* Platz für das Icon */
+}
+
+.mainBullet::before {
+    content: "\f0c8";
+    /* Unicode für das Font Awesome square */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 900;
+    /* für solid icons */
+    color: burlywood;
+    position: absolute;
+    font-size: medium;
+    left: -20px;
+    /* Icon links vom Text platzieren */
+    top: 0.75ex
+}
+
+.subBullet {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    text-align: left;
+    /* Platz für das Icon */
+}
+
+.subBullet::before {
+    content: "\f101";
+    /* Unicode für das Font Awesome angles-right */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 900;
+    /* für solid icons */
+    color: rgb(219, 93, 43);
+    position: absolute;
+    font-size: medium;
+    left: -20px;
+    /* Icon links vom Text platzieren */
+    top: 0.75ex
+}
+
+.question {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    left: 25px;
+    text-align: left;
+    /* Platz für das Icon */
+}
+
+.question::before {
+    content: "\f059"; /* Unicode für das Font Awesome Squarespace symbol */
+    /* Unicode für das Font Awesome angles-right */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 500;
+    /* für solid icons */
+    color: rgb(255, 0, 119);
+    position: absolute;
+    font-size: x-large;
+    left: -3ex;
+    /* Icon links vom Text platzieren */
+    top: 0.0ex
+}
+
+.task {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    left: 25px;
+    text-align: left;
+    /* Platz für das Icon */
+}
+
+.task::before {
+    content: "\f086"; /* Unicode für das Font Awesome Squarespace symbol */
+    /* Unicode für das Font Awesome angles-right */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 500;
+    /* für solid icons */
+    color: rgb(0, 92, 251);
+    position: absolute;
+    font-size: x-large;
+    left: -3ex;
+    /* Icon links vom Text platzieren */
+    top: 0.0ex
+}
+
 .image-box {
     display: block;
     border: 5px solid #d4d4d4;
