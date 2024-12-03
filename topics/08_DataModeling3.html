@@ -243,9 +243,47 @@
           Important <span class="post-it-strip">Terms</span> in ML
         </h4>
         <div>
-          <div class="leftBox"></div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Features: </strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Input variables that describe the data, e.g., temperature, pH, turbidity in water quality analysis.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Labels: </strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Output variables that define the target, e.g., "potable" or "non-potable" in water quality classification.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Training Data: </strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Dataset used to train the model, consisting of features and labels.
+              </span>
+            </p>
+          </div>
           <div class="spacer"></div>
-          <div class="rightBox"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              <strong>Model: </strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Algorithm that learns patterns from training data to make predictions.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Testing Data: </strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Dataset used to evaluate the model's performance on unseen data.
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Metrics: </strong><br>
+              <span style="font-size: large; font-style: italic;">
+                Measures used to assess model performance, e.g., accuracy.
+              </span>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -275,16 +313,13 @@
                 <div class="tab" data-tab="general">Generalization</div>
               </div>
               <div class="tab-content active" data-tab="underfit" style="height: 400px;">
-                <!-- Plot will be rendered here -->
-                <div id="chart_underfit"></div>
+                <img src="../resources/overfitting(1).png" alt="Underfitting" style="width: auto; height: 100%;">
               </div>
               <div class="tab-content" data-tab="overfit" style="height: 400px;">
-                <!-- Plot will be rendered here -->
-                <div id="chart_overfit"></div>
+                <img src="../resources/overfitting(2).png" alt="Overfitting" style="width: auto; height: 100%;">
               </div>
               <div class="tab-content" data-tab="general" style="height: 400px;">
-                <!-- Plot will be rendered here -->
-                <div id="chart_general"></div>
+                <img src="../resources/overfitting(3).png" alt="Generalization" style="width: auto; height: 100%;">
               </div>
               <p class="caption" style="text-align: center; font-size: small; color: gray;">
                 Balancing Model Complexity: A trade-off between underfitting and overfitting.
@@ -352,9 +387,6 @@
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-            <div class="image-box">
-              <div id="chart_decision_boundary"></div>
-            </div>
             <p class="mainBullet">
               <strong>Pros:</strong><br>
               <span style="font-size: large; font-style: italic;">
@@ -393,10 +425,17 @@
           </div>
           <div class="spacer"></div>
           <div class="rightBox">
-            <div class="image-box">
-              <!-- Placeholder for SVM margin and hyperplane illustration -->
-              <p style="text-align: center; font-style: italic;">Insert SVM Hyperplane and Margin Diagram Here</p>
+            <div class="tabs">
+              <div class="tab active svm-tab" data-tab="svm1">SVM</div>
+              <div class="tab svm-tab" data-tab="svm2">Zoom-in Margin</div>
             </div>
+            <div class="tab-content active svm-tab" data-tab="svm1">
+              <img src="../resources/support-vector-machine-svm.webp" alt="Support Vector Machine" style="width: auto; height: auto;">
+            </div>
+            <div class="tab-content svm-tab" data-tab="svm2">
+              <img src="../resources/decision-margin-svm.webp" alt="Support Vector Machine" style="width: auto; height: auto;">
+            </div>
+              <p style="text-align: center; font-style: italic; font-size: medium;">https://spotintelligence.com/2024/05/06/support-vector-machines-svm/</p>
           </div>
         </div>
       </section>
@@ -424,19 +463,17 @@
                 b) Identifying contamination sources using multi-parameter datasets.
               </span>
             </p>
-          </div>
-          <div class="spacer"></div>
-          <div class="rightBox">
-            <div class="image-box">
-              <!-- Placeholder for SVM kernel transformation illustration -->
-              <p style="text-align: center; font-style: italic;">Insert SVM Kernel Transformation Diagram Here</p>
-            </div>
             <p class="mainBullet">
               <strong>Pros:</strong><br>
               <span style="font-size: large; font-style: italic;">
                 Effective for high-dimensional spaces, works well with non-linear data using kernel trick.
               </span>
             </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/data-transformed-svm.webp" alt="SVM Applications" style="width: auto; height: 100%;">
+            <p style="text-align: center; font-style: italic; font-size: medium;">https://spotintelligence.com/2024/05/06/support-vector-machines-svm/</p>
             <p class="mainBullet">
               <strong>Cons:</strong><br>
               <span style="font-size: large; font-style: italic;">
@@ -764,25 +801,57 @@ Best Split: Conductivity < 100 (Gini Index = 0.1)
 
 <section>
   <h4>
-    What if I have <span class="post-it-strip">Multiple classes</span>?
+    Example for <span class="post-it-strip">Gini Index</span>
   </h4>
   <div>
     <div class="leftBox">
-      <p class="mainBullet">
-        <strong>Handling Multiple Classes:</strong>
-      </p>
-      <p class="subBullet" style="font-size: large;">
-        For classification tasks with more than two classes, Random Forest uses a one-vs-all approach.
-      </p>
-      <p class="subBullet" style="font-size: large;">
-        Each tree is trained to distinguish one class from all others.
-      </p>
-      <p class="subBullet" style="font-size: large;">
-        The final prediction is based on the majority vote of all trees.
+      <img src="../resources/criterion_selection.png" alt="Decision Tree Split" style="width: auto; height: auto;">
+      <p style="text-align: center; font-style: italic; font-size: medium;">
+        Possible splits for a decision tree node.
       </p>
     </div>
     <div class="spacer"></div>
     <div class="rightBox">
+      <p class="mainBullet">
+        <strong>A: out1 (5, 2); out2 (2, 3)</strong>
+        <span style="font-size: large; ">
+        \[ Gini_1 = 1 - \left( \left( \frac{6}{7} \right)^2 + \left( \frac{2}{7} \right)^2 \right) \approx 0.375 \]
+        \[ Gini_2 = 1 - \left( \left( \frac{2}{5} \right)^2 + \left( \frac{3}{5} \right)^2 \right) = 0.48 \]
+        \[ Gini_{\text{split}} = \frac{n_1}{n} \times Gini_1 + \frac{n_2}{n} \times Gini_2 \]
+        \[ Gini_{\text{split}} = \frac{8}{13} \times 0.375 + \frac{5}{13} \times 0.48 \approx 0.42 \]
+        </span>
+      </p>
+      <p class="subBullet">
+        <strong>Other Splits:</strong><br>
+        <span style="font-size: large; font-style: italic;">
+        B) Gini Index: 0.47<br> 
+        C) Gini Index: 0.26<br>
+        D) Gini Index: 0.29
+        </span>
+      </p>
+    </div>
+    </div>
+</section>
+
+<section>
+  <h4>
+    What if I have <span class="post-it-strip">Multiple classes</span>?
+  </h4>
+  <div>
+    <div class="leftBox">
+      <img src="../resources/decision_trees2.png" alt="Decision Tree Split" style="width: auto; height: auto;">
+    </div>
+    <div class="spacer"></div>
+    <div class="rightBox">
+      <p class="mainBullet">
+        <strong>Handling Multiple Classes:</strong>
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        A Decision Tree can handle multiple classes as the Gini Index can be extended to multi-class problems.
+      </p>
+      <p class="subBullet" style="font-size: large;">
+        This will lead to a cascade of binary splits to separate the classes.
+      </p>
       <p class="mainBullet">
         <strong>Example:</strong>
       </p>
@@ -790,16 +859,9 @@ Best Split: Conductivity < 100 (Gini Index = 0.1)
         <strong>Classes:</strong> A, B, C
       </p>
       <p class="subBullet" style="font-size: large;">
-        <strong>Tree 1:</strong> A vs. B, C (e.g., vote for A)
-      </p>
-      <p class="subBullet" style="font-size: large;">
-        <strong>Tree 2:</strong> B vs. A, C (e.g., vote for A, C)
-      </p>
-      <p class="subBullet" style="font-size: large;">
-        <strong>Tree 3:</strong> C vs. A, B (e.g., vote for A, B)
-      </p>
-      <p class="subBullet" style="font-size: large;">
-        <strong>Final Prediction:</strong> Majority vote of all trees. (e.g., A)
+        <strong>Root node:</strong> mainly separated into A and not A.<br>
+        <strong>Child node 1:</strong> further clean A into A and B.<br>
+        <strong>Child node 2:</strong> further clean not A into B and C.
       </p>
     </div>
   </div>
@@ -883,6 +945,7 @@ unknown samples:
         <div class="tab active" data-tab="step1">Step 1</div>
         <div class="tab" data-tab="step2">Step 2</div>
         <div class="tab" data-tab="step3">Step 3</div>
+        <div class="tab" data-tab="step4">Step 4</div>
       </div>
       <div class="tab-content active" data-tab="step1">
         <p class="mainBullet">
@@ -904,7 +967,7 @@ bootstrap_sample2 = ...</pre>
         <p class="mainBullet">
           <strong>Step 2: Train Trees</strong><br>
           <span style="font-size: large; font-style: italic;">
-            Train each tree on a bootstrapped sample and aggregate predictions.
+            Train each tree on a bootstrapped sample.
           </span>
           <pre style="font-size: large;">
 Tree 1: 
@@ -933,25 +996,29 @@ Error Rate: 25%</pre>
   Feature Importance:<br>
 </span>
 <pre style="font-size: large;">
-  Conductivity = 0.6
-  Turbidity = 0.3
+  Conductivity = 0.3
+  Turbidity = 0.6
   pH = 0.1</pre>
+        </p>
+      </div>
+      <div class="tab-content" data-tab="step4">
+        <p class="mainBullet">
+          <strong>Final Prediction</strong><br>
+          <span style="font-size: large; font-style: italic;">
+            Combine tree predictions using majority vote.
+          </span>
+          <pre style="font-size: large;">
+Unkown Sample 1: [5.2, 160, 7.1] 
+  Votes: Potable, Potable, Non-Potable
+  = Potable
+Unkown Sample 2: [6.5, 300, 8.5] 
+  Votes: Non-Potable, Non-Potable, Non-Potable 
+  = Non-Potable</pre>
         </p>
       </div>
     </div>
   </div>
 </section>
-
-      <section>
-        <h4>
-          Random Forest Example: <span class="post-it-strip">Regression</span>
-        </h4>
-        <div>
-          <div class="leftBox"></div>
-          <div class="spacer"></div>
-          <div class="rightBox"></div>
-        </div>
-      </section>
 
     </div>
     <div class="footer-global">
@@ -1009,7 +1076,6 @@ Error Rate: 25%</pre>
   <!-- Chart scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
   <script src="../resources/d3_utils.js"></script>
-  <script src="../resources/chart_ml_fittings1.js"></script>
   <script src="../resources/chart_logistic_reg.js"></script>
   <script>
     function drawBootstrapSample() {
