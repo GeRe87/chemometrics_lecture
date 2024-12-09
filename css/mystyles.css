@@ -264,6 +264,29 @@
     top: 0.75ex
 }
 
+.subSubBullet {
+    font-size: x-large;
+    position: relative;
+    margin-left: 25px;
+    text-align: left;
+    /* Platz für das Icon */
+}
+
+.subSubBullet::before {
+    content: "\f0eb";
+    /* Unicode für das Font Awesome angles-right */
+    font-family: "Font Awesome 5 Free";
+    /* Font Awesome verwenden */
+    font-weight: 900;
+    /* für solid icons */
+    color: rgb(219, 93, 43);
+    position: absolute;
+    font-size: medium;
+    left: -20px;
+    /* Icon links vom Text platzieren */
+    top: 0.75ex
+}
+
 .question {
     font-size: x-large;
     position: relative;

@@ -198,10 +198,10 @@ function createGroupedBarChart(containerId, data, xLabel, yLabel, yMin = null, y
 }
 
 // Main function to create XY line chart with optional markers and grid
-function createXYLineChart(containerId, data, xKey, yKey, xLabel, yLabel, showLines = true, showMarkers = false, showGrid = false, xMin = null, xMax = null, yMin = null, yMax = null) {
+function createXYLineChart(containerId, data, xKey, yKey, xLabel, yLabel, showLines = true, showMarkers = false, showGrid = false, xMin = null, xMax = null, yMin = null, yMax = null, w = 300, h = 400, hideAxes = false) {
     // Chart dimensions
-    const width = 300;
-    const height = 400;
+    const width = w;
+    const height = h;
     const margin = { top: 20, right: 30, bottom: 50, left: 70 };
 
     // Create SVG container with wiggle filter
@@ -211,7 +211,9 @@ function createXYLineChart(containerId, data, xKey, yKey, xLabel, yLabel, showLi
     const { x, y } = createXYScales(data, width, height, xKey, yKey, xMin, xMax, yMin, yMax);
 
     // Add axes with xkcd styling
-    addAxes(svg, x, y, width, height, margin, xLabel, yLabel);
+    if (!hideAxes) {
+        addAxes(svg, x, y, width, height, margin, xLabel, yLabel);
+    }
 
     // Optionally add grid
     if (showGrid) {
@@ -252,7 +254,7 @@ function createXYLineChart(containerId, data, xKey, yKey, xLabel, yLabel, showLi
     return { xScale: x, yScale: y };
 }
 
-function addPlotSeries(containerId, data, xScale, yScale, xKey, yKey, lineColor = "steelblue", markerColor = "#ef476f", showLine = true, showMarkers = true) {
+function addPlotSeries(containerId, data, xScale, yScale, xKey, yKey, lineColor = "steelblue", markerColor = "#ef476f", showLine = true, showMarkers = true, lineWidth=4, lineStyle = "curve") {
     const svg = d3.select(`#${containerId} svg g`); // Wählt das bestehende `g`-Element aus
 
     const line = d3.line()
@@ -266,9 +268,10 @@ function addPlotSeries(containerId, data, xScale, yScale, xKey, yKey, lineColor 
             .datum(data)
             .attr("fill", "none")
             .attr("stroke", lineColor)
-            .attr("stroke-width", 4)
+            .attr("stroke-width", lineWidth)
             .style("filter", "url(#wiggle-filter)")
             .attr("d", line)
+            .style("stroke-dasharray", lineStyle === "curve" ? "0" : "5,5")
             .raise(); // Bringt das neue Element ganz nach oben
     }
 
@@ -532,6 +535,21 @@ function createDistanceMatrix(data, distanceFunction) {
       }
     }
     return matrix;
+  }
+
+function createGaussianPeakData(n, mean, variance, amplitude) {
+    const data = Array.from({ length: n }, (_, i) => {
+      const x = i / n;
+      const y = amplitude * Math.exp(-((x - mean) ** 2) / (2 * variance));
+      return { x, y };
+    });
+    return data;
+  }
+
+function minMaxNormalization(data) {
+    const min = Math.min(...data);
+    const max = Math.max(...data);
+    return data.map(val => (val - min) / (max - min));
   }
 
 
