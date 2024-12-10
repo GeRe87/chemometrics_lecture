@@ -1003,23 +1003,25 @@
                 <div>
                     <div class="leftBox">
                         <p class="mainBullet" style="font-size: large;">
+                            In DWT, we use two functions to analyze signals.
+                        <p class="mainBullet" style="font-size: large;">
                             The Haar wavelet operates on two functions:
                         </p>
-                        <p class="subBullet" style="font-size: large;">
+                        <p class="subBullet" style="font-size: medium;">
                             <strong>1. Scaling Function (\(\phi(t)\)):</strong><br>
                             Used to calculate <strong>averages</strong> (low-frequency components).<br>
                             \[
                             \phi(t) = \begin{cases} 1, & 0 \leq t < 1 \\ 0, & \text{otherwise.} \end{cases}
                             \]
                         </p>
-                        <p class="subBullet" style="font-size: large;">
+                        <p class="subBullet" style="font-size: medium;">
                             <strong>2. Wavelet Function (\(\psi(t)\)):</strong><br>
                             Used to calculate <strong>differences</strong> (high-frequency components).<br>
                             \[
                             \psi(t) = \begin{cases} 1, & 0 \leq t < 0.5 \\ -1, & 0.5 \leq t < 1 \\ 0, & \text{otherwise.} \end{cases}
                             \]
                         </p>
-                        <p class="subBullet" style="font-size: large;">
+                        <p class="subBullet" style="font-size: medium;">
                             These functions decompose a signal into <strong>approximations</strong> and <strong>details</strong>.
                         </p>
                     </div>
@@ -1032,8 +1034,243 @@
                     </div>
                 </div>
             </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    Haar Wavelet Transformation <span class="post-it-strip">Step-by-Step</span>
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet" style="font-size: large;">
+                            The Haar Wavelet Transformation processes data by:
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            1. Splitting the data \( y \) into <strong>vertical packages</strong>: (e.g., scale of 4)
+                            \[
+                            y = \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ y_4 \\ \vdots \\ y_n \end{bmatrix}
+                            \rightarrow
+                            P = \begin{bmatrix}
+                            y_1 & y_{5} & y_{9} \\
+                            y_2 & y_{6} & y_{10} \\
+                            y_3 & y_{7} & y_{11} \\
+                            y_4 & y_{8} & y_{12}
+                            \end{bmatrix}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            2. Applying the <strong>Scaling Function</strong>:
+                            \[
+                            \phi = \frac{1}{4} \begin{bmatrix} 1 & 1 & 1 & 1 \end{bmatrix}
+                            \]
+                            Averages:
+                            \[
+                            A = \phi \cdot P
+                            \]
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subBullet" style="font-size: large;">
+                            3. Applying the <strong>Wavelet Function</strong>:
+                            \[
+                            \psi = \frac{1}{4} \begin{bmatrix} 1 & 1 & -1 & -1 \end{bmatrix}
+                            \]
+                            Differences:
+                            \[
+                            D = \psi \cdot P
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            4. Recursive Process: with a constant scale of 2, the process is repeated until the desired
+                            <pre>
+P -> A1 & D1
+      ↳ A2 & D2
+         ↳ A3 & D3
+            ↳ A4 & D4</pre>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    Example of <span class="post-it-strip">DWT</span>
+                </h4>
+                <img src="../resources/dwt2.png" alt="DWT Example" style="width: 80%;">
+                <div>
+                    <div class="leftBox">
+                        <p class="subBullet" style="font-size: large;">
+                            The DWT decomposes a signal into <span style="color: red;"><strong>approximations</strong></span> and <span style="color: blue;"><strong>details</strong></span>.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subSubBullet" style="font-size: large;">
+                            <span style="color: red;">Approximations</span> represent the signal's low-frequency components (father wavelet).
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            <span style="color: blue;">Details</span> represent the signal's high-frequency components (mother wavelet).
+                        </p>
+                    </div>
+                </div>
+            </section>
             
-            
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    DWT and the <span class="post-it-strip">Multi Resolution Analysis</span>
+                </h4>
+                <img src="../resources/dwt5.png" alt="DWT Example" style="width: 80%;">
+                <div>
+                    <div class="leftBox">
+                        <p class="subBullet" style="font-size: large;">
+                            On the left side, we see the original signal.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subSubBullet" style="font-size: large;">
+                            On the right side, we see the <span style="color: blue;">Details</span> of multiple scales (steps)
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            The indivudal <span style="color: blue;">Details</span> describe the signal's frequencies at different scales (high scale = low frequency).
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    DWT and the <span class="post-it-strip">Multi Resolution Analysis</span>
+                </h4>
+                <img src="../resources/dwt6.png" alt="DWT Example" style="width: 80%;">
+                <div>
+                    <div class="leftBox">
+                        <p class="subBullet" style="font-size: large;">
+                            On the left side, we see the original and reconstructed signal.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subSubBullet" style="font-size: large;">
+                            To denoise, we use filters on the different scales (Details).
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            The reconstructed signal is the sum of the approximations and the filtered details.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    DWT and the <span class="post-it-strip">Multi Resolution Analysis</span>
+                </h4>
+                <img src="../resources/dwt7.png" alt="DWT Example" style="width: 80%;">
+                <div>
+                    <div class="leftBox">
+                        <p class="subBullet" style="font-size: large;">
+                            Depending on the Wavelet, the signal may look step-like (e.g., Haar Wavelet).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subSubBullet" style="font-size: large;">
+                            To improve the reconstruction, we can use different Wavelets.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    DWT and the <span class="post-it-strip">Multi Resolution Analysis</span>
+                </h4>
+                <img src="../resources/dwt8.png" alt="DWT Example" style="width: 80%;">
+                <div>
+                    <div class="leftBox">
+                        <p class="subBullet" style="font-size: large;">
+                            Depending on the Wavelet, the signal may look step-like (e.g., Haar Wavelet).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subSubBullet" style="font-size: large;">
+                            There are many Wavelets available, e.g., rbio3.9 or db4. Each Wavelet has different strengths and weaknesses.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    DWT and the <span class="post-it-strip">Multi Resolution Analysis</span>
+                </h4>
+                <img src="../resources/dwt9.png" alt="DWT Example" style="width: 80%;">
+                <div>
+                    <div class="leftBox">
+                        <p class="subBullet" style="font-size: large;">
+                            On the left side, we see the original and reconstructed signal.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subSubBullet" style="font-size: large;">
+                            To denoise, we use filters on the different scales (Details).
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            The reconstructed signal is the sum of the approximations and the filtered details.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>
+                    Discrete Wavelet Transformation <span class="post-it-strip">Summary</span>
+                </h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet" style="font-size: large;">
+                            The <strong>Discrete Wavelet Transformation (DWT)</strong> provides a way to analyze signals in both:
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Frequency domain</strong> (like FFT).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Time domain</strong> (unlike FFT).
+                        </p>
+                        <p class="mainBullet" style="font-size: large;">
+                            By using <strong>Wavelets</strong>:
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Approximations:</strong> Low-frequency components for trends (smooth signal).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Details:</strong> High-frequency components for transient features (sharp changes).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet" style="font-size: large;">
+                            <strong>Advantages of DWT:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Detects <strong>location</strong> of features in the signal.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Supports <strong>multi-resolution analysis</strong> (analyzing signals at different scales).
+                        </p>
+                        <p class="mainBullet" style="font-size: large;">
+                            <strong>Key Applications:</strong>
+                        </p>
+                        <ul style="font-size: large;">
+                            <li>Noise reduction (denoising).</li>
+                            <li>Image compression (e.g., JPEG 2000).</li>
+                            <li>Transient detection (e.g., ECG or fault detection).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
             
 
         </div>
