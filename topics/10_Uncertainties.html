@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Chemometrics and Statistics</title>
+
+    <link rel="stylesheet" href="../dist/reset.css">
+    <link rel="stylesheet" href="../dist/reveal.css">
+    <link rel="stylesheet" href="../dist/theme/iac.css">
+    <link rel="stylesheet" href="../css/mystyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+    <style>
+        .green-text {
+            color: rgb(133, 198, 42);
+        }
+
+        .teal-text {
+            color: rgb(0, 150, 136);
+        }
+
+        .small-text {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Modal for full-size images -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times; << Close me</span>
+        <div class="modal-content">
+            <div class="popup-slide">
+                <img src="../resources/srm_1.jpg" alt="SRM 1" style="height: auto;">
+            </div>
+            <div class="popup-slide">
+                <img src="../resources/srm_2.jpg" alt="SRM 2">
+            </div>
+            <div class="popup-slide">
+                <img src="../resources/srm_3.jpg" alt="SRM 3">
+            </div>
+            <div class="popup-slide">
+                <img src="../resources/srm_4.jpg" alt="SRM 4">
+            </div>
+            <div class="popup-slide">
+                <img src="../resources/srm_5.jpg" alt="SRM 5">
+            </div>
+            <div class="popup-slide">
+                <img src="../resources/srm_6.jpg" alt="SRM 6">
+            </div>
+            <div class="popup-slide">
+                <img src="../resources/srm_7.jpg" alt="SRM 7">
+            </div>
+            <div class="popup-slide">
+                <img src="../resources/srm_8.jpg" alt="SRM 8">
+            </div>        
+        </div>
+         <!-- Navigation Arrows -->
+         <a class="popup-prev" onclick="plusSlides(-1)">&#10094;</a>
+         <a class="popup-next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+                <pre><code>10. Uncertainties</code></pre>
+                <h4>Error Propagation, Bootstrap, Monte Carlo & Outliers</h4>
+                <p style="text-align: right; font-size: medium;">by <a
+                        href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4> Iinitial thoughts</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            Let's assume we have a model that <strong>predicts the concentration</strong> of a
+                            certain analyte in a sample.
+                        </p>
+                        <p class="subBullet">
+                            As a result, we obtain a <strong>concentration of 10.5 mg/L</strong>.
+                        </p>
+                        <p class="question" style="color: rgb(255, 0, 119);">
+                            What is the <strong>problem</strong> with this result?
+                        </p>
+                        <p class="task">
+                            We do not know how <strong>reliable</strong> this result is.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet fragment">
+                            It makes a <strong>huge difference</strong> whether the true concentration is...
+                        </p>
+                        <p class="subBullet fragment">
+                            ...<strong>10.5 mg/L</strong> +/- 0.1 mg/L or...
+                        </p>
+                        <p class="subBullet fragment">
+                            ...<strong>10.5 mg/L</strong> +/- 5 mg/L.
+                        </p>
+                        <p class="task fragment">
+                            So the question is: <strong>How can we quantify the uncertainty</strong> of our result? <em>(Some appraoches you already know.)</em>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4><span class="post-it-strip">Types</span> of Uncertainties</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            When we talk about uncertainties, we can distinguish between
+                            different types of uncertainties:
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Random uncertainties</strong><br>
+                            <span class="small-text" style="font-style: italic; color: darkslategray;">
+                                Natural fluctuations in your samples or measurements even if you do <strong>everything correctly</strong> and keep all <strong>conditions constant</strong>.
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Systematic uncertainties</strong><br>
+                            <span class="small-text" style="font-style: italic; color: darkslategray;">
+                                Uncertainties that occur due to <strong>incorrect calibration</strong> or <strong>faulty equipment</strong>. I.e., your <strong>input data</strong> is already <strong>incorrect</strong>.
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Model uncertainties</strong><br>
+                            <span class="small-text" style="font-style: italic; color: darkslategray;">
+                                Uncertainties that occur due to <strong>incorrect model assumptions</strong> or <strong>inadequate model complexity</strong>. I.e., your <strong>output data</strong> is <strong>incorrect</strong>.
+                            </span>
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                    </div>  
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Errors vs. Uncertainties</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Errors:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">    
+                            Describe the actual deviation of a discrete result from the true value.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Refer to specific measurements or calculations.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Can be corrected if the source is identified.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <em>Example:</em> A measured value of 22.1 °C has an error of -0.4 °C if the true value is 22.5 °C.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Uncertainties:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Describe the range within which the true value is likely to lie.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Statistical representation of possible deviations.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Account for both random variability and systematic influences.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <em>Example:</em> An uncertainty of ±0.5 °C means the true value is likely between 21.6 °C - 22.6 °C.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="fade">
+                <h4>The Role of Standard Reference Materials (SRMs) in Error Checking</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What are SRMs?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Certified materials with well-defined composition or properties, issued by official institutions (e.g., NIST, BAM, etc.).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Used to validate measurement methods and assess measurement errors.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Help ensure <strong>traceability</strong> to international standards.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Cover a wide range of applications (e.g., chemical composition, physical properties).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <img src="../resources/peanutbutter.jpg" alt="Peanut Butter" style="width: 80%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                        <p class="small-text" style="font-style: italic; color: darkslategray; font-size: medium;">
+                            <strong>Example:</strong> Peanut butter as a standard reference material for food analysis. Do not eat this it costs $1,143.00 per jar.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="fade">
+                <h4>The Role of Standard Reference Materials (SRMs) in Error Checking</h4>
+                <div>
+                    <div class="leftBox">
+                        <span class="post-it-strip" style="font-size: large;">Example</span><span style="font-size: x-large; font-weight: bold;">
+                            Certificate of an SRM:
+                        </span>
+                        <div class="gallery">
+                            <img src="../resources/srm_1.jpg" alt="SRM 1" class="thumbnail" onclick="openModal();setCurrentSlide(1)">
+                            <img src="../resources/srm_2.jpg" alt="SRM 2" class="thumbnail" onclick="openModal();setCurrentSlide(2)">
+                            <img src="../resources/srm_3.jpg" alt="SRM 3" class="thumbnail" onclick="openModal();setCurrentSlide(3)">
+                            <img src="../resources/srm_4.jpg" alt="SRM 4" class="thumbnail" onclick="openModal();setCurrentSlide(4)">
+                            <img src="../resources/srm_5.jpg" alt="SRM 5" class="thumbnail" onclick="openModal();setCurrentSlide(5)">
+                            <img src="../resources/srm_6.jpg" alt="SRM 6" class="thumbnail" onclick="openModal();setCurrentSlide(6)">
+                            <img src="../resources/srm_7.jpg" alt="SRM 7" class="thumbnail" onclick="openModal();setCurrentSlide(7)">
+                            <img src="../resources/srm_8.jpg" alt="SRM 8" class="thumbnail" onclick="openModal();setCurrentSlide(8)">
+                        </div>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How is SRM Trueness Defined?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Typically established through inter-laboratory comparisons (e.g., round robin tests).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Certified values are based on consensus results from multiple, independent laboratories.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Measurement uncertainty is rigorously evaluated and reported with the certified value.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Validation includes comparison against primary standards or highly accurate reference methods.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <div class="footer-global">
+            Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+            Last updated: December 10, 2024
+        </div>
+    </div>
+    <div id="clock">--:--</div>
+
+    <script src="../dist/reveal.js"></script>
+    <script src="../plugin/notes/notes.js"></script>
+    <script src="../plugin/markdown/markdown.js"></script>
+    <script src="../plugin/highlight/highlight.js"></script>
+    <script src="../plugin/math/math.js"></script>
+    <script src="../plugin/menu/menu.js"></script>
+    <!-- Anything plugin -->
+    <!-- Chart plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="../plugin/chartscii/dist/bundle.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            parallaxBackgroundImage: '../resources/bg3.png', // URL of your background image
+            // Parallax background size (optional)
+            parallaxBackgroundSize: '5376px 1512px', // Adjust to your desired size
+            // Parallax background horizontal movement (optional)
+            parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
+            menu: {
+                custom: [{
+                    title: 'Topics',
+                    icon: '<i class="fas fa-home"></i>',
+                    src: 'menu.html'
+                }]
+            },
+            hash: true,
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu],
+        });
+        // Funktion zum Aktualisieren der Uhrzeit
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Uhrzeit sofort und dann jede Sekunde aktualisieren
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+    <!-- Chart scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+    <script src="../resources/d3_utils.js"></script>
+    <script src="../resources/slideshow.js"></script>
+
+</body>
+
+</html>

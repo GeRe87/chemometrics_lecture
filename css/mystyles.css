@@ -549,3 +549,87 @@ body {
 .color-text-5 {
     color: #073b4c;
 }
+
+
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.thumbnail {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 5%;
+    left: 2.5%;
+    width: 95%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 90%;
+    height: 100%; /* Nimmt die volle Modal-Höhe ein */
+    width: 100%; /* Nimmt die volle Modal-Breite ein */
+    margin: auto;
+    position: relative;
+}
+
+.modal-content img {
+    max-height: 100%; /* Bildhöhe passt sich an die Höhe des Modals an */
+    max-width: 100%; /* Verhindert, dass das Bild die Breite des Modals überschreitet */
+    object-fit: contain; /* Erhält das Seitenverhältnis des Bildes */
+}
+
+.popup-slide {
+    display: none;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.popup-prev,
+.popup-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-size: 18px;
+    user-select: none;
+}
+
+.popup-prev {
+    left: 0;
+}
+
+.popup-next {
+    right: 0;
+}
