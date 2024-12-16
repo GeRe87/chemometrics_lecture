@@ -67,7 +67,7 @@
     </div>
     <div class="reveal">
         <div class="slides">
-            <section>
+            <section data-transition="zoom-in slide-out">
                 <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
                 <pre><code>10. Uncertainties</code></pre>
                 <h4>Error Propagation, Bootstrap, Monte Carlo & Outliers</h4>
@@ -145,6 +145,730 @@
             </section>
 
             <section data-transition="zoom-in slide-out">
+                <h4>Uncertainty in simple Measurements</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            We measure the absorbance (\( E \)) of a solution using the Beer-Lambert law:
+                            \[
+                            E = \varepsilon \cdot c \cdot d
+                            \]
+                            <span class="small-text" style="font-style: italic; color: darkslategray;">
+                                \( \varepsilon \) = molar absorptivity, \( c \) = concentration, \( d \) = path length
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            For this case:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \( \varepsilon \) and \( d \) are constant and exact.
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \( E \) is a <strong>random variable</strong> due to measurement fluctuations.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Uncertainty of \( E \):</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The measurement uncertainty of \( E \) is described by the standard deviation \( \sigma_E \):
+                            \[
+                            E \sim N(\mu_E, \sigma_E^2)
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            This uncertainty in \( E \) directly propagates into the calculation of \( c \).
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Propagation of Uncertainty in Concentration</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            From the Beer-Lambert law, we calculate the concentration:
+                            \[
+                            c = \frac{E}{\varepsilon \cdot d}
+                            \]
+                            where \( \varepsilon \) and \( d \) are constants.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Since \( E \) is a random variable, the uncertainty of \( c \) is calculated using the propagation of uncertainties:
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Uncertainty of \( c \):</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Using the propagation formula:
+                            \[
+                            \sigma_c = \left| \frac{\partial c}{\partial E} \right| \cdot \sigma_E
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            For \( c = \frac{E}{\varepsilon \cdot d} \), the derivative with respect to \( E \) is:
+                            \[
+                            \frac{\partial c}{\partial E} = \frac{1}{\varepsilon \cdot d}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Substituting:
+                            \[
+                            \sigma_c = \frac{\sigma_E}{\varepsilon \cdot d}
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Key Insight:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The uncertainty in \( c \) is inversely proportional to \( \varepsilon \cdot d \): higher \( \varepsilon \) or \( d \) reduces \( \sigma_c \).
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Why Use Partial Derivatives for Uncertainty Propagation?</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>The Problem:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            When calculating a new variable (\( z \)) from measured variables (\( x_1, x_2, \dots \)), their uncertainties (\( \sigma_{x_1}, \sigma_{x_2}, \dots \)) affect the uncertainty in \( z \).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The question is: <em>How does \( z \) change when any \( x_i \) changes?</em>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The answer depends on:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            The <strong>functional relationship</strong> between \( z \) and \( x_i \).
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            The <strong>uncertainty (\( \sigma_{x_i} \))</strong> of each variable.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>The Solution:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The <strong>partial derivative</strong> of \( z \) with respect to \( x_i \) tells us how much \( z \) changes when \( x_i \) changes slightly:
+                            \[
+                            \frac{\partial z}{\partial x_i}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            By multiplying this sensitivity by the uncertainty in \( x_i \), we get the contribution of \( x_i \) to the uncertainty in \( z \):
+                            \[
+                            \sigma_{z, i} = \left| \frac{\partial z}{\partial x_i} \right| \cdot \sigma_{x_i}
+                            \]
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Understanding Experimental Uncertainty</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Uncertainty in experiments:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Experiments are rarely influenced by a single source of uncertainty.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Uncertainties arise from multiple <strong>components</strong>, each contributing to the total uncertainty.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            These components are often <strong>interconnected</strong> and must be analyzed to accurately describe the uncertainty of the experiment.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Key sources of uncertainty:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Dependent uncertainties:</strong> Shared sources, like calibration or environmental influences, that affect multiple measurements.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Independent uncertainties:</strong> Random noise or unrelated systematic effects that act independently.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Goal:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            To accurately determine the total uncertainty, we must identify, quantify, and combine all contributing components.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Dependent Uncertainties</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What are dependent uncertainties?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Dependent uncertainties arise from the same source and are <strong>fully correlated</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Their effects add <strong>in the same direction</strong> and reinforce each other.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Examples include calibration errors in multiple sensors using the same faulty standard or environmental factors affecting multiple measurements, such as temperature drift.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How and why do we add dependent uncertainties?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Since dependent uncertainties are fully correlated, their effects are cumulative and must be <strong>added directly</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Formula:</strong> \( U_{\text{dependent}} = u_1 + u_2 + \dots + u_n \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            This approach reflects the <strong>worst-case scenario</strong> where all uncertainties push the result in the same direction.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Example:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A balance with a calibration uncertainty of \( \pm 0.1 \, \mathrm{g} \) is used to weigh three samples.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Total mass:</strong> \( M_{\text{total}} = m_1 + m_2 + m_3 \)<br>
+                            <strong>Total uncertainty:</strong> \( U_{\text{total}} = 0.1 + 0.1 + 0.1 = 0.3 \, \mathrm{g} \)
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Independent Uncertainties</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What are independent uncertainties?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Independent uncertainties arise from <strong>different, unrelated sources</strong> and are <strong>not correlated</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Their effects can partially cancel each other out due to randomness.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Examples include random noise in separate measurements or independent biases in unrelated instruments.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How and why do we add independent uncertainties?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Independent uncertainties act as <strong>orthogonal components</strong> and combine through the <strong>quadratic sum</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Formula:</strong> \( U_{\text{independent}} = \sqrt{u_1^2 + u_2^2 + \dots + u_n^2} \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            This reflects the combined variability while avoiding overestimation, as random effects may cancel out.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Example:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            Three masses are measured independently with the following uncertainties:
+                            \[
+                            m_1 = 5.0 \pm 0.1 \, \mathrm{g}, \, m_2 = 10.0 \pm 0.2 \, \mathrm{g}, \, m_3 = 15.0 \pm 0.3 \, \mathrm{g}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            <strong>Total mass:</strong>
+                            \(
+                            M_{\text{total}} = m_1 + m_2 + m_3 = 30.0 \, \mathrm{g}
+                            \)
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            <strong>Total uncertainty:</strong>
+                            \(
+                            U_{\text{independent}} = \sqrt{(0.1)^2 + (0.2)^2 + (0.3)^2}
+                            \)
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Paradox: Using Three Scales vs. One Scale</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>The Question:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Why does the total uncertainty seem smaller when using three independent scales compared to using one scale, even if all have the same uncertainty?
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            <strong>Case 1:</strong> Three independent scales with uncertainties:
+                            \[
+                            u_1 = 0.3 \, \mathrm{g}, \, u_2 = 0.3 \, \mathrm{g}, \, u_3 = 0.3 \, \mathrm{g}
+                            \]
+                            Total uncertainty:
+                            \[
+                            U_{\text{independent}} = \sqrt{(0.3)^2 + (0.3)^2 + (0.3)^2} = 0.52 \, \mathrm{g}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            <strong>Case 2:</strong> One scale used three times with a systematic uncertainty of:
+                            \[
+                            u = 0.3 \, \mathrm{g}
+                            \]
+                            Total uncertainty (dependent):
+                            \[
+                            U_{\text{dependent}} = 0.3 + 0.3 + 0.3 = 0.9 \, \mathrm{g}
+                            \]
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Why does this happen?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            In <strong>independent uncertainties</strong>, random errors can partially cancel out due to their uncorrelated nature. This leads to a smaller total uncertainty.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            In <strong>dependent uncertainties</strong>, all errors reinforce each other because they are fully correlated, resulting in a larger total uncertainty.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Key Takeaway:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Independent uncertainties reduce the overall variability due to the statistical nature of random errors, whereas dependent uncertainties model the worst-case scenario of cumulative bias.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Combining Dependent and Independent Uncertainties</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What happens when both types are present?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            In real systems, uncertainties often include <strong>both dependent and independent contributions</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Examples include calibration errors combined with random noise in measurements or systematic environmental influences combined with unrelated biases.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How to combine dependent and independent uncertainties?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Dependent uncertainties are <strong>added directly</strong>, and independent uncertainties are combined using the <strong>quadratic sum</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The two groups are then <strong>combined quadratically</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Formula:</strong> 
+                            \[
+                            U_{\text{total}} = \sqrt{U_{\text{dependent}}^2 + U_{\text{independent}}^2}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            This approach accounts for both cumulative effects and orthogonal contributions.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Round-Robin Test: A Real-World Example</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What is a Round-Robin Test?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A collaborative testing approach where multiple laboratories measure the same sample to evaluate:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            Random uncertainties (<strong>independent</strong>) from individual measurement conditions.
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            Systematic uncertainties (<strong>dependent</strong>) caused by shared influences, such as calibration standards or environmental factors.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Why is it used?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            To assess the reliability and reproducibility of a method and identify the main sources of uncertainty.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How are uncertainties combined?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Independent uncertainties from each lab are combined quadratically:
+                            \[
+                            U_{\text{random}} = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Systematic uncertainty is determined from the mean bias between the lab results and the reference value:
+                            \[
+                            U_{\text{systematic}} = \left| \frac{\sum_{i=1}^n (x_i - x_{\text{ref}})}{n} \right|
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Total uncertainty combines both contributions:
+                            \[
+                            U_{\text{total}} = \sqrt{U_{\text{random}}^2 + U_{\text{systematic}}^2}
+                            \]
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Round-Robin Test: Example Calculation</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Three laboratories measure the mass of the same sample:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            \( x_1 = 100.2 \, \mathrm{g}, \, x_2 = 99.8 \, \mathrm{g}, \, x_3 = 100.1 \, \mathrm{g} \)
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Reference value: \( x_{\text{ref}} = 100.0 \, \mathrm{g} \)
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Measurement uncertainties:<br>
+                            \( u_1 = 0.2 \, \mathrm{g}, \, u_2 = 0.3 \, \mathrm{g}, \, u_3 = 0.1 \, \mathrm{g} \)
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Step 1: Random uncertainty</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            Random Uncertainty of lab measurements:
+                            \[
+                            U_{\text{random}} = \sqrt{\frac{\sum_{i=1}^3 (x_i - \bar{x})^2}{3-1}}
+                            \]
+                            \[
+                            U_{\text{random}} = \sqrt{\frac{0.033^2 + 0.233^2 + 0.067^2}{2}} \approx 0.16 \, \mathrm{g}
+                            \]
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Step 2: Systematic uncertainty</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            Mean bias relative to reference:
+                            \[
+                            U_{\text{systematic}} = \left| \frac{\sum_{i=1}^3 (x_i - x_{\text{ref}})}{3} \right|
+                            \]
+                            \[
+                            U_{\text{systematic}} = \left| \frac{0.2 - 0.2 + 0.1}{3} \right| = 0.033 \, \mathrm{g}
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Step 3: Total uncertainty</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            Combine random and systematic uncertainties:
+                            \[
+                            U_{\text{total}} = \sqrt{U_{\text{random}}^2 + U_{\text{systematic}}^2}
+                            \]
+                            \[
+                            U_{\text{total}} = \sqrt{(0.16)^2 + (0.033)^2} \approx 0.163 \, \mathrm{g}
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Conclusion:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The propotion of the total uncertainty is due to random errors, while the systematic uncertainty is relatively small. <strong>
+                                The total uncertainty is 0.163 g should be reported for the mass measurement when applying the Round-Robin validated method.
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Uncertainty Propagation: General Formula</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What is uncertainty propagation?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            When calculating a new variable (\( z \)) from measured variables (\( x_1, x_2, \dots \)), the uncertainties in \( x_i \) affect \( z \).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The goal is to estimate the uncertainty of \( z \), denoted \( \sigma_z \), based on the uncertainties of \( x_i \).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How does it work?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            If \( z \) is a function of \( x_1, x_2, \dots, x_n \):
+                            \[
+                            z = f(x_1, x_2, \dots, x_n)
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The uncertainty of \( z \) is approximated by:
+                            \[
+                            \sigma_z = \sqrt{\sum_{i=1}^n \left( \frac{\partial f}{\partial x_i} \cdot \sigma_{x_i} \right)^2}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Each term \( \frac{\partial f}{\partial x_i} \cdot \sigma_{x_i} \) represents the contribution of \( x_i \) to the total uncertainty.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Example: Uncertainty in Photometric Measurement</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            The Beer-Lambert law relates absorbance (\( E \)) to concentration (\( c \)):
+                            \[
+                            c = \frac{E}{\varepsilon \cdot d}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Uncertainties:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \( \sigma_E = 0.01, \, \sigma_\varepsilon = 0.05, \, \sigma_d = 0.02 \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Measured values:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \( E = 1.0, \, \varepsilon = 100.0, \, d = 1.0 \, \mathrm{cm} \)
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Step 1: Partial derivatives</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            \[
+                            \frac{\partial c}{\partial E} = \frac{1}{\varepsilon \cdot d}, \quad \frac{\partial c}{\partial \varepsilon} = -\frac{E}{\varepsilon^2 \cdot d}, \quad \frac{\partial c}{\partial d} = -\frac{E}{\varepsilon \cdot d^2}
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Step 2: Propagate uncertainties</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            \[
+                            \sigma_c = \sqrt{\left( \frac{\partial c}{\partial E} \cdot \sigma_E \right)^2 + \left( \frac{\partial c}{\partial \varepsilon} \cdot \sigma_\varepsilon \right)^2 + \left( \frac{\partial c}{\partial d} \cdot \sigma_d \right)^2}
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Step 3: Numerical values</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \[
+                            \frac{\partial c}{\partial E} = 0.01, \quad \frac{\partial c}{\partial \varepsilon} = -0.0001, \quad \frac{\partial c}{\partial d} = -0.01
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            \[
+                            \sigma_c = \sqrt{(0.0001)^2 + (0.000005)^2 + (0.0002)^2} \approx 0.00022
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Result:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Concentration \( c = 0.01 \, \mathrm{mol/L} \pm 0.0002 \, \mathrm{mol/L} \)
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Significant Figures: Rules and Examples</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What are significant figures?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Significant figures reflect the precision of a measurement or calculation. They include all certain digits and the first uncertain digit.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Rules for significant figures:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Non-zero digits are always significant.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Zeros between significant digits are significant.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Leading zeros are not significant.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Trailing zeros in a number with a decimal point are significant.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Examples:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \( 0.0045 \): 2 significant figures (\( 4 \) and \( 5 \)).
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \( 450.0 \): 4 significant figures (\( 4, 5, 0, 0 \)).
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \( 1500 \): 2 significant figures (\( 1 \) and \( 5 \))
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \( 1.5 \times 10^3 \): 2 significant figures (\( 1 \) and \( 5 \)).
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \( 1500. \): 4 significant figures (\( 1, 5, 0, 0 \)).
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \( 1500.0 \): 5 significant figures (\( 1, 5, 0, 0, 0 \)).
+                        </p>
+                        <p class="mainBullet">
+                            <strong>When performing calculations:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            For multiplication/division: Result has the same significant figures as the input with the fewest significant figures.<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                E.g., \( 12.34 \times 3.2 = 39 \) (rounded to 2 significant figures).
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            For addition/subtraction: Result has the same decimal places as the input with the fewest decimal places.<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                E.g., \( 123.456 + 0.12 = 123.58 \) (rounded to 2 decimal places).
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Reporting of Uncertainties</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Why report uncertainties?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Uncertainties communicate the reliability of a measurement and provide a range where the true value is likely to lie.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Common formats:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            \( x \pm u \): Value with uncertainty<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                E.g., \( 12.3 \pm 0.1 \).
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Parentheses notation: \( x(u) \): Uncertainty in the last digit(s)<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                E.g., \( 12.3(1) \) = \( 12.3 \pm 0.1 \).<br>
+                                E.g., \( 12.345(12) \) = \( 12.345 \pm 0.012 \).
+                            </span>
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Rules for reporting uncertainties:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The uncertainty is usually reported to 1 or 2 significant figures.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The value is rounded to the same decimal place as the uncertainty.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Examples:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Measurement: \( 123.456 \pm 0.12 \):<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                Reported as \( 123.46 \pm 0.12 \).
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Parentheses notation: \( 123.46(12) \).
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+
+            <section data-transition="zoom-in slide-out">
                 <h4>Errors vs. Uncertainties</h4>
                 <div>
                     <div class="leftBox">
@@ -185,7 +909,7 @@
                 </div>
             </section>
 
-            <section data-transition="fade">
+            <section data-transition="zoom-in slide-out">
                 <h4>The Role of Standard Reference Materials (SRMs) in Error Checking</h4>
                 <div>
                     <div class="leftBox">
@@ -208,14 +932,14 @@
                     <div class="spacer"></div>
                     <div class="rightBox">
                         <img src="../resources/peanutbutter.jpg" alt="Peanut Butter" style="width: 80%; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-                        <p class="small-text" style="font-style: italic; color: darkslategray; font-size: medium;">
+                        <p class="small-text" style="font-style: italic; color: rgb(185, 47, 128); font-size: medium;">
                             <strong>Example:</strong> Peanut butter as a standard reference material for food analysis. Do not eat this it costs $1,143.00 per jar.
                         </p>
                     </div>
                 </div>
             </section>
 
-            <section data-transition="fade">
+            <section data-transition="zoom-in slide-out">
                 <h4>The Role of Standard Reference Materials (SRMs) in Error Checking</h4>
                 <div>
                     <div class="leftBox">
@@ -253,6 +977,470 @@
                     </div>
                 </div>
             </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>How and Why to Correct Errors</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Why correct errors?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Errors cause deviations from the true value, reducing the reliability and accuracy of results.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Correcting errors ensures <strong>better data quality</strong>, improving confidence in experimental findings.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Reduces the propagation of errors in subsequent calculations or analyses.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How to correct errors:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Identify the source:</strong> Understand if errors are due to calibration, environmental influences, measurement procedures, or instrument bias.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Use reference materials:</strong> Compare results with certified reference values to detect and correct systematic deviations.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Apply corrections:</strong> Adjust results based on known biases or systematic shifts identified during validation.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Verify corrections:</strong> Reassess data consistency after correction to ensure the desired accuracy is achieved.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Example: Correcting Calibration Bias</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A thermometer is used to measure the temperature of a water bath. The true value, determined using a Standard Reference Material (SRM), is \( 25.00 \, {}^\circ\mathrm{C} \). However, the thermometer consistently reads \( 24.80 \, {}^\circ\mathrm{C} \).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Identified Error:</strong> A systematic bias of \( -0.20 \, {}^\circ\mathrm{C} \) in the thermometer's readings.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Correction Calculation:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Measured Value:</strong> \( 24.80 \, {}^\circ\mathrm{C} \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Correction Factor:</strong> \( +0.20 \, {}^\circ\mathrm{C} \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Corrected Value:</strong>
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            T_{\text{corrected}} = T_{\text{measured}} + \text{Correction Factor}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Substituting values:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            T_{\text{corrected}} = 24.80 + 0.20 = 25.00 \, {}^\circ\mathrm{C}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The corrected value matches the true value from the SRM.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Example: Correcting Time-Dependent Errors</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A measurement instrument experiences drift over time. A standard sample with a known value of \( 50.00 \, {}^\circ\mathrm{C} \) is periodically measured to monitor the drift.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The following measurements are taken:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            At \( t = 0 \): Measured standard = \( 50.00 \, {}^\circ\mathrm{C} \) (no drift)
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            At \( t = 1 \): Measured standard = \( 50.20 \, {}^\circ\mathrm{C} \) (+0.20 drift)
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            At \( t = 2 \): Measured standard = \( 50.50 \, {}^\circ\mathrm{C} \) (+0.50 drift)
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Correction Calculation:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Measured sample value at \( t = 2 \):</strong> \( 47.80 \, {}^\circ\mathrm{C} \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Measured standard drift at \( t = 2 \):</strong> \( +0.50 \, {}^\circ\mathrm{C} \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Corrected sample value:</strong>
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            T_{\text{corrected}} = T_{\text{measured}} - \text{Drift Correction}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Substituting values:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            T_{\text{corrected}} = 47.80 - 0.50 = 47.30 \, {}^\circ\mathrm{C}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Using the standard sample allows for accurate correction of the time-dependent drift.
+                        </p>
+                    </div>
+                </div>
+            </section>
+                
+            <section data-transition="zoom-in slide-out">
+                <h4>Example: Correcting High-Frequency Drifts</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            In high-frequency drift situations (e.g., isotope measurements), drift corrections are performed using <strong>flanking standards</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Two standards with known values are measured <strong>before</strong> and <strong>after</strong> the sample to interpolate the correction term.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Example measurements:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            Standard 1 (before sample): Measured = \( 1.010 \), True = \( 1.000 \), Drift = \( +0.010 \)
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            Standard 2 (after sample): Measured = \( 1.015 \), True = \( 1.000 \), Drift = \( +0.015 \)
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            Sample measurement: Measured = \( 1.008 \)
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Correction Calculation:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Step 1: Interpolate drift correction for sample time:</strong>
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            \text{Drift}_{\text{sample}} = \text{Drift}_{\text{before}} + \frac{\text{Drift}_{\text{after}} - \text{Drift}_{\text{before}}}{2}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Substituting values:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            \text{Drift}_{\text{sample}} = 0.010 + \frac{0.015 - 0.010}{2} = 0.0125
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Step 2: Correct the sample value:</strong>
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            \text{Corrected}_{\text{sample}} = \text{Measured}_{\text{sample}} - \text{Drift}_{\text{sample}}
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Substituting values:
+                        </p>
+                        <p class="subSubBullet" style="font-size: large;">
+                            \[
+                            \text{Corrected Sample Value} = 1.008 - 0.0125 = 0.9955
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The corrected sample value accurately accounts for high-frequency drift.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Identifying Outliers in Data</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What are outliers?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Outliers are data points that deviate significantly from the rest of the dataset. They can:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            <strong>Indicate errors:</strong> Measurement or recording mistakes.
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            <strong>Represent rare but valid events:</strong> Anomalies in natural phenomena.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Common outlier tests:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Interquartile Range (IQR):</strong> Classifies outliers as points beyond \( 1.5 \times \mathrm{IQR} \) from the first or third quartile.
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            <strong>Outliers:</strong><br>\( x < Q_1 - 1.5 \times \mathrm{IQR} \) or \( x > Q_3 + 1.5 \times \mathrm{IQR} \)<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                Where \( \mathrm{IQR} = Q_3 - Q_1 \).
+                            </span>
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Grubbs' Test:</strong> Identifies one outlier at a time in normally distributed data.
+                            \[
+                            G = \frac{|x_i - \bar{x}|}{s}
+                            \]
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                Where \( G \) is the test statistic, \( x_i \) the suspected outlier, \( \bar{x} \) the mean, and \( s \) the standard deviation.
+                            </span>
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            <strong>Critical value (\( G_{\text{crit}} \)):</strong> Depends on the sample size \( n \) and confidence level \( \alpha \).<br>
+                            \[
+                            G_{\text{crit}} = \frac{n-1}{\sqrt{n} \cdot \sqrt{n-2 + \frac{t^2}{n-1}}}
+                            \]
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                Where \( t \) is the critical value of the t-distribution with \( n-2 \) degrees of freedom.
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Dixon's Q Test:</strong> Useful for small datasets, compares the gap between the outlier and its nearest neighbor to the range of the data.
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            <strong>Critical value (\( Q_{\text{crit}} \)):</strong> Depends on sample size and confidence level. Example for \( n = 5, \alpha = 0.05 \): \( Q_{\text{crit}} = 0.71 \).
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Outlier Detection: Example</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Dataset:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            \( [12, 15, 13, 14, 22] \)
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Grubbs' Test:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \[
+                            G = \frac{|22 - 15.2|}{3.6} \approx 1.89
+                            \]
+                            <strong>Critical value:</strong> \( G_{\text{crit}} = 1.67 \, (\alpha = 0.05, n = 5) \).
+                            <br>
+                            <strong>Result:</strong> \( 22 \) is an outlier (\( G > G_{\text{crit}} \)).
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Dixon's Q Test:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            \[
+                            Q = \frac{|22 - 15|}{22 - 12} = \frac{7}{10} = 0.7
+                            \]
+                            <strong>Critical value:</strong> \( Q_{\text{crit}} = 0.71 \, (\alpha = 0.05, n = 5) \).
+                            <br>
+                            <strong>Result:</strong> \( 22 \) is <strong>not</strong> an outlier (\( Q < Q_{\text{crit}} \)).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>After removing the outlier:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            New dataset: \( [12, 15, 13, 14] \)
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Grubbs' Test:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            No further outliers detected (\( G < G_{\text{crit}} \)).
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Dixon's Q Test:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            No further outliers detected (\( Q < Q_{\text{crit}} \)).
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Conclusion:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The point \( 22 \) was flagged as an outlier by Grubbs' Test but not by Dixon's Q Test, demonstrating the importance of test selection based on data and context.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Estimating Uncertainties using Bootstrap Statistics</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Definition:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A non-parametric resampling method to estimate the distribution of a statistic by drawing random samples with replacement from the original dataset.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Key Idea:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            By simulating multiple datasets, we approximate the variability of a statistic (e.g., mean, median).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>How does it work?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Original dataset: \( [x_1, x_2, \dots, x_n] \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Resampled datasets: \( [x_1^*, x_2^*, \dots, x_n^*] \), drawn randomly with replacement.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Statistic (e.g., median) is calculated for each resampled dataset.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The distribution of these statistics provides an estimate of its uncertainty.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>How many resamples?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Commonly used: 1000-10000 resamples to ensure robust estimates.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Why Use Bootstrap?</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>When is Bootstrap useful?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Small sample sizes:</strong> Traditional statistical methods often require large datasets or strong assumptions (e.g., normality).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Non-parametric statistics:</strong> Works well for medians, percentiles, or other statistics where parametric assumptions fail.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Typical applications:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Confidence intervals:</strong> Estimate confidence intervals for any statistic.<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                E.g., 95% confidence interval for the median. This is mainly used if the variable is not further used in other calculations.
+                            </span>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Uncertainty estimation:</strong> Assess the variability of statistics like medians or regression coefficients.<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                We can use standard deviation of bootstrap statistics as an estimate of uncertainty and further consideration in error propagation.
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Example: Bootstrap for Median Uncertainty</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scenario:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            We have a dataset (n=100) \( [5.1, 7.7, 8.2, ..., 10.1, 12.9] \) and want to estimate the uncertainty of the median.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Bootstrap Process:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Resample the dataset 10000 times with replacement to create new datasets.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Calculate the median for each resampled dataset.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Results:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Original median: \( 8.6 \)
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Bootstrap medians (e.g., histogram of results): Approximate the distribution of the median.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            95% confidence interval: \( [8.1, 11.3] \)<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                Here, we mostly use the 2.5th and 97.5th percentiles of the bootstrap medians.
+                            </span>
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Conclusion:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The median (CI95%) is \( 8.6 (8.1,11.3) \) based on the bootstrap simulation.<br>
+                            <span style="font-size: medium; font-style: italic; color: rgb(185, 47, 128);">
+                                Alternatively: \( 8.6_{-0.5}^{+2.7} \)
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
 
         </div>
         <div class="footer-global">
