@@ -70,7 +70,7 @@
             <section data-transition="zoom-in slide-out">
                 <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
                 <pre><code>10. Uncertainties</code></pre>
-                <h4>Error Propagation, Bootstrap, Monte Carlo & Outliers</h4>
+                <h4>Error Propagation, Bootstrap & Outliers</h4>
                 <p style="text-align: right; font-size: medium;">by <a
                         href="https://www.uni-due.de/iac/gerrit_renner.php" target="_blank">Gerrit Renner</a></p>
             </section>
@@ -116,33 +116,48 @@
                 <div>
                     <div class="leftBox">
                         <p class="mainBullet">
-                            When we talk about uncertainties, we can distinguish between
-                            different types of uncertainties:
+                            <strong>When we talk about uncertainties, we can distinguish between different types:</strong>
                         </p>
                         <p class="subBullet" style="font-size: large;">
                             <strong>Random uncertainties</strong><br>
                             <span class="small-text" style="font-style: italic; color: darkslategray;">
-                                Natural fluctuations in your samples or measurements even if you do <strong>everything correctly</strong> and keep all <strong>conditions constant</strong>.
+                                Uncertainties caused by natural, unpredictable variations in measurements or samples, even under ideal and consistent conditions. They are characterized by randomness and often follow statistical distributions.
                             </span>
                         </p>
                         <p class="subBullet" style="font-size: large;">
                             <strong>Systematic uncertainties</strong><br>
                             <span class="small-text" style="font-style: italic; color: darkslategray;">
-                                Uncertainties that occur due to <strong>incorrect calibration</strong> or <strong>faulty equipment</strong>. I.e., your <strong>input data</strong> is already <strong>incorrect</strong>.
+                                Uncertainties that consistently shift measurements in a specific direction, arising from identifiable sources like calibration offsets or measurement bias. They are repeatable and predictable but hard to detect without external reference.
                             </span>
                         </p>
                         <p class="subBullet" style="font-size: large;">
                             <strong>Model uncertainties</strong><br>
                             <span class="small-text" style="font-style: italic; color: darkslategray;">
-                                Uncertainties that occur due to <strong>incorrect model assumptions</strong> or <strong>inadequate model complexity</strong>. I.e., your <strong>output data</strong> is <strong>incorrect</strong>.
+                                Uncertainties resulting from limitations in the models used to analyze data or make predictions. These arise from simplifying assumptions, incomplete understanding, or inadequate model complexity.
                             </span>
                         </p>
                     </div>
                     <div class="spacer"></div>
                     <div class="rightBox">
-                    </div>  
+                        <p class="mainBullet">
+                            <strong>Key distinctions:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Random uncertainties are inherently variable and can be reduced by averaging multiple measurements.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Systematic uncertainties require calibration or correction to be mitigated, as they affect all measurements consistently.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Model uncertainties are addressed by refining the model, validating its assumptions, or improving the data used for analysis.
+                        </p>
+                        <p class="mainBullet">
+                            However, uncertainties are normal and unavoidable in measurements and analyses, and understanding their nature is crucial for accurate interpretation.
+                        </p>
+                    </div>
                 </div>
             </section>
+            
 
             <section data-transition="zoom-in slide-out">
                 <h4>Uncertainty in simple Measurements</h4>
@@ -183,6 +198,9 @@
                         </p>
                         <p class="subBullet" style="font-size: large;">
                             This uncertainty in \( E \) directly propagates into the calculation of \( c \).
+                        </p>
+                        <p class="question fragment" style="font-size: large;">
+                            How to improve the uncertainty of \( c \)?
                         </p>
                     </div>
                 </div>
@@ -1440,6 +1458,285 @@
                     </div>
                 </div>
             </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Errors of the First and Second Kind</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What are errors of the first and second kind?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            These errors occur when testing hypotheses and making decisions based on statistical tests.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            They describe incorrect conclusions drawn from the data:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            <strong>Type I Error (α):</strong> Rejecting a true null hypothesis (false positive).
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            <strong>Type II Error (β):</strong> Failing to reject a false null hypothesis (false negative).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Key concepts:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Type I and II errors arise due to uncertainty in data and decision thresholds.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Reducing one error type often increases the other (trade-off).
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The balance depends on the context and consequences of the errors.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Type I Error: False Positive</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Definition:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A Type I Error occurs when a true null hypothesis is incorrectly rejected.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Causes:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Random fluctuations in data create a result that appears significant.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Significance Level (α):</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The probability of a Type I Error is controlled by setting \( \alpha \), often at 0.05.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Example:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Testing a new medication:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Null hypothesis (\( H_0 \)): The medication has no effect.
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Type I Error: Concluding the medication works when it does not.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Consequence:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            False positive results can lead to unnecessary treatments or incorrect scientific conclusions.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            When performing hypothesis tests, false positives of \( \alpha \) are expected due to random chance.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Type II Error: False Negative</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Definition:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A Type II Error occurs when a false null hypothesis is not rejected.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Causes:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Insufficient sample size, high variability, or overly strict significance levels.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Probability (β):</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The probability of a Type II Error depends on the sample size, effect size, and significance level.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Example:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Testing a new medication:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Null hypothesis (\( H_0 \)): The medication has no effect.
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Type II Error: Concluding the medication does not work when it actually does.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Consequence:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            False negative results can prevent effective treatments from being approved or delay scientific progress.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            When performing hypothesis tests, false negatives of \( \beta \) are expected due to random chance. However, \( \beta \) is often not explicitly controlled.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Balancing Type I and II Errors</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>The Trade-Off:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Reducing \( \alpha \) (Type I Error) increases \( \beta \) (Type II Error), and vice versa.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Key factors affecting the balance:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>1. Significance level (\( \alpha \)):</strong> Lowering \( \alpha \) reduces false positives but increases false negatives.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>2. Sample size:</strong> Larger samples reduce \( \beta \) without increasing \( \alpha \).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Practical Considerations:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Balance depends on the <strong>consequences</strong> of errors:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            In medical trials, reducing \( \alpha \) is crucial to avoid approving ineffective drugs.
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            In safety-critical systems, minimizing \( \beta \) ensures risks are not overlooked.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Power of a Test:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Increasing power (\( 1 - \beta \)) reduces Type II Errors, often by increasing sample size or adjusting the test design.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section data-transition="zoom-in slide-out">
+                <h4>Effect of Sample Size on Errors</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>How does sample size affect errors?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                           <strong>Type II Errors (\( \beta \))</strong> decrease with larger sample sizes:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Larger samples detect smaller effects, reducing false negatives.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Type I Errors (\( \alpha \))</strong> remain constant, but:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Very small, irrelevant effects can appear statistically significant.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Practical implications:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Statistical significance (\( p < 0.05 \)) does not imply practical relevance.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Effect sizes and confidence intervals should always be reported.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Define a minimum effect size that is meaningful for your study.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Composite Metrics: Precision, Sensitivity, Specificity</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>What are composite metrics?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Metrics combining true positives (TP), false positives (FP), true negatives (TN), and false negatives (FN) to evaluate classification performance.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Key metrics:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Sensitivity (Recall):</strong>
+                            \[
+                            \text{Sensitivity} = \frac{\text{TP}}{\text{TP} + \text{FN}}
+                            \]
+                            Measures the ability to identify positive cases correctly.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Specificity:</strong>
+                            \[
+                            \text{Specificity} = \frac{\text{TN}}{\text{TN} + \text{FP}}
+                            \]
+                            Measures the ability to identify negative cases correctly.
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Additional metrics:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Precision:</strong>
+                            \[
+                            \text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
+                            \]
+                            Measures the reliability of positive predictions.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>F1-Score:</strong>
+                            \[
+                            F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Sensitivity}}{\text{Precision} + \text{Sensitivity}}
+                            \]
+                            Harmonic mean of Precision and Sensitivity.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>Accuracy:</strong>
+                            \[
+                            \text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}
+                            \]
+                            Overall correctness of predictions.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
             
 
         </div>
