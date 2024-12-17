@@ -1458,6 +1458,185 @@
                     </div>
                 </div>
             </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Example: Microplastic Analysis - Experimental Setup</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Experimental Design:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            A sand sample of <strong>100.3 g</strong> was analyzed to identify microplastic (MP) particles.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Microplastic particles were collected on a filter and divided into <strong>50 equal parts</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            <strong>3 parts</strong> were analyzed with Raman microscopy to identify polymers:
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            PE (Polyethylene), PP (Polypropylene), PS (Polystyrene), PU (Polyurethane).
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Measurements for each part:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Total particle count: approximately <strong>4000</strong>.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Polymer-specific counts: between <strong>20–80</strong> particles per part.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Goal:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Estimate the total MP count for, e.g., PE on the entire filter and quantify the uncertainties.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section data-transition="zoom-in slide-out">
+                <h4>Step 1: Bootstrap Results for Individual Parts</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Bootstrap Resampling per Part:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            For each part, 1000 bootstrap resamples were generated to estimate uncertainties.
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Bootstrap provide 1000 estimates for the total particle count of PE, PP, PS, and PU. The mean and standard deviation of these estimates are used to quantify the uncertainty.
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Results for PE:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            Part 1: \( 23 \pm 6 \, \mathrm{particles} \)
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            Part 2: \( 30 \pm 5 \, \mathrm{particles} \)
+                        </p>
+                        <p class="subBullet" style="font-size: medium;">
+                            Part 3: \( 26 \pm 7 \, \mathrm{particles} \)
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Interpretation:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            The uncertainty for each part (±) represents the standard deviation of the bootstrap resamples.
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Differences between parts reflect sampling variability.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h4>Step 2: Combining Results Across Parts</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>How to combine bootstrap results from multiple parts?</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Step 1: Calculate the mean count across the parts:
+                            \[
+                            \text{Mean} = \frac{23 + 30 + 26}{3} = 26.3
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Step 2: Combine uncertainties using:
+                            \[
+                            \sigma_{\text{total}} = \sqrt{\sigma_{\text{within}}^2 + SE_{\text{between}}^2}
+                            \]
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Within-part uncertainty (\( \sigma_{\text{within}} \)): mean of the bootstrap standard deviations (e.g., \( 6 \)).
+                        </p>
+                        <p class="subSubBullet" style="font-size: medium;">
+                            Between-part uncertainty (\( SE_{\text{between}} \)):  
+                            \[
+                            SE = \frac{\sigma_{\text{between}}}{\sqrt{3}} = \frac{3.5}{\sqrt{3}} = 2.0
+                            \]
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Final combined uncertainty:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            \[
+                            \sigma_{\text{total}} = \sqrt{6^2 + 2^2} = 6.3
+                            \]
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Final result for PE (mean ± uncertainty):  
+                            \[
+                            26.3 \pm 6.3 \, \mathrm{particles}
+                            \]
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section>
+                <h4>Step 3: Scaling to the Entire Filter</h4>
+                <div>
+                    <div class="leftBox">
+                        <p class="mainBullet">
+                            <strong>Scaling factor:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            To estimate the total count for all 50 parts:
+                            \[
+                            N_{\text{total}} = 26.3 \times \frac{50}{3} = 438.3
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Propagating uncertainty:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Scale the combined uncertainty:
+                            \[
+                            \sigma_{\text{scaled}} = 6.3 \times \frac{50}{3} = 105.0
+                            \]
+                        </p>
+                    </div>
+                    <div class="spacer"></div>
+                    <div class="rightBox">
+                        <p class="mainBullet">
+                            <strong>Final result for PE:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            Total PE count:  
+                            \[
+                            438 \pm 105 \, \mathrm{particles}
+                            \]
+                        </p>
+                        <p class="mainBullet">
+                            <strong>Key takeaway:</strong>
+                        </p>
+                        <p class="subBullet" style="font-size: large;">
+                            By combining bootstrap uncertainties and sampling variability, we provide a robust estimate for the entire filter.
+                        </p>
+                        <p class="question fragment" style="font-size: large;">
+                            How could we further extend this analysis? I.e., what is not covered in this example?
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
             
             <section data-transition="zoom-in slide-out">
                 <h4>Errors of the First and Second Kind</h4>
