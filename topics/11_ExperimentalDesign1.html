@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Chemometrics and Statistics</title>
+
+  <link rel="stylesheet" href="../dist/reset.css">
+  <link rel="stylesheet" href="../dist/reveal.css">
+  <link rel="stylesheet" href="../dist/theme/iac.css">
+  <link rel="stylesheet" href="../css/mystyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="../plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../dist/theme/simple.css" media="print">
+  <style>
+    .green-text {
+      color: rgb(133, 198, 42);
+    }
+
+    .teal-text {
+      color: rgb(0, 150, 136);
+    }
+
+    .small-text {
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h2><span class="green-text">C</span>hemometrics & <span class="teal-text">S</span>tatistics</h2>
+        <pre><code>11. Experimental Design 1</code></pre>
+        <h4>Downhill-Simplex Optimization</h4>
+        <p style="text-align: right; font-size: medium;">by <a href="https://www.uni-due.de/iac/gerrit_renner.php"
+            target="_blank">Gerrit Renner</a></p>
+      </section>
+
+      <section>
+        <h4>Initial Thoughts</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Coagulation process</strong> to remove microplastics from water
+            </p>
+            <p class="subBullet">
+              <strong>Factors:</strong> Coagulant dosage, pH, stirring speed
+            </p>
+            <p class="subBullet">
+              <strong>Response:</strong> Removal efficiency<br>(% microplastics)
+            </p>
+
+            <p class="question">
+              <strong>How do process parameters affect microplastic removal efficiency?</strong>
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/coagulation.png" alt="Coagulation process" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Experimental Design: General Info</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Experimental Design</strong>: A structured approach to planning experiments
+            </p>
+            <p class="subBullet">
+              Goal: Maximize information while minimizing resources
+            </p>
+            <p class="subBullet">
+              Focus: Identify key factors and their interactions
+            </p>
+            <p class="mainBullet">
+              <strong>Key Benefits:</strong>
+            </p>
+            <p class="subBullet">
+              Improves efficiency and reliability of results
+            </p>
+            <p class="subBullet">
+              Provides insights into cause-and-effect relationships
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Two main Tasks in Experimental Design</h4>
+        <div style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); padding: 10px; background-color: wheat;">
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>1: Method optimization</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Focus: Identify the best combination of factors <strong>(dynamically exploring design space)</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Goal: Maximize performance (e.g., sensitivity, efficiency)
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Example: Optimizing pH, temperature, and time for a chemical reaction
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/expdesign1.png" alt="Optimization" style="width: 100%;">
+          </div>
+        </div>
+        <div style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); padding: 10px;">
+          <div class="leftBox">
+            <img src="../resources/expdesign2.png" alt="Optimization" style="width: 100%;">
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              <strong>2: Determination of effects</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Focus: Quantify the impact of individual factors and their interactions <strong>(statically exploring
+                design
+                space)</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Goal: Understand cause-and-effect relationships
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Example: Assessing how pH, stirring speed, and dosage influence pollutant removal
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Terms: <span class="post-it-strip">Factors</span></h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Factor:</strong> A variable that influences the outcome of an experiment
+            </p>
+            <p class="subBullet">
+              Also referred to as a <strong>parameter</strong>
+            </p>
+            <p class="subBullet">
+              <strong>Examples:</strong>
+            </p>
+            <p class="subSubBullet">
+              pH value in a chemical reaction
+            </p>
+            <p class="subSubBullet">
+              Dosage of coagulant in water treatment
+            </p>
+            <p class="subBullet">
+              <strong>Key:</strong> Factors can be controlled or adjusted during the experiment
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              <strong>Two types of factors:</strong>
+            </p>
+            <p class="subBullet">
+              <strong>Continuous:</strong> Can take any value within a range (e.g., pH, temperature)
+            </p>
+            <p class="subBullet">
+              <strong>Categorical:</strong> Limited to discrete levels or categories (e.g., type of coagulant: metal
+              salt, polymer)
+            </p>
+            <p class="mainBullet">
+              <strong>Definition range:</strong> Every factor has a range or set of values it can take
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Terms: <span class="post-it-strip">Response</span></h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Response:</strong> The dependent variable in an experiment
+            </p>
+            <p class="subBullet">
+              Also referred to as <strong>target</strong> or <strong>target value</strong>
+            </p>
+            <p class="subBullet">
+              <strong>Numeric value:</strong> Allows comparison of factor combinations relative to the target
+            </p>
+            <p class="subBullet">
+              Determined through a model (function) of independent variables (factors)
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="subBullet">
+              <strong>Choice of model:</strong> Crucial for experimental design and depends on the research question
+            </p>
+            <p class="subBullet">
+              <strong>Examples:</strong>
+            </p>
+            <p class="subSubBullet">
+              Removal efficiency (%) in a coagulation process
+            </p>
+            <p class="subSubBullet">
+              Yield of a chemical reaction (e.g., mg product per g reactant)
+            </p>
+            <p class="subSubBullet">
+              Limit of detection (LOD) in analytical chemistry
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Terms: <span class="post-it-strip">Experimental Design Space</span></h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Experimental Design Space:</strong> The range of all possible factor combinations in an experiment
+            </p>
+            <p class="subBullet">
+              An <strong>n+1 dimensional space</strong>, where:
+            </p>
+            <p class="subSubBullet">
+              <strong>n dimensions:</strong> Represent the factors (independent variables) as perpendicular axes
+            </p>
+            <p class="subSubBullet">
+              <strong>1 dimension:</strong> Represents the response (dependent variable)
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/designspace1.png" alt="Design space" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Terms: <span class="post-it-strip">Dimensionality of the Design Space</span></h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              For <strong>dimensionality</strong> of the design space, we have to distinguish between dimensions from
+              factors and the response
+            </p>
+            <p class="subBullet">
+              The response can be seen as a hyper surface(volume) in the design space
+            </p>
+            <p class="subBullet">
+              I.e., the response is a function of the factors
+            </p>
+            <p class="subBullet">
+              This is called the <strong>response surface</strong>
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/dimensionalitySpace.png" alt="Design space" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>Terms: <span class="post-it-strip">Resolution of the Design Space</span></h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Resolution of the Response Function:</strong> Determines the level of detail in the design space
+            </p>
+            <p class="subBullet">
+              Higher resolution requires more measurement points
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              For <strong>1 parameter</strong>: Resolution increases linearly with the number of measurements
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              For <strong>2 parameters</strong>: Resolution increases quadratically with the number of measurements
+            </p>
+            <p class="subBullet">
+              <strong>Key:</strong> Adequate resolution is critical to accurately capture the behavior of the response
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              Trade-off: High resolution improves detail but increases experimental cost and time
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/opti0.png" alt="Design space" style="width: 45%;">
+            <img src="../resources/opti1.png" alt="Design space" style="width: 45%;">
+            <img src="../resources/opti2.png" alt="Design space" style="width: 45%;">
+          </div>
+        </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>Terms: <span class="post-it-strip">Resolution of the Design Space</span></h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Resolution of the Response Function:</strong> Determines the level of detail in the design space
+            </p>
+            <p class="subBullet">
+              Higher resolution requires more measurement points
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              For <strong>1 parameter</strong>: Resolution increases linearly with the number of measurements
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              For <strong>2 parameters</strong>: Resolution increases quadratically with the number of measurements
+            </p>
+            <p class="subBullet">
+              <strong>Key:</strong> Adequate resolution is critical to accurately capture the behavior of the response
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              Trade-off: High resolution improves detail but increases experimental cost and time
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/opti3b.png" alt="Design space" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>Terms: <span class="post-it-strip">Resolution of the Design Space</span></h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Resolution of the Response Function:</strong> Determines the level of detail in the design space
+            </p>
+            <p class="subBullet">
+              Higher resolution requires more measurement points
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              For <strong>1 parameter</strong>: Resolution increases linearly with the number of measurements
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              For <strong>2 parameters</strong>: Resolution increases quadratically with the number of measurements
+            </p>
+            <p class="subBullet">
+              <strong>Key:</strong> Adequate resolution is critical to accurately capture the behavior of the response
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              Trade-off: High resolution improves detail but increases experimental cost and time
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="styled-noPoint">
+              \[
+              R \propto n^\frac{1}{p}
+              \]
+              <span class="small-text">where \(R\) is the resolution, \(n\) is the number of measurements, and \(p\) is
+                the number of parameters</span>
+            </p>
+            <p class="subBullet">
+              I.e., for doubling the resoultion, the number of measurements has to be quadrupled for 2 parameters, cubed
+              for 3 parameters, etc.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Downhill-Simplex Optimization</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Downhill Simplex Method:</strong> A strategy for response optimization
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Focus: Minimize the number of measurement points
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Dynamic exploration of the <strong>design space</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Starts from an initial point and iteratively moves towards the optimal response
+            </p>
+            <p class="mainBullet">
+              <strong>Key Features:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Empirical step-by-step response improvement
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Well-suited for nonlinear and multidimensional problems
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Relies on a geometric approach using an <strong>n-simplex</strong> (triangle in 2D, tetrahedron in 3D,
+              etc.)
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/simplex17.png" alt="Simplex" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>The n-Simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>n-Simplex:</strong> The smallest geometric unit in the design space
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Defined by <strong>n+1 points</strong> in an n-dimensional space
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Represents the simplest approximation of the response surface
+            </p>
+            <p class="mainBullet">
+              <strong>Geometric Interpretation:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              for 1 Factor (2D): A line (2 points)
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              for 2 Factors (3D): A triangle (3 points)
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              for 3 Factors (4D): A tetrahedron (4 points)
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              for n Factors: An n-simplex (n+1 points)
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/simplex0.png" alt="Simplex" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Princple of the Downhill-Simplex Method</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              We consider the <strong>vertices</strong> of the n-simplex to estimate <strong>local trends</strong> of
+              the response surface
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              We search for improvment algon <strong>local trends</strong> and reapeat this process until we reach the
+              <strong>optimal response</strong>
+          </div>
+        </div>
+        <img src="../resources/simplex_princ.png" alt="Simplex" style="width: 80%;">
+      </section>
+
+      <section data-auto-animate>
+        <h4>How a Simplex Moves</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Principle of the Downhill Simplex:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Iteratively removes the <strong>worst point</strong> (worst response)
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Replaces it with a <strong>new point</strong> in an unexplored region
+            </p>
+            <p class="mainBullet">
+              <strong>Key Step: Reflection</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Reflects the worst point across the <strong>centroid</strong> of the remaining points
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Direction of reflection approximates the <strong>local gradient</strong>
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/simplex.drawio.png" alt="Simplex" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How a Simplex Moves</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Principle of the Downhill Simplex:</strong>
+            </p>
+            <p class="subBullet">
+              New point = <strong>Reflection Point (R):</strong>
+              \[
+              \mathbf{R} = \mathbf{C} + \alpha (\mathbf{C} - \mathbf{W})
+              \]
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              \(\mathbf{C}\): Centroid (mean) of the remaining points
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              \(\mathbf{W}\): Coordinates of the worst point
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              \(\alpha\): Reflection coefficient (typically \(\alpha = 1\))
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/simplex.drawio.png" alt="Simplex" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Example</h4>
+        <div class="tabs">
+          <div class="tab active simplex1" data-tab="simplex1">Initial Simplex</div>
+          <div class="tab simplex2" data-tab="simplex2">Reflection</div>
+          <div class="tab simplex3" data-tab="simplex3">Measureing new point</div>
+          <div class="tab simplex4" data-tab="simplex4">next cycle</div>
+          <div class="tab simplex5" data-tab="simplex5">next cycle</div>
+          <div class="tab simplex6" data-tab="simplex6">next cycle</div>
+        </div>
+        <div>
+          <div class="leftBox">
+            <div class="tab-content active simplex1" data-tab="simplex1">
+              <p class="mainBullet">
+                We start with an initial simplex somewhere in the design space
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                Each point represents a factor combination
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                In our case we have 2 factors, so the simplex is a triangle
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The responses of the points will be evaluated by performing measurements
+              </p>
+            </div>
+            <div class="tab-content simplex2" data-tab="simplex2">
+              <p class="mainBullet" style="font-size: large;">
+                The worst point (113) is reflected across the centroid of the remaining points (124 and 121)
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The centroid is calculated dimension-wise, e.g.: 
+              </p>
+              <p class="styled-noPoint" style="font-size: large;">
+                \[C_T=(65+75)/2 = 70\]
+                \[C_{pH}=(4.3 + 4.1)/2 = 4.2\]
+                <span class="small-text" style="font-size: medium;">
+                  where {65; 4.3} are the values of the point with the response 124 and {75; 4.1} are the values of the point with the response 121
+                </span>
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The reflection point is calculated as:
+              </p>
+              <p class="styled-noPoint" style="font-size: large;">
+                \[R_T = 70 + 1*(70-62) = 78\]
+                \[R_{pH} = 4.2 + 1*(4.2-4.0) = 4.4\]
+              </p>
+            </div>
+            <div class="tab-content simplex3" data-tab="simplex3">
+              <p class="mainBullet">
+                The response of the reflection point is measured
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The new point has a response of 174
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The simplex is updated by replacing the worst point with the reflection point
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The simplex is then iteratively optimized by repeating the reflection step (now the point 121 is the worst)
+              </p>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="tab-content active simplex1" data-tab="simplex1">
+              <img src="../resources/simplex2.png" alt="Simplex" style="width: 100%;">
+            </div>
+            <div class="tab-content simplex2" data-tab="simplex2">
+              <img src="../resources/simplex2b.png" alt="Simplex" style="width: 100%;">
+            </div>
+            <div class="tab-content simplex3" data-tab="simplex3">
+              <img src="../resources/simplex3.png" alt="Simplex" style="width: 100%;">
+            </div>
+            <div class="tab-content simplex4" data-tab="simplex4">
+              <img src="../resources/simplex4.png" alt="Simplex" style="width: 100%;">
+            </div>
+            <div class="tab-content simplex5" data-tab="simplex5">
+              <img src="../resources/simplex5.png" alt="Simplex" style="width: 100%;">
+            </div>
+            <div class="tab-content simplex6" data-tab="simplex6">
+              <img src="../resources/simplex6.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <div class="footer-global" style="color: white;">
+    Chemometrics & Statistics Lecture <br> by Gerrit Renner <br>
+    Last updated: December 10, 2024
+  </div>
+  </div>
+  <div id="clock">--:--</div>
+
+  <script src="../dist/reveal.js"></script>
+  <script src="../plugin/notes/notes.js"></script>
+  <script src="../plugin/markdown/markdown.js"></script>
+  <script src="../plugin/highlight/highlight.js"></script>
+  <script src="../plugin/math/math.js"></script>
+  <script src="../plugin/menu/menu.js"></script>
+  <!-- Anything plugin -->
+  <!-- Chart plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="../plugin/chartscii/dist/bundle.js"></script>
+  <script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+      parallaxBackgroundImage: '../resources/bg3.png', // URL of your background image
+      // Parallax background size (optional)
+      parallaxBackgroundSize: '5376px 1512px', // Adjust to your desired size
+      // Parallax background horizontal movement (optional)
+      parallaxBackgroundHorizontal: 200, // Horizontal movement, adjust as needed
+      menu: {
+        custom: [{
+          title: 'Topics',
+          icon: '<i class="fas fa-home"></i>',
+          src: 'menu.html'
+        }]
+      },
+      hash: true,
+      // Learn about plugins: https://revealjs.com/plugins/
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu],
+    });
+    // Funktion zum Aktualisieren der Uhrzeit
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Uhrzeit sofort und dann jede Sekunde aktualisieren
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+  <!-- Chart scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
+  <script src="../resources/d3_utils.js"></script>
+  <script src="../resources/chart_dataprocessing1.js"></script>
+  <script src="../resources/chart_dataprocessing2.js"></script>
+  <script src="../resources/chart_smoothing1.js"></script>
+  <script src="../resources/chart_fft.js"></script>
+  <script src="../resources/chart_dwt.js"></script>
+
+</body>
+
+</html>
