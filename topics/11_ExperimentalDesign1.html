@@ -557,13 +557,14 @@
                 The worst point (113) is reflected across the centroid of the remaining points (124 and 121)
               </p>
               <p class="subBullet" style="font-size: large;">
-                The centroid is calculated dimension-wise, e.g.: 
+                The centroid is calculated dimension-wise, e.g.:
               </p>
               <p class="styled-noPoint" style="font-size: large;">
                 \[C_T=(65+75)/2 = 70\]
                 \[C_{pH}=(4.3 + 4.1)/2 = 4.2\]
                 <span class="small-text" style="font-size: medium;">
-                  where {65; 4.3} are the values of the point with the response 124 and {75; 4.1} are the values of the point with the response 121
+                  where {65; 4.3} are the values of the point with the response 124 and {75; 4.1} are the values of the
+                  point with the response 121
                 </span>
               </p>
               <p class="subBullet" style="font-size: large;">
@@ -585,7 +586,50 @@
                 The simplex is updated by replacing the worst point with the reflection point
               </p>
               <p class="subBullet" style="font-size: large;">
-                The simplex is then iteratively optimized by repeating the reflection step (now the point 121 is the worst)
+                The simplex is then iteratively optimized by repeating the reflection step (now the point 121 is the
+                worst)
+              </p>
+            </div>
+            <div class="tab-content simplex4" data-tab="simplex4">
+              <p class="mainBullet">
+                The former worst point (121) was reflected across the centroid of the remaining points (124 and 174)
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The new point has a response of 185
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The simplex is updated by replacing the worst point (121) with the reflection point (185)
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The simplex is then iteratively optimized by repeating the reflection step
+              </p>
+            </div>
+            <div class="tab-content simplex5" data-tab="simplex5">
+              <p class="mainBullet">
+                The former worst point (124) was reflected across the centroid of the remaining points (174 and 185)
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The new point has a response of 200
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The simplex is updated by replacing the worst point (124) with the reflection point (200)
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The simplex is then iteratively optimized by repeating the reflection step
+              </p>
+            </div>
+            <div class="tab-content simplex6" data-tab="simplex6">
+              <p class="mainBullet">
+                The former worst point (174) was reflected across the centroid of the remaining points (185 and 200)
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The new point has a response of 183
+              </p>
+              <p class="subBullet" style="font-size: large;">
+                The simplex is updated by replacing the worst point (174) with the reflection point (183)
+              </p>
+              <p class="question" style="font-size: large;">
+                What happens next?
               </p>
             </div>
           </div>
@@ -611,6 +655,655 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <section>
+        <h4>Shrinking / Contracting the Simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Shrink:</strong> Reducing the simplex size when reflection fails
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Occurs when the reflected point is still the <strong>worst point</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Purpose: Reduce the step size and explore the region more cautiously
+            </p>
+            <p class="mainBullet">
+              <strong>Mathematical Step:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              New point = <strong>Shrink Point (S):</strong>
+            </p>
+            <p class="styled-noPoint" style="font-size: large;">
+              \[
+              \mathbf{S} = \mathbf{C} + \beta (\mathbf{C} - \mathbf{W})
+              \]
+              <span class="small-text" style="font-size: medium;">
+                where \(\beta\) is the shrink coefficient<br>(typically \(\beta = 0.5\)), \(\mathbf{W}\) is the worst
+                point
+                and \(\mathbf{C}\) is the centroid of the remaining points
+              </span>
+            </p>
+            <p class="mainBullet">
+              <strong>Goal:</strong> Focus exploration on a smaller region
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div class="tabs">
+              <div class="tab active shrink1" data-tab="shrink1">shrink (n=8)</div>
+              <div class="tab shrink2" data-tab="shrink2">n=11</div>
+              <div class="tab shrink3" data-tab="shrink3">n=25</div>
+            </div>
+            <div class="tab-content active shrink1" data-tab="shrink1">
+              <img src="../resources/simplex7.png" alt="Simplex" style="width: 100%;">
+            </div>
+            <div class="tab-content shrink2" data-tab="shrink2">
+              <img src="../resources/simplex8.png" alt="Simplex" style="width: 100%;">
+            </div>
+            <div class="tab-content shrink3" data-tab="shrink3">
+              <img src="../resources/simplex9.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Example: Response Overview</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Response Function Across Optimization Steps:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Initial simplex: <strong>Individual responses</strong> (red bars)
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Subsequent steps: <strong>Best response</strong> per simplex (blue bars)
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Rapid improvement followed by saturation
+            </p>
+            <p class="mainBullet">
+              <strong>Stopping Criterion:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Occurs when further improvement is negligible
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              <strong>Response convergence:</strong> Minimal change in best response (e.g., < 1%) </p>
+                <p class="subSubBullet" style="font-size: large;">
+                  <strong>Simplex size:</strong> Simplex shrinks below a predefined threshold
+                </p>
+                <p class="subSubBullet" style="font-size: large;">
+                  <strong>Iteration limit:</strong> Maximum number of steps reached (e.g., 25)
+                </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/simplex11.png" alt="Simplex" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Out of bounds</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>What to do if the new point leaves the design space?</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              A new point can fall outside the <strong>defined boundaries</strong> of the design space
+            </p>
+            <p class="mainBullet">
+              <strong>Approaches to handle this:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              a) <strong>Clip the point:</strong> Restrict the new point to the nearest boundary of the design space
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              b) <strong>Modify the reflection or contraction step:</strong> Adjust the reflection or shrink coefficient
+              to ensure the point stays within bounds
+            </p>
+            <p class="mainBullet">
+              <strong>Example:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              If the pH range is 4–9 and a new point suggests pH = 9.5, adjust the point to pH = 9
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Alternatively, scale the reflection step to bring the point back within bounds (e.g., \(\alpha = -0.5\))
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/outofbounds.png" alt="Simplex" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>The drunken simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Simplex Movement: A "Tumbling" Path to the Optimum</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              The Simplex does not move directly toward the optimum
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Instead, it "tumbles," exploring the response surface dynamically
+            </p>
+            <p class="mainBullet">
+              <strong>Reason for Tumbling:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Simplex geometry defines the movement freedom
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              An irregular Simplex may cause inefficient or erratic motion
+            </p>
+
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet">
+              <strong>Optimal Geometry:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              A <strong>regular (equilateral) Simplex</strong> ensures balanced exploration
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Maintains equal "weight" across all dimensions
+            </p>
+            <p class="mainBullet">
+              <strong>Goal:</strong> Keep the Simplex as regular as possible during optimization
+            </p>
+            <div>
+              <img src="../resources/simplex.drawio.png" alt="Simplex" style="width: 45%;">
+              <img src="../resources/simplex2.drawio.png" alt="Simplex" style="width: 45%;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Initial Simplex matters</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              <strong>Importance of the Initial Simplex:</strong>
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              The simplex should be of <strong>suitable size, orientation, and shape</strong>
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              Shape: Regular (equilateral)
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              Size: edge should be like 10% of the design space
+            </p>
+            <p class="subSubBullet" style="font-size: large;">
+              avoid edges parallel to the axes
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              The initial simplex should be placed in a <strong>promising region</strong> of the design space.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <img src="../resources/initialsimplex.png" alt="Simplex" style="width: 100%;">
+          </div>
+        </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet fragment" style="font-size: large;">
+              For a starting, we can use the axes vectors for all but one vertex. The last vertex is then calculated using the rule of Pythagoras. 
+            </p>
+            <p class="subBullet fragment" style="font-size: large;">
+              E.g., for a 2D simplex:
+              \[        
+                \mathbf{A} = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \quad
+                \mathbf{B} = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \quad
+                \mathbf{C} = \begin{pmatrix} ? \\ ? \end{pmatrix}
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              E.g., for a 2D simplex:
+              \[        
+                dist(\mathbf{A}, \mathbf{B}) = dist(\mathbf{B}, \mathbf{C}) = dist(\mathbf{C}, \mathbf{A})
+              \]
+            </p>
+            <p class ="subBullet fragment" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{B}) = \sqrt{(x_A - x_B)^2 + (y_A - y_B)^2} = \sqrt{2}
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{(1 - x_C)^2 + (0 - y_C)^2} = \sqrt{2}
+              \]
+              \[
+              dist(\mathbf{B}, \mathbf{C}) = \sqrt{(0 - x_C)^2 + (1 - y_C)^2} = \sqrt{2}
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = dist(\mathbf{B}, \mathbf{C})
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              \sqrt{(1 - x_C)^2 + (0 - y_C)^2} = \sqrt{(0 - x_C)^2 + (1 - y_C)^2}
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = dist(\mathbf{B}, \mathbf{C})
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              (1 - x_C)^2 + (0 - y_C)^2 = (0 - x_C)^2 + (1 - y_C)^2
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = dist(\mathbf{B}, \mathbf{C})
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              (1 - x_C)^2 - (0 - x_C)^2  =  (1 - y_C)^2 - (0 - y_C)^2
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = dist(\mathbf{B}, \mathbf{C})
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              x_C  =  y_C
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{2}
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              \sqrt{(1 - x_C)^2 + (0 - y_C)^2} = \sqrt{2}
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{2}
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              \sqrt{(1 - u)^2 + (0 - u)^2} = \sqrt{2}
+              \]
+              where \(u\) is \(x_C\) and \(y_C\)
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{2}
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              (1 - u)^2 + (0 - u)^2 = 2
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{2}
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              (1 - u)^2 + u^2 - 2 = 0
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{2}
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              1 - 2u + u^2 + u^2 - 2 = 0
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{2}
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              2u^2 - 2u - 1 = 0
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
+      </section>
+
+      <section data-auto-animate>
+        <h4>How to create an initial n-simplex</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet">
+              To construct a <strong>regular n-simplex</strong> we need to find <strong>n+1 vertices</strong> of n dimensions. E.g., for 2 factors (2D) we need 3 points that form a regular triangle.
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Regular means that all edges have the <strong>same length</strong> and all angles are equal
+            </p>
+            <p class="subBullet" style="font-size: large;">
+              Now we use that all edges have the same length to calculate the last vertex.
+            </p>
+            <p class ="subBullet" style="font-size: large;">
+              I.e., 
+              \[
+              dist(\mathbf{A}, \mathbf{C}) = \sqrt{2}
+              \]
+            </p>
+            <p class ="styled-noPoint" style="font-size: medium;">
+              \[
+              u = \frac{2\pm \sqrt{4 - 4(-1*2)}}{4} = \frac{2\pm \sqrt{12}}{4} = \frac{1\pm \sqrt{3}}{2} 
+              \]
+            </p>
+            </div>
+            <div class="spacer"></div>
+            <div class="rightBox">
+              <img src="../resources/simplex12.png" alt="Simplex" style="width: 100%;">
+            </div>
+          </div>
       </section>
 
     </div>
