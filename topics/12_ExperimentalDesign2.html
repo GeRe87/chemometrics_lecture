@@ -144,46 +144,1050 @@
       </section>
 
       <section>
-        <h4>Introduction to Design of Experiments (DoE)</h4> <div> <div class="leftBox"> <p class="mainBullet"> What is DoE? </p> <p class="subBullet" style="font-size: medium;"> A systematic approach to plan, conduct, and analyze experiments to understand how multiple factors (e.g., water pH, pollutant concentration) affect key outcomes (e.g., degradation efficiency). </p> <p class="mainBullet"> Goals of DoE </p> <p class="subBullet" style="font-size: medium;"> Identify key factors such as temperature, catalyst type, or pollutant type that significantly impact water treatment processes. </p> <p class="subBullet" style="font-size: medium;"> Optimize experiments for environmental processes like nutrient recovery or pollutant degradation. </p> <p class="subBullet" style="font-size: medium;"> Ensure reliable results for regulatory compliance and environmental protection. </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="Graph illustrating experimental design concept"> </div> </div>
+        <h4>Introduction to Design of Experiments (DoE)</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> What is DoE? </p>
+            <p class="subBullet" style="font-size: medium;"> A systematic approach to plan, conduct, and analyze
+              experiments to understand how multiple factors (e.g., water pH, pollutant concentration) affect key
+              outcomes (e.g., degradation efficiency). </p>
+            <p class="mainBullet"> Goals of DoE </p>
+            <p class="subBullet" style="font-size: medium;"> Characterize relationships between factors and the response
+              to understand their influence on system behavior. </p>
+            <p class="subBullet" style="font-size: medium;"> Develop a mathematical model that enables interpolation
+              across the chemical space for predictive analysis. </p>
+            <p class="subBullet" style="font-size: medium;"> Capture interactions between factors to identify combined
+              effects on the response. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div id="doeChart"></div>
+          </div>
+        </div>
       </section>
 
       <section>
-        <h4>Key Elements of Experimental Design</h4> <div> <div class="leftBox"> <p class="mainBullet"> Core Components of DoE </p> <p class="subBullet" style="font-size: medium;"> Factors: Controlled variables such as pollutant type, pH, or catalyst concentration. </p> <p class="subBullet" style="font-size: medium;"> Levels: Specific values, e.g., pollutant concentrations of 10, 50, and 100 mg/L. </p> <p class="subBullet" style="font-size: medium;"> Response: Measurable outcomes like pollutant degradation (%) or toxicity reduction. </p> <p class="mainBullet"> Why Structure Matters </p> <p class="subBullet" style="font-size: medium;"> A structured design helps uncover relationships like how pH influences heavy metal precipitation. </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="Illustration of factorial design with factors and levels"> </div> </div>
+        <h4>Key Elements of Experimental Design</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> Core Components of DoE </p>
+            <p class="subBullet" style="font-size: medium;"> Factors: Controlled variables such as pollutant type, pH,
+              or catalyst concentration. </p>
+            <p class="subBullet" style="font-size: medium;"> Levels: Specific values, e.g., pollutant concentrations of
+              10, 50, and 100 mg/L. </p>
+            <p class="subBullet" style="font-size: medium;"> Response: Measurable outcomes like pollutant degradation
+              (%) or toxicity reduction. </p>
+            <p class="mainBullet"> Why Structure Matters </p>
+            <p class="subBullet" style="font-size: medium;"> A structured design helps uncover relationships like how pH
+              influences heavy metal precipitation. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div id="doe3dChart"></div>
+          </div>
+        </div>
       </section>
 
       <section>
-        <h4>Advantages of Design of Experiments</h4> <div> <div class="leftBox"> <p class="mainBullet"> Efficient Experimentation </p> <p class="subBullet" style="font-size: medium;"> DoE minimizes tests needed to determine the optimal dosage of coagulants in water treatment. </p> <p class="mainBullet"> Identifies Key Insights </p> <p class="subBullet" style="font-size: medium;"> Reveals how interactions between pollutant types and catalysts affect degradation rates. </p> <p class="mainBullet"> Improves Process Understanding </p> <p class="subBullet" style="font-size: medium;"> Optimizes processes like advanced oxidation or nutrient recovery from wastewater. </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="Flowchart showing DoE efficiency and insights"> </div> </div>
+        <h4>Advantages of Design of Experiments</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> Efficient Experimentation </p>
+            <p class="subBullet" style="font-size: medium;"> DoE minimizes tests needed to determine the optimal dosage
+              of coagulants in water treatment. </p>
+            <p class="mainBullet"> Identifies Key Insights </p>
+            <p class="subBullet" style="font-size: medium;"> Reveals how interactions between pollutant types and
+              catalysts affect degradation rates. </p>
+            <p class="mainBullet"> Improves Process Understanding </p>
+            <p class="subBullet" style="font-size: medium;"> Optimizes processes like advanced oxidation or nutrient
+              recovery from wastewater. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div id="doe3dFittedChart"></div>
+          </div>
+        </div>
       </section>
 
       <section>
-        <h4>Types of Experimental Designs</h4> <div> <div class="leftBox"> <p class="mainBullet"> Full Factorial Design </p> <p class="subBullet" style="font-size: medium;"> Explores all combinations of factors, e.g., pH, temperature, and pollutant type, providing comprehensive insights. </p> <p class="mainBullet"> Fractional Factorial Design </p> <p class="subBullet" style="font-size: medium;"> Tests a subset of combinations to reduce effort, e.g., identifying key factors in pesticide degradation. </p> <p class="mainBullet"> Response Surface Methodology (RSM) </p> <p class="subBullet" style="font-size: medium;"> Used for optimization, e.g., modeling the effects of UV dosage and pollutant concentration on water treatment. </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="Simplified illustration of factorial design applications in water treatment"> </div> </div>
-      </section>
-      
-      <section>
-        <h4>Example: Full Factorial Design for Pollutant Removal</h4> <div> <div class="leftBox"> <p class="mainBullet"> <strong>Objective</strong> </p> <p class="subBullet" style="font-size: medium;"> Investigate how <strong>temperature</strong> and <strong>pH</strong> influence pollutant removal efficiency in water samples. </p> <p class="mainBullet"> <strong>Factors and Levels</strong> </p> <p class="subBullet" style="font-size: medium;"> <strong>Factor 1:</strong> Temperature → Levels: -1 (Low, 20°C), +1 (High, 40°C) </p> <p class="subBullet" style="font-size: medium;"> <strong>Factor 2:</strong> pH → Levels: -1 (Low, pH 5), +1 (High, pH 9) </p> <p class="mainBullet"> <strong>Design Type</strong> </p> <p class="subBullet" style="font-size: medium;"> Full factorial design with <strong>2 levels per factor</strong> (2 × 2 = 4 experiments). </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="Illustration of temperature and pH levels in water treatment"> </div> </div>
-      </section>
-
-      <section>
-        <h4>Step 1: Creating the Design Matrix</h4> <div> <div class="leftBox"> <p class="mainBullet"> <strong>Design Matrix</strong> </p> <p class="subBullet" style="font-size: medium;"> All combinations of factors and levels (-1, +1) form the matrix. </p> <table style="font-size: medium; border: 1px solid black; border-collapse: collapse;"> <tr> <th style="border: 1px solid black; padding: 5px;">Run</th> <th style="border: 1px solid black; padding: 5px;">Temperature (X₁)</th> <th style="border: 1px solid black; padding: 5px;">pH (X₂)</th> <th style="border: 1px solid black; padding: 5px;">Removal Efficiency (Y)</th> </tr> <tr> <td style="border: 1px solid black; padding: 5px;">1</td> <td style="border: 1px solid black; padding: 5px;">-1</td> <td style="border: 1px solid black; padding: 5px;">-1</td> <td style="border: 1px solid black; padding: 5px;">70</td> </tr> <tr> <td style="border: 1px solid black; padding: 5px;">2</td> <td style="border: 1px solid black; padding: 5px;">-1</td> <td style="border: 1px solid black; padding: 5px;">+1</td> <td style="border: 1px solid black; padding: 5px;">75</td> </tr> <tr> <td style="border: 1px solid black; padding: 5px;">3</td> <td style="border: 1px solid black; padding: 5px;">+1</td> <td style="border: 1px solid black; padding: 5px;">-1</td> <td style="border: 1px solid black; padding: 5px;">85</td> </tr> <tr> <td style="border: 1px solid black; padding: 5px;">4</td> <td style="border: 1px solid black; padding: 5px;">+1</td> <td style="border: 1px solid black; padding: 5px;">+1</td> <td style="border: 1px solid black; padding: 5px;">90</td> </tr> </table> <p class="mainBullet"> <strong>Regression Model</strong> </p> <p class="subBullet" style="font-size: medium;"> Fit a linear regression model: </p> <p class="subBullet" style="font-size: medium;"> <strong>Y = β₀ + β₁X₁ + β₂X₂</strong> </p> <p class="subBullet" style="font-size: medium;"> - <strong>Y:</strong> Removal efficiency (%) - <strong>X₁:</strong> Temperature (-1, +1) - <strong>X₂:</strong> pH (-1, +1) </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="Linear regression equation with factors"> </div> </div>
-      </section>
-
-      <section>
-        <h4>Step 2: Regression Analysis</h4> <div> <div class="leftBox"> <p class="mainBullet"> <strong>Fitting the Model</strong> </p> <p class="subBullet" style="font-size: medium;"> Using the data: </p> <p class="subBullet" style="font-size: medium;"> Run 1: Y = 70 Run 2: Y = 75 Run 3: Y = 85 Run 4: Y = 90 </p> <p class="mainBullet"> <strong>Estimated Coefficients</strong> </p> <p class="subBullet" style="font-size: medium;"> <strong>β₀:</strong> Average response (intercept) </p> <p class="subBullet" style="font-size: medium;"> <strong>β₁:</strong> Effect of temperature on removal efficiency </p> <p class="subBullet" style="font-size: medium;"> <strong>β₂:</strong> Effect of pH on removal efficiency </p> <p class="mainBullet"> <strong>Example Result</strong> </p> <p class="subBullet" style="font-size: medium;"> Y = 80 + 7.5X₁ + 2.5X₂ </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="Regression coefficients visualized on a plot"> </div> </div>
-      </section>
-
-      <section>
-        <h4>Step 3: Interpreting Results</h4> <div> <div class="leftBox"> <p class="mainBullet"> <strong>Insights from Coefficients</strong> </p> <p class="subBullet" style="font-size: medium;"> <strong>β₁ (7.5):</strong> Higher temperature significantly improves removal efficiency. </p> <p class="subBullet" style="font-size: medium;"> <strong>β₂ (2.5):</strong> Higher pH has a smaller positive effect. </p> <p class="mainBullet"> <strong>Predictions</strong> </p> <p class="subBullet" style="font-size: medium;"> Predict removal efficiency for any combination of temperature and pH using the regression equation. </p> <p class="mainBullet"> <strong>Visualization</strong> </p> <p class="subBullet" style="font-size: medium;"> Create 2D or 3D plots to illustrate the effects of temperature and pH on removal efficiency. </p> </div> <div class="spacer"></div> <div class="rightBox"> <img src="https://via.placeholder.com/300" alt="2D plot showing the effect of temperature and pH on efficiency"> </div> </div>
-      </section>
-
-      <section>
-        <h4>Step 4: Testing Significance of Coefficients</h4> <div> <div class="leftBox"> <p class="mainBullet"> <strong>Hypothesis Testing</strong> </p> <p class="subBullet" style="font-size: medium;"> For each coefficient (<strong>β₁</strong>, <strong>β₂</strong>): </p> <p class="subBullet" style="font-size: medium;"> - Null hypothesis (H₀): The coefficient is not significant (β = 0). </p> <p class="subBullet" style="font-size: medium;"> - Alternative hypothesis (H₁): The coefficient is significant (β ≠ 0). </p> <p class="mainBullet"> <strong>t-Test for Significance</strong> </p> <p class="subBullet" style="font-size: medium;"> Use the formula for the t-statistic: </p> <p class="subBullet" style="font-size: medium;"> <strong>t = β / SE(β)</strong> </p> <p class="subBullet" style="font-size: medium;"> Where <strong>SE(β)</strong> is the standard error of the coefficient. </p> </div> <div class="spacer"></div> <div class="rightBox"> <p class="mainBullet"> <strong>Decision Rule</strong> </p> <p class="subBullet" style="font-size: medium;"> Compare the calculated t-value to the critical t-value from the t-distribution table at a chosen significance level (e.g., α = 0.05). </p> <p class="subBullet" style="font-size: medium;"> If |t| > critical value, the coefficient is significant. </p> <p class="mainBullet"> <strong>Example Results</strong> </p> <p class="subBullet" style="font-size: medium;"> - <strong>t₁ (β₁ for temperature):</strong> Significant (p < 0.05). </p> <p class="subBullet" style="font-size: medium;"> - <strong>t₂ (β₂ for pH):</strong> Not significant (p > 0.05). </p>  </div> </div>
+        <h4>Types of Experimental Designs</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> Full Factorial Design </p>
+            <p class="subBullet" style="font-size: medium;"> Explores all combinations of factors, e.g., pH,
+              temperature, and pollutant type, providing comprehensive insights. </p>
+            <p class="mainBullet"> Fractional Factorial Design </p>
+            <p class="subBullet" style="font-size: medium;"> Tests a subset of combinations to reduce effort, e.g.,
+              identifying key factors in pesticide degradation. </p>
+            <p class="mainBullet"> Box-Behnken Design (BBD) </p>
+            <p class="subBullet" style="font-size: medium;"> Efficiently explores factor interactions using midpoints of
+              edges and the center of the design space, avoiding extreme conditions. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox"> <img src="../resources/doe.png"
+              alt="Simplified illustration of factorial and Box-Behnken designs" width="auto" height="400"> </div>
+        </div>
       </section>
 
       <section>
-        <h4>Step 5: Adjusting Coefficients to Actual Units</h4> <div> <div class="leftBox"> <p class="mainBullet"> <strong>Converting Coefficients</strong> </p> <p class="subBullet" style="font-size: medium;"> The regression model uses coded levels (-1, +1). To express results in real-world units, we adjust the coefficients. </p> <p class="mainBullet"> <strong>Conversion Formula</strong> </p> <p class="subBullet" style="font-size: medium;"> For a factor X with range [X<sub>min</sub>, X<sub>max</sub>]: </p> <p class="subBullet" style="font-size: medium;"> <strong>X (real) = (X (coded) + 1) × (X<sub>max</sub> - X<sub>min</sub>) / 2 + X<sub>min</sub></strong> </p> <p class="mainBullet"> <strong>Example: Temperature</strong> </p> <p class="subBullet" style="font-size: medium;"> Coded range: -1 to +1 </p> <p class="subBullet" style="font-size: medium;"> Real range: 20°C to 40°C </p> <p class="subBullet" style="font-size: medium;"> β₁ (real) = β₁ (coded) × (40 - 20) / 2 = β₁ (coded) × 10 </p> </div> <div class="spacer"></div> <div class="rightBox"> <p class="mainBullet"> <strong>Final Model in Real Units</strong> </p> <p class="subBullet" style="font-size: medium;"> <strong>Coded Model:</strong> Y = 80 + 7.5 × Temp(coded) + 2.5 × pH(coded) </p> <p class="subBullet" style="font-size: medium;"> <strong>Real Units Model:</strong> Y = 80 + 7.5 × (Temp(real) - 30) / 10 + 2.5 × (pH(real) - 7) / 2 </p> <p class="mainBullet"> <strong>Interpretation</strong> </p> <p class="subBullet" style="font-size: medium;"> - The temperature effect (β₁) increases by 7.5% for every 10°C increase from the center point (30°C). </p> <p class="subBullet" style="font-size: medium;"> - The pH effect (β₂) increases by 2.5% for every 2 units above or below the center point (pH 7). </p> </div> </div>
+        <h4>Example: Full Factorial Design for Pollutant Removal</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Objective</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Investigate how <strong>temperature</strong> and
+              <strong>pH</strong> influence pollutant removal efficiency in water samples.
+            </p>
+            <p class="mainBullet"> <strong>Factors and Levels</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>Factor 1:</strong> Temperature → Levels: -1 (Low,
+              20°C), +1 (High, 40°C) </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>Factor 2:</strong> pH → Levels: -1 (Low, pH 5), +1
+              (High, pH 9) </p>
+            <p class="mainBullet"> <strong>Design Type</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Full factorial design with <strong>2 levels per
+                factor</strong> (2 × 2 = 4 experiments). </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <div id="doeExample1Chart"></div>
+          </div>
+        </div>
       </section>
 
-      
+      <section>
+        <h4>Step 1: Creating the Design Matrix</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Design Matrix</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> All combinations of factors and levels (-1, +1) form the
+              matrix. </p>
+            <table style="font-size: medium; border: 1px solid black; border-collapse: collapse;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Run</th>
+                <th style="border: 1px solid black; padding: 5px;">Temperature (X₁)</th>
+                <th style="border: 1px solid black; padding: 5px;">pH (X₂)</th>
+                <th style="border: 1px solid black; padding: 5px;">Removal Efficiency (Y)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">70</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">+1</td>
+                <td style="border: 1px solid black; padding: 5px;">75</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">+1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">85</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">+1</td>
+                <td style="border: 1px solid black; padding: 5px;">+1</td>
+                <td style="border: 1px solid black; padding: 5px;">90</td>
+              </tr>
+            </table>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"><strong>Design Matrix</strong> (for Regression)</p>
+            <p class="subBullet" style="font-size: medium;"> Every factor \(X_i\) is a column in the design matrix, with
+              each row representing a run. </p>
+            <p class="subBullet" style="font-size: medium;"> In additon, the very first column is a column of 1s,
+              representing the intercept term. </p>
+            <p class="subSubBullet" style="font-size: medium;"> Intercept can be interpreted as the part of the response
+              that is not explained by the factors.
+              \[ X = \begin{bmatrix} +1 & -1 & -1 \\ +1 & -1 & +1 \\ +1 & +1 & -1 \\ +1 & +1 & +1 \end{bmatrix} \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 2: Regression Analysis</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Fitting the Model</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Using the data: </p>
+            <p class="subBullet" style="font-size: medium;"> Run 1: Y = 70 Run 2: Y = 75 Run 3: Y = 85 Run 4: Y = 90
+            </p>
+            <p class="mainBullet"> <strong>Estimated Coefficients</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>β₀:</strong> Average response (intercept) </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>β₁:</strong> Effect of temperature on removal
+              efficiency </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>β₂:</strong> Effect of pH on removal efficiency
+            </p>
+            <p class="mainBullet"> <strong>Example Result</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Y = 80 + 7.5X₁ + 2.5X₂ </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Regression Model</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Fit a linear regression model: </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>Y = β₀ + β₁X₁ + β₂X₂</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>Y:</strong> Removal efficiency (%)
+              <strong>X₁:</strong> Temperature (-1, +1) <strong>X₂:</strong> pH (-1, +1)
+            </p>
+            <p class="mainBullet">Apply the <strong>Regression</strong></p>
+            <p class="subBullet" style="font-size: medium;"> Calculate the coefficients \(\beta_0, \beta_1, \beta_2\)
+              using the design matrix \(X\) and the response vector \(Y\).
+              \[ \begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{bmatrix} = (X^T X)^{-1} X^T Y \]
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 3: Interpreting Results</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Insights from Coefficients</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>β₁ (7.5):</strong> Higher temperature significantly
+              improves removal efficiency. </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>β₂ (2.5):</strong> Higher pH has a smaller positive
+              effect. </p>
+            <p class="mainBullet"> <strong>Predictions</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Predict removal efficiency for any combination of
+              temperature and pH using the regression equation. </p>
+            <p class="mainBullet"> <strong>Visualization</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Create 2D or 3D plots to illustrate the effects of
+              temperature and pH on removal efficiency. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox"> <img src="../resources/doeExmp2.png"></div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 4: Testing Significance of Coefficients</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Hypothesis Testing</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> For each coefficient (<strong>β₁</strong>,
+              <strong>β₂</strong>):
+            </p>
+            <p class="subBullet" style="font-size: medium;"> - Null hypothesis (H₀): The coefficient is not significant
+              (β = 0). </p>
+            <p class="subBullet" style="font-size: medium;"> - Alternative hypothesis (H₁): The coefficient is
+              significant (β ≠ 0). </p>
+            <p class="mainBullet"> <strong>t-Test for Significance</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Use the formula for the t-statistic: </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>t = β / SE(β)</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Where <strong>SE(β)</strong> is the standard error of the
+              coefficient. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Decision Rule</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Compare the calculated t-value to the critical t-value from
+              the t-distribution table at a chosen significance level (e.g., α = 0.05). </p>
+            <p class="subBullet" style="font-size: medium;"> If |t| > critical value, the coefficient is significant.
+            </p>
+            <p class="mainBullet"> <strong>Example Results</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>t₁ (β₁ for temperature):</strong> Significant (p <
+                0.05). </p>
+                <p class="subBullet" style="font-size: medium;"> <strong>t₂ (β₂ for pH):</strong> Not significant (p >
+                  0.05). </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Step 5: Adjusting Coefficients to Actual Units</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Understanding Coefficients</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Regression coefficients in coded levels (\([-1, 1]\))
+              describe the change in response when the factor changes by the full range (\(+2\) units in coded space).
+            </p>
+            <p class="mainBullet"> <strong>Converting to Real Units</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> The effect of a factor in real units is calculated by
+              dividing the total response change by the real range of the factor. </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>Response Change per Real Unit = 2 × β (coded) /
+                Real Range</strong> </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Example: Temperature</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>β₁ (coded):</strong> 7.5 </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>Real Range:</strong> 20°C </p>
+            <p class="subBullet" style="font-size: medium;"> Total response change over full range: \( 2 × 7.5 = 15 \)
+            </p>
+            <p class="subBullet" style="font-size: medium;"> Change per °C: \( 15 / 20 = 0.75 \) response units per °C
+            </p>
+            <p class="mainBullet"> <strong>Final Model Interpretation</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> The temperature coefficient (\( \beta_1 \)) means that for
+              every <strong>1°C increase</strong>, the response increases by <strong>0.75 units</strong>. </p>
+            <p class="subBullet" style="font-size: medium;"> For pH or other factors, use the same formula to adjust the
+              coefficient to the real range. </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Determining the Number of Experiments in Full Factorial Designs</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Number of Experiments</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> In a full factorial design, the total number of experiments
+              (\(N\)) depends on the number of factors (\(k\)) and the levels per factor (\(L\)). </p>
+            <p class="mainBullet"> <strong>Formula</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> \( N = L^k \) </p>
+            <p class="subBullet" style="font-size: medium;"> Where: \(L\): Number of levels per factor (e.g., 2 for
+              \([-1, +1]\)) \(k\): Number of factors </p>
+            <p class="mainBullet"> <strong>Example</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> For \(k = 3\) factors (\(X_1, X_2, X_3\)) and \(L = 2\)
+              levels (\([-1, +1]\)): </p>
+            <p class="subBullet" style="font-size: medium;"> \( N = 2^3 = 8 \) experiments </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Key Insight</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> The number of experiments grows exponentially with the
+              number of factors. For \(k = 5\) factors and \(L = 2\): \( N = 2^5 = 32 \). </p>
+            <p class="mainBullet"> <strong>Experiment Count Examples</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Number of Factors (\(k\))</th>
+                <th style="border: 1px solid black; padding: 5px;">Experiments (\(N = 2^k\))</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">8</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">16</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">5</td>
+                <td style="border: 1px solid black; padding: 5px;">32</td>
+              </tr>
+            </table>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Number of Experiments vs. Degrees of Freedom</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Degrees of Freedom (df) in Full Factorial Designs</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> The degrees of freedom (\(df\)) are calculated as: </p>
+            <p class="subBullet" style="font-size: medium;"> <strong>df = N - p - 1</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Where: \(-\) \(N\): Number of experiments \(-\) \(p\):
+              Number of coefficients (factors or interactions) \(-\) \(1\): For the intercept </p>
+            <p class="mainBullet"> <strong>Model Scenarios</strong> </p>
+            <p class="subBullet" style="font-size: medium;"><strong>Main Effects Model:</strong> Only main factors are
+              included (\(p = k\)).</p>
+            <p class="subBullet" style="font-size: medium;"><strong>Main Effects + Pairwise Interactions:</strong>
+              Includes main factors and pairwise interactions (\(p = k + \frac{k(k-1)}{2}\)). </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Key Insight</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> The model requires \(df \geq 0\) to estimate coefficients
+              and fit the data. Pairwise interactions significantly increase \(p\), reducing \(df\). </p>
+            <p class="mainBullet"> <strong>Comparison Table</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Number of Factors (\(k\))</th>
+                <th style="border: 1px solid black; padding: 5px;">Experiments (\(N = 2^k\))</th>
+                <th style="border: 1px solid black; padding: 5px;">df (Main Effects)</th>
+                <th style="border: 1px solid black; padding: 5px; color: red;">df (Main + Pairwise Interactions)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;"><strong>1</strong><br>(4 - 2 - 1)</td>
+                <td style="border: 1px solid black; padding: 5px; color: red;"><strong>0</strong><br>(4 - 3 - 1)</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">8</td>
+                <td style="border: 1px solid black; padding: 5px;"><strong>4</strong><br>(8 - 3 - 1)</td>
+                <td style="border: 1px solid black; padding: 5px; color: red;"><strong>1</strong><br>(8 - 6 - 1)</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">16</td>
+                <td style="border: 1px solid black; padding: 5px;"><strong>11</strong><br>(16 - 4 - 1)</td>
+                <td style="border: 1px solid black; padding: 5px; color: red;"><strong>5</strong><br>(16 - 10 - 1)</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">5</td>
+                <td style="border: 1px solid black; padding: 5px;">32</td>
+                <td style="border: 1px solid black; padding: 5px;"><strong>26</strong><br>(32 - 5 - 1)</td>
+                <td style="border: 1px solid black; padding: 5px; color: red;"><strong>16</strong><br>(32 - 15 - 1)</td>
+              </tr>
+            </table>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Understanding Interactions in Experimental Design</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>What is an Interaction?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> An interaction occurs when the effect of one factor on the
+              response depends on the level of another factor. </p>
+            <p class="subBullet" style="font-size: medium;"> Interactions highlight <strong>synergies</strong> or
+              <strong>conflicts</strong>
+              between factors that cannot be explained by their individual effects alone.
+            </p>
+            <p class="mainBullet"> <strong>Example</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Consider two factors: <br><strong>Temperature</strong>
+              (\(X_1\)) and <strong>pH</strong>
+              (\(X_2\)): </p>
+            <p class="subBullet" style="font-size: medium;"> Without interaction: \(Y = \beta_0 + \beta_1 X_1 +
+              \beta_2 X_2\). </p>
+            <p class="subBullet" style="font-size: medium;"> With interaction: \(Y = \beta_0 + \beta_1 X_1 + \beta_2
+              X_2 + \beta_{12} X_1 X_2\). </p>
+            <p class="subBullet" style="font-size: medium;"> The interaction term (\(\beta_{12} X_1 X_2\)) modifies the
+              response based on the combination of \(X_1\) and \(X_2\). </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Impact on the Design Matrix</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Adding interactions introduces new columns to the design
+              matrix, representing products of factors. </p>
+            <p class="mainBullet"> <strong>Design Matrix Comparison</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Experiment</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1 X_2\) (Interaction)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+            </table><span style="font-size: medium">i.e.,
+              \[X = \begin{bmatrix} +1 & -1 & -1 & +1 \\ +1 & -1 & +1 & -1 \\ +1 & +1 & -1 & -1 \\ +1 & +1 & +1 & +1
+              \end{bmatrix}\]</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Understanding Quadratic Terms in Experimental Design</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>What is a Quadratic Term?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> A quadratic term models the <strong>nonlinear
+                effects</strong> of a
+              factor on the response. It represents the curvature of the relationship between a factor and the response.
+            </p>
+            <p class="subBullet" style="font-size: medium;"> Quadratic terms allow for the identification of
+              <strong>optimal
+                factor levels</strong>, where the response is maximized or minimized.
+            </p>
+            <p class="mainBullet"> <strong>Example</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Consider two factors: <br><strong>Temperature</strong>
+              (\(X_1\)) and <strong>pH</strong> (\(X_2\)): </p>
+            <p class="subBullet" style="font-size: medium;"> Without quadratic terms: \(Y = \beta_0 + \beta_1 X_1 +
+              \beta_2 X_2 + \beta_{12} X_1 X_2\). </p>
+            <p class="subBullet" style="font-size: medium;"> With quadratic terms: \(Y = \beta_0 + \beta_1 X_1 + \beta_2
+              X_2 + \beta_{12} X_1 X_2 + \beta_{11} X_1^2 + \beta_{22} X_2^2\). </p>
+            <p class="subBullet" style="font-size: medium;"> The quadratic terms (\(\beta_{11} X_1^2, \beta_{22}
+              X_2^2\)) allow for curvature in the response. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Impact on the Design Matrix</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Adding quadratic terms introduces new columns to the design
+              matrix, representing squared factors. </p>
+            <p class="mainBullet"> <strong>Design Matrix Comparison</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Experiment</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1 X_2\) (Interaction)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1^2\) (Quadratic)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2^2\) (Quadratic)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+            </table><span style="font-size: medium">i.e., \[ X = \begin{bmatrix} +1 & -1 & -1 & +1 & +1 & +1 \\ +1 & -1
+              & +1 & -1 & +1 & +1 \\ +1 & +1 & -1 & -1 & +1 & +1 \\ +1 & +1 & +1 & +1 & +1 & +1 \end{bmatrix} \]</span>
+            </p>
+            <p class="question">
+              Is this design plan suitable?
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Central and Edge-Center Points in Experimental Design</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Why are Additional Points Needed?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> To model <strong>quadratic terms</strong>, additional
+              experiments are required to capture the curvature of the response. </p>
+            <p class="subBullet" style="font-size: medium;"> These additional points ensure sufficient information to
+              estimate quadratic effects accurately. </p>
+            <p class="mainBullet"> <strong>Types of Additional Points</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> 1. <strong>Center Points</strong> (\(X_1 = 0, X_2 = 0\)):
+              Measure the response at the geometric center of the design space. </p>
+            <p class="subBullet" style="font-size: medium;"> 2. <strong>Edge-Center Points</strong> (\(X_1 = 0\) or
+              \(X_2 = 0\)): Measure the response at the midpoint of each factor's range, holding the other factor
+              constant. </p>
+            <p class="mainBullet"> <strong>Key Insight</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Without these points, the curvature of the response cannot
+              be determined, and quadratic terms cannot be estimated reliably. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Updated Design Matrix</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: small;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Experiment</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1 X_2\) (Interaction)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1^2\) (Quadratic)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2^2\) (Quadratic)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">5 (<strong>Center Point</strong>)</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">6 (<strong>Edge Center</strong>)</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">7 (<strong>Edge Center</strong>)</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">8 (<strong>Edge Center</strong>)</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">9 (<strong>Edge Center</strong>)</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+              </tr>
+            </table>
+            </p>
+            <img src="../resources/doe_centers.png" height="100px">
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Introduction to Fractional Design Plans</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Why Use Fractional Designs?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Full factorial designs require exponentially more
+              experiments as the number of factors increases (\(N = 2^k\)). </p>
+            <p class="subBullet" style="font-size: medium;"> Fractional designs allow us to study key effects with fewer
+              experiments, saving time and resources. </p>
+            <p class="mainBullet"> <strong>What is a Fractional Design Plan?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> A fractional design tests only a subset (fraction) of the
+              combinations in a full factorial design. </p>
+            <p class="subBullet" style="font-size: medium;"> It uses mathematical rules to carefully select combinations
+              that maximize the information gained. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Key Idea</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Fractional designs assume that <strong>higher-order
+                interactions</strong> (e.g., \(X_1 X_2 X_3\)) are negligible, focusing only on main effects and
+              lower-order interactions (e.g., \(X_1 X_2\)). </p>
+            <p class="mainBullet"> <strong>Benefits of Fractional Designs</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+              Reduces the number of experiments without significantly compromising the
+              quality of insights. </p>
+            <p class="subBullet" style="font-size: medium;"> Efficiently identifies main effects and key interactions.
+            </p>
+            <p class="subBullet" style="font-size: medium;">Suitable for initial screening of factors. </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Building a Fractional Design Plan</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Steps to Create a Fractional Design</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> 1. Start with a full factorial design for a smaller set of
+              factors (e.g., \(X_1, X_2\)). </p>
+            <p class="subBullet" style="font-size: medium;"> 2. Define additional factors (\(X_3, X_4, \dots\)) as
+              interactions of existing factors. </p>
+            <p class="subBullet" style="font-size: medium;"> 3. Construct the design matrix by combining these
+              relationships. </p>
+            <p class="mainBullet"> <strong>Example: Fractional \(2^{3-1}\) Design</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> \(k = 3\) factors (\(X_1, X_2, X_3\)). </p>
+            <p class="subBullet" style="font-size: medium;"> Full factorial: \(2^3 = 8\) experiments. </p>
+            <p class="subBullet" style="font-size: medium;"> Fractional plan: \(2^{3-1} = 4\) experiments. </p>
+            <p class="subBullet" style="font-size: medium;"> Define \(X_3 = X_1 X_2\). </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Fractional Design Matrix</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Experiment</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_3 = X_1 X_2\)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+            </table>
+            </p>
+            <div align="center">
+              <img src="../resources/doe_reduced.png" height="250px">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Limitations of Fractional Design Plans</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Assumptions of Fractional Designs</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Fractional designs assume that higher-order interactions
+              are negligible. </p>
+            <p class="subBullet" style="font-size: medium;"> If higher-order interactions are significant, the results
+              can be misleading. </p>
+            <p class="mainBullet"> <strong>Confounding</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> In fractional designs, some effects are
+              <strong>confounded</strong>,
+              meaning they cannot be distinguished from each other (same column pattern).
+            </p>
+            <p class="subBullet" style="font-size: medium;"> For example, if \(X_3 = X_1 X_2\), the effect of \(X_3\) is
+              inseparable from the interaction \(X_1 X_2\). </p>
+            <p class="mainBullet"> <strong>Validation is Required</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Fractional designs are suitable for initial screening, but
+              full designs or additional experiments may be needed for confirmation. </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Key Challenges</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Risk of missing significant higher-order interactions. </p>
+            <p class="subBullet" style="font-size: medium;"> Interpretation requires careful consideration of
+              confounding. </p>
+            <p class="subBullet" style="font-size: medium;"> Reduced resolution compared to full factorial designs. </p>
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Experiment</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_3\)</th>
+                <th style="border: 1px solid black; padding: 5px; background-color: #f9d5e5;">\(X_1 X_2\)</th>
+                <th style="border: 1px solid black; padding: 5px; background-color: #fbe5d6;">\(X_1 X_3\)</th>
+                <th style="border: 1px solid black; padding: 5px; background-color: #d6f9e5;">\(X_2 X_3\)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #f9d5e5;">1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #fbe5d6;">1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #d6f9e5;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #f9d5e5;">-1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #fbe5d6;">-1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #d6f9e5;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">3</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #f9d5e5;">-1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #fbe5d6;">-1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #d6f9e5;">-1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">4</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #f9d5e5;">1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #fbe5d6;">-1</td>
+                <td style="border: 1px solid black; padding: 5px; background-color: #d6f9e5;">-1</td>
+              </tr>
+            </table>
+            <p class="task" style="font-size: medium;">
+              \(X_3\) is confounded with the interaction term \(X_1 \times X_2\).
+            </p>
+            <p class="task" style="font-size: medium;">
+              \(X_1 X_3\) is a hidden quadratic term (\(X_1^2 \times X_2\)), which is not allowed without center points.
+            </p>
+            <p class="task" style="font-size: medium;">
+              \(X_2 X_3\) is a hidden quadratic term (\(X_1 \times X_2^2\)), which is not allowed without center points.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Introduction to Box-Behnken Designs</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>What is a Box-Behnken Design?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> A Box-Behnken design (BBD) is a response surface
+              methodology (RSM) used for modeling nonlinear relationships between factors and responses. </p>
+            <p class="subBullet" style="font-size: medium;"> Unlike full factorial designs, BBDs avoid extreme corner
+              points, reducing the risk of running impractical or unsafe experiments. </p>
+            <p class="mainBullet"> <strong>Key Features</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Includes center points (\(X = 0\)) and edge-center
+              points. </p>
+            <p class="subBullet" style="font-size: medium;"> Provides sufficient data to estimate quadratic effects.
+            </p>
+            <p class="subBullet" style="font-size: medium;"> Requires fewer experiments than a full factorial design.
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>When to Use?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Box-Behnken designs are ideal when: </p>
+            <p class="subSubBullet" style="font-size: medium;"> Quadratic effects need to be modeled. </p>
+            <p class="subSubBullet" style="font-size: medium;"> Experiments at extreme conditions (e.g., corners) are
+              undesirable. </p>
+            <p class="mainBullet"> <strong>Benefits of Box-Behnken Designs</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Reduces the number of experiments compared to full
+              factorial designs. </p>
+            <p class="subBullet" style="font-size: medium;"> Efficiently models curvature (quadratic effects). </p>
+            <p class="subBullet" style="font-size: medium;"> Avoids impractical or unsafe experimental conditions. </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Structure of a Box-Behnken Design</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>How is a Box-Behnken Design Built?</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Combines edge-center points and center points in the
+              design space. </p>
+            <p class="subBullet" style="font-size: medium;"> Requires a minimum of 3 factors (Box-Behnken is not
+              defined for 2 factors). </p>
+            <p class="subBullet" style="font-size: medium;"> For 3 factors (\(X_1, X_2, X_3\)), a Box-Behnken plan
+              consists of 12 edge-center points and 1 center point. </p>
+            <p class="mainBullet"> <strong>Design Matrix Example: 3 Factors</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Experiment</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_1\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_2\)</th>
+                <th style="border: 1px solid black; padding: 5px;">\(X_3\)</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">2</td>
+                <td style="border: 1px solid black; padding: 5px;">1</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">-1</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">...</td>
+                <td style="border: 1px solid black; padding: 5px;">...</td>
+                <td style="border: 1px solid black; padding: 5px;">...</td>
+                <td style="border: 1px solid black; padding: 5px;">...</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;">13 (Center Point)</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+                <td style="border: 1px solid black; padding: 5px;">0</td>
+              </tr>
+            </table>
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Key Insight</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> The Box-Behnken design carefully balances the placement of
+              points to capture quadratic effects while minimizing the number of experiments. </p>
+            <p class="mainBullet"> <strong>Visualizing a Box-Behnken Plan</strong> </p> <img
+              src="../resources/doe_bbd.png" height="250px" alt="Box-Behnken Design Visualization">
+            <p class="subBullet" style="font-size: medium;"> A Box-Behnken design for 3 factors creates a cube with
+              edge-center points and a center point. </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Limitations of Box-Behnken Designs</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Key Limitations</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Not defined for 2 factors; requires at least 3 factors.
+            </p>
+            <p class="subBullet" style="font-size: medium;"> Inefficient for large numbers of factors compared to
+              other RSM methods (e.g., Central Composite Designs). </p>
+            <p class="subBullet" style="font-size: medium;"> Assumes quadratic effects dominate; may miss higher-order
+              interactions. </p>
+            <p class="mainBullet"> <strong>Practical Challenges</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Limited flexibility for factor ranges; scaling is often
+              required. </p>
+            <p class="subBullet" style="font-size: medium;"> Requires careful validation to ensure results are robust.
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Example Limitation</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> With 5 factors, a Box-Behnken design requires significantly
+              more experiments than a fractional factorial design, reducing efficiency. </p>
+            <p class="mainBullet"> <strong>Key Insight</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> While Box-Behnken designs are efficient for 3–4 factors,
+              alternative methods may be better for larger systems. </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Choosing the Right Experimental Design</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Key Considerations</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> The choice of experimental design depends on: </p>
+            <p class="subSubBullet" style="font-size: medium;"> The number of factors (\(k\)) and their levels (\(L\)).
+            </p>
+            <p class="subSubBullet" style="font-size: medium;"> The type of effects to be studied (main effects,
+              interactions, quadratic terms). </p>
+            <p class="subSubBullet" style="font-size: medium;"> The available resources (time, budget, and experimental
+              feasibility).
+            </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Design Overview</strong> </p>
+            <p class="subBullet" style="font-size: medium;">
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; font-size: medium;">
+              <tr>
+                <th style="border: 1px solid black; padding: 5px;">Design Type</th>
+                <th style="border: 1px solid black; padding: 5px;">When to Use</th>
+                <th style="border: 1px solid black; padding: 5px;">Key Features</th>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;"><strong>Full Factorial</strong></td>
+                <td style="border: 1px solid black; padding: 5px;">Small number of factors (\(k \leq 3\)); all
+                  interactions important</td>
+                <td style="border: 1px solid black; padding: 5px;">Comprehensive insights but resource-intensive</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;"><strong>Fractional Factorial</strong></td>
+                <td style="border: 1px solid black; padding: 5px;">Screening for main effects when \(k \geq 4\)</td>
+                <td style="border: 1px solid black; padding: 5px;">Fewer experiments with confounding of higher-order
+                  interactions</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;"><strong>Box-Behnken</strong></td>
+                <td style="border: 1px solid black; padding: 5px;">Curvature modeling; \(k = 3\) to \(5\)</td>
+                <td style="border: 1px solid black; padding: 5px;">No corner points; robust for quadratic effects</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;"><strong>Central Composite</strong></td>
+                <td style="border: 1px solid black; padding: 5px;">Curvature modeling; \(k \geq 5\)</td>
+                <td style="border: 1px solid black; padding: 5px;">Includes axial points; flexible for large ranges</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid black; padding: 5px;"><strong>...</strong></td>
+                <td style="border: 1px solid black; padding: 5px;"><strong>...</strong></td>
+                <td style="border: 1px solid black; padding: 5px;"><strong>...</strong></td>
+              </tr>
+            </table>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h4>Model Functions for Experimental Designs</h4>
+        <div>
+          <div class="leftBox">
+            <p class="mainBullet"> <strong>Full Factorial</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Includes main effects and all interactions: </p>
+            <p class="subBullet" style="font-size: medium;"> \( Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 +
+              \beta_{12} X_1 X_2 + \beta_{13} X_1 X_3 + \beta_{23} X_2 X_3 + \beta_{123} X_1 X_2 X_3 \) </p>
+            <p class="mainBullet"> <strong>Fractional Factorial</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Includes only main effects and selected interactions (e.g.,
+              confounded terms): </p>
+            <p class="subBullet" style="font-size: medium;"> \( Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_{12} X_1
+              X_2 \) <br> where \(X_3 = X_1 X_2\) </p>
+            <p class="mainBullet"> <strong>Box-Behnken</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Captures quadratic effects without corner points: </p>
+            <p class="subBullet" style="font-size: medium;"> \( Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 +
+              \beta_{12} X_1 X_2 + \beta_{13} X_1 X_3 + \beta_{23} X_2 X_3 + \beta_{11} X_1^2 + \beta_{22} X_2^2 +
+              \beta_{33} X_3^2 \) </p>
+          </div>
+          <div class="spacer"></div>
+          <div class="rightBox">
+            <p class="mainBullet"> <strong>Comparison of Models</strong> </p>
+            <p class="subBullet" style="font-size: medium;"> Full Factorial: Captures all effects but resource-intensive.
+            </p>
+            <p class="subBullet" style="font-size: medium;"> Fractional Factorial: Simplified model, ideal for screening.
+            </p>
+            <p class="subBullet" style="font-size: medium;"> Box-Behnken: Focuses on quadratic effects, avoids extremes.
+            </p>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
   <div class="footer-global" style="color: white;">
@@ -241,11 +1245,7 @@
   <!-- Chart scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jstat@1.9.5/dist/jstat.min.js"></script>
   <script src="../resources/d3_utils.js"></script>
-  <script src="../resources/chart_dataprocessing1.js"></script>
-  <script src="../resources/chart_dataprocessing2.js"></script>
-  <script src="../resources/chart_smoothing1.js"></script>
-  <script src="../resources/chart_fft.js"></script>
-  <script src="../resources/chart_dwt.js"></script>
+  <script src="../resources/chart_doe01.js"></script>
 
 </body>
 
