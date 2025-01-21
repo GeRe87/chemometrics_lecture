@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive DoE Table with CSV Export</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        input:invalid {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h3>Interactive DoE Table with CSV Export</h3>
+    <table id="doeTable">
+        <thead>
+            <tr>
+                <th>X<sub>1</sub> (Temperature)</th>
+                <th>X<sub>2</sub> (pH)</th>
+                <th>Y (Efficiency)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="number" class="x1-input" placeholder="Enter X1" min="-1" max="1" step="0.01"></td>
+                <td><input type="number" class="x2-input" placeholder="Enter X2" min="-1" max="1" step="0.01"></td>
+                <td class="y-output">-</td>
+                <td><button onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="addRow()">Add Row</button>
+    <button onclick="exportTableToCSV()">Export as CSV</button>
+
+    <script>
+        // Function to calculate Y with specified significant and non-significant effects
+        function calculateY(x1, x2) {
+            const beta0 = 80;  // Intercept
+            const beta1 = 7.5; // Coefficient for X1 (significant)
+            const beta2 = 2.5; // Coefficient for X2 (significant)
+            const beta11 = -4; // Coefficient for X1^2 (significant)
+            const beta12 = 0;  // Coefficient for X1*X2 (not significant)
+            const beta22 = 0;  // Coefficient for X2^2 (not significant)
+
+            // Add random noise
+            const noise = (Math.random() - 0.5) * 5; // Random noise between -2.5 and +2.5
+
+            // Calculate response
+            return beta0 
+                + beta1 * x1 
+                + beta2 * x2 
+                + beta11 * Math.pow(x1, 2) 
+                + beta12 * x1 * x2 
+                + beta22 * Math.pow(x2, 2) 
+                + noise;
+        }
+
+        // Function to add a new row
+        function addRow() {
+            const table = document.getElementById("doeTable").getElementsByTagName("tbody")[0];
+            const newRow = table.insertRow();
+
+            // X1 input
+            const x1Cell = newRow.insertCell(0);
+            const x1Input = document.createElement("input");
+            x1Input.type = "number";
+            x1Input.className = "x1-input";
+            x1Input.placeholder = "Enter X1";
+            x1Input.min = -1;
+            x1Input.max = 1;
+            x1Input.step = 0.01;
+            x1Input.oninput = validateAndUpdate;
+            x1Cell.appendChild(x1Input);
+
+            // X2 input
+            const x2Cell = newRow.insertCell(1);
+            const x2Input = document.createElement("input");
+            x2Input.type = "number";
+            x2Input.className = "x2-input";
+            x2Input.placeholder = "Enter X2";
+            x2Input.min = -1;
+            x2Input.max = 1;
+            x2Input.step = 0.01;
+            x2Input.oninput = validateAndUpdate;
+            x2Cell.appendChild(x2Input);
+
+            // Y output
+            const yCell = newRow.insertCell(2);
+            yCell.className = "y-output";
+            yCell.innerText = "-";
+
+            // Delete button
+            const actionCell = newRow.insertCell(3);
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            deleteButton.onclick = () => deleteRow(deleteButton);
+            actionCell.appendChild(deleteButton);
+        }
+
+        // Function to delete a row
+        function deleteRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        // Function to validate input and update Y
+        function validateAndUpdate() {
+            const input = this;
+            const value = parseFloat(input.value);
+
+            if (value < -1 || value > 1) {
+                alert("Value must be between -1 and 1!");
+                input.value = ""; // Reset invalid input
+                return;
+            }
+
+            const row = input.parentNode.parentNode;
+            const x1 = parseFloat(row.querySelector(".x1-input").value) || 0;
+            const x2 = parseFloat(row.querySelector(".x2-input").value) || 0;
+
+            const yCell = row.querySelector(".y-output");
+            yCell.innerText = calculateY(x1, x2).toFixed(2);
+        }
+
+        // Add event listeners to initial inputs
+        document.querySelectorAll(".x1-input, .x2-input").forEach(input => {
+            input.oninput = validateAndUpdate;
+        });
+
+        // Function to export the table to CSV and copy to clipboard
+        function exportTableToCSV() {
+            const rows = document.querySelectorAll("#doeTable tbody tr");
+            const csvData = [];
+
+            rows.forEach(row => {
+                const x1 = row.querySelector(".x1-input").value || "0";
+                const x2 = row.querySelector(".x2-input").value || "0";
+                const y = row.querySelector(".y-output").innerText || "-";
+
+                csvData.push(`${x1},${x2},${y}`);
+            });
+
+            const csvContent = csvData.join("\n");
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(csvContent)
+                .then(() => alert("Table data copied to clipboard!"))
+                .catch(err => console.error("Could not copy text: ", err));
+        }
+    </script>
+</body>
+</html>
